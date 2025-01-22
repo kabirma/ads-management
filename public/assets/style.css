@@ -1,0 +1,182 @@
+.main-menu .navbar-header .navbar-brand {
+    margin-top: 2px !important;
+    ;
+}
+
+.main-menu .main-menu-content {
+    margin-top: 19px !important;
+}
+
+.sidebar-brand-logo {
+    width: 100px;
+}
+
+span.brand-logo {
+    margin-top: 27px !important;
+}
+
+.card-text:last-child {
+    font-size: small !important;
+}
+
+.dropdown-menu.dropdown-menu-end.show {
+    margin-top: 0px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    padding-right: 0rem;
+}
+
+.picker {
+    top: auto !important;
+}
+
+.rpdiv {
+    margin-bottom: 3px !important;
+}
+
+.mb2 {
+    margin-bottom: 2px !important;
+}
+
+.emptybadge {
+    position: inherit !important;
+    max-width: 1.5rem !important;
+    min-height: 1.5rem !important;
+}
+
+.card-mb10 {
+    margin-bottom: 10px !important;
+}
+
+.cardheader-pt10b0 {
+    padding-bottom: 0px !important;
+    padding-top: 10px !important;
+}
+
+.badge-role {
+    color: white !important;
+}
+
+.itemCheckDiv {
+    margin-bottom: 6px !important;
+}
+
+.invoice-add .invoice-preview-card .invoice-product-details {
+    padding: 3.75rem 2rem 2.3rem 2rem !important;
+}
+
+.invoice-add-wrapper {
+    margin-top: -20px;
+}
+
+.invoice-add .invoice-spacing {
+    margin: 0.4rem 0;
+}
+
+.py-50 {
+    padding-top: 2.2rem !important;
+    padding-bottom: 0.0rem !important;
+}
+
+.repeater-wrapper {
+    margin-bottom: 0px !important;
+}
+
+.col-12.d-flex.product-details-border.position-relative.pe-0 {
+    padding-left: 0px;
+}
+
+.plr {
+    padding-left: 1px !important;
+    padding-right: 1px !important;
+}
+
+.padr0 {
+    padding-right: 1px !important;
+}
+
+input.form-control.cost {
+    padding-left: 4px !important;
+    padding-right: 2px !important;
+}
+
+.alert {
+    padding: 0.71rem 1rem !important;
+}
+
+.menu-content {
+    padding-left: 8% !important;
+}
+
+.table .btn {
+    margin: 1px;
+}
+
+form .form-group {
+    margin-bottom: 2%;
+}
+
+.dt-button {
+    border-color: #5bbe25 !important;
+    background-color: #5bbe25 !important;
+    color: #fff !important;
+    border-radius: 4px;
+}
+
+form .form-group label {
+    margin-bottom: .8%;
+}
+
+.semi-dark-layout .main-menu,
+.semi-dark-layout .main-menu-content .navigation-main,
+.main-menu.menu-dark .navigation,
+.semi-dark-layout .main-menu-content .navigation-main .nav-item .menu-content,
+.semi-dark-layout .main-menu-content .navigation-main .nav-item.open:not(.sidebar-group-active)>a,
+.semi-dark-layout .main-menu-content .navigation-main .nav-item .menu-content li:not(.active) a {
+    background-color: black;
+}
+
+.main-menu.menu-dark .navigation > li ul .active{
+    background: linear-gradient(118deg, #5bbe25, #2C7B01)!important;
+    box-shadow: 0 0 10px 1px #5bbe25!important;
+}
+
+.btn-primary {
+    border-color: #5bbe25 !important;
+    background-color: #5bbe25 !important;
+    color: #fff !important;
+}
+
+.badge.badge-light-primary{
+    background-color: rgba(117, 240, 103, 0.12);
+    color: #5bbe25 !important;
+}
+
+.page-item.active .page-link{
+    background-color: #5bbe25!important;
+}
+
+#project_detail .form-group{
+    margin-bottom:2%;
+}
+
+#project_detail label{
+    margin-bottom:1%;
+    font-size:12px;
+    text-transform: uppercase;
+}
+
+#project-details i{
+    font-size:16px;
+    color:#5bbe25;
+}
+
+#project-details h6{
+    text-transform: uppercase;
+}
+
+#project-details .card-header{
+    background-color: whitesmoke;
+    margin-bottom: 3%;
+}

@@ -1,0 +1,189 @@
+[30-Nov-2022 12:03:13 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:03:19 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:03:22 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:20:56 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:26:56 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:28:27 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:28:29 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:28:33 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:30:22 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:30:34 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:31:22 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:32:08 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:38:17 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:45:34 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:45:42 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:58:36 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:58:50 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 12:59:44 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 13:01:18 UTC] PHP Parse error:  syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/newadminsystemit/public_html/vendor/nunomaduro/termwind/src/Functions.php on line 17
+[30-Nov-2022 13:04:32 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:37 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:37 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:37 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:37 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:37 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:37 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:40 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:40 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:40 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:47 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:47 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 13:07:48 Europe/London] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(629): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(610): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(541): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(447): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(366): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(427): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(115): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home/newadminsystemit/public_html/public/index.php(55): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home/newadminsystemit/public_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[30-Nov-2022 15:55:38 UTC] PHP Fatal error:  Unparenthesized `a ? b : c ? d : e` is not supported. Use either `(a ? b : c) ? d : e` or `a ? b : (c ? d : e)` in /home/newadminsystemit/public_html/app/Http/Controllers/InvoiceController.php on line 213
