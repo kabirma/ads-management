@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="intro-animation">
-			<img src="{{ asset('front/images/intro-animation.png')}}" alt="" title="" />
+			<img src="{{asset($setting->cover)}}" alt="" title="" />
 		</div>
 		<svg class="svg-intro-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
 			preserveAspectRatio="none">
@@ -64,27 +64,49 @@
 		</div>
 
 	</section>
+
+
+	<section class="section section--about" id="about">
+
+		<div class="section__content section__content--fluid-width section__content--about">
+			<div class="grid grid--5col grid--about">
+			<h2 class="section__title section__title--centered">About Us</h2>
+
+				<div class="grid__item grid__item--x2">
+					<small class="grid__title">{{$setting->name}}</small>
+					<h3 class="grid__title"><?= $setting->about_heading ?></h3>
+					<p class="grid__text"> <?= $setting->about_content ?></p>
+				
+
+				</div>
+				<div class="grid__item grid__item--x3">
+					<div class="grid__image grid__image--right" data-paroller-factor="0.2"
+						data-paroller-type="foreground" data-paroller-direction="vertical"><img
+							src="{{asset($setting->about_image)}}" alt="" title="" /></div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+
 	<!-- Section -- about -->
 	<section class="section section--about">
 
 		<div class="section__content section__content--fluid-width section__content--about">
 			<div class="grid grid--5col grid--about">
+			<h2 class="section__title section__title--centered">Our Mission</h2>
 
 				<div class="grid__item grid__item--x2 grid__item--floated-right">
-					<h3 class="grid__title">Powerful services for <span>powerful applications</span></h3>
-					<p class="grid__text">Responsive code that makes your landing page look good on all devices
-						(desktops, tablets, and phones). Created with mobile specialists.</p>
-					<ul class="grid__list">
-						<li>Responsive code</li>
-						<li>Look good on all devices</li>
-						<li>Created with mobile specialists</li>
-					</ul>
+					
+					<h3 class="grid__title"><span> <?= $setting->mission_heading ?></span></h3>
+					<p class="grid__text"><?= $setting->mission_content ?>
 
 				</div>
 				<div class="grid__item grid__item--x3">
 					<div class="grid__image grid__image--left" data-paroller-factor="0.2"
 						data-paroller-type="foreground" data-paroller-direction="vertical"><img
-							src="{{ asset('front/images/desktop-frame-about-2.png')}}" alt="" title="" /></div>
+						src="{{asset($setting->mission_image)}}" alt="" title="" /></div>
 				</div>
 
 			</div>

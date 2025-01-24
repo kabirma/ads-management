@@ -10,6 +10,8 @@
 	<title>{{$setting->name}}</title>
 	<link rel="stylesheet" href="{{ asset('front/css/swiper.css')}}">
 	<link rel="stylesheet" href="{{ asset('front/style.css')}}">
+	<link rel="icon" type="image/x-icon" href="{{asset($setting->favicon)}}">
+
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900" rel="stylesheet">
 </head>
 
