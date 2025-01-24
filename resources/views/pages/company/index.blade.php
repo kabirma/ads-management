@@ -43,11 +43,11 @@
                                         type="text" required class="form-control">
                                 </div>
 
-{{--                                <div class="form-group col-md-12" style="display: none">--}}
-{{--                                    <label for="phone">Phone</label>--}}
-{{--                                    <input id="phone" name="phone" value="{{ isset($record) ? $record->phone : '' }}"--}}
-{{--                                        type="text"  class="form-control">--}}
-{{--                                </div>--}}
+                          <div class="form-group col-md-12">
+                                <label for="phone">Phone</label>
+                                  <input id="phone" name="phone" value="{{ isset($record) ? $record->phone : '' }}"
+                                       type="text"  class="form-control">
+                                </div>
 
                                 <div class="form-group col-md-12">
                                     <label for="email">Email</label>
@@ -59,16 +59,6 @@
                                     <label for="address">Address</label>
                                     <input id="address" name="address" value="{{ isset($record) ? $record->address : '' }}"
                                         type="text" required class="form-control">
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="address">Series</label>
-                                    <input class="input-tags" type="text" data-role="tagsinput"  name="series" value="{{ isset($record) ? $record->series : '' }}"
-                                    >
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="address">Category</label>
-                                    <input class="input-tags" type="text" data-role="tagsinput"  name="tags" value="{{ isset($record) ? $record->tags : '' }}"
-                                           >
                                 </div>
 
                                 <div class="form-group col-md-12">
@@ -132,6 +122,34 @@
                                     @endif
                                 </div>
 
+
+                                <div class="col-md-12">
+                                    <h4>Vision Section</h4>
+                                    <hr>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="vision_heading">Vision Heading</label>
+                                    <input id="vision_heading" name="vision_heading" value="{{ isset($record) ? $record->vision_heading	 : '' }}"
+                                        type="text" required class="form-control">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="vision_content">Vision Description</label>
+                                    <textarea name="vision_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->vision_content : '' }}</textarea>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="vision_image">Vision Image</label>
+                                    <input id="vision_image" name="vision_image" type="file" class="form-control">
+                                    @if(isset($record))
+                                    <br>
+                                    <img src="{{asset($record->vision_image)}}" style="height:100px">
+                                    @endif
+                                </div>
+
+                                
+
                                 <div class="col-md-12">
                                     <h4>Mission Section</h4>
                                     <hr>
@@ -156,6 +174,52 @@
                                     <img src="{{asset($record->mission_image)}}" style="height:100px">
                                     @endif
                                 </div>
+
+                                
+
+
+                                <div class="col-md-12">
+                                    <h4>Our Team Section</h4>
+                                    <hr>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="our_team_heading">Our Team Heading</label>
+                                    <input id="our_team_heading" name="our_team_heading" value="{{ isset($record) ? $record->our_team_heading	 : '' }}"
+                                        type="text" required class="form-control">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="our_team_content">Our Team Description</label>
+                                    <textarea name="our_team_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->our_team_content : '' }}</textarea>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="our_team_image">Our Team Image</label>
+                                    <input id="our_team_image" name="our_team_image" type="file" class="form-control">
+                                    @if(isset($record))
+                                    <br>
+                                    <img src="{{asset($record->our_team_image)}}" style="height:100px">
+                                    @endif
+                                </div>
+
+                                <div class="col-md-12">
+                                    <h4>Join Us Section</h4>
+                                    <hr>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="join_us_heading">Join Us Heading</label>
+                                    <input id="join_us_heading" name="join_us_heading" value="{{ isset($record) ? $record->join_us_heading	 : '' }}"
+                                        type="text" required class="form-control">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="join_us_content">Join Us Description</label>
+                                    <textarea name="join_us_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->join_us_content : '' }}</textarea>
+                                </div>
+
+                                
 
                                 <div class="col-md-12">
                                     <h4>Branding Section</h4>

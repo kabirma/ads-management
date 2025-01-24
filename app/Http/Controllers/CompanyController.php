@@ -41,6 +41,8 @@ class CompanyController extends Controller
         }
         $this->ImageUpload($model,"about_image",$request,"about","about_image");
         $this->ImageUpload($model,"mission_image",$request,"mission","mission_image");
+        $this->ImageUpload($model,"our_team_image",$request,"our_team","our_team_image");
+        $this->ImageUpload($model,"vision_image",$request,"vision","vision_image");
         $this->ImageUpload($model,"cover",$request,"homepage","cover");
         $this->ImageUpload($model,"logo",$request,"settings","logo");
         $this->ImageUpload($model,"favicon",$request,"settings","favicon");

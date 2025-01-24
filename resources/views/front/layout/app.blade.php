@@ -13,6 +13,7 @@
 	<link rel="icon" type="image/x-icon" href="{{asset($setting->favicon)}}">
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -21,19 +22,13 @@
 			<div class="header__logo-title">{{$setting->name}}</div>
 			<nav class="header__menu">
 				<ul>
-					<li><a class="selected header-link" href="#intro">HOME</a></li>
-					<li class="menu-item-has-children"><a href="#features" class="header-link">FEATURES</a>
-						<ul class="sub-menu">
-							<li><a href="#about" class="header-link">OUR PRODUCTS</a></li>
-							<li><a href="#about2" class="header-link">HOW IT WORKS</a></li>
-							<li><a href="#clients" class="header-link">OUR CLIENTS</a></li>
-							<li><a href="#testimonials" class="header-link">TESTIMONIALS</a></li>
-							<li><a href="#support" class="header-link">SUPPORT</a></li>
-						</ul>
-					</li>
-					<li><a href="#pricing" class="header-link">PRICING</a></li>
-					<li><a href="#support" class="header-link">CONTACT</a></li>
-					<li class="header__btn header__btn--login modal-toggle" data-openpopup="signuplogin"
+					<li><a class="selected header-link" href="{{route('index')}}">HOME</a></li>
+					
+					<li><a href="{{route('index')}}#about" class="header-link">ABOUT US</a></li>
+					<li><a href="{{route('index')}}#pricing" class="header-link">PRICING</a></li>
+					<li><a href="{{route('index')}}#joinus" class="header-link">JOIN US</a></li>
+					<li><a href="{{route('index')}}#contact" class="header-link">CONTACT</a></li>
+					<li class="header__btn header__btn--signup modal-toggle" data-openpopup="signuplogin"
 						data-popup="login"><a href="#">LOGIN</a></li>
 					<li class="header__btn header__btn--signup modal-toggle" data-openpopup="signuplogin"
 						data-popup="signup"><a href="#">GET STARTED</a></li>
@@ -51,7 +46,8 @@
 			<div class="grid grid--5col">
 
 				<div class="grid__item grid__item--x2">
-					<h3 class="grid__title grid__title--footer-logo">LATERAL</h3>
+					<h3 class="grid__title grid__title--footer-logo">{{$setting->name}}</h3>
+					<p>{{$setting->short_description}}</p>
 					<p class="grid__text grid__text--copyright">Copyright &copy; {{date('Y')}} {{$setting->name}}. <br />All Rights
 						Reserved. </p>
 					<ul class="grid__list grid__list--sicons">
@@ -61,22 +57,36 @@
 					</ul>
 				</div>
 				<div class="grid__item">
-					<h3 class="grid__title grid__title--footer">Company</h3>
+					<h3 class="grid__title grid__title--footer">USEFUL LINKS</h3>
 					<ul class="grid__list grid__list--fmenu">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Carrers</a></li>
-						<li><a href="#">Awards</a></li>
-						<li><a href="#">Users Program</a></li>
-						<li><a href="#">Locations</a></li>
+				
+						<li><a href="#intro">HOME</a></li>
+					
+					<li><a href="#about">ABOUT US</a></li>
+					<li><a href="#pricing">PRICING</a></li>
+					<li><a href="#joinus">JOIN US</a></li>
+					<li><a href="#contact">CONTACT</a></li>
 					</ul>
 				</div> 
 				<div class="grid__item">
 					<h3 class="grid__title grid__title--footer">Support</h3>
 					<ul class="grid__list grid__list--fmenu">
-						<li><a href="#">Contact</a></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Press</a></li>
+						@foreach(App\Models\Page::get() as $page)
+						<li><a href="{{route('content',$page->category)}}">{{$page->title}}</a></li>
+						@endforeach
+					
+					</ul>
+				</div>
 
+				<div class="grid__item">
+					<h3 class="grid__title grid__title--footer">Get in Touch</h3>
+					<ul class="grid__list grid__list--fmenu">
+						
+						<li><a href="#0"> <i class="fa fa-phone"></i> {{$setting->phone}}</a></li>
+						<li><a href="#0"> <i class="fa fa-at"></i> {{$setting->email}}</a></li>
+						<li><a href="#0"> <i class="fa fa-map-marker"></i> {{$setting->address}}</a></li>
+						
+					
 					</ul>
 				</div>
 

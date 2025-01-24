@@ -8,14 +8,12 @@
 		<div class="section__content section__content--fluid-width section__content--intro">
 			<div class="intro">
 				<div class="intro__content">
-					<div class="intro__title"><span>Powerful services</span> for powerful applications</div>
-					<div class="intro__subtitle">We believe we have created the most efficient SaaS landing page for
-						your users. </div>
-					<div class="intro__description">For as low as <span>$0.95</span> per user account</div>
+					<div class="intro__title">{{$setting->name}}</div>
+					<div class="intro__subtitle">{{$setting->short_description}}</div>
+					<!-- <div class="intro__description">For as low as <span>$0.95</span> per user account</div> -->
 					<div class="intro__buttons intro__buttons--left">
-						<a href="index-2.html" class="btn btn--blue-bg btn--play modal-toggle"
-							data-openpopup="animation">WATCH DEMO</a>
-						<a href="index-2.html" class="btn btn--orange-bg">START NOW</a>
+					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="login"><i class="fa fa-user"></i> LOGIN</a>
+					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="signup"> <i class="fa fa-rocket"></i> GET STARTED</a>
 					</div>
 				</div>
 			</div>
@@ -37,47 +35,15 @@
 		</svg>
 	</section>
 
-	<!-- Section -- about -->
+
 	<section class="section section--about" id="about">
 
 		<div class="section__content section__content--fluid-width section__content--about">
 			<div class="grid grid--5col grid--about">
 
 				<div class="grid__item grid__item--x2">
-					<h3 class="grid__title">Build your SAAS landing page using the <span>intelligent BEM
-							interface</span></h3>
-					<p class="grid__text">Blocks, Elements and Modifiers. A smart HTML/CSS structure that can easely be
-						reused. Layout driven by the purpose of modularity.</p>
-					<ul class="grid__list">
-						<li>Simple and Smart HTML code</li>
-						<li>Works reintegrated in any part of the layout</li>
-						<li>Reuse the elements from one design to another</li>
-					</ul>
-
-				</div>
-				<div class="grid__item grid__item--x3">
-					<div class="grid__image grid__image--right" data-paroller-factor="0.2"
-						data-paroller-type="foreground" data-paroller-direction="vertical"><img
-							src="{{ asset('front/images/desktop-frame-about.png')}}" alt="" title="" /></div>
-				</div>
-			</div>
-		</div>
-
-	</section>
-
-
-	<section class="section section--about" id="about">
-
-		<div class="section__content section__content--fluid-width section__content--about">
-			<div class="grid grid--5col grid--about">
-			<h2 class="section__title section__title--centered">About Us</h2>
-
-				<div class="grid__item grid__item--x2">
-					<small class="grid__title">{{$setting->name}}</small>
 					<h3 class="grid__title"><?= $setting->about_heading ?></h3>
 					<p class="grid__text"> <?= $setting->about_content ?></p>
-				
-
 				</div>
 				<div class="grid__item grid__item--x3">
 					<div class="grid__image grid__image--right" data-paroller-factor="0.2"
@@ -91,57 +57,59 @@
 
 
 	<!-- Section -- about -->
-	<section class="section section--about">
+	<section class="section section--features" id="vision">
 
 		<div class="section__content section__content--fluid-width section__content--about">
-			<div class="grid grid--5col grid--about">
-			<h2 class="section__title section__title--centered">Our Mission</h2>
+			<div class="grid grid--2col grid--about">
 
-				<div class="grid__item grid__item--x2 grid__item--floated-right">
+				<div class="grid__item grid__item--x1 grid__item--floated-right">
 					
-					<h3 class="grid__title"><span> <?= $setting->mission_heading ?></span></h3>
-					<p class="grid__text"><?= $setting->mission_content ?>
+					<h3 class="grid__title"><span> <?= $setting->vision_heading ?></span></h3>
+					<p class="grid__text"><?= $setting->vision_content ?>
 
 				</div>
-				<div class="grid__item grid__item--x3">
-					<div class="grid__image grid__image--left" data-paroller-factor="0.2"
-						data-paroller-type="foreground" data-paroller-direction="vertical"><img
-						src="{{asset($setting->mission_image)}}" alt="" title="" /></div>
+				<div class="grid__item grid__item--x1">
+				<h3 class="grid__title"><span> <?= $setting->mission_heading ?></span></h3>
+				<p class="grid__text"><?= $setting->mission_content ?>
+		<br><br>
+
+		<br><br>
+
 				</div>
 
 			</div>
 		</div>
-
 	</section>
-	<!-- Section -- about -->
-	<section class="section section--about" id="about2">
-
-		<div class="section__content section__content--fluid-width section__content--about">
-			<div class="grid grid--5col grid--about">
-
-				<div class="grid__item grid__item--x2">
-					<h3 class="grid__title">Layout driven by the <span>purpose of modularity</span>.</h3>
-					<p class="grid__text">Choose between multiple unique designs and easy integrate elements from one
-						design to another. Following the latest design trends.</p>
-					<ul class="grid__list">
-						<li>Elements from one design to another</li>
-						<li>Following the latest design trends</li>
-						<li>Reuse the elements from one design to another</li>
-					</ul>
+	
+<!-- Section -->
+	<section class="section" id="joinus">
+		<div class="section__content section__content--fluid-width section__content--padding">
+			<div class="grid grid--2col grid--support">
+			
+				<div class="grid__item grid__item--padding">
+					<h3 class="grid__title">{{$setting->join_us_heading}}</h3>
+					<p class="grid__text"><?= $setting->join_us_content ?></p>
 
 				</div>
-				<div class="grid__item grid__item--x3">
-					<div class="grid__image grid__image--right" data-paroller-factor="0.2"
-						data-paroller-type="foreground" data-paroller-direction="vertical"><img
-							src="{{ asset('front/images/desktop-frame-about-3.png')}}" alt="" title="" /></div>
+					<div class="grid__item grid__item--padding  grid__item--centering">
+
+					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="login">LOGIN</a>
+					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="signup">GET STARTED</a>
 				</div>
+				<svg class="svg-support-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+					preserveAspectRatio="none">
+					<path d="M0,90 Q0,100 3,100 L95,96 Q100,96 99,80 L95,25 Q94,15 90,15 L6,0 Q2,0 2,10 Z"
+						fill="#476A30" />
+				</svg>
 			</div>
+			<div class="clear"></div>
 		</div>
 
 	</section>
+
 
 	<!-- Section -- features -->
-	<section class="section section--features" id="features">
+	<!-- <section class="section section--features" id="features">
 
 		<div class="section__content section__content--fluid-width section__content--features">
 			<h2 class="section__title section__title--centered">Features designed for you</h2>
@@ -208,8 +176,21 @@
 		</div>
 
 
-	</section>
+	</section> -->
 
+
+	<section class="section section--features" id="our_team">
+
+		<div class="section__content section__content--fluid-width section__content--features">
+			<h2 class="section__title section__title--centered">{{$setting->our_team_heading}}</h2>
+			<div class="section__description section__description--centered">
+				<?= $setting->our_team_content ?>
+			</div>
+			
+		</div>
+
+
+	</section>
 
 
 	<!-- Section -- pricing -->
@@ -298,153 +279,29 @@
 
 	</section>
 
-	<!-- Section -- testimonials -->
-	<section class="section section--testimonials" id="testimonials">
-
-		<div class="section__content section__content--fluid-width section__content--padding">
-			<h2 class="section__title section__title--centered">Success stories</h2>
-			<div class="testimonials">
-				<div class="testimonials__content swiper-wrapper">
-					<div class="testimonials__slide swiper-slide">
-						<div class="testimonials__thumb" data-swiper-parallax="-50%"><img src="{{ asset('front/images/avatar-1.jpg')}}"
-								alt="" title="" /></div>
-						<div class="testimonials__source">Lason Duvan <a href="#">New York Business Center</a></div>
-						<div class="testimonials__text" data-swiper-parallax="-100%">
-							<p>"Business is all about the customer: what the customer wants and what they get. "</p>
-						</div>
-
-					</div>
-					<div class="testimonials__slide swiper-slide">
-						<div class="testimonials__thumb" data-swiper-parallax="-50%"><img src="{{ asset('front/images/avatar-2.jpg')}}"
-								alt="" title="" /></div>
-						<div class="testimonials__source">Jada Sacks <a href="#">Paris Tehnics</a></div>
-						<div class="testimonials__text" data-swiper-parallax="-100%">
-							<p>" I've internalized it to the point of understanding that the success of my actions
-								and/or endeavors"</p>
-						</div>
-
-					</div>
-					<div class="testimonials__slide swiper-slide">
-						<div class="testimonials__thumb" data-swiper-parallax="-50%"><img src="{{ asset('front/images/avatar-3.jpg')}}"
-								alt="" title="" /></div>
-						<div class="testimonials__source">Lason Duvan <a href="#">Music Software</a></div>
-						<div class="testimonials__text" data-swiper-parallax="-100%">
-							<p>"The American Dream is that any man or woman, despite of his or her background, can
-								change their circumstances"</p>
-						</div>
-
-					</div>
-					<div class="testimonials__slide swiper-slide">
-						<div class="testimonials__thumb" data-swiper-parallax="-50%"><img src="{{ asset('front/images/avatar-4.jpg')}}"
-								alt="" title="" /></div>
-						<div class="testimonials__source">Duran Jackson <a href="#">New York Business Center</a></div>
-						<div class="testimonials__text" data-swiper-parallax="-100%">
-							<p>"Generally, every customer wants a product or service that solves their problem, worth
-								their money"</p>
-						</div>
-
-					</div>
-					<div class="testimonials__slide swiper-slide">
-						<div class="testimonials__thumb" data-swiper-parallax="-50%"><img src="{{ asset('front/images/avatar-5.jpg')}}"
-								alt="" title="" /></div>
-						<div class="testimonials__source">Maria Allesi <a href="#">Italy Solutions</a></div>
-						<div class="testimonials__text" data-swiper-parallax="-100%">
-							<p>"No one can make you successful; the will to success comes from within.' I've made this
-								my motto."</p>
-						</div>
-
-					</div>
-					<div class="testimonials__slide swiper-slide">
-						<div class="testimonials__thumb" data-swiper-parallax="-50%"><img src="{{ asset('front/images/avatar-6.jpg')}}"
-								alt="" title="" /></div>
-						<div class="testimonials__source">Jenifer Patrison<a href="#">App Dating</a></div>
-						<div class="testimonials__text" data-swiper-parallax="-100%">
-							<p>"Can change their circumstances and rise as high as they are willing to work"</p>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="testimonials__pagination swiper-pagination"></div>
-				<div class="testimonials__button--next swiper-button-next"></div>
-				<div class="testimonials__button--prev swiper-button-prev"></div>
-			</div>
-			<div class="clear"></div>
-		</div>
-
-	</section>
-
-
 	<!-- Section -->
-	<section class="section" id="support">
-		<div class="section__content section__content--fluid-width section__content--padding">
-			<div class="grid grid--2col grid--support">
-				<div class="grid__item grid__item--padding">
-
-					<h3 class="grid__title">Help &amp; Support</h3>
-					<p class="grid__text">Your issue is our main priority. Our 24/7 support team is here to help you and
-						make sure our product is up to date. Have a presale question about our products and features? Or
-						looking for a refund? We would love to hear what you concern is. Online awards and publications.
-						Get our media resources and learn about our company information.</p>
-				</div>
-				<div class="grid__item grid__item--padding grid__item--centering">
-					<a href="#" class="grid__more">GET IN TOUCH NOW</a>
-				</div>
-				<svg class="svg-support-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-					preserveAspectRatio="none">
-					<path d="M0,90 Q0,100 3,100 L95,96 Q100,96 99,80 L95,25 Q94,15 90,15 L6,0 Q2,0 2,10 Z"
-						fill="#fb993e" />
-				</svg>
-			</div>
-			<div class="clear"></div>
-		</div>
-
-	</section>
-
-
-	<!-- Section -->
-	<section class="section section--clients" id="clients">
-		<div class="section__content section__content--fluid-width">
-			<div class="grid grid--5col">
-
-				<div class="grid__item">
-					<div class="grid__client-logo"><a href="#"><img src="{{ asset('front/images/clients/clients-logo1.png')}}" alt=""
-								title="" /></a></div>
-				</div>
-				<div class="grid__item">
-					<div class="grid__client-logo"><a href="#"><img src="{{ asset('front/images/clients/clients-logo2.png')}}" alt=""
-								title="" /></a></div>
-				</div>
-				<div class="grid__item">
-					<div class="grid__client-logo"><a href="#"><img src="{{ asset('front/images/clients/clients-logo3.png')}}" alt=""
-								title="" /></a></div>
-				</div>
-				<div class="grid__item">
-					<div class="grid__client-logo"><a href="#"><img src="{{ asset('front/images/clients/clients-logo4.png')}}" alt=""
-								title="" /></a></div>
-				</div>
-				<div class="grid__item">
-					<div class="grid__client-logo"><a href="#"><img src="{{ asset('front/images/clients/clients-logo5.png')}}" alt=""
-								title="" /></a></div>
-				</div>
-			</div>
-
-		</div>
-		<svg class="svg-cta-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-			<path d="M0,70 C30,130 70,50 100,70 L100,100 0,100 Z" fill="#42387a" />
-		</svg>
-	</section>
-
-	<!-- Section -->
-	<section class="section section--cta" id="cta">
+	<section class="section section--cta" id="contact">
 		<div class="section__content section__content--fluid-width section__content--padding section__content--cta">
-			<h2 class="section__title section__title--centered section__title--cta">Get Started Now!</h2>
+			<h2 class="section__title section__title--centered section__title--cta">We'd love to hear from you!			</h2>
 			<div class="section__description section__description--centered section__description--cta">
-				We believe we have created the most efficient SaaS landing page for your users. Landing page with
-				features that will convince you to use it for your SaaS business.
+			If you have any questions, feedback, or inquiries, please feel free to reach out using the form below or through our contact details.
+			</div>
+			<div style="display:flex;padding:0 20%">
+			<div class="intro__buttons intro__buttons--centered">
+				<a href="index-2.html" class="btn btn--orange-bg">
+				<i class="fa fa-phone"></i>
+				{{$setting->phone}}</a>
 			</div>
 			<div class="intro__buttons intro__buttons--centered">
-				<a href="index-2.html" class="btn btn--orange-bg">CREATE AN ACCOUNT</a>
+				<a href="index-2.html" class="btn btn--orange-bg">
+				<i class="fa fa-at"></i>
+				{{$setting->email}}</a>
+			</div>
+			<div class="intro__buttons intro__buttons--centered">
+				<a href="index-2.html" class="btn btn--orange-bg">
+				<i class="fa fa-map-marker"></i>
+				{{$setting->address}}</a>
+			</div>
 			</div>
 		</div>
 		<svg class="svg-cta-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">

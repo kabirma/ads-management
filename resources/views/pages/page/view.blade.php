@@ -37,7 +37,6 @@
                                         <tr style="">
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Image</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -46,7 +45,6 @@
                                             <tr>
                                                 <td>{{ $list->id }}</td>
                                                 <td>{{ $list->title }}</td>
-                                                <td><img src="{{ asset($list->image) }}" style="height:100px"></td>
                                                 <td>
                                                     <a href="{{ route('status.page', $list->id) }}"
                                                         class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
