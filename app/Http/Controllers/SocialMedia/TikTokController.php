@@ -33,7 +33,7 @@ class TikTokController extends Controller
         $code = $request->get('code');
 
         // Step 3: Exchange authorization code for access token using v2 endpoint
-        $response = Http::asForm()->post('https://sandbox.tiktokapis.com/v2/oauth/token/', [
+        $response = Http::asForm()->post('https://open.tiktokapis.com/v2/oauth/token/', [
             'client_key' => config('services.tiktok.client_key'),
             'client_secret' => config('services.tiktok.client_secret'),
             'code' => $code,
