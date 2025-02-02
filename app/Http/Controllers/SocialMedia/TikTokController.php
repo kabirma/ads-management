@@ -42,7 +42,7 @@ class TikTokController extends Controller
         ]);
 
         $data = $response->json();
-
+        dd($data);
         if (isset($data['data']['access_token'])) {
             $user = Auth::user();
             $user->tiktok_token = $data['data']['access_token'];
