@@ -9,7 +9,7 @@ use App\Models\Invoice;
 use App\Models\InvoiceProduct;
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\SpotLightEvent;
+use App\Models\Package;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -34,7 +34,7 @@ class DashboardController extends Controller
   public function index()
   {
     $data = array();
-    $data['spotlight_events'] = SpotLightEvent::count();
+    $data['spotlight_events'] = Package::count();
     $data['bts'] = BTS::count();
     $data['pages'] = Page::count();
     $data['events'] = Event::count();
@@ -189,4 +189,12 @@ class DashboardController extends Controller
       echo json_encode($output_array);
     }
   }
+
+
+  public function setting()
+  {
+    $data['title'] = 'Connect Social Media';
+    return view('auth.setting',$data);
+  }
+
 }

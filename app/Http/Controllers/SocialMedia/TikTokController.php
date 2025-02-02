@@ -1,143 +1,57 @@
 <?php
+namespace App\Http\Controllers\SocialMedia;
 
-namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class TikTokController extends Controller
 {
-    protected $client;
-    protected $apiKey;
-    protected $apiSecret;
-    protected $redirectUri;
-
-    public function __construct()
-    {
-        $this->client = new Client();
-        $this->apiKey = env('TIKTOK_API_KEY');       // Add this to .env
-        $this->apiSecret = env('TIKTOK_API_SECRET'); // Add this to .env
-        $this->redirectUri = env('TIKTOK_REDIRECT_URI'); // Add this to .env
-    }
-
+    // Step 1: Redirect user to TikTok's OAuth page
     public function redirectToTikTok()
     {
-        $authUrl = "https://ads.tiktok.com/marketing_api/auth?app_id={$this->apiKey}&redirect_uri={$this->redirectUri}&state=xyz";
-        return redirect()->away($authUrl);
+        $query = http_build_query([
+            'client_key' => config('services.tiktok.client_key'),
+            'response_type' => 'code',
+            'scope' => 'user.info.basic,ads.read,ads.write',
+            'redirect_uri' => config('services.tiktok.redirect'),
+            'state' => csrf_token(), // For CSRF protection
+        ]);
+        
+        return redirect("https://www.tiktok.com/v2/auth/authorize/?" . $query);
     }
 
-    public function handleCallback(Request $request)
+    // Step 2: Handle TikTok's callback and exchange code for access token
+    public function handleTikTokCallback(Request $request)
     {
-        $code = $request->input('auth_code');
+        if ($request->has('error')) {
+            return redirect('/dashboard')->with('error', 'TikTok authorization failed.');
+        }
 
-        // Exchange the code for an access token
-        $response = $this->client->post('https://business-api.tiktok.com/open_api/oauth2/access_token/', [
-            'form_params' => [
-                'app_id' => $this->apiKey,
-                'secret' => $this->apiSecret,
-                'auth_code' => $code,
-            ],
+        $code = $request->get('code');
+
+        // Step 3: Exchange authorization code for access token using v2 endpoint
+        $response = Http::asForm()->post('https://open.tiktokapis.com/v2/oauth/token/', [
+            'client_key' => config('services.tiktok.client_key'),
+            'client_secret' => config('services.tiktok.client_secret'),
+            'code' => $code,
+            'grant_type' => 'authorization_code',
+            'redirect_uri' => config('services.tiktok.redirect'),
         ]);
 
-        $data = json_decode($response->getBody(), true);
-        $accessToken = $data['data']['access_token'];
+        $data = $response->json();
 
-        // Save the token securely (in session or database)
-        session(['tiktok_access_token' => $accessToken]);
+        if (isset($data['data']['access_token'])) {
+            $user = Auth::user();
+            $user->tiktok_token = $data['data']['access_token'];
+            $user->tiktok_refresh_token = $data['data']['refresh_token'];
+            $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
+            $user->save();
 
-        return redirect('/dashboard')->with('success', 'TikTok Authenticated Successfully!');
+            return redirect('/dashboard')->with('success', 'TikTok connected successfully!');
+        }
+
+        return redirect('/dashboard')->with('error', 'Failed to retrieve TikTok access token.');
     }
-
-    public function createCampaign(Request $request)
-    {
-        $accessToken = session('tiktok_access_token');
-        $advertiserId =  $this->getAdvertiserId();
-        if($advertiserId === null){
-            dd('error');
-        }
-
-        $response = $this->client->post('https://business-api.tiktok.com/open_api/v1.2/campaign/create/', [
-            'headers' => [
-                'Access-Token' => $accessToken,
-            ],
-            'json' => [
-                'advertiser_id' => $advertiserId,
-                'campaign_name' => $request->input('campaign_name'),
-                'objective_type' => 'TRAFFIC',  // Example objective: TRAFFIC, CONVERSIONS, APP_INSTALLS
-                'budget_mode' => 'BUDGET_MODE_INFINITE', // or BUDGET_MODE_DAY
-            ],
-        ]);
-
-        $data = json_decode($response->getBody(), true);
-
-        if ($data['code'] == 0) {
-            return back()->with('success', 'Campaign Created Successfully!');
-        } else {
-            return back()->with('error', 'Failed to Create Campaign: ' . $data['message']);
-        }
-    }
-
-    public function createAd(Request $request)
-    {
-        $accessToken = session('tiktok_access_token');
-        $advertiserId = $this->getAdvertiserId();
-        if($advertiserId === null){
-            dd('error');
-        }
-        $adGroupId = 'your_ad_group_id';  // You need to create an Ad Group first
-
-        $response = $this->client->post('https://business-api.tiktok.com/open_api/v1.2/ad/create/', [
-            'headers' => [
-                'Access-Token' => $accessToken,
-            ],
-            'json' => [
-                'advertiser_id' => $advertiserId,
-                'adgroup_id' => $adGroupId,
-                'ad_name' => $request->input('ad_name'),
-                'creative_material_mode' => 'UNION',
-                'ad_format' => 'SINGLE_VIDEO',
-                'creatives' => [
-                    [
-                        'ad_name' => $request->input('ad_name'),
-                        'video_id' => 'your_uploaded_video_id',  // Upload videos via API first
-                        'title' => $request->input('ad_title'),
-                    ],
-                ],
-            ],
-        ]);
-
-        $data = json_decode($response->getBody(), true);
-
-        if ($data['code'] == 0) {
-            return back()->with('success', 'Ad Created Successfully!');
-        } else {
-            return back()->with('error', 'Failed to Create Ad: ' . $data['message']);
-        }
-    }
-
-    public function getAdvertiserId()
-    {
-        $accessToken = session('tiktok_access_token');
-
-        $response = $this->client->get('https://business-api.tiktok.com/open_api/v1.2/oauth2/advertiser/get/', [
-            'headers' => [
-                'Access-Token' => $accessToken,
-            ],
-        ]);
-
-        $data = json_decode($response->getBody(), true);
-
-        if ($data['code'] == 0) {
-            // List of advertiser accounts linked to your app
-            $advertiserAccounts = $data['data']['list'];
-
-            // Example: Return the first advertiser ID
-            return $advertiserAccounts[0]['advertiser_id'];
-        } else {
-             dd('Error fetching advertiser ID: ' . $data['message']);
-             return null;
-        }
-    }
-
-
 }

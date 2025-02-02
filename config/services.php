@@ -40,5 +40,9 @@ return [
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
-
+    'tiktok' => [
+        'client_key' => env('TIKTOK_API_KEY'),
+        'client_secret' => env('TIKTOK_API_SECRET'),
+        'redirect' => env('TIKTOK_REDIRECT_URI'),
+    ],
 ];

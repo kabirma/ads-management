@@ -16,31 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, 'content'])->name('content');
 
-Route::get('/our-mission', [App\Http\Controllers\HomeController::class, 'our_mission'])->name('our_mission');
-Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about_us'])->name('about_us');
-Route::get('/make-donation', [App\Http\Controllers\HomeController::class, 'make_donation'])->name('make_donation');
-
-Route::get('/behind-the-scenes', [App\Http\Controllers\HomeController::class, 'featured_stories'])->name('featured_stories');
-Route::get('/behind-the-scenes/search', [App\Http\Controllers\HomeController::class, 'featured_stories_search'])->name('featured_stories_search');
-Route::get('/behind-the-scenes/{slug}', [App\Http\Controllers\HomeController::class, 'featured_stories_detail'])->name('featured_stories_detail');
-Route::get('/feature/concerts/{id}', [App\Http\Controllers\HomeController::class, 'spotlight_event'])->name('spotlight_event');
-Route::get('/feature/concerts', [App\Http\Controllers\HomeController::class, 'spotLightEvent'])->name('spotLightEvent');
-Route::get('/concerts/list', [App\Http\Controllers\HomeController::class, 'events'])->name('events');
-Route::get('/concerts/calendar', [App\Http\Controllers\HomeController::class, 'eventsCalendar'])->name('eventsCalendar');
-Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
-Route::get('/concerts/detail/{id}', [App\Http\Controllers\HomeController::class, 'event_detail'])->name('event_detail');
-Route::get('/concerts/add', [App\Http\Controllers\HomeController::class, 'event_add'])->name('event_add');
-Route::post('/concerts/save', [App\Http\Controllers\HomeController::class, 'event_save'])->name('event_save');
-Route::get('/authorized/google', [App\Http\Controllers\HomeController::class, 'redirectToGoogle'])->name('google_login');
-Route::get('/authorized/google/callback', [App\Http\Controllers\HomeController::class, 'handleGoogleCallback'])->name('google_login_redirect');
-Route::get('/photo-gallery', [App\Http\Controllers\HomeController::class, 'photo_gallery'])->name('photo_gallery');
-Route::get('/photo-gallery/detail/{id}', [App\Http\Controllers\HomeController::class, 'photo_gallery_detail'])->name('photo_gallery_detail');
-
-// Social Media Integration
-Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok']);
-Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleCallback']);
-Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign']);
-Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd']);
 
 
 Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
@@ -56,6 +31,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/logout',  [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout.admin');
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/setting', [App\Http\Controllers\DashboardController::class, 'setting'])->name('user_setting');
+
+    // Social Media Integration
+    Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok'])->name('redirect_to_tiktok');
+    Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleCallback'])->name('handle_callback');
+    Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign'])->name('create_campaign');
+    Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd'])->name('create_ad');
 
 
     Route::group(['prefix' => 'roles'], function () {
@@ -114,16 +96,16 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-    Route::group(['prefix' => 'spot_light_event'], function () {
-        Route::controller(App\Http\Controllers\SpotLightEventController::class)->group(function () {
-            Route::get('/', 'index')->name('view.spot_light_event');
-            Route::get('/add', 'add')->name('add.spot_light_event');
-            Route::get('/edit/{id}', 'edit')->name('edit.spot_light_event');
+    Route::group(['prefix' => 'package'], function () {
+        Route::controller(App\Http\Controllers\PackageController::class)->group(function () {
+            Route::get('/', 'index')->name('view.package');
+            Route::get('/add', 'add')->name('add.package');
+            Route::get('/edit/{id}', 'edit')->name('edit.package');
 
-            Route::post('/save', 'save')->name('save.spot_light_event');
-            Route::get('/delete/{id}', 'delete')->name('delete.spot_light_event');
-            Route::get('/delete/image/{id}', 'delete_image')->name('delete.spot_light_event.image');
-            Route::get('/status/{id}', 'status')->name('status.spot_light_event');
+            Route::post('/save', 'save')->name('save.package');
+            Route::get('/delete/{id}', 'delete')->name('delete.package');
+            Route::get('/delete/image/{id}', 'delete_image')->name('delete.package.image');
+            Route::get('/status/{id}', 'status')->name('status.package');
         });
     });
 

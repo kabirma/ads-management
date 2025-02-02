@@ -47,7 +47,24 @@
             </a>
         </li>
 
-        
+        <li class=" nav-item">
+            <a class="d-flex align-items-center" href="#">
+                <i class="fa fa-dollar"></i><span class="menu-title text-truncate" data-i18n="Invoice">Pricing Packages
+                </span>
+            </a>
+            <ul class="menu-content">
+                <li class="{{ Route::currentRouteName() == 'view.package' ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('view.package') }}">
+                        <i class="fa fa-list"></i><span class="menu-item text-truncate" data-i18n="List">View</span>
+                    </a>
+                </li>
+                <li class="{{ Route::currentRouteName() == 'add.package' ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('add.package') }}">
+                        <i class="fa fa-plus"></i><span class="menu-item text-truncate" data-i18n="List">Add</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class=" nav-item">
             <a class="d-flex align-items-center" href="#">
                 <i class="fa fa-pencil"></i><span class="menu-title text-truncate" data-i18n="Invoice">Page
@@ -88,10 +105,17 @@
         </li>
 
 
-        <li class=" nav-item {{ Route::currentRouteName() == 'company' ? 'active' : '' }}">
+        <li class=" nav-item {{ Route::currentRouteName() == 'edit.customer' ? 'active' : '' }}">
             <a class="d-flex align-items-center" href="{{ route('edit.customer',Auth::user()->id) }}">
+                <i class="fa fa-user"></i>
+                <span class="menu-title text-truncate" data-i18n="Profile">Profile</span>
+            </a>
+        </li>
+
+        <li class=" nav-item {{ Route::currentRouteName() == 'user_setting' ? 'active' : '' }}">
+            <a class="d-flex align-items-center" href="{{ route('user_setting') }}">
                 <i class="fa fa-gear"></i>
-                <span class="menu-title text-truncate" data-i18n="Settings">Profile</span>
+                <span class="menu-title text-truncate" data-i18n="Settings">Settings</span>
             </a>
         </li>
 

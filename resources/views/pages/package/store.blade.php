@@ -101,66 +101,48 @@
                                     {{ $title }}</span>
                             </li>
                         </ol>
-                        <a href="{{ route('view.spot_light_event') }}" class="btn btn-sm btn-primary waves-effect addnew">
+                        <a href="{{ route('view.package') }}" class="btn btn-sm btn-primary waves-effect addnew">
                             <i class="fa fa-list"></i> <span>View {{ $title }}</span>
                         </a>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">
-                            <form action="{{ route('save.spot_light_event') }}" method="post" class="row"
+                            <form action="{{ route('save.package') }}" method="post" class="row"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
-                                <div class="form-group col-md-12">
-                                    <label for="artist">Artist</label>
-                                    <input id="artist" name="artist" value="{{ isset($record) ? $record->artist : '' }}"
+                                <div class="form-group col-md-6">
+                                    <label for="name">Name</label>
+                                    <input id="name" name="name" value="{{ isset($record) ? $record->name : '' }}"
                                         type="text" required class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="date">Date</label>
-                                    <input id="date" name="date" value="{{ isset($record) ? $record->date : '' }}"
-                                        type="date" required class="form-control">
+                                    <label for="price">Price</label>
+                                    <input id="price" name="price" value="{{ isset($record) ? $record->price : '' }}"
+                                        type="number" required class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="time">Time</label>
-                                    <input id="time" name="time"
-                                        value="{{ isset($record) ? $record->time : '' }}" type="time" required
-                                        class="form-control">
+                                    <label for="time">Social Media</label>
+                                    <select name="social_media[]" id="" class="form-control select2" multiple>
+                                        <option <?= (isset($record) && in_array('facebook',explode(",", $record->social_media))) ? 'selected' : '' ?> value="facebook">Facebook</option>
+                                        <option <?= (isset($record) && in_array('tiktok',explode(",", $record->social_media))) ? 'selected' : '' ?> value="tiktok">TikTok</option>
+                                        <option <?= (isset($record) && in_array('youtube',explode(",", $record->social_media))) ? 'selected' : '' ?> value="youtube">Youtube</option>
+                                        <option <?= (isset($record) && in_array('google',explode(",", $record->social_media))) ? 'selected' : '' ?> value="google">Google</option>
+                                    </select>
                                 </div>
-                         
-
-                                <div class="form-group col-md-12">
-                                    <label for="description">Venue</label>
-                                    <input type="hidden" value="{{ isset($record) ? $record->location : '' }}"
-                                        class="form-control" id="address" placeholder="Event Address" name="location">
-                                    <input type="hidden" id="longitude" name="longitude"
-                                        value="{{ isset($record) ? $record->longitude : '' }}">
-                                    <input type="hidden" id="latitude" name="latitude"
-                                        value="{{ isset($record) ? $record->latitude : '' }}">
-                                    <input id="pac-input" class="controls" required type="text"
-                                        value="{{ isset($record) ? $record->location : '' }}" placeholder="Search Box">
-                                    <div id="map_2"></div>
+                                <div class="form-group col-md-6">
+                                    <label for="is_popular">Is Popular?</label>
+                                    <input id="is_popular" name="is_popular" {{ (isset($record) && isset($record->is_popular)) ? 'checked' : '' }}
+                                        type="checkbox">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="description">Description</label>
-                                    <textarea name="description" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->description : '' }}</textarea>
+                                    <label for="features">Features</label>
+                                    <textarea name="features" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->features : '' }}</textarea>
                                 </div>
 
-                                <div class="form-group col-md-12">
-                                    <label for="about">About</label>
-                                    <textarea name="about" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->about : '' }}</textarea>
-                                </div>
 
-                                <div class="form-group col-md-12">
-                                    <label for="image">Image</label>
-                                    <input id="image" name="image" type="file" class="form-control">
-                                    @if(isset($record))
-                                    <br>
-                                    <img src="{{asset($record->image)}}" style="height:100px">
-                                    @endif
-                                </div>
 
                                 <div class="form-group col-md-12">
                                     <hr>

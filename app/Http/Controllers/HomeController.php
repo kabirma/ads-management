@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\Gallery;
 use App\Models\User;
-use App\Models\SpotLightEvent;
+use App\Models\Package;
 use App\Models\Event;
 use App\Models\EventImage;
 use App\Models\InterestedEvents;
@@ -62,7 +62,7 @@ class HomeController extends Controller
     public function index()
     {
         $today = date("Y-m-d");
-        $spot_light_events = SpotLightEvent::orderBy("id", "DESC")->inRandomOrder()->limit(6)->get();
+        $spot_light_events = Package::orderBy("id", "DESC")->inRandomOrder()->limit(6)->get();
         $events = Event::orderBy("date", "ASC")->limit(8)->where('status',1)->where('date','>', $today)->get();
         $genres = Event::groupBy('genre')->pluck('genre')->toArray();
         return view('front.index', compact("spot_light_events", "events", "genres"));
@@ -76,13 +76,13 @@ class HomeController extends Controller
 
     public function spotLightEvent()
     {
-        $spotlight_events = SpotLightEvent::get();
+        $spotlight_events = Package::get();
         return view('front.spotLightEvent', compact("spotlight_events"));
     }
 
     public function spotlight_event($id)
     {
-        $spotlight_events = SpotLightEvent::find($id);
+        $spotlight_events = Package::find($id);
         return view('front.spotlight_event', compact("spotlight_events"));
     }
 

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SpotLightEvent;
-use App\Models\SpotLightEventImage;
+use App\Models\Package;
 use App\Models\Role;
 
-class SpotLightEventController extends Controller
+class PackageController extends Controller
 {
     protected $title;
     protected $model;
@@ -19,13 +18,12 @@ class SpotLightEventController extends Controller
 
     public function __construct()
     {
-        $this->title = "Spotlight Event";
+        $this->title = "Pricing Packages";
         $this->model_primary = "id";
-        $this->view_page = "pages.spot_light_event.view";
-        $this->store_page = "pages.spot_light_event.store";
-        $this->redirect_page = "view.spot_light_event";
-        $this->model = SpotLightEvent::class;
-        $this->child_model = SpotLightEventImage::class;
+        $this->view_page = "pages.package.view";
+        $this->store_page = "pages.package.store";
+        $this->redirect_page = "view.package";
+        $this->model = Package::class;
     }
 
     public function index()
@@ -52,11 +50,16 @@ class SpotLightEventController extends Controller
     {
         $model = $request->id > 0 ? $this->model::where('id', $request->id)->first() : new $this->model;
         foreach ($request->all() as $key => $req) {
-            if ($key != "_token" && $key != "id") {
+            if ($key == 'is_popular' && $key != "_token" && $key != "id") {
+            
+                if($key === 'social_media'){
+                    $req = implode(",", $req);
+                }
                 $model->$key = $req;
             }
         }
-        $this->ImageUpload($model,"image",$request,"events");
+
+        $model->is_popular = isset($request->is_popular) ? 1 : 0;
         $model->save();
         return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
     }

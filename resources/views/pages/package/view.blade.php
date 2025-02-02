@@ -24,7 +24,7 @@
                                     List</span></li>
                         </ol>
 
-                        <a href="{{ route('add.spot_light_event') }}" class="btn btn-sm btn-primary waves-effect">
+                        <a href="{{ route('add.package') }}" class="btn btn-sm btn-primary waves-effect">
                             <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
                         </a>
 
@@ -36,10 +36,10 @@
                                     <thead>
                                         <tr style="">
                                             <th>ID</th>
-                                            <th>Artist Name</th>
-                                            <th>Venue</th>
-                                            <th>Date</th>
-                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Promote Ads On</th>
+                                            <th>is Popular</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -47,18 +47,18 @@
                                         @foreach ($listing as $list)
                                             <tr>
                                                 <td>{{ $list->id }}</td>
-                                                <td>{{ $list->artist }}</td>
-                                                <td>{{ $list->location }}</td>
-                                                <td>{{ date("M d, Y",strtotime($list->date)) }}</td>
-                                                <td><img src="{{ asset($list->image) }}" style="height:100px"></td>
+                                                <td>{{ $list->name }}</td>
+                                                <td>{{ $list->price }}</td>
+                                                <td>{{ $list->social_media }}</td>
+                                                <td>{{ $list->is_popular ? 'Yes' : 'No' }}</td>
                                                 <td>
-                                                    <a href="{{ route('status.spot_light_event', $list->id) }}"
+                                                    <a href="{{ route('status.package', $list->id) }}"
                                                         class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
-                                                    <a href="{{ route('edit.spot_light_event', $list->id) }}"
+                                                    <a href="{{ route('edit.package', $list->id) }}"
                                                         class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                                     <a href="#0" class="btn btn-sm btn-danger delete"
                                                         data-title="{{ $list->title }}"
-                                                        data-href="{{ route('delete.spot_light_event', $list->id) }}"><i
+                                                        data-href="{{ route('delete.package', $list->id) }}"><i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>

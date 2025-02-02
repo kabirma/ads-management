@@ -102,7 +102,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KRC6TgL2aHoS6TRQ',
+            '_route' => 'generated::tTNJ0swVJFBwwAA9',
           ),
           1 => NULL,
           2 => 
@@ -123,285 +123,6 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'index',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/our-mission' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'our_mission',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/about-us' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'about_us',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/make-donation' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'make_donation',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/behind-the-scenes' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'featured_stories',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/behind-the-scenes/search' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'featured_stories_search',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/feature/concerts' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'spotLightEvent',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/concerts/list' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'events',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/concerts/calendar' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'eventsCalendar',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/search' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'search',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/concerts/add' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'event_add',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/concerts/save' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'event_save',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/authorized/google' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'google_login',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/authorized/google/callback' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'google_login_redirect',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/photo-gallery' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'photo_gallery',
           ),
           1 => NULL,
           2 => 
@@ -497,7 +218,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::XC4DVVY8Tshq1qMc',
+            '_route' => 'generated::dwB5uJvOcnU1IaAG',
           ),
           1 => NULL,
           2 => 
@@ -569,7 +290,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::JDCN82fYqO3pgjoT',
+            '_route' => 'generated::DumvQPr5LVMPV491',
           ),
           1 => NULL,
           2 => 
@@ -660,7 +381,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::5ARaziuPOkiFlCZn',
+            '_route' => 'generated::uqj5e6t3g5jAk00l',
           ),
           1 => NULL,
           2 => 
@@ -686,6 +407,104 @@ app('router')->setCompiledRoutes(
           array (
             'GET' => 0,
             'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/setting' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'user_setting',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/tiktok/auth' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'redirect_to_tiktok',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/tiktok/callback' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'handle_callback',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/tiktok/create-campaign' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'create_campaign',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/tiktok/create-ad' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'create_ad',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
           ),
           3 => NULL,
           4 => false,
@@ -1061,13 +880,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/spot_light_event' => 
+      '/package' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'view.spot_light_event',
+            '_route' => 'view.package',
           ),
           1 => NULL,
           2 => 
@@ -1081,13 +900,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/spot_light_event/add' => 
+      '/package/add' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'add.spot_light_event',
+            '_route' => 'add.package',
           ),
           1 => NULL,
           2 => 
@@ -1101,13 +920,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/spot_light_event/save' => 
+      '/package/save' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'save.spot_light_event',
+            '_route' => 'save.package',
           ),
           1 => NULL,
           2 => 
@@ -1300,11 +1119,11 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/c(?|on(?|tent/([^/]++)(*:30)|certs/detail/([^/]++)(*:58))|ustomer/(?|concerts/interested/([^/]++)(*:105)|edit/([^/]++)(*:126)|delete/([^/]++)(*:149)))|/b(?|ehind\\-the\\-scenes/([^/]++)(*:191)|ts/(?|edit/([^/]++)(*:218)|de(?|tail/([^/]++)(*:244)|lete/([^/]++)(*:265))|status/([^/]++)(*:289)))|/feature/concerts/([^/]++)(*:325)|/p(?|hoto\\-gallery/detail/([^/]++)(*:367)|a(?|ssword/reset/([^/]++)(*:400)|ge/(?|edit/([^/]++)(*:427)|delete/([^/]++)(*:450)|status/([^/]++)(*:473))))|/ads/(?|edit/([^/]++)(*:505)|delete/(?|([^/]++)(*:531)|image/([^/]++)(*:553))|status/([^/]++)(*:577))|/spot_light_event/(?|edit/([^/]++)(*:620)|delete/(?|([^/]++)(*:646)|image/([^/]++)(*:668))|status/([^/]++)(*:692))|/gallery/(?|edit/([^/]++)(*:726)|de(?|tail/([^/]++)(*:752)|lete/([^/]++)(*:773))|status/([^/]++)(*:797)))/?$}sDu',
+      0 => '{^(?|/c(?|ontent/([^/]++)(*:27)|ustomer/(?|concerts/interested/([^/]++)(*:73)|edit/([^/]++)(*:93)|delete/([^/]++)(*:115)))|/pa(?|ssword/reset/([^/]++)(*:152)|ge/(?|edit/([^/]++)(*:179)|delete/([^/]++)(*:202)|status/([^/]++)(*:225))|ckage/(?|edit/([^/]++)(*:256)|delete/(?|([^/]++)(*:282)|image/([^/]++)(*:304))|status/([^/]++)(*:328)))|/ads/(?|edit/([^/]++)(*:359)|delete/(?|([^/]++)(*:385)|image/([^/]++)(*:407))|status/([^/]++)(*:431))|/gallery/(?|edit/([^/]++)(*:465)|de(?|tail/([^/]++)(*:491)|lete/([^/]++)(*:512))|status/([^/]++)(*:536))|/bts/(?|edit/([^/]++)(*:566)|de(?|tail/([^/]++)(*:592)|lete/([^/]++)(*:613))|status/([^/]++)(*:637)))/?$}sDu',
     ),
     3 => 
     array (
-      30 => 
+      27 => 
       array (
         0 => 
         array (
@@ -1327,30 +1146,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      58 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'event_detail',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      105 => 
+      73 => 
       array (
         0 => 
         array (
@@ -1373,7 +1169,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      126 => 
+      93 => 
       array (
         0 => 
         array (
@@ -1396,7 +1192,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      149 => 
+      115 => 
       array (
         0 => 
         array (
@@ -1419,168 +1215,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      191 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'featured_stories_detail',
-          ),
-          1 => 
-          array (
-            0 => 'slug',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      218 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'edit.bts',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      244 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'detail.bts',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      265 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'delete.bts',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      289 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'status.bts',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      325 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'spotlight_event',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      367 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'photo_gallery_detail',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      400 => 
+      152 => 
       array (
         0 => 
         array (
@@ -1603,7 +1238,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      427 => 
+      179 => 
       array (
         0 => 
         array (
@@ -1626,7 +1261,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      450 => 
+      202 => 
       array (
         0 => 
         array (
@@ -1649,7 +1284,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      473 => 
+      225 => 
       array (
         0 => 
         array (
@@ -1672,7 +1307,99 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      505 => 
+      256 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'edit.package',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      282 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delete.package',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      304 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delete.package.image',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      328 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'status.package',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      359 => 
       array (
         0 => 
         array (
@@ -1695,7 +1422,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      531 => 
+      385 => 
       array (
         0 => 
         array (
@@ -1718,7 +1445,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      553 => 
+      407 => 
       array (
         0 => 
         array (
@@ -1741,7 +1468,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      577 => 
+      431 => 
       array (
         0 => 
         array (
@@ -1764,99 +1491,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      620 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'edit.spot_light_event',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      646 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'delete.spot_light_event',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      668 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'delete.spot_light_event.image',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      692 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'status.spot_light_event',
-          ),
-          1 => 
-          array (
-            0 => 'id',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      726 => 
+      465 => 
       array (
         0 => 
         array (
@@ -1879,7 +1514,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      752 => 
+      491 => 
       array (
         0 => 
         array (
@@ -1902,7 +1537,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      773 => 
+      512 => 
       array (
         0 => 
         array (
@@ -1925,13 +1560,105 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      797 => 
+      536 => 
       array (
         0 => 
         array (
           0 => 
           array (
             '_route' => 'status.gallery',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      566 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'edit.bts',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      592 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'detail.bts',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      613 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delete.bts',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      637 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'status.bts',
           ),
           1 => 
           array (
@@ -2109,7 +1836,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::KRC6TgL2aHoS6TRQ' => 
+    'generated::tTNJ0swVJFBwwAA9' => 
     array (
       'methods' => 
       array (
@@ -2124,15 +1851,15 @@ app('router')->setCompiledRoutes(
           0 => 'api',
           1 => 'auth:sanctum',
         ),
-        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:295:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
+        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:297:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:79:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"0000000000000ad80000000000000000";}";s:4:"hash";s:44:"5hzmTT9XwNRtkrj2vXkJhnEu31W3+WqzjaxFNghUcs4=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"0000000000000a0d0000000000000000";}";s:4:"hash";s:44:"AZvUKaokWDHsgR39dnvvLj7PJO5XQ26CpW6Eo6V4/7A=";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::KRC6TgL2aHoS6TRQ',
+        'as' => 'generated::tTNJ0swVJFBwwAA9',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2207,671 +1934,6 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'content',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'our_mission' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'our-mission',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@our_mission',
-        'controller' => 'App\\Http\\Controllers\\HomeController@our_mission',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'our_mission',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'about_us' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'about-us',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@about_us',
-        'controller' => 'App\\Http\\Controllers\\HomeController@about_us',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'about_us',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'make_donation' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'make-donation',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@make_donation',
-        'controller' => 'App\\Http\\Controllers\\HomeController@make_donation',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'make_donation',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'featured_stories' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'behind-the-scenes',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@featured_stories',
-        'controller' => 'App\\Http\\Controllers\\HomeController@featured_stories',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'featured_stories',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'featured_stories_search' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'behind-the-scenes/search',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@featured_stories_search',
-        'controller' => 'App\\Http\\Controllers\\HomeController@featured_stories_search',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'featured_stories_search',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'featured_stories_detail' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'behind-the-scenes/{slug}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@featured_stories_detail',
-        'controller' => 'App\\Http\\Controllers\\HomeController@featured_stories_detail',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'featured_stories_detail',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'spotlight_event' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'feature/concerts/{id}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@spotlight_event',
-        'controller' => 'App\\Http\\Controllers\\HomeController@spotlight_event',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'spotlight_event',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'spotLightEvent' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'feature/concerts',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@spotLightEvent',
-        'controller' => 'App\\Http\\Controllers\\HomeController@spotLightEvent',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'spotLightEvent',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'events' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'concerts/list',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@events',
-        'controller' => 'App\\Http\\Controllers\\HomeController@events',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'events',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'eventsCalendar' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'concerts/calendar',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@eventsCalendar',
-        'controller' => 'App\\Http\\Controllers\\HomeController@eventsCalendar',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'eventsCalendar',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'search' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'search',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@search',
-        'controller' => 'App\\Http\\Controllers\\HomeController@search',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'search',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'event_detail' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'concerts/detail/{id}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@event_detail',
-        'controller' => 'App\\Http\\Controllers\\HomeController@event_detail',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'event_detail',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'event_add' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'concerts/add',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@event_add',
-        'controller' => 'App\\Http\\Controllers\\HomeController@event_add',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'event_add',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'event_save' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'concerts/save',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@event_save',
-        'controller' => 'App\\Http\\Controllers\\HomeController@event_save',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'event_save',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'google_login' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'authorized/google',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@redirectToGoogle',
-        'controller' => 'App\\Http\\Controllers\\HomeController@redirectToGoogle',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'google_login',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'google_login_redirect' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'authorized/google/callback',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@handleGoogleCallback',
-        'controller' => 'App\\Http\\Controllers\\HomeController@handleGoogleCallback',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'google_login_redirect',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'photo_gallery' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'photo-gallery',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@photo_gallery',
-        'controller' => 'App\\Http\\Controllers\\HomeController@photo_gallery',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'photo_gallery',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'photo_gallery_detail' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'photo-gallery/detail/{id}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\HomeController@photo_gallery_detail',
-        'controller' => 'App\\Http\\Controllers\\HomeController@photo_gallery_detail',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'photo_gallery_detail',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3074,7 +2136,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::XC4DVVY8Tshq1qMc' => 
+    'generated::dwB5uJvOcnU1IaAG' => 
     array (
       'methods' => 
       array (
@@ -3094,7 +2156,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::XC4DVVY8Tshq1qMc',
+        'as' => 'generated::dwB5uJvOcnU1IaAG',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3183,7 +2245,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::JDCN82fYqO3pgjoT' => 
+    'generated::DumvQPr5LVMPV491' => 
     array (
       'methods' => 
       array (
@@ -3203,7 +2265,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::JDCN82fYqO3pgjoT',
+        'as' => 'generated::DumvQPr5LVMPV491',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3402,7 +2464,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::5ARaziuPOkiFlCZn' => 
+    'generated::uqj5e6t3g5jAk00l' => 
     array (
       'methods' => 
       array (
@@ -3422,7 +2484,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::5ARaziuPOkiFlCZn',
+        'as' => 'generated::uqj5e6t3g5jAk00l',
       ),
       'fallback' => false,
       'defaults' => 
@@ -3499,6 +2561,194 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'dashboard',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'user_setting' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'setting',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\DashboardController@setting',
+        'controller' => 'App\\Http\\Controllers\\DashboardController@setting',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'user_setting',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'redirect_to_tiktok' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'tiktok/auth',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@redirectToTikTok',
+        'controller' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@redirectToTikTok',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'redirect_to_tiktok',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'handle_callback' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'tiktok/callback',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@handleCallback',
+        'controller' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@handleCallback',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'handle_callback',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'create_campaign' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'tiktok/create-campaign',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@createCampaign',
+        'controller' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@createCampaign',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'create_campaign',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'create_ad' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'tiktok/create-ad',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@createAd',
+        'controller' => 'App\\Http\\Controllers\\SocialMedia\\TikTokController@createAd',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'create_ad',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4490,14 +3740,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'view.spot_light_event' => 
+    'view.package' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'spot_light_event',
+      'uri' => 'package',
       'action' => 
       array (
         'middleware' => 
@@ -4505,14 +3755,14 @@ app('router')->setCompiledRoutes(
           0 => 'web',
           1 => 'auth',
         ),
-        'uses' => 'App\\Http\\Controllers\\SpotLightEventController@index',
-        'controller' => 'App\\Http\\Controllers\\SpotLightEventController@index',
+        'uses' => 'App\\Http\\Controllers\\PackageController@index',
+        'controller' => 'App\\Http\\Controllers\\PackageController@index',
         'namespace' => NULL,
-        'prefix' => '/spot_light_event',
+        'prefix' => '/package',
         'where' => 
         array (
         ),
-        'as' => 'view.spot_light_event',
+        'as' => 'view.package',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4528,14 +3778,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'add.spot_light_event' => 
+    'add.package' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'spot_light_event/add',
+      'uri' => 'package/add',
       'action' => 
       array (
         'middleware' => 
@@ -4543,14 +3793,14 @@ app('router')->setCompiledRoutes(
           0 => 'web',
           1 => 'auth',
         ),
-        'uses' => 'App\\Http\\Controllers\\SpotLightEventController@add',
-        'controller' => 'App\\Http\\Controllers\\SpotLightEventController@add',
+        'uses' => 'App\\Http\\Controllers\\PackageController@add',
+        'controller' => 'App\\Http\\Controllers\\PackageController@add',
         'namespace' => NULL,
-        'prefix' => '/spot_light_event',
+        'prefix' => '/package',
         'where' => 
         array (
         ),
-        'as' => 'add.spot_light_event',
+        'as' => 'add.package',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4566,14 +3816,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'edit.spot_light_event' => 
+    'edit.package' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'spot_light_event/edit/{id}',
+      'uri' => 'package/edit/{id}',
       'action' => 
       array (
         'middleware' => 
@@ -4581,14 +3831,14 @@ app('router')->setCompiledRoutes(
           0 => 'web',
           1 => 'auth',
         ),
-        'uses' => 'App\\Http\\Controllers\\SpotLightEventController@edit',
-        'controller' => 'App\\Http\\Controllers\\SpotLightEventController@edit',
+        'uses' => 'App\\Http\\Controllers\\PackageController@edit',
+        'controller' => 'App\\Http\\Controllers\\PackageController@edit',
         'namespace' => NULL,
-        'prefix' => '/spot_light_event',
+        'prefix' => '/package',
         'where' => 
         array (
         ),
-        'as' => 'edit.spot_light_event',
+        'as' => 'edit.package',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4604,13 +3854,13 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'save.spot_light_event' => 
+    'save.package' => 
     array (
       'methods' => 
       array (
         0 => 'POST',
       ),
-      'uri' => 'spot_light_event/save',
+      'uri' => 'package/save',
       'action' => 
       array (
         'middleware' => 
@@ -4618,14 +3868,14 @@ app('router')->setCompiledRoutes(
           0 => 'web',
           1 => 'auth',
         ),
-        'uses' => 'App\\Http\\Controllers\\SpotLightEventController@save',
-        'controller' => 'App\\Http\\Controllers\\SpotLightEventController@save',
+        'uses' => 'App\\Http\\Controllers\\PackageController@save',
+        'controller' => 'App\\Http\\Controllers\\PackageController@save',
         'namespace' => NULL,
-        'prefix' => '/spot_light_event',
+        'prefix' => '/package',
         'where' => 
         array (
         ),
-        'as' => 'save.spot_light_event',
+        'as' => 'save.package',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4641,14 +3891,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'delete.spot_light_event' => 
+    'delete.package' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'spot_light_event/delete/{id}',
+      'uri' => 'package/delete/{id}',
       'action' => 
       array (
         'middleware' => 
@@ -4656,14 +3906,14 @@ app('router')->setCompiledRoutes(
           0 => 'web',
           1 => 'auth',
         ),
-        'uses' => 'App\\Http\\Controllers\\SpotLightEventController@delete',
-        'controller' => 'App\\Http\\Controllers\\SpotLightEventController@delete',
+        'uses' => 'App\\Http\\Controllers\\PackageController@delete',
+        'controller' => 'App\\Http\\Controllers\\PackageController@delete',
         'namespace' => NULL,
-        'prefix' => '/spot_light_event',
+        'prefix' => '/package',
         'where' => 
         array (
         ),
-        'as' => 'delete.spot_light_event',
+        'as' => 'delete.package',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4679,14 +3929,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'delete.spot_light_event.image' => 
+    'delete.package.image' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'spot_light_event/delete/image/{id}',
+      'uri' => 'package/delete/image/{id}',
       'action' => 
       array (
         'middleware' => 
@@ -4694,14 +3944,14 @@ app('router')->setCompiledRoutes(
           0 => 'web',
           1 => 'auth',
         ),
-        'uses' => 'App\\Http\\Controllers\\SpotLightEventController@delete_image',
-        'controller' => 'App\\Http\\Controllers\\SpotLightEventController@delete_image',
+        'uses' => 'App\\Http\\Controllers\\PackageController@delete_image',
+        'controller' => 'App\\Http\\Controllers\\PackageController@delete_image',
         'namespace' => NULL,
-        'prefix' => '/spot_light_event',
+        'prefix' => '/package',
         'where' => 
         array (
         ),
-        'as' => 'delete.spot_light_event.image',
+        'as' => 'delete.package.image',
       ),
       'fallback' => false,
       'defaults' => 
@@ -4717,14 +3967,14 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'status.spot_light_event' => 
+    'status.package' => 
     array (
       'methods' => 
       array (
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'spot_light_event/status/{id}',
+      'uri' => 'package/status/{id}',
       'action' => 
       array (
         'middleware' => 
@@ -4732,14 +3982,14 @@ app('router')->setCompiledRoutes(
           0 => 'web',
           1 => 'auth',
         ),
-        'uses' => 'App\\Http\\Controllers\\SpotLightEventController@status',
-        'controller' => 'App\\Http\\Controllers\\SpotLightEventController@status',
+        'uses' => 'App\\Http\\Controllers\\PackageController@status',
+        'controller' => 'App\\Http\\Controllers\\PackageController@status',
         'namespace' => NULL,
-        'prefix' => '/spot_light_event',
+        'prefix' => '/package',
         'where' => 
         array (
         ),
-        'as' => 'status.spot_light_event',
+        'as' => 'status.package',
       ),
       'fallback' => false,
       'defaults' => 
