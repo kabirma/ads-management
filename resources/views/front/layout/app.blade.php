@@ -59,13 +59,12 @@
 				<div class="grid__item">
 					<h3 class="grid__title grid__title--footer">USEFUL LINKS</h3>
 					<ul class="grid__list grid__list--fmenu">
-				
-						<li><a href="#intro">HOME</a></li>
 					
-					<li><a href="#about">ABOUT US</a></li>
-					<li><a href="#pricing">PRICING</a></li>
-					<li><a href="#joinus">JOIN US</a></li>
-					<li><a href="#contact">CONTACT</a></li>
+						<li><a href="#intro">HOME</a></li>
+						<li><a href="#about">ABOUT US</a></li>
+						<li><a href="#pricing">PRICING</a></li>
+						<li><a href="#joinus">JOIN US</a></li>
+						<li><a href="#contact">CONTACT</a></li>
 					</ul>
 				</div> 
 				<div class="grid__item">

@@ -36,6 +36,12 @@ Route::get('/authorized/google/callback', [App\Http\Controllers\HomeController::
 Route::get('/photo-gallery', [App\Http\Controllers\HomeController::class, 'photo_gallery'])->name('photo_gallery');
 Route::get('/photo-gallery/detail/{id}', [App\Http\Controllers\HomeController::class, 'photo_gallery_detail'])->name('photo_gallery_detail');
 
+// Social Media Integration
+Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok']);
+Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleCallback']);
+Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign']);
+Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd']);
+
 
 Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'customer_dashboard'])->name('customer_dashboard');

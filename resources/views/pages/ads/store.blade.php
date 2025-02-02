@@ -225,6 +225,21 @@
             text-align: center;
             font-weight: bold;
         }
+        .step-heading{
+            
+            text-align:center;
+            margin-bottom:1.5%;
+        }
+
+        .step-heading h2{
+            font-size:45px;
+            font-weight:bold;
+            color:#938AF4;
+        }
+
+        .titleRow{
+            padding:1% 15%;
+        }
 
     </style>
     <!-- Dashboard Analytics Start -->
@@ -251,6 +266,9 @@
 
                                 <div class="row">
                                     <div class="col-md-12 steps" id="step1">
+                                         <div class="step-heading">
+                                            <h2>Choose Your Media</h2>
+                                         </div>
                                         <ul id="imageRadio">
                                             <li><input type="radio" name="test" id="cb1" />
                                                 <label for="cb1"> <i class="fab fa-facebook"></i> </label>
@@ -263,6 +281,9 @@
                                             </li>
                                             <li><input type="radio" name="test" id="cb4" />
                                                 <label for="cb4"><i class="fab fa-google"></i></label>
+                                            </li>
+                                            <li><input type="radio" name="test" id="cb5" />
+                                                <label for="cb5"><i class="fab fa-tiktok"></i></label>
                                             </li>
                                         </ul>
                                     </div>
@@ -291,6 +312,9 @@
                                     </div>
 
                                     <div class="col-md-12 steps" id="step3">
+                                        <div class="step-heading">
+                                            <h2>Choose Your Goal</h2>
+                                         </div>
                                         <ul id="imageRadio">
                                             <li><input type="radio" name="test" id="cb5" />
                                                 <label for="cb5"> <img src="https://cdn.sweply.com/ui-images/obj-sales.svg" alt="">
@@ -308,11 +332,29 @@
                                         </ul>
                                     </div>
 
+                                    <div class="col-md-12 steps" id="step4">
+                                        <div class="step-heading">
+                                            <h2>Choose Your Content</h2>
+                                         </div>
+                                        <div class="titleRow">
+                                            <div class="form-group col-md-12">
+                                                <label for="title">Title</label>
+                                                <input id="title" name="title" value="{{ isset($record) ? $record->title : '' }}"
+                                                    type="text" required class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="description">Description</label>
+                                                <textarea name="description" id="ckeditor" class="form-control" cols="30" rows="10">{{ isset($record) ? $record->description : '' }}</textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                 
                                 </div>
 
 
 
-                                <div class="form-group col-md-6">
+                                <!-- <div class="form-group col-md-6">
                                     <label for="title">Title</label>
                                     <input id="title" name="title" value="{{ isset($record) ? $record->title : '' }}"
                                         type="text" required class="form-control">
@@ -398,13 +440,13 @@
                                         @endforeach
                                     </div>
                                     @endif
-                                </div>
+                                </div> -->
 
                                 <div class="form-group col-md-12 text-center">
                                     <hr>
-                                    <button type="button" class="btn btn-secondary"><i class="fa fa-arrow-left"></i> Back</button>
-                                    <button type="button" class="btn btn-dark"><i class="fa fa-arrow-right"></i> Next</button>
-                                    <button class="btn btn-primary"><i class="fa fa-checkbox"></i> Create Ad</button>
+                                    <button type="button" class="btn btn-secondary prev"><i class="fa fa-arrow-left"></i> Back</button>
+                                    <button type="button" class="btn btn-dark next"><i class="fa fa-arrow-right"></i> Next</button>
+                                    <button class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> Create Ad</button>
                                 </div>
                             </form>
                         </div>
@@ -424,6 +466,36 @@
     </script>
     <script>
         CKEDITOR.replace('ckeditor');
+
+
+        $('.steps').hide();
+        $('#step1').show();
+        var stepCount = 1;
+        $(".createAd").hide();
+        if(stepCount == 1){
+            $(".prev").hide();
+        }
+        $(".next").click(function(){
+            $(".prev").show();
+            ++stepCount;
+            $(".steps").hide();
+            $("#step"+stepCount).show();
+            if(stepCount == 4){
+                $(this).hide();
+                $(".createAd").show();
+            }
+        })
+
+        $(".prev").click(function(){
+            $(".next").show();
+            --stepCount;
+            $(".steps").hide();
+            $("#step"+stepCount).show();
+            if(stepCount == 1){
+                $(this).hide();
+              
+            }
+        })
     </script>
 
     <script>
