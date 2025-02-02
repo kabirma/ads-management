@@ -26,7 +26,6 @@ class TikTokController extends Controller
     public function handleTikTokCallback(Request $request)
     {
         if ($request->has('error')) {
-            dd($request);
             return redirect('/dashboard')->with('error', 'TikTok authorization failed.');
         }
 
@@ -42,7 +41,7 @@ class TikTokController extends Controller
         ]);
 
         $data = $response->json();
-        dd($data);
+       
         if (isset($data['data']['access_token'])) {
             $user = Auth::user();
             $user->tiktok_token = $data['data']['access_token'];

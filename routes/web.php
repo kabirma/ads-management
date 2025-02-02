@@ -24,8 +24,6 @@ Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
     Route::get('/logout',  [App\Http\Controllers\HomeController::class, 'customer_logout'])->name('customer_logout');
 });
 
-Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok'])->name('redirect_to_tiktok');
-Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handle_callback');
 
 Route::post('/login/submit',  [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
 Auth::routes();
@@ -38,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Social Media Integration
    
+    Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok'])->name('redirect_to_tiktok');
+    Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handle_callback');
     Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign'])->name('create_campaign');
     Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd'])->name('create_ad');
 
