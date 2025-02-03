@@ -51,7 +51,13 @@ class TikTokController extends Controller
             $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
             $user->save();
             dump($user);
-            return redirect()->route('dashboard')->with('success', 'TikTok connected successfully!');
+            try {
+                return redirect()->route('dashboard')->with('success', 'TikTok connected successfully!');
+            } catch (\Exception $e) {
+                \Log::error('Redirection error:', ['message' => $e->getMessage()]);
+                return redirect()->route('user_setting')->with('error', 'Redirection failed.');
+            }
+            
         }
         return redirect()->route('user_setting')->with('error', 'Failed to retrieve TikTok access token.');
     }
