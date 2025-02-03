@@ -16,7 +16,7 @@ class CustomerMiddleware
      */
     public function handle($request, Closure $next, $guard = 'customer')
     {
-        dd($request,Auth::guard($guard));
+        dump($request,Auth::guard($guard));
         if (Auth::guard($guard)->check()) {
             return $next($request);
         } else {
