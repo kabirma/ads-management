@@ -40,9 +40,9 @@ class TikTokController extends Controller
             'grant_type' => 'authorization_code',
             'redirect_uri' => config('services.tiktok.redirect'),
         ]);
-        dd($response);
+        
         $data = $response->json();
-       
+        dd($data);
         if (isset($data['data']['access_token'])) {
             $user = Auth::user();
             $user->tiktok_token = $data['data']['access_token'];
