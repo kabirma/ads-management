@@ -42,9 +42,7 @@ class TikTokController extends Controller
         
         $data = $response->json();
         
-        dd($data);
-        if (isset($data['data']['access_token'])) {
-            dd('asd');
+        if (isset($data['access_token'])) {
             $user = Auth::user();
             $user->tiktok_token = $data['data']['access_token'];
             $user->tiktok_refresh_token = $data['data']['refresh_token'];
@@ -52,7 +50,6 @@ class TikTokController extends Controller
             $user->save();
             
             return redirect()->route('dashboard')->with('success', 'TikTok connected successfully!');
-            
         }
         return redirect()->route('dashboard')->with('error', 'Failed to retrieve TikTok access token.');
     }
