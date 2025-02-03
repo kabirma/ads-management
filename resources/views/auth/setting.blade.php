@@ -47,7 +47,7 @@
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    @if(Auth::user()->tiktok_token !== null)
+                                    @if(Auth::user()->tiktok_token === null)
                                         <a href="{{route('redirect_to_tiktok')}}" class="btn btn-secondary"> <i class="fab fa-tiktok"></i> Conect TikTok</a>
                                     @else
                                         <a href="#0" class="btn btn-success"> <i class="fab fa-tiktok"></i> TikTok Connected</a>
