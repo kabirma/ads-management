@@ -19,10 +19,8 @@ class Authenticate extends Middleware
         //     return route('login');
         // }
 
-        if (Auth::guard('web')->check()) {
-            return $next($request);
-        } else {
+        if (!Auth::user()) {
             return redirect()->to('/login');
-        }
+        } 
     }
 }
