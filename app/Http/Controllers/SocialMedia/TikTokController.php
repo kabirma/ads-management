@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Auth;
+use App\Models\User;
 
 class TikTokController extends Controller
 {
