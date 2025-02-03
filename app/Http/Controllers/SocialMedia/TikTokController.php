@@ -26,13 +26,12 @@ class TikTokController extends Controller
     // Step 2: Handle TikTok's callback and exchange code for access token
     public function handleTikTokCallback(Request $request)
     {
-        dd($request);
         if ($request->has('error')) {
             return redirect('/dashboard')->with('error', 'TikTok authorization failed.');
         }
 
         $code = $request->get('code');
-
+        dump($code);
         // Step 3: Exchange authorization code for access token using v2 endpoint
         $response = Http::asForm()->post('https://open.tiktokapis.com/v2/oauth/token/', [
             'client_key' => config('services.tiktok.client_key'),
@@ -41,7 +40,7 @@ class TikTokController extends Controller
             'grant_type' => 'authorization_code',
             'redirect_uri' => config('services.tiktok.redirect'),
         ]);
-
+        dd($response);
         $data = $response->json();
        
         if (isset($data['data']['access_token'])) {
@@ -53,7 +52,7 @@ class TikTokController extends Controller
 
             return redirect('/dashboard')->with('success', 'TikTok connected successfully!');
         }
-
+        dd($response);
         return redirect('/dashboard')->with('error', 'Failed to retrieve TikTok access token.');
     }
 }
