@@ -17,17 +17,17 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, 'content'])->name('content');
 
 
-Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'customer_dashboard'])->name('customer_dashboard');
-    Route::get('/concerts/interested/{id}', [App\Http\Controllers\HomeController::class, 'event_interested'])->name('event_interested');
-    Route::get('/logout',  [App\Http\Controllers\HomeController::class, 'customer_logout'])->name('customer_logout');
-});
+// Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
+//     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'customer_dashboard'])->name('customer_dashboard');
+//     Route::get('/concerts/interested/{id}', [App\Http\Controllers\HomeController::class, 'event_interested'])->name('event_interested');
+//     Route::get('/logout',  [App\Http\Controllers\HomeController::class, 'customer_logout'])->name('customer_logout');
+// });
 
 
 Route::post('/login/submit',  [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
 Auth::routes();
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'customer'], function () {
 
     Route::get('/logout',  [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout.admin');
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
