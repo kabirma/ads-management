@@ -31,7 +31,6 @@ class TikTokController extends Controller
         }
 
         $code = $request->get('code');
-        dump($code);
         // Step 3: Exchange authorization code for access token using v2 endpoint
         $response = Http::asForm()->post('https://open.tiktokapis.com/v2/oauth/token/', [
             'client_key' => config('services.tiktok.client_key'),
@@ -42,22 +41,17 @@ class TikTokController extends Controller
         ]);
         
         $data = $response->json();
-        dump($data);
+        
 
         if (isset($data['data']['access_token'])) {
+            dd('asd');
             $user = Auth::user();
-            dd($user);
             $user->tiktok_token = $data['data']['access_token'];
             $user->tiktok_refresh_token = $data['data']['refresh_token'];
             $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
             $user->save();
-            dd($user);
-            try {
-                return redirect()->route('dashboard')->with('success', 'TikTok connected successfully!');
-            } catch (\Exception $e) {
-                \Log::error('Redirection error:', ['message' => $e->getMessage()]);
-                return redirect()->route('user_setting')->with('error', 'Redirection failed.');
-            }
+            
+            return redirect()->route('dashboard')->with('success', 'TikTok connected successfully!');
             
         }
         return redirect()->route('user_setting')->with('error', 'Failed to retrieve TikTok access token.');
