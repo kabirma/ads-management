@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 class TikTokController extends Controller
 {
+
     // Step 1: Redirect user to TikTok's OAuth page
     public function redirectToTikTok()
     {
