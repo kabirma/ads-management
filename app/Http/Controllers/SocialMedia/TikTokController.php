@@ -27,7 +27,7 @@ class TikTokController extends Controller
     public function handleTikTokCallback(Request $request)
     {
         if ($request->has('error')) {
-            return redirect('/setting')->with('error', 'TikTok authorization failed.');
+            return redirect()->route('user_setting')->with('error', 'TikTok authorization failed.');
         }
 
         $code = $request->get('code');
@@ -48,8 +48,8 @@ class TikTokController extends Controller
             $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
             $user->save();
 
-            return redirect('/setting')->with('success', 'TikTok connected successfully!');
+            return redirect()->route('user_setting')->with('success', 'TikTok connected successfully!');
         }
-        return redirect('/setting')->with('error', 'Failed to retrieve TikTok access token.');
+        return redirect()->route('user_setting')->with('error', 'Failed to retrieve TikTok access token.');
     }
 }
