@@ -17,9 +17,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, 'content'])->name('content');
 
 
-Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok'])->name('redirect_to_tiktok');
-Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handle_callback');
-
 Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'customer_dashboard'])->name('customer_dashboard');
     Route::get('/concerts/interested/{id}', [App\Http\Controllers\HomeController::class, 'event_interested'])->name('event_interested');
@@ -38,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Social Media Integration
    
+    Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok'])->name('redirect_to_tiktok');
+    Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handle_callback');
     Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign'])->name('create_campaign');
     Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd'])->name('create_ad');
 

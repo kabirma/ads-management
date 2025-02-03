@@ -44,7 +44,7 @@ class TikTokController extends Controller
         $data = $response->json();
         
         if (isset($data['access_token'])) {
-            $user = User::find(Auth::user()->id);
+            $user = User::find(Auth::guard('web')->user()->id);
             $user->tiktok_token = $data['access_token'];
             $user->tiktok_refresh_token = $data['refresh_token'];
             $user->tiktok_token_expiry = now()->addSeconds($data['expires_in']);
