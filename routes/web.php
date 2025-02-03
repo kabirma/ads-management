@@ -18,7 +18,7 @@ Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, '
 
 
 Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok'])->name('redirect_to_tiktok');
-Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handle_callback');
+Route::post('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handle_callback');
 
 Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'customer_dashboard'])->name('customer_dashboard');

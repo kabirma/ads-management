@@ -3,8 +3,8 @@ namespace App\Http\Controllers\SocialMedia;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Auth;
 
 class TikTokController extends Controller
 {
