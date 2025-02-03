@@ -15,7 +15,7 @@ class TikTokController extends Controller
         $query = http_build_query([
             'client_key' => config('services.tiktok.client_key'),
             'response_type' => 'code',
-            'scope' => 'user.info.basic,video.publish,video.upload',
+            'scope' => 'user.info.basic',
             'redirect_uri' => config('services.tiktok.redirect'),
             'state' => csrf_token(), // For CSRF protection
         ]);
@@ -26,6 +26,7 @@ class TikTokController extends Controller
     // Step 2: Handle TikTok's callback and exchange code for access token
     public function handleTikTokCallback(Request $request)
     {
+        dd($request);
         if ($request->has('error')) {
             return redirect('/dashboard')->with('error', 'TikTok authorization failed.');
         }
