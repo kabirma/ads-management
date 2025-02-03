@@ -22,6 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'tiktok_token',
+        'tiktok_refresh_token',
+        'tiktok_token_expiry',
     ];
 
     /**
