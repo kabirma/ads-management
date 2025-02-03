@@ -46,6 +46,7 @@ class TikTokController extends Controller
 
         if (isset($data['data']['access_token'])) {
             $user = Auth::user();
+            dd($user);
             $user->tiktok_token = $data['data']['access_token'];
             $user->tiktok_refresh_token = $data['data']['refresh_token'];
             $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
