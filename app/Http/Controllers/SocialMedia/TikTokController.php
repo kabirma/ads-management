@@ -15,7 +15,7 @@ class TikTokController extends Controller
         $query = http_build_query([
             'client_key' => config('services.tiktok.client_key'),
             'response_type' => 'code',
-            'scope' => 'user.info.basic',
+            'scope' => 'user.info.basic,video.publish,video.upload',
             'redirect_uri' => config('services.tiktok.redirect'),
             'state' => csrf_token(), // For CSRF protection
         ]);
@@ -27,11 +27,10 @@ class TikTokController extends Controller
     public function handleTikTokCallback(Request $request)
     {
         if ($request->has('error')) {
-            return redirect('/dashboard')->with('error', 'TikTok authorization failed.');
+            return redirect('/setting')->with('error', 'TikTok authorization failed.');
         }
 
         $code = $request->get('code');
-        dump($code);
         // Step 3: Exchange authorization code for access token using v2 endpoint
         $response = Http::asForm()->post('https://open.tiktokapis.com/v2/oauth/token/', [
             'client_key' => config('services.tiktok.client_key'),
@@ -42,7 +41,6 @@ class TikTokController extends Controller
         ]);
         
         $data = $response->json();
-        dd($data);
         if (isset($data['data']['access_token'])) {
             $user = Auth::user();
             $user->tiktok_token = $data['data']['access_token'];
@@ -50,9 +48,8 @@ class TikTokController extends Controller
             $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
             $user->save();
 
-            return redirect('/dashboard')->with('success', 'TikTok connected successfully!');
+            return redirect('/setting')->with('success', 'TikTok connected successfully!');
         }
-        dd($response);
-        return redirect('/dashboard')->with('error', 'Failed to retrieve TikTok access token.');
+        return redirect('/setting')->with('error', 'Failed to retrieve TikTok access token.');
     }
 }
