@@ -16,10 +16,10 @@ class CustomerMiddleware
      */
     public function handle($request, Closure $next, $guard = 'customer')
     {
-        dump($request,Auth::guard($guard));
         if (Auth::guard($guard)->check()) {
             return $next($request);
         } else {
+            dd($request,Auth::guard($guard));
             return redirect()->to('/?login=0');
         }
     }
