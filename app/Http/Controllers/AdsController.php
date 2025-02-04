@@ -7,6 +7,8 @@ use App\Models\Ads;
 use App\Models\Company;
 // use App\Models\AdsImage;
 use App\Models\Role;
+use App\Models\UserPackage;
+use Auth;
 
 class AdsController extends Controller
 {
@@ -38,6 +40,15 @@ class AdsController extends Controller
 
     public function add()
     {
+        $userPackage = UserPackage::where('user_id',Auth::user()->id)->where('expire_at','>=', date("Y-m-d"))->first();
+        if(!isset($userPackage)){
+            return view('auth.package',['title'=>'Subscribe to Packages']);
+        }
+
+        if(Auth::user()->tiktok_refresh_token !== null){
+            $this->refreshTikTokToken();
+        }
+
         $data['title'] = $this->title;
         $tags = [];
         $company = Company::first();

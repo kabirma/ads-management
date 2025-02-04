@@ -125,10 +125,10 @@
                                 <div class="form-group col-md-6">
                                     <label for="time">Social Media</label>
                                     <select name="social_media[]" id="" class="form-control select2" multiple>
-                                        <option <?= (isset($record) && in_array('facebook',explode(",", $record->social_media))) ? 'selected' : '' ?> value="facebook">Facebook</option>
-                                        <option <?= (isset($record) && in_array('tiktok',explode(",", $record->social_media))) ? 'selected' : '' ?> value="tiktok">TikTok</option>
-                                        <option <?= (isset($record) && in_array('youtube',explode(",", $record->social_media))) ? 'selected' : '' ?> value="youtube">Youtube</option>
-                                        <option <?= (isset($record) && in_array('google',explode(",", $record->social_media))) ? 'selected' : '' ?> value="google">Google</option>
+                                        <option <?= (isset($record) && in_array('facebook',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="facebook">Facebook</option>
+                                        <option <?= (isset($record) && in_array('tiktok',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="tiktok">TikTok</option>
+                                        <option <?= (isset($record) && in_array('youtube',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="youtube">Youtube</option>
+                                        <option <?= (isset($record) && in_array('google',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="google">Google</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -139,7 +139,37 @@
 
                                 <div class="form-group col-md-12">
                                     <label for="features">Features</label>
-                                    <textarea name="features" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->features : '' }}</textarea>
+                                    <div id="featuresArea">
+                                        @if(!isset($record))
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <input type="text" class="form-control" name="features[]" placceholder="Features">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <a href="#0" class="btn btn-secondary" id="addFeatures"><i class="fa fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                        @else
+                                            @foreach(explode("?=",$record->features) as $key => $feature)
+                                                <div class="row mt-2">
+                                                    <div class="col-md-10">
+                                                        <input type="text" class="form-control" value="{{$feature}}" name="features[]" placceholder="Features">
+                                                    </div>
+                                                    @if($key > 0)
+                                                        <div class="col-md-2">
+                                                            <a href="#0" class="btn btn-danger removeFeature"><i class="fa fa-times"></i></a>
+                                                        </div>
+                                                    @else
+                                                        <div class="col-md-2">
+                                                            <a href="#0" class="btn btn-secondary" id="addFeatures"><i class="fa fa-plus"></i></a>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                   
+                                    
                                 </div>
 
 
@@ -166,6 +196,13 @@
     </script>
     <script>
         // CKEDITOR.replace('ckeditor');
+        $("#addFeatures").click(function(){
+            $("#featuresArea").append('<div class="row mt-2"><div class="col-md-10"> <input type="text" class="form-control" name="features[]" placceholder="Features"> </div> <div class="col-md-2"> <a href="#0" class="btn btn-danger removeFeature"><i class="fa fa-times"></i></a> </div></div>');
+        });
+
+        $(document).on("click",".removeFeature",function(){
+            $(this).parent().parent().remove();
+        })
     </script>
 
 <script>

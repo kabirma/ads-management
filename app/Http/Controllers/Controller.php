@@ -40,4 +40,23 @@ class Controller extends BaseController
             }
         }
     }
+
+    public function refreshTikTokToken(){
+        $response = Http::asForm()->post('https://open.tiktokapis.com/v2/oauth/token/', [
+            'client_key' => config('services.tiktok.client_key'),
+            'client_secret' => config('services.tiktok.client_secret'),
+            'grant_type' => 'refresh_token',
+            'refresh_token' => Auth::user()->tiktok_refresh_token,
+        ]);
+        
+        $data = $response->json();
+        
+        if (isset($data['data']['access_token'])) {
+            $user = Auth::user();
+            $user->tiktok_token = $data['data']['access_token'];
+            $user->tiktok_refresh_token = $data['data']['refresh_token'];
+            $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
+            $user->save();
+        }
+    }
 }

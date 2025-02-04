@@ -49,16 +49,15 @@ class PackageController extends Controller
     public function save(Request $request)
     {
         $model = $request->id > 0 ? $this->model::where('id', $request->id)->first() : new $this->model;
+        
         foreach ($request->all() as $key => $req) {
-            if ($key == 'is_popular' && $key != "_token" && $key != "id") {
-            
-                if($key === 'social_media'){
-                    $req = implode(",", $req);
+            if ($key != 'is_popular' && $key != "_token" && $key != "id") {
+                if($key === 'social_media' || $key === 'features'){
+                    $req = implode("?=", $req);
                 }
                 $model->$key = $req;
             }
         }
-
         $model->is_popular = isset($request->is_popular) ? 1 : 0;
         $model->save();
         return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");

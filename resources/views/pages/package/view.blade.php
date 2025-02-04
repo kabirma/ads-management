@@ -45,11 +45,18 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($listing as $list)
+                                            @php 
+                                                $socailMedia = explode("?=", $list->social_media);
+                                            @endphp
                                             <tr>
                                                 <td>{{ $list->id }}</td>
                                                 <td>{{ $list->name }}</td>
                                                 <td>{{ $list->price }}</td>
-                                                <td>{{ $list->social_media }}</td>
+                                                <td>
+                                                    @foreach($socailMedia as $social)
+                                                        <i class="fab fa-{{$social}}"></i>
+                                                    @endforeach
+                                                </td>
                                                 <td>{{ $list->is_popular ? 'Yes' : 'No' }}</td>
                                                 <td>
                                                     <a href="{{ route('status.package', $list->id) }}"

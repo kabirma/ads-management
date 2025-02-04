@@ -48,9 +48,31 @@ class TikTokController extends Controller
             $user->tiktok_refresh_token = $data['refresh_token'];
             $user->tiktok_token_expiry = now()->addSeconds($data['expires_in']);
             $user->save();
-            
-            return redirect()->route('user_setting')->with('success', 'TikTok connected successfully!');
+            $this->getAdvertiserInfo();
         }
         return redirect()->route('user_setting')->with('error', 'Failed to retrieve TikTok access token.');
+    }
+
+    public function getAdvertiserInfo()
+    {
+        $accessToken = Auth::user()->tiktok_token;
+
+        $response = Http::withHeaders([
+            'Access-Token' => trim($accessToken),  // Ensure token is clean
+        ])->get('https://business-api.tiktok.com/open_api/v2/advertiser/info/');
+
+        $data = $response->json();
+        dump($data);
+        if (isset($data['data']['list']) && count($data['data']['list']) > 0) {
+            $advertiserId = $data['data']['list'][0]['advertiser_id'];
+
+            $user = Auth::user();
+            $user->tiktok_advertiser_token = $advertiserId;
+            $user->save();
+
+            return redirect()->route('user_setting')->with('success', 'TikTok connected successfully!');
+        } else {
+            return redirect()->route('user_setting')->with('error', 'Failed to connect TikTok.');
+        }
     }
 }

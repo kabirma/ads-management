@@ -27,11 +27,14 @@ Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, '
 Route::post('/login/submit',  [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
 Auth::routes();
 
-Route::group(['middleware' => 'customer'], function () {
+Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/logout',  [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout.admin');
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/setting', [App\Http\Controllers\DashboardController::class, 'setting'])->name('user_setting');
+   
+    Route::get('/package', [App\Http\Controllers\PurchaseController::class, 'index'])->name('user_package');
+    Route::post('/package/purchase', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('purchase_package');
 
     // Social Media Integration
    
