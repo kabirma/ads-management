@@ -62,7 +62,7 @@ class TikTokController extends Controller
         ])->get('https://business-api.tiktok.com/open_api/v2/advertiser/info/');
 
         $data = $response->json();
-        dump($data);
+        dd($data);
         if (isset($data['data']['list']) && count($data['data']['list']) > 0) {
             $advertiserId = $data['data']['list'][0]['advertiser_id'];
 
