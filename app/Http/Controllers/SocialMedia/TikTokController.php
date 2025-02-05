@@ -53,8 +53,9 @@ class TikTokController extends Controller
 
     public function getAdvertiserInfo()
     {
-        $userId = Auth::user()->id;
+        $userId = Auth::guard('web')->user()->id;
         $user = User::find($userId);
+        dd($userId);
         $response = Http::withHeaders([
             'Access-Token' => trim($user->tiktok_token), 
         ])->get('https://business-api.tiktok.com/open_api/v1.2/advertiser/info/');
