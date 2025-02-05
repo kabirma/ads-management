@@ -10,7 +10,6 @@ use App\Models\User;
 class TikTokController extends Controller
 {
 
-    // Step 1: Redirect user to TikTok's OAuth page
     public function redirectToTikTok()
     {
         $query = http_build_query([
@@ -18,13 +17,12 @@ class TikTokController extends Controller
             'response_type' => 'code',
             'scope' => 'user.info.basic,video.publish,video.upload',
             'redirect_uri' => config('services.tiktok.redirect'),
-            'state' => csrf_token(), // For CSRF protection
+            'state' => csrf_token(),
         ]);
         
         return redirect("https://www.tiktok.com/v2/auth/authorize/?" . $query);
     }
 
-    // Step 2: Handle TikTok's callback and exchange code for access token
     public function handleTikTokCallback(Request $request)
     {
         if ($request->has('error')) {
@@ -58,8 +56,8 @@ class TikTokController extends Controller
         $accessToken = Auth::user()->tiktok_token;
 
         $response = Http::withHeaders([
-            'Access-Token' => trim($accessToken),  // Ensure token is clean
-        ])->get('https://business-api.tiktok.com/open_api/v2/advertiser/info/');
+            'Access-Token' => trim($accessToken), 
+        ])->get('https://business-api.tiktok.com/open_api/v1.2/advertiser/info/');
 
         $data = $response->json();
         dd($data);
