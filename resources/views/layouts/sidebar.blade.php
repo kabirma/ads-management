@@ -112,12 +112,7 @@
             </a>
         </li>
 
-        <li class=" nav-item {{ Route::currentRouteName() == 'user_setting' ? 'active' : '' }}">
-            <a class="d-flex align-items-center" href="{{ route('user_setting') }}">
-                <i class="fa fa-gear"></i>
-                <span class="menu-title text-truncate" data-i18n="Settings">Settings</span>
-            </a>
-        </li>
+     
 
         <li class=" nav-item">
             <a class="d-flex align-items-center" href="{{ route('logout.admin') }}">

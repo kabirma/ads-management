@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign'])->name('create_campaign');
     Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd'])->name('create_ad');
 
+    Route::get('/tiktok/create-identity', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createIdentity'])->name('createIdentity');
 
     Route::group(['prefix' => 'roles'], function () {
         Route::controller(App\Http\Controllers\RoleController::class)->group(function () {
@@ -91,6 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', 'index')->name('view.ads');
             Route::get('/add', 'add')->name('add.ads');
             Route::get('/edit/{id}', 'edit')->name('edit.ads');
+            Route::get('/detail/{id}/{platform}', 'detail')->name('detail.ads');
 
             Route::post('/save', 'save')->name('save.ads');
             Route::get('/delete/{id}', 'delete')->name('delete.ads');

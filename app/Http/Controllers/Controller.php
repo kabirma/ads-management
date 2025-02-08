@@ -6,6 +6,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use App\Models\Campaign;
+use App\Models\AdGroup;
+use App\Models\Ads;
+use App\Models\Media;
+
 
 class Controller extends BaseController
 {
@@ -41,22 +46,118 @@ class Controller extends BaseController
         }
     }
 
-    public function refreshTikTokToken(){
-        $response = Http::asForm()->post('https://open.tiktokapis.com/v2/oauth/token/', [
-            'client_key' => config('services.tiktok.client_key'),
-            'client_secret' => config('services.tiktok.client_secret'),
-            'grant_type' => 'refresh_token',
-            'refresh_token' => Auth::user()->tiktok_refresh_token,
-        ]);
-        
-        $data = $response->json();
-        
-        if (isset($data['data']['access_token'])) {
-            $user = Auth::user();
-            $user->tiktok_token = $data['data']['access_token'];
-            $user->tiktok_refresh_token = $data['data']['refresh_token'];
-            $user->tiktok_token_expiry = now()->addSeconds($data['data']['expires_in']);
-            $user->save();
+    public function saveMedia($field,$request,$location = "company",$reference_id)
+    {
+        if($request->hasFile($field)){
+            $filenameWithExt = $request->file($field)->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file($field)->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $request->file($field)->storeAs("media/".$location."/",$fileNameToStore);
+            $fullPath = "storage/media/".$location."/".$fileNameToStore;
+           
+            $mediaDB = new Media();
+            $mediaDB->name = $filename;
+            $mediaDB->media = $fullPath;
+            $mediaDB->media_type = $field;
+            $mediaDB->reference_id = $reference_id;
+            $mediaDB->reference_table = 'ads';
+            $mediaDB->save();
+            
+            return $fullPath;
         }
+    }
+
+    
+    function campaignCreationDB($data): int {
+        if(count($data) === 0){
+            return 0;
+        }
+        $campaign = isset($data['id']) ? Campaign::where('id', $data['id'])->first() : new Campaign();
+        foreach ($data as $key => $req) {
+            if ($key != "id") {
+                $campaign->$key = $req;
+            }
+        }
+        try{
+            $campaign->save();
+            return $campaign->id;
+        }catch(\Exception $ex){
+            dd($ex);
+            return 0;
+        }
+    }
+
+    function adGroupCreationDB($data): int {
+        if(count($data) === 0){
+            return 0;
+        }
+        $adGroup = isset($data['id']) ? AdGroup::where('id', $data['id'])->first() : new AdGroup();
+        foreach ($data as $key => $req) {
+            if ($key != "id") {
+                $adGroup->$key = $req;
+            }
+        }
+        try{
+            $adGroup->save();
+            return $adGroup->id;
+        }catch(\Exception $ex){
+            dd($ex);
+
+            return 0;
+        }
+    }
+
+    function adCreationDB($data): int {
+        if(count($data) === 0){
+            return 0;
+        }
+        $ad = isset($data['id']) ? Ads::where('id', $data['id'])->first() : new Ads();
+        foreach ($data as $key => $req) {
+            if ($key != "id") {
+                $ad->$key = $req;
+            }
+        }
+        try{
+            $ad->save();
+            return $ad->id;
+        }catch(\Exception $ex){
+            dd($ex);
+
+            return 0;
+        }
+    }
+
+    function validateImage($request, $field){
+        $request->validate([
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048', // 2MB max
+        ]);
+    
+        $image = $request->file($field);
+        $imagePath = $image->getPathname();
+    
+        list($width, $height) = getimagesize($imagePath);
+    
+        $allowedSizes = [
+            [720, 1280],
+            [1200, 628],
+            [640, 640],
+            [640, 100],
+            [600, 500],
+            [640, 200],
+        ];
+    
+        $validSize = false;
+        foreach ($allowedSizes as $size) {
+            if ($width == $size[0] && $height == $size[1]) {
+                $validSize = true;
+                break;
+            }
+        }
+    
+        if (!$validSize) {
+            return back()->with(['error' => 'Invalid image size. Allowed sizes: 720x1280, 1200x628, 640x640, 640x100, 600x500, 640x200 pixels.']);
+        }
+    
     }
 }

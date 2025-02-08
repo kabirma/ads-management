@@ -8,6 +8,7 @@ use App\Models\Company;
 // use App\Models\AdsImage;
 use App\Models\Role;
 use App\Models\UserPackage;
+use App\Http\Controllers\SocialMedia\TikTokController;
 use Auth;
 
 class AdsController extends Controller
@@ -75,15 +76,15 @@ class AdsController extends Controller
 
     public function save(Request $request)
     {
-        $model = $request->id > 0 ? $this->model::where('id', $request->id)->first() : new $this->model;
-        foreach ($request->all() as $key => $req) {
-            if ($key != "_token" && $key != "id" && $key!="gallery") {
-                $model->$key = $req;
-            }
-        }
-        // $this->ImageUpload($model,"image",$request,"adss");
-        $model->save();
-        // $this->MultiImageUpload($this->child_model,$model->id,"gallery",$request,"adss/gallery");
+        $tiktokController = new TikTokController();
+        $dates = explode(" - ",$request->dates);
+        $request->merge(
+            [
+                'from'=>$dates[0],
+                'to'=>$dates[1]
+            ]
+        );
+        $tiktokController->campiagnCreation($request);
         return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
     }
 
@@ -116,5 +117,17 @@ class AdsController extends Controller
             return redirect()->route($this->redirect_page)->with("success", $this->title . " Status Updated Successfully");
         }
         return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+    }
+
+    public function detail($id, $platform){
+        $title = "Ads Detail";
+        if($platform === 'tiktok'){
+            $tiktok = new TikTokController();
+            $response = $tiktok->fetchAds($id);
+            if(count($response)){
+                [$ad, $apiResponse] = $response;
+            }
+            return view('pages.ads.detail.tiktok',compact("title","apiResponse","ad"));
+        }
     }
 }

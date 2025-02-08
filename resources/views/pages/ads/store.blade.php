@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <style>
         #map {
             height: 500px;
@@ -250,13 +251,10 @@
                     <div class="card-header">
                         <ol class="breadcrumb">
 
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">Edit
+                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">Add
                                     {{ $title }}</span>
                             </li>
                         </ol>
-                        <a href="{{ route('view.ads') }}" class="btn btn-sm btn-primary waves-effect addnew">
-                            <i class="fa fa-list"></i> <span>View {{ $title }}</span>
-                        </a>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">
@@ -270,21 +268,19 @@
                                             <h2>Choose Your Media</h2>
                                          </div>
                                         <ul id="imageRadio">
-                                            <li><input type="radio" name="test" id="cb1" />
+                                            <li><input type="radio" name="social_media" value="facebook" id="cb1" />
                                                 <label for="cb1"> <i class="fab fa-facebook"></i> </label>
                                             </li>
-                                            <li><input type="radio" name="test" id="cb2" />
+                                            <li><input type="radio" name="social_media" checked value="tiktok" id="cb2" />
                                                 <label for="cb2"><i class="fab fa-tiktok"></i></label>
                                             </li>
-                                            <li><input type="radio" name="test" id="cb3" />
+                                            <li><input type="radio" name="social_media" value="twitter" id="cb3" />
                                                 <label for="cb3"><i class="fab fa-twitter"></i></label>
                                             </li>
-                                            <li><input type="radio" name="test" id="cb4" />
+                                            <li><input type="radio" name="social_media" value="google" id="cb4" />
                                                 <label for="cb4"><i class="fab fa-google"></i></label>
                                             </li>
-                                            <li><input type="radio" name="test" id="cb5" />
-                                                <label for="cb5"><i class="fab fa-tiktok"></i></label>
-                                            </li>
+                                           
                                         </ul>
                                     </div>
 
@@ -316,16 +312,16 @@
                                             <h2>Choose Your Goal</h2>
                                          </div>
                                         <ul id="imageRadio">
-                                            <li><input type="radio" name="test" id="cb5" />
-                                                <label for="cb5"> <img src="https://cdn.sweply.com/ui-images/obj-sales.svg" alt="">
+                                            <li><input type="radio" name="goal" checked value="TRAFFIC" id="cb6" />
+                                                <label for="cb6"> <img src="https://cdn.sweply.com/ui-images/obj-sales.svg" alt="">
                                                     <h4>Website Traffic</h4>
                                                     <p>Get more website visits</p>
                                                 </label>
                                             </li>
-                                            <li><input type="radio" name="test" id="cb6" />
-                                                <label for="cb6"> <img src="https://cdn.sweply.com/ui-images/obj-video-view.svg" alt="">
-                                                    <h4>Video Views</h4>
-                                                    <p>Increase video views among your target audience</p>
+                                            <li><input type="radio" name="goal" value="WEB_CONVERSIONS" id="cb7" />
+                                                <label for="cb7"> <img src="https://cdn.sweply.com/ui-images/obj-video-view.svg" alt="">
+                                                    <h4>Web Conversion</h4>
+                                                    <p>Get more users to convert</p>
                                                 </label>
                                             </li>
                                            
@@ -336,116 +332,81 @@
                                         <div class="step-heading">
                                             <h2>Choose Your Content</h2>
                                          </div>
-                                        <div class="titleRow">
+                                        <div class="titleRow row">
                                             <div class="form-group col-md-12">
                                                 <label for="title">Title</label>
-                                                <input id="title" name="title" value="{{ isset($record) ? $record->title : '' }}"
-                                                    type="text" required class="form-control">
+                                                <input id="title" name="title" type="text" required class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="description">Description</label>
-                                                <textarea name="description" id="ckeditor" class="form-control" cols="30" rows="10">{{ isset($record) ? $record->description : '' }}</textarea>
+                                                <textarea name="description" class="form-control" cols="30" rows="10"></textarea>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="call_to_action">Call to Action</label>
+                                                <select name="call_to_action" id="call_to_action" class="form-control">
+                                                    <option selected value="BOOK_NOW">Book Now</option>
+                                                    <option value="CONTACT_US">Contact Us</option>
+                                                    <option value="APPLY_NOW">Apply Now</option>
+                                                    <option value="CALL_NOW">Call Now</option>
+                                                    <option value="LEARN_MORE">Learn More</option>
+                                                    <option value="READ_MORE">Read More</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="website_url">Website Url</label>
+                                                <input id="website_url" name="website_url" type="text" required class="form-control">
                                             </div>
                                         </div>
 
+                                    </div>
+
+                                    <div class="col-md-12 steps" id="step5">
+                                        <div class="step-heading">
+                                            <h2>Upload Media</h2>
+                                         </div>
+                                        <div class="titleRow">
+                                            <div class="form-group col-md-12">
+                                                <label for="website_url">Choose Media Type</label>
+                                                <select name="media_type" id="media_type" class="form-control">
+                                                    <option selected value="1">Image</option>
+                                                    <option value="2">Video</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-12" id="media_image">
+                                                <label for="image">Image</label>
+                                                <input id="image" name="image" type="file" accept="image/*"  class="form-control">
+                                                <small id="error-message" style="color: red; display: none;"></small>
+                                            </div>
+                                            <div class="form-group col-md-12" id="media_video">
+                                                <label for="video">Video</label>
+                                                <input id="video" name="video" type="file"  class="form-control">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-12 steps" id="step6">
+                                        <div class="step-heading">
+                                            <h2>Choose Duration & Budget</h2>
+                                         </div>
+                                        <div class="titleRow row">
+                                            <div class="form-group col-md-12">
+                                                <label for="dates">Schedule Dates</label>
+                                                <input id="dates" name="dates" type="text" required class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="budget">Budget</label>
+                                                <input id="budget" name="budget" type="number" required class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
                                  
                                 </div>
 
-
-
-                                <!-- <div class="form-group col-md-6">
-                                    <label for="title">Title</label>
-                                    <input id="title" name="title" value="{{ isset($record) ? $record->title : '' }}"
-                                        type="text" required class="form-control">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="genre">Genre</label>
-                                    <select id="genre" name="genre" class="form-control">
-                                        @foreach($tags as $tag)
-                                        <option value="{{$tag}}" {{ isset($record) && $record->genre == $tag ??   'selected' }}>{{$tag}}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="date">Date</label>
-                                    <input id="date" name="date" value="{{ isset($record) ? $record->date : '' }}"
-                                        type="date" required class="form-control">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="genre">Series</label>
-                                    <select id="series" name="series" class="form-control">
-                                        <option value="">Select Series</option>
-                                        @foreach($series as $tag)
-                                            <option value="{{$tag}}" {{ isset($record) && $record->series == $tag ?   'selected' : '' }}>{{$tag}}</option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="genre">Start Time</label>
-                                    <input id="start_time" name="start_time"
-                                        value="{{ isset($record) ? $record->start_time : '' }}" type="time" required
-                                        class="form-control">
-                                </div>
-
-                                <div class="form-group col-md-3" style="display: none">
-                                    <label for="end_time">End Time</label>
-                                    <input id="end_time" name="end_time"
-                                        value="{{ isset($record) ? $record->end_time : '' }}" type="time" value="0"
-                                        class="form-control">
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <label for="description">Address</label>
-                                    <input type="hidden" value="{{ isset($record) ? $record->location : '' }}"
-                                        class="form-control" id="address" placeholder="Event Address" name="location">
-                                    <input type="hidden" id="longitude" name="longitude"
-                                        value="{{ isset($record) ? $record->longitude : '' }}">
-                                    <input type="hidden" id="latitude" name="latitude"
-                                        value="{{ isset($record) ? $record->latitude : '' }}">
-                                    <input id="pac-input" class="controls" required type="text"
-                                        value="{{ isset($record) ? $record->location : '' }}" placeholder="Search Box">
-                                    <div id="map"></div>
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <label for="description">Description</label>
-                                    <textarea name="description" id="ckeditor" class="form-control" cols="30" rows="10">{{ isset($record) ? $record->description : '' }}</textarea>
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <label for="image">Image</label>
-                                    <input id="image" name="image" type="file" class="form-control">
-                                    @if(isset($record))
-                                    <br>
-                                    <img src="{{asset($record->image)}}" style="height:100px">
-                                    @endif
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <label for="image">Gallery</label>
-                                    <input id="image" name="gallery[]" type="file" multiple class="form-control">
-                                    @if(isset($record))
-                                    <br>
-                                    <div class="row">
-                                        @foreach($record->galleries as $gallery)
-                                        <div class="col-md-2">
-                                            <div class="image_container">
-                                                <img src="{{asset($gallery->image)}}">
-                                                <a href="{{route("delete.event.image",$gallery->id)}}" class="top-right"><i class="fa fa-times"></i></a>
-                                            </div>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                    @endif
-                                </div> -->
-
                                 <div class="form-group col-md-12 text-center">
                                     <hr>
                                     <button type="button" class="btn btn-secondary prev"><i class="fa fa-arrow-left"></i> Back</button>
-                                    <button type="button" class="btn btn-dark next"><i class="fa fa-arrow-right"></i> Next</button>
+                                    <button type="button" class="btn btn-dark next" id="nextButton"><i class="fa fa-arrow-right"></i> Next</button>
                                     <button class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> Create Ad</button>
                                 </div>
                             </form>
@@ -459,28 +420,41 @@
     </section>
     <!-- Dashboard Analytics end -->
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+   
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBDymzR-k83U6xBmrlrTFF2cqYNWysHK0U">
     </script>
+    
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace('ckeditor');
-
-
+        $('input[name="dates"]').daterangepicker({
+            autoApply: true, // Auto-selects dates without needing the Apply button
+            minDate: moment().add(1, 'days'), // Start date must be from tomorrow
+            locale: { format: 'YYYY-MM-DD' }, // Format: YYYY-MM-DD
+        }, function(start, end, label) {
+            let minEndDate = start.clone().add(2, 'days'); // Ensure the end date is at least +1 day
+            if (end.isSame(start, 'day')) {
+                $('input[name="dates"]').data('daterangepicker').setEndDate(minEndDate); // Force +1 day
+            }
+        });
         $('.steps').hide();
         $('#step1').show();
         var stepCount = 1;
+        var finalCount = 6;
         $(".createAd").hide();
-        if(stepCount == 1){
+        if(stepCount === finalCount){
             $(".prev").hide();
         }
+
         $(".next").click(function(){
             $(".prev").show();
             ++stepCount;
             $(".steps").hide();
             $("#step"+stepCount).show();
-            if(stepCount == 4){
+            if(stepCount === finalCount){
                 $(this).hide();
                 $(".createAd").show();
             }
@@ -491,81 +465,67 @@
             --stepCount;
             $(".steps").hide();
             $("#step"+stepCount).show();
-            if(stepCount == 1){
+            if(stepCount === finalCount){
                 $(this).hide();
-              
             }
         })
+
+
+        $("#media_type").change(function(){
+            if($(this).val() == 1){
+                $("#media_image").show();
+                $("#media_video").hide();
+            }else{
+                $("#media_image").hide();
+                $("#media_video").show();
+            }
+        })
+
+        $("#media_type").change();
+
+        CKEDITOR.replace('ckeditor');
     </script>
 
-    <script>
-        /* script */
-        function initialize() {
-            var latlng = new google.maps.LatLng({{ isset($record) ? $record->latitude : '47.087767' }},
-                {{ isset($record) ? $record->longitude : '-119.7190647' }});
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: latlng,
-                zoom: 12
-            });
-            var marker = new google.maps.Marker({
-                map: map,
-                position: latlng,
-                draggable: true,
-                anchorPoint: new google.maps.Point(0, -29)
-            });
-            var input = document.getElementById('pac-input');
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-            var geocoder = new google.maps.Geocoder();
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo('bounds', map);
-            var infowindow = new google.maps.InfoWindow();
-            autocomplete.addListener('place_changed', function() {
-                infowindow.close();
-                marker.setVisible(false);
-                var place = autocomplete.getPlace();
-                if (!place.geometry) {
-                    window.alert("Autocomplete's returned place contains no geometry");
-                    return;
-                }
 
-                // If the place has a geometry, then present it on a map.
-                if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
-                } else {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(17);
-                }
+        <script>
+             document.getElementById('image').addEventListener('change', function (event) {
+                const file = event.target.files[0]; // Get the selected file
+                const errorMessage = document.getElementById('error-message');
+                const submitButton = document.getElementById('nextButton');
 
-                marker.setPosition(place.geometry.location);
-                marker.setVisible(true);
-                bindDataToForm(place.formatted_address, place.geometry.location.lat(), place.geometry.location
-                    .lng());
-                infowindow.setContent(place.formatted_address);
-                infowindow.open(map, marker);
+                if (file) {
+                    const img = new Image();
+                    img.src = URL.createObjectURL(file); 
 
-            });
-            // this function will work on marker move event into map
-            google.maps.event.addListener(marker, 'dragend', function() {
-                geocoder.geocode({
-                    'latLng': marker.getPosition()
-                }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            bindDataToForm(results[0].formatted_address, marker.getPosition().lat(), marker
-                                .getPosition().lng());
-                            infowindow.setContent(results[0].formatted_address);
-                            infowindow.open(map, marker);
+                    img.onload = function () {
+                        const width = img.width;
+                        const height = img.height;
+                        console.log(width,height);
+                        // Allowed image sizes
+                        const allowedSizes = [
+                            { width: 720, height: 1280 },
+                            { width: 1200, height: 628 },
+                            { width: 640, height: 640 },
+                            { width: 640, height: 100 },
+                            { width: 600, height: 500 },
+                            { width: 640, height: 200 }
+                        ];
+
+                        // Check if the uploaded image matches any of the allowed sizes
+                        const isValidSize = allowedSizes.some(size => size.width === width && size.height === height);
+
+                        if (!isValidSize) {
+                            errorMessage.innerText = "Invalid image size. Allowed sizes: 720x1280, 1200x628, 640x640, 640x100, 600x500, 640x200 pixels.";
+                            errorMessage.style.display = "block";
+                            submitButton.disabled = true;
+                        } else {
+                            errorMessage.style.display = "none";
+                            submitButton.disabled = false;
                         }
-                    }
-                });
+                    };
+                }
             });
-        }
+        </script>
 
-        function bindDataToForm(address, lat, lng) {
-            document.getElementById('address').value = address;
-            document.getElementById('latitude').value = lat;
-            document.getElementById('longitude').value = lng;
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+   
 @endsection

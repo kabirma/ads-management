@@ -41,8 +41,8 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
     'tiktok' => [
-        'client_key' => env('TIKTOK_API_KEY'),
-        'client_secret' => env('TIKTOK_API_SECRET'),
-        'redirect' => env('TIKTOK_REDIRECT_URI'),
+        'tiktok_api_url' => env('TIKTOK_API_URL'),
+        'tiktok_token' => env('TIKTOK_BUSINESS_TOKEN'),
+        'tiktok_advertiser_id' => env('TIKTOK_ADVERTISER_ID'),
     ],
 ];

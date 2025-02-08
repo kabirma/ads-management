@@ -34,9 +34,11 @@
                                         <tr style="">
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Genre</th>
-                                            <th>Date</th>
-                                            <th>Image</th>
+                                            <th>Platform</th>
+                                            <th>Dates</th>
+                                            <th>CTA Text</th>
+                                            <th>CTA Url</th>
+                                            <th>Media</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -44,11 +46,20 @@
                                         @foreach ($listing as $list)
                                             <tr>
                                                 <td>{{ $list->id }}</td>
-                                                <td>{{ $list->title }}</td>
-                                                <td>{{ $list->genre }}</td>
-                                                <td>{{ date("M d, Y",strtotime($list->date)) }}</td>
-                                                <td><img src="{{ asset($list->image) }}" style="height:100px"></td>
+                                                <td>{{ $list->name }}</td>
+                                                <td>{{ $list->platform }}</td>
+                                                <td>{{ date("M d, Y",strtotime($list->from)) }} - {{ date("M d, Y",strtotime($list->to)) }}</td>
+                                                <td>{{ $list->call_to_action }}</td>
+                                                <td>{{ $list->landing_page_url }}</td>
+                                                @if($list->media_type == 1)
+                                                <td><img src="{{$list->image_url}}" style="height:100px"></td>
+                                                @else
+                                                <td>Video</td>
+                                                @endif
                                                 <td>
+                                                    <a href="{{ route('detail.ads', ['id'=>$list->id, 'platform'=>$list->platform]) }}"
+                                                        class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Details</a>
+<!--                                                 
                                                     <a href="{{ route('status.ads', $list->id) }}"
                                                         class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
                                                     <a href="{{ route('edit.ads', $list->id) }}"
@@ -56,7 +67,7 @@
                                                     <a href="#0" class="btn btn-sm btn-danger delete"
                                                         data-title="{{ $list->title }}"
                                                         data-href="{{ route('delete.ads', $list->id) }}"><i
-                                                            class="fa fa-trash"></i></a>
+                                                            class="fa fa-trash"></i></a> -->
                                                 </td>
                                             </tr>
                                         @endforeach
