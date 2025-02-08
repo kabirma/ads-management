@@ -33,12 +33,12 @@ class TikTokController extends Controller
             'platform'=>'tiktok',
         ];
         $campaignId = $this->campaignCreationDB($data);
-        
+
         if($campaignId === 0){
             return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
         }
         $campaignName = $this->setting->name.'-TK-'.$campaignId . date('His');
-        
+
         $response = Http::withHeaders([
             'Access-Token' => $this->accessToken,
             'Content-Type' => 'application/json',
@@ -47,7 +47,7 @@ class TikTokController extends Controller
             'objective_type' => $request->goal,
             'campaign_name' => $campaignName,
             'budget_mode' => 'BUDGET_MODE_TOTAL',
-            'budget' => $request->budget, 
+            'budget' => $request->budget,
         ]);
 
         $data = $response->json();
@@ -157,9 +157,9 @@ class TikTokController extends Controller
         if($adGroupId === 0){
             return redirect()->route('add.ads')->with("error", "Error Creating Ads");
         }
-       
+
         $adGroup = AdGroup::find($adGroupId);
-      
+
         $data = [
             'user_id'=>Auth::guard('web')->user()->id,
             'campaign_id'=>$adGroup->campaign_id,
@@ -224,7 +224,7 @@ class TikTokController extends Controller
     }
 
     function uploadMedia($request, $reference_id){
-       
+
         if($request->media_type == 1){
             $mediaPath = $this->saveMedia('image',$request,'socialMedia/TikTok', $reference_id);
             $fileName = str_replace(" ","_",$request->title) .'-'. date('YMDHis') . '-'.$reference_id;
@@ -232,14 +232,14 @@ class TikTokController extends Controller
             $response = Http::withHeaders([
                 'Access-Token' => $this->accessToken,
             ])->attach(
-                'image_file', file_get_contents($mediaPath), $fileName 
+                'image_file', file_get_contents($mediaPath), $fileName
             )->post($this->apiUrl.'/open_api/v1.3/file/image/ad/upload/', [
                 'advertiser_id' => $this->advertiserId,
                 'file_name' => $fileName,
                 'image_signature' => md5(file_get_contents($mediaPath)),
             ]);
         }else{
-            
+
             $mediaPath = $this->saveMedia('video',$request,'socialMedia/TikTok', $reference_id);
             $fileName = str_replace(" ","_",$request->name) .'-'. date('YMDHis') . '-'.$reference_id;
 
@@ -251,13 +251,13 @@ class TikTokController extends Controller
                 'advertiser_id' => $this->advertiserId,
                 'file_name' => $fileName,
                 'upload_type' => 'UPLOAD_BY_FILE',
-                'video_signature' => md5(file_get_contents($mediaPath)),  
-                'flaw_detect' => 'true', 
-                'auto_fix_enabled' => 'true', 
-                'auto_bind_enabled' => 'true',  
+                'video_signature' => md5(file_get_contents($mediaPath)),
+                'flaw_detect' => 'true',
+                'auto_fix_enabled' => 'true',
+                'auto_bind_enabled' => 'true',
             ]);
         }
-        
+
         $data = $response->json();
         if($data['message']=="OK"){
             return $data['data'];
@@ -269,11 +269,11 @@ class TikTokController extends Controller
     function createIdentity(){
         $mediaPath = $this->setting->logo;
         $fileName = $this->setting->name . date('YmdHis');
-        
+
         $response = Http::withHeaders([
             'Access-Token' => $this->accessToken,
         ])->attach(
-            'image_file', file_get_contents($mediaPath), $fileName 
+            'image_file', file_get_contents($mediaPath), $fileName
         )->post($this->apiUrl.'/open_api/v1.3/file/image/ad/upload/', [
             'advertiser_id' => $this->advertiserId,
             'file_name' => $fileName,
@@ -286,7 +286,7 @@ class TikTokController extends Controller
             'Content-Type' => 'application/json',
         ])->post($this->apiUrl.'/open_api/v1.3/identity/create/', [
             'advertiser_id' => $this->advertiserId,
-            'image_uri' => $mediaResponse['data']['image_id'], 
+            'image_uri' => $mediaResponse['data']['image_id'],
             'display_name' => $fileName,
         ]);
 
@@ -305,15 +305,16 @@ class TikTokController extends Controller
 
         $response = Http::withHeaders([
             'Access-Token' => $this->accessToken,
-        ])->get($this->apiUrl.'/open_api/v1.3/ad/get/', [
+        ])->get('https://sandbox-ads.tiktok.com/open_api/v1.3/ad/get/', [
             'advertiser_id' => $this->advertiserId,
-            'filtering' => json_encode(['ad_ids' => [$tiktokAdId]]),           
+            'filtering' => json_encode(['ad_ids' => [$tiktokAdId]]),
         ]);
-        
+
         $data = $response->json();
         if($data['message']!=='OK'){
             return [];
         }
         return [$ad, $data];
     }
+
 }

@@ -126,6 +126,9 @@ class AdsController extends Controller
             $response = $tiktok->fetchAds($id);
             if(count($response)){
                 [$ad, $apiResponse] = $response;
+
+
+
             }
             return view('pages.ads.detail.tiktok',compact("title","apiResponse","ad"));
         }
