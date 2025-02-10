@@ -59,11 +59,11 @@
                         </div>
 
                         <div class="mb-1">
-                            <div class="form-check">
+                            <!-- <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="remember-me" name="remember"
                                     tabindex="3" {{ old('remember') ? 'checked' : '' }} />
                                 <label class="form-check-label" for="remember-me"> Remember Me </label>
-                            </div>
+                            </div> -->
                         </div>
                         <button class="btn btn-primary w-100" tabindex="4">Sign in</button>
                     </form>

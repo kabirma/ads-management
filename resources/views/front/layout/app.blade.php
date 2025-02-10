@@ -107,12 +107,8 @@
 				<div class="modal__content modal__content--login">
 					<div class="modal__info">
 						<h2 class="modal__title">First time here?</h2>
-						<div class="modal__descr">Join now and get <span>20% OFF</span> for all products</div>
-						<ul class="modal__list">
-							<li>premium access to all products</li>
-							<li>free testing tools</li>
-							<li>unlimited user accounts</li>
-						</ul>
+						<div class="modal__descr">Join now and make <span>Ads management</span> as easy as possible</div>
+						
 						<button class="modal__switch modal__switch--signup" data-popup="signup">Signup</button>
 					</div>
 					<div class="modal__form form">
@@ -130,8 +126,6 @@
 								<input name="password" id="password" class="form__input" type="password" />
 								<span class="form__row-border"></span>
 							</div>
-							<div class="modal__checkbox"><input id="remember" name="remember" value="remember" checked
-									type="checkbox"><label for="remember">Keep me Signed in</label></div>
 							<div class="modal__switch modal__switch--forgot" data-popup="forgot">Forgot Password?</div>
 							<input type="submit" name="submit" class="form__submit btn btn--green-bg" id="submitl"
 								value="LOGIN" />
@@ -215,12 +209,8 @@
 					</div>
 					<div class="modal__info">
 						<h2 class="modal__title">Allready have an account?</h2>
-						<div class="modal__descr">Login now and starting using our <span>amazing</span> products</div>
-						<ul class="modal__list">
-							<li>premium access to all products</li>
-							<li>free testing tools</li>
-							<li>unlimited user accounts</li>
-						</ul>
+						<div class="modal__descr">Login now and starting using our <span>amazing</span> platform</div>
+						
 						<button class="modal__switch modal__switch--login" data-popup="login">Login</button>
 					</div>
 				</div> <!-- End Modal signup -->

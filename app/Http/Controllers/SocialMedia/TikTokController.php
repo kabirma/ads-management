@@ -65,8 +65,8 @@ class TikTokController extends Controller
             $campaignId = $this->campaignCreationDB($data);
             $this->createAdGroup($campaignId,$request);
         }else{
+            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
             dd($data);
-            return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
         }
     }
 
@@ -89,7 +89,7 @@ class TikTokController extends Controller
         $adGroupName = $this->setting->name.'-TK-'.$adGroupId . date('His');
 
         $placements = [];
-        dump($request->goal);
+        
         if($request->goal === 'TRAFFIC'){
             $placements[] = 'PLACEMENT_PANGLE';
             $placements[] = 'PLACEMENT_TIKTOK';
@@ -149,6 +149,8 @@ class TikTokController extends Controller
             $adGroupId = $this->adGroupCreationDB($data);
             $this->createAd($adGroupId,$request);
         }else{
+            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+
             dd($data);
         }
     }
@@ -219,6 +221,7 @@ class TikTokController extends Controller
             $adId = $this->adCreationDB($data);
             return redirect()->route("view.ads")->with("success", "Ads Created Successfully");
         }else{
+            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
             dd($data);
         }
     }

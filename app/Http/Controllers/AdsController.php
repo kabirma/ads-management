@@ -35,13 +35,13 @@ class AdsController extends Controller
     public function index()
     {
         $data['title'] = $this->title;
-        $data['listing'] = $this->model::orderBy('id','desc')->get();
+        $data['listing'] = $this->model::where('user_id',Auth::guard('web')->user()->id)->orderBy('id','desc')->get();
         return view($this->view_page, $data);
     }
 
     public function add()
     {
-        $userPackage = UserPackage::where('user_id',Auth::user()->id)->where('expire_at','>=', date("Y-m-d"))->first();
+        $userPackage = UserPackage::where('user_id',Auth::guard('web')->user()->id)->where('expire_at','>=', date("Y-m-d"))->first();
         if(!isset($userPackage)){
             return view('auth.package',['title'=>'Subscribe to Packages']);
         }

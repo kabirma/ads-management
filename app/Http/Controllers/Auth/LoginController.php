@@ -52,12 +52,10 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->intended('dashboard');
         }
-        session()->flash('error','Invalid Credentials');
-        return redirect()->back();
+        return redirect()->back()->with('error','Invalid Credentials');
     }
 }

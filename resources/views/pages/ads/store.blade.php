@@ -268,16 +268,16 @@
                                             <h2>Choose Your Media</h2>
                                          </div>
                                         <ul id="imageRadio">
-                                            <li><input type="radio" name="social_media" value="facebook" id="cb1" />
+                                            <li><input type="radio" name="social_media" disabled value="facebook" id="cb1" />
                                                 <label for="cb1"> <i class="fab fa-facebook"></i> </label>
                                             </li>
-                                            <li><input type="radio" name="social_media" checked value="tiktok" id="cb2" />
+                                            <li><input type="radio" name="social_media"  checked value="tiktok" id="cb2" />
                                                 <label for="cb2"><i class="fab fa-tiktok"></i></label>
                                             </li>
-                                            <li><input type="radio" name="social_media" value="twitter" id="cb3" />
+                                            <li><input type="radio" name="social_media" disabled value="twitter" id="cb3" />
                                                 <label for="cb3"><i class="fab fa-twitter"></i></label>
                                             </li>
-                                            <li><input type="radio" name="social_media" value="google" id="cb4" />
+                                            <li><input type="radio" name="social_media" disabled value="google" id="cb4" />
                                                 <label for="cb4"><i class="fab fa-google"></i></label>
                                             </li>
                                            
@@ -318,10 +318,10 @@
                                                     <p>Get more website visits</p>
                                                 </label>
                                             </li>
-                                            <li><input type="radio" name="goal" value="WEB_CONVERSIONS" id="cb7" />
+                                            <li><input type="radio" name="goal" value="TRAFFIC" id="cb7" />
                                                 <label for="cb7"> <img src="https://cdn.sweply.com/ui-images/obj-video-view.svg" alt="">
-                                                    <h4>Web Conversion</h4>
-                                                    <p>Get more users to convert</p>
+                                                    <h4>Reach</h4>
+                                                    <p>Increase the overall reach</p>
                                                 </label>
                                             </li>
                                            
@@ -505,10 +505,10 @@
                         const allowedSizes = [
                             { width: 720, height: 1280 },
                             { width: 1200, height: 628 },
-                            { width: 640, height: 640 },
-                            { width: 640, height: 100 },
-                            { width: 600, height: 500 },
-                            { width: 640, height: 200 }
+                            // { width: 640, height: 640 },
+                            // { width: 640, height: 100 },
+                            // { width: 600, height: 500 },
+                            // { width: 640, height: 200 }
                         ];
 
                         // Check if the uploaded image matches any of the allowed sizes
