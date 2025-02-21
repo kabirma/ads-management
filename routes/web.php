@@ -25,6 +25,10 @@ Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, '
 
 
 Route::post('/login/submit',  [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
+ 
+Route::get('/snapchat/auth', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'authSnapChat'])->name('auth_snapchat');
+Route::get('/snapchat/redirect', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'redirectToSnapChat'])->name('redirect_to_snapchat');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
@@ -45,9 +49,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd'])->name('create_ad');
 
     Route::get('/tiktok/create-identity', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createIdentity'])->name('createIdentity');
-    
-    Route::get('/snapchat/auth', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'authSnapChat'])->name('auth_snapchat');
-    Route::get('/snapchat/redirect', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'redirectToSnapChat'])->name('redirect_to_snapchat');
 
     // Payment 
     Route::get('/checkout', [App\Http\Controllers\MastercardController::class, 'showCheckout'])->name('payment.checkout');
