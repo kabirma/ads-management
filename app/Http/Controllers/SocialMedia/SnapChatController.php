@@ -36,7 +36,7 @@ class SnapChatController extends Controller
         $scope = 'snapchat-marketing-api';
 
         $authUrl = "https://accounts.snapchat.com/login/oauth2/authorize?client_id={$clientId}&redirect_uri={$redirectUri}&response_type={$responseType}&scope={$scope}";
-
+        dd($authUrl);
         return redirect($authUrl);
     }
 
