@@ -23,8 +23,8 @@ class SnapChatController extends Controller
     public function __construct() {
         $this->redirectUrl =  config('services.snapchat.snapchat_redirect_uri');
         $this->apiUrl =  config('services.snapchat.snapchat_api_url');
-        $this->clientSecret = config('services.snapchat.snapchat_client_id');
-        $this->clientId = config('services.snapchat.snapchat_client_secret');
+        $this->clientSecret = config('services.snapchat.snapchat_client_secret');
+        $this->clientId = config('services.snapchat.snapchat_client_id');
         $this->setting = Company::find(1);
     }
 
