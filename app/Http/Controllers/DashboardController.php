@@ -197,4 +197,10 @@ class DashboardController extends Controller
     return view('auth.setting',$data);
   }
 
+  public function wallet()
+  {
+    $data['title'] = 'Wallet';
+    return view('auth.wallet',$data);
+  }
+
 }

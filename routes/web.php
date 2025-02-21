@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout',  [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout.admin');
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/setting', [App\Http\Controllers\DashboardController::class, 'setting'])->name('user_setting');
+    Route::get('/wallet', [App\Http\Controllers\DashboardController::class, 'wallet'])->name('user_wallet');
    
     Route::get('/package', [App\Http\Controllers\PurchaseController::class, 'index'])->name('user_package');
     Route::post('/package/purchase', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('purchase_package');
@@ -44,6 +45,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd'])->name('create_ad');
 
     Route::get('/tiktok/create-identity', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createIdentity'])->name('createIdentity');
+    
+    Route::get('/snapchat/auth', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'authSnapChat'])->name('auth_snapchat');
+    Route::get('/snapchat/redirect', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'redirectToSnapChat'])->name('redirect_to_snapchat');
+
+    // Payment 
+    Route::get('/checkout', [App\Http\Controllers\MastercardController::class, 'showCheckout'])->name('payment.checkout');
+    Route::post('/checkout/create', [App\Http\Controllers\MastercardController::class, 'createCheckout'])->name('payment.create');
+    Route::get('/checkout/success', [App\Http\Controllers\MastercardController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/checkout/cancel', [App\Http\Controllers\MastercardController::class, 'paymentCancel'])->name('payment.cancel');
 
     Route::group(['prefix' => 'roles'], function () {
         Route::controller(App\Http\Controllers\RoleController::class)->group(function () {
