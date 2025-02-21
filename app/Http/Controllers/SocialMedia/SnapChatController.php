@@ -41,7 +41,7 @@ class SnapChatController extends Controller
     }
 
     public function redirectToSnapChat(Request $request){
-        dump($request);
+        dump($request->all(),'rediirect');
         $code = $request->query('code');
         
         if (!$code) {
