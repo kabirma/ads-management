@@ -6,10 +6,14 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Auth;
 use App\Models\Campaign;
 use App\Models\AdGroup;
 use App\Models\Ads;
 use App\Models\Media;
+use App\Models\Company;
 
 
 class Controller extends BaseController
@@ -159,5 +163,29 @@ class Controller extends BaseController
             return back()->with(['error' => 'Invalid image size. Allowed sizes: 720x1280, 1200x628, 640x640, 640x100, 600x500, 640x200 pixels.']);
         }
     
+    }
+
+    public function refreshSnapChatAccessToke($clientSecret,$clientId,$setting){
+        $refreshToken = $setting->snapchat_refresh_toke;
+        $expiry = new \DateTime($setting->snapchat_access_token_expiry);
+        $currentTime = new \DateTime('now');
+        $diff = $currentTime->getTimestamp() - $expiry->getTimestamp();
+        if ($diff > (50 * 60)) {
+            $response = Http::asForm()->post('https://accounts.snapchat.com/login/oauth2/access_token', [
+                'refresh_token' => $refreshToken,
+                'client_id' => $clientId,
+                'client_secret' => $clientSecret,
+                'grant_type' => 'refresh_token',
+            ]);
+        
+            $data = $response->json();
+            if(!array_key_exists('error',$data)){
+                $setting->snapchat_access_token_expiry = $currentTime;
+                $setting->snapchat_access_token = $data['access_token'];
+                $setting->snapchat_refresh_toke = $data['refresh_token'];
+                $setting->save();
+            }
+        }
+
     }
 }

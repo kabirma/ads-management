@@ -103,7 +103,7 @@
             display: inline-block;
         }
 
-        #imageRadio input[type="radio"][id^="cb"] {
+        #imageRadio input[type="radio"] {
             display: none;
         }
 
@@ -162,6 +162,10 @@
             max-width: 600px;
             margin: 20px auto;
             font-family: Arial, sans-serif;
+        }
+
+        #imageRadio label img{
+            height:100px;
         }
 
         .note-header {
@@ -268,17 +272,20 @@
                                             <h2>Choose Your Media</h2>
                                          </div>
                                         <ul id="imageRadio">
-                                            <li><input type="radio" name="social_media" disabled value="facebook" id="cb1" />
-                                                <label for="cb1"> <i class="fab fa-facebook"></i> </label>
+                                            <li><input type="radio" name="social_media" disabled value="facebook" id="facebook" />
+                                                <label for="facebook"> <i class="fab fa-facebook"></i> </label>
                                             </li>
-                                            <li><input type="radio" name="social_media"  checked value="tiktok" id="cb2" />
-                                                <label for="cb2"><i class="fab fa-tiktok"></i></label>
+                                            <li><input type="radio" name="social_media"  checked value="tiktok" id="tiktok" />
+                                                <label for="tiktok"><i class="fab fa-tiktok"></i></label>
                                             </li>
-                                            <li><input type="radio" name="social_media" disabled value="twitter" id="cb3" />
-                                                <label for="cb3"><i class="fab fa-twitter"></i></label>
+                                            <li><input type="radio" name="social_media" disabled value="twitter" id="twitter" />
+                                                <label for="twitter"><i class="fab fa-twitter"></i></label>
                                             </li>
-                                            <li><input type="radio" name="social_media" disabled value="google" id="cb4" />
-                                                <label for="cb4"><i class="fab fa-google"></i></label>
+                                            <li><input type="radio" name="social_media" disabled value="google" id="google" />
+                                                <label for="google"><i class="fab fa-google"></i></label>
+                                            </li>
+                                            <li><input type="radio" name="social_media" value="snapchat" id="snapchat" />
+                                                <label for="snapchat"><i class="fab fa-snapchat"></i></label>
                                             </li>
                                            
                                         </ul>
@@ -312,16 +319,36 @@
                                             <h2>Choose Your Goal</h2>
                                          </div>
                                         <ul id="imageRadio">
-                                            <li><input type="radio" name="goal" checked value="TRAFFIC" id="cb6" />
-                                                <label for="cb6"> <img src="https://cdn.sweply.com/ui-images/obj-sales.svg" alt="">
+                                            <li class='tiktok_goal'><input type="radio" name="goal" checked value="TRAFFIC" id="tk1" />
+                                                <label for="tk1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
                                                     <h4>Website Traffic</h4>
                                                     <p>Get more website visits</p>
                                                 </label>
                                             </li>
-                                            <li><input type="radio" name="goal" value="TRAFFIC" id="cb7" />
-                                                <label for="cb7"> <img src="https://cdn.sweply.com/ui-images/obj-video-view.svg" alt="">
+                                            <li class='tiktok_goal'><input type="radio" name="goal" value="TRAFFIC" id="tk2" />
+                                                <label for="tk2"> <img src="{{asset('front/images/video-chat.png')}}" alt="">
                                                     <h4>Reach</h4>
                                                     <p>Increase the overall reach</p>
+                                                </label>
+                                            </li>
+
+                                            <li class='snapchat_goal'><input type="radio" name="goal" checked value="WEB_CONVERSION" id="sc1" />
+                                                <label for="sc1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
+                                                    <h4>Website Traffic</h4>
+                                                    <p>Get more website visits</p>
+                                                </label>
+                                            </li>
+                                            <li class='snapchat_goal'><input type="radio" name="goal" value="ENGAGEMENT" id="sc2" />
+                                                <label for="sc2"> <img src="{{asset('front/images/video-chat.png')}}" alt="">
+                                                    <h4>Reach</h4>
+                                                    <p>Increase the overall reach</p>
+                                                </label>
+                                            </li>
+
+                                            <li class='snapchat_goal'><input type="radio" name="goal" value="BRAND_AWARENESS " id="sc3" />
+                                                <label for="sc3"> <img src="{{asset('front/images/web.png')}}" alt="">
+                                                    <h4>Brand Promotion</h4>
+                                                    <p>Increase brand awareness</p>
                                                 </label>
                                             </li>
                                            
@@ -400,6 +427,51 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    
+                                    <div class="col-md-12 steps" id="step7">
+                                        <div class="step-heading">
+                                            <h2>Choose Demographic & Location</h2>
+                                         </div>
+                                        <div class="titleRow row">
+                                            <div class="form-group col-md-12">
+                                                <label for="gender">Gender</label>
+                                                <select name="gender" id="gender" class="form-control">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Both">Both</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="age_group">Age Group</label>
+                                                <select name="age_group" id="age_group" class="form-control">
+                                                    <option value="12">Less than 12</option>
+                                                    <option value="18">Less than 18</option>
+                                                    <option value="30">Less than 30</option>
+                                                    <option value="31">Greater than 30</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="location">Locations</label>
+                                                <select name="location[]" id="location" class="form-control select2" multiple>
+                                                    <option value="">Select a Country</option>
+                                                    <option value="SA">Saudi Arabia</option>
+                                                    <option value="AE">United Arab Emirates</option>
+                                                    <option value="QA">Qatar</option>
+                                                    <option value="BH">Bahrain</option>
+                                                    <option value="KW">Kuwait</option>
+                                                    <option value="OM">Oman</option>
+                                                    <option value="YE">Yemen</option>
+                                                    <option value="IQ">Iraq</option>
+                                                    <option value="SY">Syria</option>
+                                                    <option value="LB">Lebanon</option>
+                                                    <option value="JO">Jordan</option>
+                                                    <option value="PS">Palestine</option>
+                                                    <option value="EG">Egypt</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                  
                                 </div>
 
@@ -435,15 +507,15 @@
             minDate: moment().add(1, 'days'), // Start date must be from tomorrow
             locale: { format: 'YYYY-MM-DD' }, // Format: YYYY-MM-DD
         }, function(start, end, label) {
-            let minEndDate = start.clone().add(2, 'days'); // Ensure the end date is at least +1 day
-            if (end.isSame(start, 'day')) {
-                $('input[name="dates"]').data('daterangepicker').setEndDate(minEndDate); // Force +1 day
-            }
+            // let minEndDate = start.clone().add(2, 'days'); // Ensure the end date is at least +1 day
+            // if (end.isSame(start, 'day')) {
+            //     $('input[name="dates"]').data('daterangepicker').setEndDate(minEndDate); // Force +1 day
+            // }
         });
         $('.steps').hide();
         $('#step1').show();
         var stepCount = 1;
-        var finalCount = 6;
+        var finalCount = 7;
         $(".createAd").hide();
         if(stepCount === finalCount){
             $(".prev").hide();
@@ -525,6 +597,19 @@
                     };
                 }
             });
+
+            $("#step1 input").change(function(){
+                var currentVal = $("#step1 input:checked").val();
+                $("#step3 ul li").hide();
+                if(currentVal == 'tiktok'){
+                    $(".tiktok_goal").show();
+                }
+                else if(currentVal == 'snapchat'){
+                    $(".snapchat_goal").show();
+                }
+            })
+
+            $("#step1 input").change();
         </script>
 
    

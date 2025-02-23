@@ -46,6 +46,7 @@ return [
         'tiktok_advertiser_id' => env('TIKTOK_ADVERTISER_ID'),
     ],
     'snapchat' => [
+        'snapchat_ad_acount_id' => env('SNAPCHAT_AD_ACCOUNT_ID'),
         'snapchat_redirect_uri' => env('SNAPCHAT_REDIRECT_URI'),
         'snapchat_api_url' => env('SNAPCHAT_API_URL'),
         'snapchat_client_id' => env('SNAPCHAT_CLIENT_ID'),

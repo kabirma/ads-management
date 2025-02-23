@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Role;
 use App\Models\UserPackage;
 use App\Http\Controllers\SocialMedia\TikTokController;
+use App\Http\Controllers\SocialMedia\SnapChatController;
 use Auth;
 
 class AdsController extends Controller
@@ -76,7 +77,6 @@ class AdsController extends Controller
 
     public function save(Request $request)
     {
-        $tiktokController = new TikTokController();
         $dates = explode(" - ",$request->dates);
         $request->merge(
             [
@@ -84,7 +84,14 @@ class AdsController extends Controller
                 'to'=>$dates[1]
             ]
         );
-        $tiktokController->campiagnCreation($request);
+
+        if($request->social_media == 'tiktok'){
+            $tiktokController = new TikTokController();
+            $tiktokController->campiagnCreation($request);
+        }else if($request->social_media == 'snapchat'){
+            $snapchatController = new SnapChatController();
+            $snapchatController->campiagnCreation($request);
+        }
         return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
     }
 
