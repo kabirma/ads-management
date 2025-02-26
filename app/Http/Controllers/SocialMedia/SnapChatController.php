@@ -50,6 +50,10 @@ class SnapChatController extends Controller
             return ['error' => 'No '.$mediaType.' uploaded'];
         }
 
+        if($to->format('Y-m-d') < $from->format('Y-m-d')){
+            return ['error' => 'Campaign end date can not be before start date'];
+        }
+
         return [];
     }
 
@@ -145,7 +149,7 @@ class SnapChatController extends Controller
             $log = [
                 'reference_id' => $campaignId,
                 'reference_table' => 'campaigns',
-                'request' => json_ecode($payload),
+                'request' => json_encode($payload),
                 'url' => $url,
                 'response' => json_encode($response),
             ];
@@ -171,6 +175,39 @@ class SnapChatController extends Controller
         $adGroupId = $this->adGroupCreationDB($data);
         $adGroupName = $this->setting->name.'-SC-'.$adGroupId . date('His');
 
+        $demographics = [];
+        
+        $ageRange = [
+            12 => 1,
+            18 => 13,
+            30 => 19,
+            0 => 1,
+        ];
+        $max_age = $request->age_group;
+        $gender = $request->gender;
+        
+        
+        if($max_age !== 0){
+            $minAge['min_age'] = (int)$ageRange[$max_age];
+            $maxAge['max_age'] = (int)$max_age;
+            
+            if($gender != "BOTH"){
+                $minAge['gender'] = strtoupper($gender);
+                $maxAge['gender'] = strtoupper($gender);
+            }
+
+            $demographics = [
+                $minAge,
+                $maxAge,
+            ];
+        }
+        $locations = $request->location;
+        $country = ['country_code' => 'us'];
+        // $country = array_map(function($location) {
+        //     return ['country_code' => $location]; 
+        // },$locations);
+      
+        
         $optimizationGoal = 'IMPRESSIONS';
 
         $payload = [
@@ -182,12 +219,8 @@ class SnapChatController extends Controller
                     'type'=> 'SNAP_ADS',
                     "targeting" => [
                         "regulated_content" => false,
-                        "demographics" => [
-                            ["min_age" => "18"]
-                        ],
-                        "geos" => [
-                            ["country_code" => "sa"]
-                        ]
+                        "demographics" => $demographics,
+                        "geos" => [$country]
                     ],
                     "targeting_reach_status" => "VALID",
                     "placement_v2" => ["config" => "AUTOMATIC"],
@@ -207,7 +240,7 @@ class SnapChatController extends Controller
                 ]
             ]
         ];
-
+        
         $url = $this->apiUrl."campaigns/".$campaign->campaign_id."/adsquads";
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
@@ -233,7 +266,7 @@ class SnapChatController extends Controller
             $log = [
                 'reference_id' => $adGroupId,
                 'reference_table' => 'ad_groups',
-                'request' => json_ecode($payload),
+                'request' => json_encode($payload),
                 'url' => $url,
                 'response' => json_encode($response),
             ];
@@ -310,7 +343,7 @@ class SnapChatController extends Controller
             $log = [
                 'reference_id' => $adId,
                 'reference_table' => 'ads',
-                'request' => json_ecode($payload),
+                'request' => json_encode($payload),
                 'url' => $url,
                 'response' => json_encode($response),
             ];
@@ -361,7 +394,7 @@ class SnapChatController extends Controller
                 $log = [
                     'reference_id' => $reference_id,
                     'reference_table' => 'mediaUpload',
-                    'request' => json_ecode($payload),
+                    'request' => json_encode($payload),
                     'url' => $url,
                     'response' => json_encode($response),
                 ];
@@ -371,7 +404,7 @@ class SnapChatController extends Controller
             $log = [
                 'reference_id' => $reference_id,
                 'reference_table' => 'media',
-                'request' => json_ecode($payload),
+                'request' => json_encode($payload),
                 'url' => $url,
                 'response' => json_encode($response),
             ];
@@ -421,7 +454,7 @@ class SnapChatController extends Controller
             $log = [
                 'reference_id' => 0,
                 'reference_table' => 'creatives',
-                'request' => json_ecode($payload),
+                'request' => json_encode($payload),
                 'url' => $url,
                 'response' => json_encode($response),
             ];

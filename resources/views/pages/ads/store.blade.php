@@ -374,7 +374,7 @@
                                                 <label for="description">Description</label>
                                                 <textarea name="description" class="form-control" cols="30" rows="10"></textarea>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">Call to Action</label>
                                                 <select name="call_to_action" id="call_to_action" class="form-control">
                                                     <option class="tiktok" selected value="BOOK_NOW">Book Now</option>
@@ -451,10 +451,10 @@
                                             <div class="form-group col-md-12">
                                                 <label for="age_group">Age Group</label>
                                                 <select name="age_group" id="age_group" class="form-control">
-                                                    <option value="12">Less than 12</option>
-                                                    <option value="18">Less than 18</option>
-                                                    <option value="30">Less than 30</option>
-                                                    <option value="31">Greater than 30</option>
+                                                    <option value="12">Max Age 12</option>
+                                                    <option value="18">Max Age 18</option>
+                                                    <option value="30">Max Age 30</option>
+                                                    <option value="0">Any Age</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
@@ -512,11 +512,6 @@
             autoApply: true, // Auto-selects dates without needing the Apply button
             minDate: moment().add(1, 'days'), // Start date must be from tomorrow
             locale: { format: 'YYYY-MM-DD' }, // Format: YYYY-MM-DD
-        }, function(start, end, label) {
-            // let minEndDate = start.clone().add(2, 'days'); // Ensure the end date is at least +1 day
-            // if (end.isSame(start, 'day')) {
-            //     $('input[name="dates"]').data('daterangepicker').setEndDate(minEndDate); // Force +1 day
-            // }
         });
         $('.steps').hide();
         $('#step1').show();
@@ -563,12 +558,12 @@
             $("#call_to_action option").hide();
 
             if($(this).val() === 'snapchat'){
-                $("#call_to_action").hide();
+                $("#callTOActionArea").hide();
                 $("#websiteUrlArea").removeClass("col-md-6");
                 $("#websiteUrlArea").addClass("col-md-12");
             }else if($(this).val() === 'tiktok'){
                 $(".tiktok").show();
-                $("#call_to_action").show();
+                $("#callTOActionArea").show();
                 $("#websiteUrlArea").addClass("col-md-6");
                 $("#websiteUrlArea").removeClass("col-md-12");
             }
