@@ -262,6 +262,12 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">
+                            @if (Session::has('error'))
+                                <div class="alert alert-danger text-center">
+                                    <i class="fa fa-times"></i> {{ Session::get('error') }}
+                                </div>
+                            @endif
+                        
                             <form action="{{ route('save.ads') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
@@ -371,15 +377,15 @@
                                             <div class="form-group col-md-6">
                                                 <label for="call_to_action">Call to Action</label>
                                                 <select name="call_to_action" id="call_to_action" class="form-control">
-                                                    <option selected value="BOOK_NOW">Book Now</option>
-                                                    <option value="CONTACT_US">Contact Us</option>
-                                                    <option value="APPLY_NOW">Apply Now</option>
-                                                    <option value="CALL_NOW">Call Now</option>
-                                                    <option value="LEARN_MORE">Learn More</option>
-                                                    <option value="READ_MORE">Read More</option>
+                                                    <option class="tiktok" selected value="BOOK_NOW">Book Now</option>
+                                                    <option class="tiktok" value="CONTACT_US">Contact Us</option>
+                                                    <option class="tiktok" value="APPLY_NOW">Apply Now</option>
+                                                    <option class="tiktok" value="CALL_NOW">Call Now</option>
+                                                    <option class="tiktok" value="LEARN_MORE">Learn More</option>
+                                                    <option class="tiktok" value="READ_MORE">Read More</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-6" id="websiteUrlArea">
                                                 <label for="website_url">Website Url</label>
                                                 <input id="website_url" name="website_url" type="text" required class="form-control">
                                             </div>
@@ -541,7 +547,7 @@
                 $(this).hide();
             }
         })
-
+        var mediaType  = 'image'
 
         $("#media_type").change(function(){
             if($(this).val() == 1){
@@ -553,13 +559,25 @@
             }
         })
 
+        $("input[name='social_media']").change(function() {
+            $("#call_to_action option").hide();
+
+            if($(this).val() === 'snapchat'){
+                $("#call_to_action").hide();
+                $("#websiteUrlArea").removeClass("col-md-6");
+                $("#websiteUrlArea").addClass("col-md-12");
+            }else if($(this).val() === 'tiktok'){
+                $(".tiktok").show();
+                $("#call_to_action").show();
+                $("#websiteUrlArea").addClass("col-md-6");
+                $("#websiteUrlArea").removeClass("col-md-12");
+            }
+        })
+
         $("#media_type").change();
 
         CKEDITOR.replace('ckeditor');
-    </script>
-
-
-        <script>
+    
              document.getElementById('image').addEventListener('change', function (event) {
                 const file = event.target.files[0]; // Get the selected file
                 const errorMessage = document.getElementById('error-message');
@@ -572,9 +590,15 @@
                     img.onload = function () {
                         const width = img.width;
                         const height = img.height;
-                        console.log(width,height);
                         // Allowed image sizes
-                        const allowedSizes = [
+
+                        var socialMedia = $("input[name='social_media']:checked").val();
+
+                        const snapchatallowedSizes = [
+                            { width: 1080 , height: 1920 }
+                        ]
+
+                        const tiktokallowedSizes = [
                             { width: 720, height: 1280 },
                             { width: 1200, height: 628 },
                             // { width: 640, height: 640 },
@@ -584,7 +608,12 @@
                         ];
 
                         // Check if the uploaded image matches any of the allowed sizes
-                        const isValidSize = allowedSizes.some(size => size.width === width && size.height === height);
+                        if(socialMedia == 'snapchat'){
+                            const isValidSize = snapchatallowedSizes.some(size => size.width === width && size.height === height);
+
+                        }else if(socialMedia == 'tiktok'){
+                            const isValidSize = tiktokallowedSizes.some(size => size.width <= width && size.height <= height);
+                        }
 
                         if (!isValidSize) {
                             errorMessage.innerText = "Invalid image size. Allowed sizes: 720x1280, 1200x628, 640x640, 640x100, 600x500, 640x200 pixels.";

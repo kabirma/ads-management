@@ -29,6 +29,7 @@ class AdsController extends Controller
         $this->view_page = "pages.ads.view";
         $this->store_page = "pages.ads.store";
         $this->redirect_page = "view.ads";
+        $this->redirect_store_page = "add.ads";
         $this->model = Ads::class;
         // $this->child_model = AdsImage::class;
     }
@@ -90,7 +91,10 @@ class AdsController extends Controller
             $tiktokController->campiagnCreation($request);
         }else if($request->social_media == 'snapchat'){
             $snapchatController = new SnapChatController();
-            $snapchatController->campiagnCreation($request);
+            $response = $snapchatController->campiagnCreation($request);
+            if($response !== null && array_key_exists('error',$response)){
+                return redirect()->route($this->redirect_store_page)->with("error", $response['error']);
+            }
         }
         return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
     }
@@ -133,11 +137,15 @@ class AdsController extends Controller
             $response = $tiktok->fetchAds($id);
             if(count($response)){
                 [$ad, $apiResponse] = $response;
-
-
-
             }
             return view('pages.ads.detail.tiktok',compact("title","apiResponse","ad"));
+        }else if($platform === 'snapchat'){
+            $snapchat = new SnapChatController();
+            $response = $snapchat->fetchAds($id);
+            if(count($response)){
+                [$ad, $apiResponse] = $response;
+            }
+            return view('pages.ads.detail.snapchat',compact("title","apiResponse","ad"));
         }
     }
 }

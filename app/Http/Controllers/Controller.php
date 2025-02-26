@@ -165,7 +165,8 @@ class Controller extends BaseController
     
     }
 
-    public function refreshSnapChatAccessToke($clientSecret,$clientId,$setting){
+    public function refreshSnapChatAccessToke($clientSecret, $clientId){
+        $setting = Company::find(1);
         $refreshToken = $setting->snapchat_refresh_toke;
         $expiry = new \DateTime($setting->snapchat_access_token_expiry);
         $currentTime = new \DateTime('now');
@@ -184,8 +185,23 @@ class Controller extends BaseController
                 $setting->snapchat_access_token = $data['access_token'];
                 $setting->snapchat_refresh_toke = $data['refresh_token'];
                 $setting->save();
+
+                return $setting;
             }
         }
 
+        return $setting;
+
+    }
+
+    function logResponse($data){
+        $log = new LogResponse();
+        $log->reference_id = $data['reference_id'];
+        $log->reference_table = $data['reference_table'];
+        $log->request = $data['request'];
+        $log->url = $data['url'];
+        $log->response = $data['response'];
+        $log->user_id = Auth::guard('web')->user()->id;
+        $log->save();
     }
 }

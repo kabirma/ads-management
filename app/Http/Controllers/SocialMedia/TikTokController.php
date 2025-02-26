@@ -222,7 +222,6 @@ class TikTokController extends Controller
             return redirect()->route("view.ads")->with("success", "Ads Created Successfully");
         }else{
             return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
-            dd($data);
         }
     }
 
