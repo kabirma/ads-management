@@ -229,7 +229,7 @@ class SnapChatController extends Controller
                     "auto_bid" => false,
                     "target_bid" => false,
                     "bid_strategy" => "LOWEST_COST_WITH_MAX_BID",
-                    "lifetime_budget_micro" => (int)$request->budget * 10000000000,
+                    "lifetime_budget_micro" => (int)$request->budget * 1000000,
                     "start_time" => $from,
                     "end_time" => $to,
                     "optimization_goal" => $optimizationGoal,
@@ -324,7 +324,7 @@ class SnapChatController extends Controller
             ->post($url, $payload);
 
         $response = $response->json();
-      
+        
         if($response['request_status']==='SUCCESS'){
             $adResponse = $response['ads'][0]['ad'];
             $data = [

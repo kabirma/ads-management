@@ -23,6 +23,14 @@ Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, '
 //     Route::get('/logout',  [App\Http\Controllers\HomeController::class, 'customer_logout'])->name('customer_logout');
 // });
 
+Route::get('/change-language/{lang}', function ($lang) {
+    if (in_array($lang, ['en', 'ar'])) {
+        Session::put('locale', $lang);
+        App::setLocale($lang);
+    }
+    return redirect()->back()->with('success', __('messages.language_changed'));
+})->name('change.language');
+
 
 Route::post('/login/submit',  [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
  
@@ -101,11 +109,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'ads'], function () {
         Route::controller(App\Http\Controllers\AdsController::class)->group(function () {
             Route::get('/', 'index')->name('view.ads');
-            Route::get('/add', 'add')->name('add.ads');
+            Route::get('/add/{ai}', 'add')->name('add.ads');
+            Route::get('/AI/add/', 'addAI')->name('addAI.ads');
             Route::get('/edit/{id}', 'edit')->name('edit.ads');
             Route::get('/detail/{id}/{platform}', 'detail')->name('detail.ads');
 
             Route::post('/save', 'save')->name('save.ads');
+            Route::post('/generate/ad', 'generateAd')->name('generateAd.ads');
             Route::get('/delete/{id}', 'delete')->name('delete.ads');
             Route::get('/delete/image/{id}', 'delete_image')->name('delete.ads.image');
             Route::get('/status/{id}', 'status')->name('status.ads');

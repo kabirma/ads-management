@@ -1,4 +1,11 @@
 <?php return array (
+  'barryvdh/laravel-translation-manager' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Barryvdh\\TranslationManager\\ManagerServiceProvider',
+    ),
+  ),
   'kitloong/laravel-migrations-generator' => 
   array (
     'providers' => 

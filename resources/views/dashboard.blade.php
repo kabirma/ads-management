@@ -27,7 +27,7 @@
                     <div class="card-header">
                         <div>
                             <h2 class="fw-bolder mb-0">{{ $spotlight_events }}</h2>
-                            <p class="card-text">Users</p>
+                            <p class="card-text">{{ __('messages.USERS') }}</p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">    
@@ -43,7 +43,7 @@
                     <div class="card-header">
                         <div>
                             <h2 class="fw-bolder mb-0">{{ $events }}</h2>
-                            <p class="card-text">Ads</p>
+                            <p class="card-text">{{ __('messages.Ads') }}</p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">
@@ -59,7 +59,7 @@
                     <div class="card-header">
                         <div>
                             <h2 class="fw-bolder mb-0">{{ $pages }}</h2>
-                            <p class="card-text">Pages</p>
+                            <p class="card-text">{{ __('messages.Pages') }}</p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">
@@ -83,18 +83,18 @@
     <section id="dashboard-analytics" style="margin-top:3%">
         <div class="row match-height">
             <div class="col-lg-12 col-sm-12 col-12 mb-2">
-                <h1 id="dashboardHeading">Welcome, {{Auth::user()->full_name}}</h1>
-                <p>Let's start this day with a burst of creativity <i class="fa fa-rocket text-primary"></i></p>
+                <h1 id="dashboardHeading">{{ __('messages.WELCOME') }}, {{Auth::user()->full_name}}</h1>
+                <p>{{ __('messages.LETS_START_THIS_DAY_WITH_A_BURST_OF_CREATIVITY') }} <i class="fa fa-rocket text-primary"></i></p>
             </div>
 
             <div class="col-lg-6 col-sm-6 col-12">
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h4 class="fw-bolder mb-0">Digital Ads</h4>
-                            <p class="card-text">Enhance your visibility by amplifying your Ads</p>
+                            <h4 class="fw-bolder mb-0">{{ __('messages.DIGITAL_ADS') }}</h4>
+                            <p class="card-text">{{ __('messages.ENHANCE_YOUR_VISIBILITY_BY_AMPLIFYING_YOUR_ADS') }}</p>
                             <br><br>
-                            <a href="#0" class="btn btn-dark">Start your Ads</a>
+                            <a href="{{route('addAI.ads')}}" class="btn btn-dark">{{ __('messages.START_YOUR_ADS') }}</a>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">    
@@ -109,8 +109,8 @@
                 <div class="card bg-light-primary ">
                     <div class="card-header">
                         <div>
-                            <h5 class="card-text">Your Balance</h5>
-                            <h1 class="fw-bolder mb-0">0.0 SAR</h1>
+                            <h5 class="card-text">{{ __('messages.START_YOUR_ADS') }} </h5>
+                            <h1 class="fw-bolder mb-0">0.0 {{ __('messages.SAR') }}</h1>
                             <br><br>
                         
                         </div>
@@ -121,14 +121,14 @@
                         </div>
                     </div>
                     <div class="card-body flex">
-                    <a href="#0" class="btn btn-light width50">Wallet</a>
-                    <a href="#0" class="btn btn-dark width50"><i class="fa fa-wallet"></i> Top-up credits</a>
+                    <a href="#0" class="btn btn-light width50">{{ __('messages.WALLET') }}</a>
+                    <a href="#0" class="btn btn-dark width50"><i class="fa fa-wallet"></i> {{ __('messages.TOP_UP_CREDITS') }}</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12 col-sm-12 col-12 mt-2">
-                <h2>Scheduled or active campaigns</h2>
-                <p>These Ads are on standby, anticipating their designated time to shine <i class="fa fa-clock text-primary"></i></p>
+                <h2>{{ __('messages.SCHEDULED_OR_ACTIVE_CAMPAIGNS') }}</h2>
+                <p>{{ __('messages.THESE_ADS_ARE_ON_STANDBY_ANTICIPATING_THEIR_DESIGNATED_TIME_TO_SHINE') }} <i class="fa fa-clock text-primary"></i></p>
             </div>
             <div class="col-lg-12 col-sm-12 col-12">
                 <div class="card">
@@ -138,10 +138,10 @@
                                 <table class="table">
                                     <thead>
                                         <tr style="">
-                                            <th>Platform</th>
-                                            <th>Schedule</th>
-                                            <th>Ad type</th>
-                                            <th>Budget (SAR)</th>
+                                            <th>{{ __('messages.PLATFORM') }}</th>
+                                            <th>{{ __('messages.SCHEDULE') }}</th>
+                                            <th>{{ __('messages.AD_TYPE') }}</th>
+                                            <th>{{ __('messages.BUDGET') }} ({{ __('messages.SAR') }})</th>
                                         </tr>
                                     </thead>
                                     <tbody>

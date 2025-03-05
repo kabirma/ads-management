@@ -10,7 +10,9 @@ use App\Models\Role;
 use App\Models\UserPackage;
 use App\Http\Controllers\SocialMedia\TikTokController;
 use App\Http\Controllers\SocialMedia\SnapChatController;
+use App\Http\Controllers\AIController;
 use Auth;
+use session;
 
 class AdsController extends Controller
 {
@@ -21,6 +23,8 @@ class AdsController extends Controller
     protected $redirect_page;
     protected $model_primary;
     protected $child_model;
+
+    protected const AI_SESSION_KEY = 'ai_session';
 
     public function __construct()
     {
@@ -41,25 +45,35 @@ class AdsController extends Controller
         return view($this->view_page, $data);
     }
 
-    public function add()
+    public function add($ai = 0)
+    {
+        $userPackage = UserPackage::where('user_id',Auth::guard('web')->user()->id)->where('expire_at','>=', date("Y-m-d"))->first();
+        if(!isset($userPackage)){
+            return view('auth.package',['title'=>'Subscribe to Packages']);
+        }
+        $data['title'] = $this->title;
+        $data['days'] = 0;
+        if(isset($_GET['ai']) && $_GET['ai'] == 1){
+            $aiSuggestion = session(self::AI_SESSION_KEY);
+            if($aiSuggestion !== null && $aiSuggestion !== ''){
+                $data = $aiSuggestion;
+            }
+        }else{
+            session([self::AI_SESSION_KEY=>'']);
+        }
+        
+        return view($this->store_page, $data);
+    }
+
+    public function addAI()
     {
         $userPackage = UserPackage::where('user_id',Auth::guard('web')->user()->id)->where('expire_at','>=', date("Y-m-d"))->first();
         if(!isset($userPackage)){
             return view('auth.package',['title'=>'Subscribe to Packages']);
         }
 
-        if(Auth::user()->tiktok_refresh_token !== null){
-            $this->refreshTikTokToken();
-        }
-
-        $data['title'] = $this->title;
-        $tags = [];
-        $company = Company::first();
-        $tags = explode(',',$company->tags);
-        $data['tags'] = $tags;
-        $series = explode(',',$company->series);
-        $data['series'] = $series;
-        return view($this->store_page, $data);
+        $data['title'] = "Create Ads Using AI";
+        return view("pages.ads.ai", $data);
     }
 
     public function edit($id)
@@ -147,5 +161,43 @@ class AdsController extends Controller
             }
             return view('pages.ads.detail.snapchat',compact("title","apiResponse","ad"));
         }
+    }
+
+    public function generateAd(Request $request){
+        $aiController = new AIController();
+        $response = $aiController->fetchContent($request);
+        if($response != ''){
+            $suggestion = explode("$==$",$response);
+            if(count($suggestion) !== 6){
+                return redirect()->back()->with("error", "Something went wrong. Please try again.");
+            }
+
+            $name = $suggestion[0];
+            $description = $suggestion[1];
+            $budget = (int)$suggestion[2];
+            $days = (int)$suggestion[3];
+            $gender = $suggestion[4];
+            $age = $suggestion[5];
+
+            $startDate = new \DateTime('tomorrow');
+            $endDate = new \DateTime('tomorrow');
+            if(is_int($days)){
+                $endDate = $endDate->modify("+$days Days");
+            }
+
+            $data['title'] = $this->title;
+            $data['name'] = $name;
+            $data['description'] = $description;
+            $data['budget'] = $budget;
+            $data['days'] = $days;
+            $data['gender'] = $gender;
+            $data['age'] = $age;
+            $data['social_media'] = $request->social_media;
+            $data['ai_sugguested'] = 1;
+            session([self::AI_SESSION_KEY=>$data]);
+            return redirect()->route('add.ads',['ai'=>1]);
+        }
+
+        return redirect()->back()->with("error", "Something went wrong. Please try again.");
     }
 }

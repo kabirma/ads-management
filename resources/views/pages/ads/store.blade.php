@@ -246,6 +246,14 @@
             padding:1% 15%;
         }
 
+        .ai-suggestion{
+            font-weight:500;
+            color: #938AF4;
+        }
+        .form-group label{
+            display: flex;
+            justify-content: space-between;  
+        }
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
@@ -277,11 +285,12 @@
                                          <div class="step-heading">
                                             <h2>Choose Your Media</h2>
                                          </div>
+                                        
                                         <ul id="imageRadio">
                                             <li><input type="radio" name="social_media" disabled value="facebook" id="facebook" />
                                                 <label for="facebook"> <i class="fab fa-facebook"></i> </label>
                                             </li>
-                                            <li><input type="radio" name="social_media"  checked value="tiktok" id="tiktok" />
+                                            <li><input type="radio" name="social_media"  @if(isset($social_media)) @if($social_media == 'tiktok') checked @endif @else checked @endif value="tiktok" id="tiktok" />
                                                 <label for="tiktok"><i class="fab fa-tiktok"></i></label>
                                             </li>
                                             <li><input type="radio" name="social_media" disabled value="twitter" id="twitter" />
@@ -290,7 +299,7 @@
                                             <li><input type="radio" name="social_media" disabled value="google" id="google" />
                                                 <label for="google"><i class="fab fa-google"></i></label>
                                             </li>
-                                            <li><input type="radio" name="social_media" value="snapchat" id="snapchat" />
+                                            <li><input type="radio" name="social_media" @if(isset($social_media)) @if($social_media == 'snapchat') checked @endif @else @endif value="snapchat" id="snapchat" />
                                                 <label for="snapchat"><i class="fab fa-snapchat"></i></label>
                                             </li>
                                            
@@ -367,12 +376,12 @@
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="title">Title</label>
-                                                <input id="title" name="title" type="text" required class="form-control">
+                                                <label for="title">Title @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <input id="title" name="title" type="text" @if(isset($name)) value="{{$name}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="description">Description</label>
-                                                <textarea name="description" class="form-control" cols="30" rows="10"></textarea>
+                                                <label for="description">Description @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <textarea name="description" class="form-control" cols="30" rows="10"> @if(isset($name)){{$description}}@endif</textarea>
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">Call to Action</label>
@@ -424,12 +433,12 @@
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="dates">Schedule Dates</label>
+                                                <label for="dates">Schedule Dates @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
                                                 <input id="dates" name="dates" type="text" required class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="budget">Budget</label>
-                                                <input id="budget" name="budget" type="number" required class="form-control">
+                                                <label for="budget">Budget @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <input id="budget" name="budget"  @if(isset($budget)) value="{{$budget}}" @endif type="number" required class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -441,20 +450,20 @@
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="gender">Gender</label>
+                                                <label for="gender">Gender  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
                                                 <select name="gender" id="gender" class="form-control">
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Both">Both</option>
+                                                    <option @if(isset($gender) && strtolower($gender) == 'male') selected @else @endif value="Male">Male</option>
+                                                    <option @if(isset($gender) && strtolower($gender) == 'female') selected @else @endif value="Female">Female</option>
+                                                    <option @if(isset($gender) && strtolower($gender) == 'both') selected @else @endif value="Both">Both</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="age_group">Age Group</label>
+                                                <label for="age_group">Age Group  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
                                                 <select name="age_group" id="age_group" class="form-control">
-                                                    <option value="12">Max Age 12</option>
-                                                    <option value="18">Max Age 18</option>
-                                                    <option value="30">Max Age 30</option>
-                                                    <option value="0">Any Age</option>
+                                                    <option @if(isset($age) && strtolower($age) == '12') selected @else @endif value="12">Max Age 12</option>
+                                                    <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">Max Age 18</option>
+                                                    <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">Max Age 30</option>
+                                                    <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">Any Age</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
@@ -509,9 +518,11 @@
     <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script>
         $('input[name="dates"]').daterangepicker({
-            autoApply: true, // Auto-selects dates without needing the Apply button
-            minDate: moment().add(1, 'days'), // Start date must be from tomorrow
-            locale: { format: 'YYYY-MM-DD' }, // Format: YYYY-MM-DD
+            autoApply: true, 
+            startDate: moment().add(1, 'days'),
+            endDate: moment().add({{$days+1}}, 'days'),
+            minDate: moment().add(1, 'days'), 
+            locale: { format: 'YYYY-MM-DD' },
         });
         $('.steps').hide();
         $('#step1').show();

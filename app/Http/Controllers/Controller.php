@@ -14,6 +14,7 @@ use App\Models\AdGroup;
 use App\Models\Ads;
 use App\Models\Media;
 use App\Models\Company;
+use App\Models\LogResponse;
 
 
 class Controller extends BaseController
