@@ -35,12 +35,12 @@
                                 <table id="dataTable" class="table zero-configuration ">
                                     <thead>
                                         <tr style="">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Promote Ads On</th>
-                                            <th>is Popular</th>
-                                            <th>Action</th>
+                                            <th>{{__('messages.ID')}}</th>
+                                            <th>{{__('messages.Name')}}</th>
+                                            <th>{{__('messages.Price')}}</th>
+                                            <th>{{__('messages.PromoteAdsOn')}}</th>
+                                            <th>{{__('messages.isPopular')}}</th>
+                                            <th>{{__('messages.Action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

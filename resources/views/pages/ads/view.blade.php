@@ -22,7 +22,7 @@
                             <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
                                     List</span></li>
                         </ol>
-                        <a href="{{ route('add.ads') }}" class="btn btn-sm btn-primary waves-effect">
+                        <a href="{{ route('add.ads',0) }}" class="btn btn-sm btn-primary waves-effect">
                             <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
                         </a>
                     </div>
@@ -32,14 +32,14 @@
                                 <table id="dataTable" class="table zero-configuration ">
                                     <thead>
                                         <tr style="">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Platform</th>
-                                            <th>Dates</th>
-                                            <th>CTA Text</th>
-                                            <th>CTA Url</th>
-                                            <th>Media</th>
-                                            <th>Action</th>
+                                            <th>{{ __("messages.ID")}}</th>
+                                            <th>{{ __("messages.Name")}}</th>
+                                            <th>{{__("messages.Platform")}}</th>
+                                            <th>{{__("messages.Dates")}}</th>
+                                            <th>{{__("messages.CTAText")}}</th>
+                                            <th>{{__("messages.CTAUrl")}}</th>
+                                            <th>{{__("messages.Media")}}</th>
+                                            <th>{{ __("messages.Action")}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

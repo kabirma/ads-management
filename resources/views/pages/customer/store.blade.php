@@ -15,7 +15,7 @@
                         </ol>
                         @if(Auth::user()->role_id === 1)
                         <a href="{{ route('view.customer') }}" class="btn btn-sm btn-primary waves-effect addnew">
-                            <i class="fa fa-list"></i> <span>View {{ $title }}</span>
+                            <i class="fa fa-list"></i> <span>{{__("messages.VIEW")}} {{ $title }}</span>
                         </a>
                         @endif
                         
@@ -32,36 +32,36 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
                                 <div class="form-group col-md-6">
-                                    <label for="full_name">Name</label>
+                                    <label for="full_name">{{__('messages.Name')}}</label>
                                     <input id="full_name" name="full_name" value="{{ isset($record) ? $record->full_name : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="email">Email</label>
+                                    <label for="email">{{__('messages.Email')}}</label>
                                     <input id="email" name="email" value="{{ isset($record) ? $record->email : '' }}"
                                         type="email" required class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="phone">Phone</label>
+                                    <label for="phone">{{__('messages.Phone')}}</label>
                                     <input id="phone" name="phone" value="{{ isset($record) ? $record->phone : '' }}"
                                         type="tel" required class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="mobile">Mobile</label>
+                                    <label for="mobile">{{__('messages.Mobile')}}</label>
                                     <input id="mobile" name="mobile" value="{{ isset($record) ? $record->mobile : '' }}"
                                         type="tel" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="name">Username</label>
+                                    <label for="name">{{__('messages.Username')}}</label>
                                     <input id="name" name="name"
                                         value="{{ isset($record) ? $record->name : '' }}" type="text" required
                                         class="form-control">
                                 </div>
                                 @if (!isset($record->password))
                                     <div class="form-group col-md-6">
-                                        <label for="password">Password</label>
+                                        <label for="password">{{__('messages.Password')}}</label>
                                         <input id="password" name="password"
                                             value="{{ isset($record) ? $record->password : '' }}" type="text" required
                                             class="form-control">
@@ -69,7 +69,7 @@
                                 @endif
                                 <div class="form-group col-md-12">
                                     <hr>
-                                    <button class="btn btn-primary"><i class="fa fa-check"></i> SAVE</button>
+                                    <button class="btn btn-primary"><i class="fa fa-check"></i> {{__('messages.SAVE')}}</button>
                                 </div>
                             </form>
                         </div>

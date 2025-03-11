@@ -43,7 +43,7 @@
                     <div class="card-header">
                         <div>
                             <h2 class="fw-bolder mb-0">{{ $events }}</h2>
-                            <p class="card-text">{{ __('messages.Ads') }}</p>
+                            <p class="card-text">{{ __('messages.ADS') }}</p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">
@@ -59,7 +59,7 @@
                     <div class="card-header">
                         <div>
                             <h2 class="fw-bolder mb-0">{{ $pages }}</h2>
-                            <p class="card-text">{{ __('messages.Pages') }}</p>
+                            <p class="card-text">{{ __('messages.PAGES') }}</p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">

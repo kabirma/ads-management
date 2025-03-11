@@ -35,9 +35,9 @@
                                 <table id="dataTable" class="table zero-configuration ">
                                     <thead>
                                         <tr style="">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Action</th>
+                                            <th>{{__("messages.ID")}}</th>
+                                            <th>{{__("messages.Name")}}</th>
+                                            <th>{{__("messages.Action")}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

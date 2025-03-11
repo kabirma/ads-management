@@ -33,88 +33,88 @@
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
                                 <div class="col-md-12">
-                                    <h4>Basic Info</h4>
+                                    <h4>{{__('messages.BASIC')}}</h4>
                                     <hr>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="name">Name</label>
+                                    <label for="name">{{__("messages.Name")}}</label>
                                     <input id="name" name="name" value="{{ isset($record) ? $record->name : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                           <div class="form-group col-md-12">
-                                <label for="phone">Phone</label>
+                                <label for="phone">{{__("messages.Phone")}}</label>
                                   <input id="phone" name="phone" value="{{ isset($record) ? $record->phone : '' }}"
                                        type="text"  class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="email">Email</label>
+                                    <label for="email">{{__("messages.Email")}}</label>
                                     <input id="email" name="email" value="{{ isset($record) ? $record->email : '' }}"
                                         type="email" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="address">Address</label>
+                                    <label for="address">{{__('messages.Address')}}</label>
                                     <input id="address" name="address" value="{{ isset($record) ? $record->address : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="short_description">Short Description</label>
+                                    <label for="short_description">{{__('messages.ShortDescription')}}</label>
                                     <input id="short_description" name="short_description" value="{{ isset($record) ? $record->short_description : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="col-md-12">
-                                    <h4>Social Media Info</h4>
+                                    <h4>{{__('messages.SocialMediaInfo')}}</h4>
                                     <hr>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="facebook">Facebook</label>
+                                    <label for="facebook">{{__('messages.Facebook')}}</label>
                                     <input id="facebook" name="facebook" value="{{ isset($record) ? $record->facebook : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="twitter">Twitter</label>
+                                    <label for="twitter">{{__('messages.Twitter')}}</label>
                                     <input id="twitter" name="twitter" value="{{ isset($record) ? $record->twitter : '' }}"
                                         type="text" required class="form-control">
                                 </div>
                                 
                                 <div class="form-group col-md-12">
-                                    <label for="instagram">Instagram</label>
+                                    <label for="instagram">{{__('messages.Instagram')}}</label>
                                     <input id="instagram" name="instagram" value="{{ isset($record) ? $record->instagram : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="snapchat">Snapchat</label>
+                                    <label for="snapchat">{{__('messages.Snapchat')}}</label>
                                     <input id="snapchat" name="snapchat" value="{{ isset($record) ? $record->snapchat : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
 
                                 <div class="col-md-12">
-                                    <h4>About Section</h4>
+                                    <h4>{{__('messages.AboutSection')}}</h4>
                                     <hr>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="about_heading">About Heading</label>
+                                    <label for="about_heading">{{__('messages.AboutHeading')}}</label>
                                     <input id="about_heading" name="about_heading" value="{{ isset($record) ? $record->about_heading : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="about_content">About Description</label>
+                                    <label for="about_content">{{__('messages.AboutDescription')}}</label>
                                     <textarea name="about_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->about_content : '' }}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="about_image">About Image</label>
+                                    <label for="about_image">{{__('messages.AboutImage')}}</label>
                                     <input id="about_image" name="about_image" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -124,23 +124,23 @@
 
 
                                 <div class="col-md-12">
-                                    <h4>Vision Section</h4>
+                                    <h4>{{__('messages.VisionSection')}}</h4>
                                     <hr>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="vision_heading">Vision Heading</label>
+                                    <label for="vision_heading">{{__('messages.VisionHeading')}}</label>
                                     <input id="vision_heading" name="vision_heading" value="{{ isset($record) ? $record->vision_heading	 : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="vision_content">Vision Description</label>
+                                    <label for="vision_content">{{__('messages.VisionDescription')}}</label>
                                     <textarea name="vision_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->vision_content : '' }}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="vision_image">Vision Image</label>
+                                    <label for="vision_image">{{__('messages.VisionImage')}}</label>
                                     <input id="vision_image" name="vision_image" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -151,23 +151,23 @@
                                 
 
                                 <div class="col-md-12">
-                                    <h4>Mission Section</h4>
+                                    <h4>{{__('messages.MissionSection')}}</h4>
                                     <hr>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="mission_heading">Mission Heading</label>
+                                    <label for="mission_heading">{{__('messages.MissionHeading')}}</label>
                                     <input id="mission_heading" name="mission_heading" value="{{ isset($record) ? $record->mission_heading	 : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="mission_content">Mission Description</label>
+                                    <label for="mission_content">{{__('messages.MissionDescription')}}</label>
                                     <textarea name="mission_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->mission_content : '' }}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="mission_image">Mission Image</label>
+                                    <label for="mission_image">{{__('messages.MissionImage')}}</label>
                                     <input id="mission_image" name="mission_image" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -179,23 +179,23 @@
 
 
                                 <div class="col-md-12">
-                                    <h4>Our Team Section</h4>
+                                    <h4>{{__('messages.OurTeamSection')}}</h4>
                                     <hr>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="our_team_heading">Our Team Heading</label>
+                                    <label for="our_team_heading">{{__('messages.OurTeamHeading')}}</label>
                                     <input id="our_team_heading" name="our_team_heading" value="{{ isset($record) ? $record->our_team_heading	 : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="our_team_content">Our Team Description</label>
+                                    <label for="our_team_content">{{__('messages.OurTeamDescription')}}</label>
                                     <textarea name="our_team_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->our_team_content : '' }}</textarea>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="our_team_image">Our Team Image</label>
+                                    <label for="our_team_image">{{__('messages.OurTeamImage')}}</label>
                                     <input id="our_team_image" name="our_team_image" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -204,30 +204,30 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <h4>Join Us Section</h4>
+                                    <h4>{{__('messages.JoinUsSection')}}</h4>
                                     <hr>
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="join_us_heading">Join Us Heading</label>
+                                    <label for="join_us_heading">{{__('messages.JoinUsHeading')}}</label>
                                     <input id="join_us_heading" name="join_us_heading" value="{{ isset($record) ? $record->join_us_heading	 : '' }}"
                                         type="text" required class="form-control">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="join_us_content">Join Us Description</label>
+                                    <label for="join_us_content">{{__('messages.JoinUsDescription')}}</label>
                                     <textarea name="join_us_content" class="form-control ckeditor" cols="30" rows="10">{{ isset($record) ? $record->join_us_content : '' }}</textarea>
                                 </div>
 
                                 
 
                                 <div class="col-md-12">
-                                    <h4>Branding Section</h4>
+                                    <h4>{{__('messages.BrandingSection')}}</h4>
                                     <hr>
                                 </div>
                                
                                 <div class="form-group col-md-12">
-                                    <label for="cover">Home Page Cover</label>
+                                    <label for="cover">{{__('messages.HomePageCover')}}</label>
                                     <input id="cover" name="cover" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -236,7 +236,7 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="favicon">Favicon</label>
+                                    <label for="favicon">{{__('messages.Favicon')}}</label>
                                     <input id="favicon" name="favicon" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -245,7 +245,7 @@
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="logo">Logo</label>
+                                    <label for="logo">{{__('messages.Logo')}}</label>
                                     <input id="logo" name="logo" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -255,7 +255,7 @@
 
                                 <div class="form-group col-md-12">
                                     <hr>
-                                    <button class="btn btn-primary"><i class="fa fa-check"></i> SAVE</button>
+                                    <button class="btn btn-primary"><i class="fa fa-check"></i> {{__('messages.SAVE')}}</button>
                                 </div>
                             </form>
                         </div>

@@ -283,7 +283,7 @@
                                 <div class="row">
                                     <div class="col-md-12 steps" id="step1">
                                          <div class="step-heading">
-                                            <h2>Choose Your Media</h2>
+                                            <h2>{{__("messages.ChooseYourMedia")}}</h2>
                                          </div>
                                         
                                         <ul id="imageRadio">
@@ -311,59 +311,59 @@
                                             <div class="note-header">
                                                 <div class="note-heading">
                                                     <i class="fa fa-bell"></i>
-                                                    <h2>IMPORTANT NOTE</h2>
+                                                    <h2>{{__("messages.IMPORTANTNOTE")}}</h2>
                                                 </div>
-                                                <p><strong>Content Not Accepted for Ads:</strong></p>
+                                                <p><strong>{{__("messages.Content")}}</strong></p>
                                             </div>
                                             <div class="note-content">
                                                 <ol>
-                                                    <li>Promotions of IPTV / Unofficial or Counterfeit Brand</li>
-                                                    <li>Offensive / Adult or Pornographic Material</li>
-                                                    <li>Illegal Activities / Drugs</li>
-                                                    <li>Medicines, fake followers</li>
+                                                    <li>{{__("messages.Promotion")}}</li>
+                                                    <li>{{__("messages.Offensive")}}</li>
+                                                    <li>{{__("messages.IllegalActivities")}}</li>
+                                                    <li>{{__("messages.Medicines")}}</li>
                                                 </ol>
                                             </div>
                                             <p class="note-warning">
-                                                    Using any of this ad content may result in your ad being disapproved or your ad account being suspended.
+                                                    {{__("messages.Warning")}}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12 steps" id="step3">
                                         <div class="step-heading">
-                                            <h2>Choose Your Goal</h2>
+                                            <h2>{{__("messages.Goal")}}</h2>
                                          </div>
                                         <ul id="imageRadio">
                                             <li class='tiktok_goal'><input type="radio" name="goal" checked value="TRAFFIC" id="tk1" />
                                                 <label for="tk1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
-                                                    <h4>Website Traffic</h4>
-                                                    <p>Get more website visits</p>
+                                                    <h4>{{ __("messages.WebsiteTraffic") }}</h4>
+                                                    <p>{{__("messages.GetMoreWebsiteVisits")}}</p>
                                                 </label>
                                             </li>
                                             <li class='tiktok_goal'><input type="radio" name="goal" value="TRAFFIC" id="tk2" />
                                                 <label for="tk2"> <img src="{{asset('front/images/video-chat.png')}}" alt="">
-                                                    <h4>Reach</h4>
-                                                    <p>Increase the overall reach</p>
+                                                    <h4>{{__("messages.Reach")}}</h4>
+                                                    <p>{{__("messages.IncreaseTheOverallReach")}}</p>
                                                 </label>
                                             </li>
 
                                             <li class='snapchat_goal'><input type="radio" name="goal" checked value="WEB_CONVERSION" id="sc1" />
                                                 <label for="sc1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
-                                                    <h4>Website Traffic</h4>
-                                                    <p>Get more website visits</p>
+                                                    <h4>{{ __("messages.WebsiteTraffic") }}</h4>
+                                                    <p>{{ __("messages.GetMoreWebsiteVisits")}}</p>
                                                 </label>
                                             </li>
                                             <li class='snapchat_goal'><input type="radio" name="goal" value="ENGAGEMENT" id="sc2" />
                                                 <label for="sc2"> <img src="{{asset('front/images/video-chat.png')}}" alt="">
-                                                    <h4>Reach</h4>
-                                                    <p>Increase the overall reach</p>
+                                                    <h4>{{ __("messages.Reach")}}</h4>
+                                                    <p>{{ __("messages.IncreaseTheOverallReach")}}</p>
                                                 </label>
                                             </li>
 
                                             <li class='snapchat_goal'><input type="radio" name="goal" value="BRAND_AWARENESS " id="sc3" />
                                                 <label for="sc3"> <img src="{{asset('front/images/web.png')}}" alt="">
-                                                    <h4>Brand Promotion</h4>
-                                                    <p>Increase brand awareness</p>
+                                                    <h4>{{__("messages.BrandPromotion")}}</h4>
+                                                    <p>{{__("messages.IncreaseBrandAwareness")}}</p>
                                                 </label>
                                             </li>
                                            
@@ -372,30 +372,32 @@
 
                                     <div class="col-md-12 steps" id="step4">
                                         <div class="step-heading">
-                                            <h2>Choose Your Content</h2>
+                                            <h2>{{__("messages.ChooseYourContent")}}</h2>
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="title">Title @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <label for="title">{{__("messages.Title")}} @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                    {{__("messages.AISuggested")}} )</small> @endif</label>
                                                 <input id="title" name="title" type="text" @if(isset($name)) value="{{$name}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="description">Description @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <label for="description">{{__("messages.Description")}} @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                    {{__("messages.AISuggested")}} )</small> @endif</label>
                                                 <textarea name="description" class="form-control" cols="30" rows="10"> @if(isset($name)){{$description}}@endif</textarea>
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
-                                                <label for="call_to_action">Call to Action</label>
+                                                <label for="call_to_action">{{__("messages.CallToAction")}}</label>
                                                 <select name="call_to_action" id="call_to_action" class="form-control">
-                                                    <option class="tiktok" selected value="BOOK_NOW">Book Now</option>
-                                                    <option class="tiktok" value="CONTACT_US">Contact Us</option>
-                                                    <option class="tiktok" value="APPLY_NOW">Apply Now</option>
-                                                    <option class="tiktok" value="CALL_NOW">Call Now</option>
-                                                    <option class="tiktok" value="LEARN_MORE">Learn More</option>
-                                                    <option class="tiktok" value="READ_MORE">Read More</option>
+                                                    <option class="tiktok" selected value="BOOK_NOW">{{__("messages.BookNow")}}</option>
+                                                    <option class="tiktok" value="CONTACT_US">{{__("messages.ContactUs")}}</option>
+                                                    <option class="tiktok" value="APPLY_NOW">{{__("messages.ApplyNow")}}</option>
+                                                    <option class="tiktok" value="CALL_NOW">{{__("messages.CallNow")}}</option>
+                                                    <option class="tiktok" value="LEARN_MORE">{{__("messages.LearnMore")}}</option>
+                                                    <option class="tiktok" value="READ_MORE">{{__("messages.ReadMore")}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6" id="websiteUrlArea">
-                                                <label for="website_url">Website Url</label>
+                                                <label for="website_url">{{__("messages.WebsiteUrl")}}</label>
                                                 <input id="website_url" name="website_url" type="text" required class="form-control">
                                             </div>
                                         </div>
@@ -404,85 +406,99 @@
 
                                     <div class="col-md-12 steps" id="step5">
                                         <div class="step-heading">
-                                            <h2>Upload Media</h2>
-                                         </div>
+                                            <h2>{{__("messages.UploadMedia")}}</h2>
+                                        </div>
                                         <div class="titleRow">
                                             <div class="form-group col-md-12">
-                                                <label for="website_url">Choose Media Type</label>
+                                                <label for="website_url">{{__("messages.ChooseMediaType")}}</label>
                                                 <select name="media_type" id="media_type" class="form-control">
-                                                    <option selected value="1">Image</option>
-                                                    <option value="2">Video</option>
+                                                    <option selected value="1">{{__("messages.Image")}}</option>
+                                                    <option value="2">{{__("messages.Video")}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12" id="media_image">
-                                                <label for="image">Image</label>
-                                                <input id="image" name="image" type="file" accept="image/*"  class="form-control">
+                                                <label for="image">{{__("messages.Image")}}</label>
+                                                <input id="image" name="image" type="file" accept="image/*" class="form-control">
                                                 <small id="error-message" style="color: red; display: none;"></small>
                                             </div>
                                             <div class="form-group col-md-12" id="media_video">
-                                                <label for="video">Video</label>
-                                                <input id="video" name="video" type="file"  class="form-control">
+                                                <label for="video">{{__("messages.Video")}}</label>
+                                                <input id="video" name="video" type="file" class="form-control">
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div class="col-md-12 steps" id="step6">
                                         <div class="step-heading">
-                                            <h2>Choose Duration & Budget</h2>
-                                         </div>
+                                            <h2>{{__("messages.ChooseDurationBudget")}}</h2>
+                                        </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="dates">Schedule Dates @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <label for="dates">
+                                                    {{__("messages.ScheduleDates")}}
+                                                    @if(isset($ai_sugguested))
+                                                        <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
+                                                    @endif
+                                                </label>
                                                 <input id="dates" name="dates" type="text" required class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="budget">Budget @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
-                                                <input id="budget" name="budget"  @if(isset($budget)) value="{{$budget}}" @endif type="number" required class="form-control">
+                                                <label for="budget">
+                                                    {{__("messages.Budget")}}
+                                                    @if(isset($ai_sugguested))
+                                                        <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
+                                                    @endif
+                                                </label>
+                                                <input id="budget" name="budget" @if(isset($budget)) value="{{$budget}}" @endif type="number" required class="form-control">
                                             </div>
                                         </div>
                                     </div>
-
                                     
                                     <div class="col-md-12 steps" id="step7">
                                         <div class="step-heading">
-                                            <h2>Choose Demographic & Location</h2>
+                                            <h2>{{__("messages.ChooseDemographic&Location")}}</h2>
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="gender">Gender  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <label for="gender">{{__("messages.Gender")}}  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
                                                 <select name="gender" id="gender" class="form-control">
-                                                    <option @if(isset($gender) && strtolower($gender) == 'male') selected @else @endif value="Male">Male</option>
-                                                    <option @if(isset($gender) && strtolower($gender) == 'female') selected @else @endif value="Female">Female</option>
-                                                    <option @if(isset($gender) && strtolower($gender) == 'both') selected @else @endif value="Both">Both</option>
+                                                    <option @if(isset($gender) && strtolower($gender) == 'male') selected @else @endif value="Male">{{__("messages.Male")}}</option>
+                                                    <option @if(isset($gender) && strtolower($gender) == 'female') selected @else @endif value="Female">{{__("messages.Female")}}</option>
+                                                    <option @if(isset($gender) && strtolower($gender) == 'both') selected @else @endif value="Both">{{__("messages.Both")}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="age_group">Age Group  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> AI Suggested)</small> @endif</label>
+                                                <label for="age_group">{{__("messages.AgeGroup")}}  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
+{{--                                                <select name="age_group" id="age_group" class="form-control">--}}
+{{--                                                    <option @if(isset($age) && strtolower($age) == '12') selected @else @endif value="12">Max Age 12</option>--}}
+{{--                                                    <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">Max Age 18</option>--}}
+{{--                                                    <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">Max Age 30</option>--}}
+{{--                                                    <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">Any Age</option>--}}
+{{--                                                </select>--}}
                                                 <select name="age_group" id="age_group" class="form-control">
-                                                    <option @if(isset($age) && strtolower($age) == '12') selected @else @endif value="12">Max Age 12</option>
-                                                    <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">Max Age 18</option>
-                                                    <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">Max Age 30</option>
-                                                    <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">Any Age</option>
+                                                    <option @if(isset($age) && strtolower($age) == '12') selected @else @endif value="12">{{__("messages.MaxAge12")}}</option>
+                                                    <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">{{__("messages.MaxAge18")}}</option>
+                                                    <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">{{__("messages.MaxAge30")}}</option>
+                                                    <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">{{__("messages.AnyAge")}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="location">Locations</label>
+                                                <label for="location">{{__("messages.Locations")}}</label>
                                                 <select name="location[]" id="location" class="form-control select2" multiple>
-                                                    <option value="">Select a Country</option>
-                                                    <option value="SA">Saudi Arabia</option>
-                                                    <option value="AE">United Arab Emirates</option>
-                                                    <option value="QA">Qatar</option>
-                                                    <option value="BH">Bahrain</option>
-                                                    <option value="KW">Kuwait</option>
-                                                    <option value="OM">Oman</option>
-                                                    <option value="YE">Yemen</option>
-                                                    <option value="IQ">Iraq</option>
-                                                    <option value="SY">Syria</option>
-                                                    <option value="LB">Lebanon</option>
-                                                    <option value="JO">Jordan</option>
-                                                    <option value="PS">Palestine</option>
-                                                    <option value="EG">Egypt</option>
+                                                    <option value="">{{__("messages.SelectCountry")}}</option>
+                                                    <option value="SA">{{__("messages.SaudiArabia")}}</option>
+                                                    <option value="AE">{{__("messages.UnitedArabEmirates")}}</option>
+                                                    <option value="QA">{{__("messages.Qatar")}}</option>
+                                                    <option value="BH">{{__("messages.Bahrain")}}</option>
+                                                    <option value="KW">{{__("messages.Kuwait")}}</option>
+                                                    <option value="OM">{{__("messages.Oman")}}</option>
+                                                    <option value="YE">{{__("messages.Yemen")}}</option>
+                                                    <option value="IQ">{{__("messages.Iraq")}}</option>
+                                                    <option value="SY">{{__("messages.Syria")}}</option>
+                                                    <option value="LB">{{__("messages.Lebanon")}}</option>
+                                                    <option value="JO">{{__("messages.Jordan")}}</option>
+                                                    <option value="PS">{{__("messages.Palestine")}}</option>
+                                                    <option value="EG">{{__("messages.Egypt")}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -492,9 +508,11 @@
 
                                 <div class="form-group col-md-12 text-center">
                                     <hr>
-                                    <button type="button" class="btn btn-secondary prev"><i class="fa fa-arrow-left"></i> Back</button>
-                                    <button type="button" class="btn btn-dark next" id="nextButton"><i class="fa fa-arrow-right"></i> Next</button>
-                                    <button class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> Create Ad</button>
+                                    <button type="button" class="btn btn-secondary prev"><i class="fa fa-arrow-left"></i>
+                                        {{__("messages.Back")}}</button>
+                                    <button type="button" class="btn btn-dark next" id="nextButton"><i class="fa fa-arrow-right"></i>
+                                        {{__("messages.Next")}}</button>
+                                    <button class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> {{__("messages.CreateAd")}}</button>
                                 </div>
                             </form>
                         </div>

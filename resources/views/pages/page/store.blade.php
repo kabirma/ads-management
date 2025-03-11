@@ -24,22 +24,22 @@
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
                                 <div class="form-group col-md-12">
-                                    <label for="title">Title</label>
+                                    <label for="title">{{__("messages.Title")}}</label>
                                     <input id="title" name="title" value="{{ isset($record) ? $record->title : '' }}"
                                         type="text" required class="form-control">
                                 </div>
                                 <div class="form-group col-md-6" style="display:none">
-                                    <label for="category">Category</label>
+                                    <label for="category">{{__("messages.Category")}}</label>
                                     <input id="category" name="category"
                                         value="{{ isset($record) ? $record->category : '' }}" type="text" 
                                         class="form-control">
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="category">Description</label>
+                                    <label for="category">{{__("messages.Description")}}</label>
                                     <textarea name="description" id="ckeditor" class="form-control" cols="30" rows="10">{{ isset($record) ? $record->description : '' }}</textarea>
                                 </div>
                                 <div class="form-group col-md-12" style="display:none">
-                                    <label for="category">Image</label>
+                                    <label for="category">{{__("messages.Image")}}</label>
                                     <input id="image" name="image" type="file" class="form-control">
                                     @if(isset($record))
                                     <br>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <hr>
-                                    <button class="btn btn-primary"><i class="fa fa-check"></i> SAVE</button>
+                                    <button class="btn btn-primary"><i class="fa fa-check"></i> {{__("messages.SAVE")}}</button>
                                 </div>
                             </form>
                         </div>

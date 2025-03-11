@@ -113,32 +113,33 @@
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
                                 <div class="form-group col-md-6">
-                                    <label for="name">Name</label>
+                                    <label for="name">{{ __('messages.Name')}}</label>
                                     <input id="name" name="name" value="{{ isset($record) ? $record->name : '' }}"
                                         type="text" required class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="price">Price</label>
+                                    <label for="price">{{ __('messages.Price') }}</label>
                                     <input id="price" name="price" value="{{ isset($record) ? $record->price : '' }}"
                                         type="number" required class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="time">Social Media</label>
+                                    <label for="time">{{ __('messages.SocialMedia')}}</label>
                                     <select name="social_media[]" id="" class="form-control select2" multiple>
-                                        <option <?= (isset($record) && in_array('facebook',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="facebook">Facebook</option>
-                                        <option <?= (isset($record) && in_array('tiktok',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="tiktok">TikTok</option>
-                                        <option <?= (isset($record) && in_array('youtube',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="youtube">Youtube</option>
-                                        <option <?= (isset($record) && in_array('google',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="google">Google</option>
+                                        <option <?= (isset($record) && in_array('facebook',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="facebook">
+                                            {{__('messages.Facebook')}}</option>
+                                        <option <?= (isset($record) && in_array('tiktok',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="tiktok">{{('messages.TikTok') }}</option>
+                                        <option <?= (isset($record) && in_array('youtube',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="youtube">{{ ('messages.Youtube') }}</option>
+                                        <option <?= (isset($record) && in_array('google',explode("?=", $record->social_media))) ? 'selected' : '' ?> value="google">{{('messages.Google') }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="is_popular">Is Popular?</label>
+                                    <label for="is_popular">{{__('messages.isPopular')}}?</label>
                                     <input id="is_popular" name="is_popular" {{ (isset($record) && isset($record->is_popular)) ? 'checked' : '' }}
                                         type="checkbox">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label for="features">Features</label>
+                                    <label for="features">{{__("messages.Features")}}</label>
                                     <div id="featuresArea">
                                         @if(!isset($record))
                                         <div class="row">
@@ -146,7 +147,7 @@
                                                 <input type="text" class="form-control" name="features[]" placceholder="Features">
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="#0" class="btn btn-secondary" id="addFeatures"><i class="fa fa-plus"></i></a>
+                                                <a href="#" class="btn btn-secondary" id="addFeatures"><i class="fa fa-plus"></i></a>
                                             </div>
                                         </div>
                                         @else
@@ -157,11 +158,11 @@
                                                     </div>
                                                     @if($key > 0)
                                                         <div class="col-md-2">
-                                                            <a href="#0" class="btn btn-danger removeFeature"><i class="fa fa-times"></i></a>
+                                                            <a href="#" class="btn btn-danger removeFeature"><i class="fa fa-times"></i></a>
                                                         </div>
                                                     @else
                                                         <div class="col-md-2">
-                                                            <a href="#0" class="btn btn-secondary" id="addFeatures"><i class="fa fa-plus"></i></a>
+                                                            <a href="#" class="btn btn-secondary" id="addFeatures"><i class="fa fa-plus"></i></a>
                                                         </div>
                                                     @endif
                                                 </div>
@@ -176,7 +177,7 @@
 
                                 <div class="form-group col-md-12">
                                     <hr>
-                                    <button class="btn btn-primary"><i class="fa fa-check"></i> SAVE</button>
+                                    <button class="btn btn-primary"><i class="fa fa-check"></i> {{__('messages.SAVE')}}</button>
                                 </div>
                             </form>
                         </div>

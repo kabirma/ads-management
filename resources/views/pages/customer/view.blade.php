@@ -25,7 +25,7 @@
                         </ol>
 
                         <a href="{{ route('add.customer') }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
+                            <i class="fa fa-plus"></i> <span>{{ __('messages.Add_costumer') }} {{ $title }}</span>
                         </a>
 
                     </div>
@@ -35,13 +35,13 @@
                                 <table id="dataTable" class="table zero-configuration ">
                                     <thead>
                                         <tr style="">
-                                            <th>ID</th>
-                                            <th>Customer Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Mobile</th>
-                                            <th>Username</th>
-                                            <th>Action</th>
+                                            <th>{{__('messages.ID')}}</th>
+                                            <th>{{__('messages.CustomerName')}}</th>
+                                            <th>{{__('messages.Email')}}</th>
+                                            <th>{{__('messages.Phone')}}</th>
+                                            <th>{{__('messages.Mobile')}}</th>
+                                            <th>{{__('messages.Username')}}</th>
+                                            <th>{{__('messages.Action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
