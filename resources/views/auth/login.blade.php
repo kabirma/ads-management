@@ -39,7 +39,7 @@
 
 
                         <div class="mb-1">
-                            <label for="login-email" class="form-label">Email</label>
+                            <label for="login-email" class="form-label">{{__("messages.Email")}}</label>
                             <input type="text" id="email" class="form-control" id="login-email"
                                 name="email" placeholder="Enter Admin Email." value="{{ old('email') }}"
                                 aria-describedby="login-email" tabindex="1" autofocus required>
@@ -48,7 +48,7 @@
 
                         <div class="mb-1">
                             <div class="d-flex justify-content-between">
-                                <label class="form-label" for="login-password">Password</label>
+                                <label class="form-label" for="login-password">{{__("messages.Password")}}</label>
                             </div>
                             <div class="input-group input-group-merge form-password-toggle">
                                 <input type="password" name="password" required class="form-control form-control-merge"
@@ -65,7 +65,7 @@
                                 <label class="form-check-label" for="remember-me"> Remember Me </label>
                             </div> -->
                         </div>
-                        <button class="btn btn-primary w-100" tabindex="4">Sign in</button>
+                        <button class="btn btn-primary w-100" tabindex="4">{{__("messages.Signin")}}</button>
                     </form>
 
 

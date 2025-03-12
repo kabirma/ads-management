@@ -142,8 +142,34 @@ return [
     "Dates" => "Dates",
     "CTAText" => "CTA Text",
     "CTAUrl" => "CTA Url",
-    "Media" => "Media"
-
+    "Media" => "Media",
+    "OurPlans"=> "Our Plans",
+    "message_content"=>"We believe we have created the most efficient SaaS landing page for your users. Landing page with
+				features that will convince you to use it for your SaaS business.",
+    "Monthly"=>"Monthly",
+    "Yearly"=>"Yearly",
+    "FREE"=>"FREE",
+    "month"=>"month",
+    "yearly"=>"yearly",
+    "UserAccount"=>"User Account",
+    "TeamMembers"=>"Team Members",
+    "Unlimited"=>"Unlimited",
+    "EmailsAccounts"=>"Emails Accounts",
+    "SetAndManagePermissions"=>"Set And Manage Permissions",
+    "API&extensionsupport"=>"API & extension support",
+    "Developersupport"=>"Developer support",
+    "A/BTesting"=>"A/B Testing",
+    "cta_description"=>"If you have any questions, feedback, or inquiries, please feel free to reach out using the form below or through our contact details.",
+    "cta_title"=>"We'd love to hear from you!",
+    "Signup"=>"Signup",
+    "ULTRA"=>"ULTRA",
+    "LOGIN"=>"LOGIN",
+    "GETSTARTED" => "GETSTARTED",
+    "POPULAR" => "POPULAR",
+    "PRO"=>"PRO",
+    "Signin"=>"Sign in",
+    "c_password"=>"Confirm Password",
+    "Register" => "Register",
 
 
 
