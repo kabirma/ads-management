@@ -16,13 +16,55 @@ class TikTokController extends Controller
     private $apiUrl;
     private $accessToken;
     private $advertiserId;
+    private $secret;
+    private $callbackUrl;
     private $setting;
 
     public function __construct() {
-        $this->apiUrl =  config('services.tiktok.tiktok_api_url');
-        $this->accessToken = config('services.tiktok.tiktok_token');
-        $this->advertiserId = config('services.tiktok.tiktok_advertiser_id');
+        $isProduction = config('services.tiktok.tiktok_is_production');
+        if($isProduction){
+            $this->apiUrl =  config('services.tiktok.tiktok_prod_api_url');
+            $this->accessToken = config('services.tiktok.tiktok_prod_token');
+            $this->advertiserId = config('services.tiktok.tiktok_advertiser_id_prod');
+        }else{
+            $this->apiUrl =  config('services.tiktok.tiktok_api_url');
+            $this->accessToken = config('services.tiktok.tiktok_token');
+            $this->advertiserId = config('services.tiktok.tiktok_advertiser_id');
+        }
+        $this->secret = config('services.tiktok.tiktok_secret');
+        $this->callbackUrl = config('services.tiktok.tiktok_callback_url');
         $this->setting = Company::find(1);
+    }
+
+    public function authTiktok(){
+      
+        $secret = $this->secret;
+        $redirectUri = urlencode($this->redirectUrl);
+        $responseType = 'code';
+
+        $authUrl = "https://business-api.tiktok.com/portal/auth?app_id={$this->advertiserId}&state=your_custom_params&redirect_uri={$this->callbackUrl}";
+        return redirect($authUrl);
+    }
+
+    public function handleTikTokCallback(Request $request){
+        $code = $request->query('code');
+        
+        if (!$code) {
+            return response()->json(['error' => 'Authorization code not provided'], 400);
+        }
+
+        $response = Http::asForm()->post('https://accounts.snapchat.com/login/oauth2/access_token', [
+            'grant_type' => 'authorization_code',
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'code' => $code,
+            'redirect_uri' => $this->redirectUrl,
+        ]);
+        if ($response->successful()) {
+            return response()->json($response->json());
+        } else {
+            return response()->json(['error' => $response->body()], $response->status());
+        }
     }
 
 
@@ -49,8 +91,9 @@ class TikTokController extends Controller
             'budget_mode' => 'BUDGET_MODE_TOTAL',
             'budget' => $request->budget,
         ]);
-
+       
         $data = $response->json();
+        dd($data,$this->apiUrl);
         if($data['message']=='OK'){
             $data = [
                 'budget'=>$request->budget,
@@ -65,8 +108,8 @@ class TikTokController extends Controller
             $campaignId = $this->campaignCreationDB($data);
             $this->createAdGroup($campaignId,$request);
         }else{
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
             dd($data);
+            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
 
@@ -149,9 +192,8 @@ class TikTokController extends Controller
             $adGroupId = $this->adGroupCreationDB($data);
             $this->createAd($adGroupId,$request);
         }else{
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
-
             dd($data);
+            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
 
@@ -221,6 +263,7 @@ class TikTokController extends Controller
             $adId = $this->adCreationDB($data);
             return redirect()->route("view.ads")->with("success", "Ads Created Successfully");
         }else{
+            dd($data);
             return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
@@ -264,7 +307,7 @@ class TikTokController extends Controller
         if($data['message']=="OK"){
             return $data['data'];
         }
-
+        dd($data);
         return [];
     }
 
@@ -293,6 +336,7 @@ class TikTokController extends Controller
         ]);
 
         $data = $response->json();
+        dump($data);
         $this->setting->tiktok_identity = $data['data']['identity_id'];
         $this->setting->save();
         echo 'Success '.$data['data']['identity_id'];

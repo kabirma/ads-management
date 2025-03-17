@@ -45,9 +45,15 @@ return [
         'redirect' => env('GOOGLE_REDIRECT'),
     ],
     'tiktok' => [
+        'tiktok_is_production' => env('TIKTOK_PROD'),
         'tiktok_api_url' => env('TIKTOK_API_URL'),
         'tiktok_token' => env('TIKTOK_BUSINESS_TOKEN'),
+        'tiktok_prod_api_url' => env('TIKTOK_PROD_API_URL'),
+        'tiktok_prod_token' => env('TIKTOK_PROD_TOKEN'),
         'tiktok_advertiser_id' => env('TIKTOK_ADVERTISER_ID'),
+        'tiktok_advertiser_id_prod' => env('TIKTOK_ADVERTISER_ID_PROD'),
+        'tiktok_secret' => env('TIKTOK_SECRET'),
+        'tiktok_callback_url' => env('TIKTOK_CALLBACK_URL'),
     ],
     'snapchat' => [
         'snapchat_ad_acount_id' => env('SNAPCHAT_AD_ACCOUNT_ID'),

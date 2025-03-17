@@ -145,7 +145,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
+                                    @foreach ($ads as $ad)
+                                            <tr>
+                                                <td>{{ $ad->platform }}</td>
+                                                <td>{{ date("M d, Y",strtotime($ad->from)) }} - {{ date("M d, Y",strtotime($ad->to)) }}</td>
+                                                <td>{{ $ad->campaign->objective_type }}</td>
+                                                <td>{{ $ad->campaign->budget }} SAR</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

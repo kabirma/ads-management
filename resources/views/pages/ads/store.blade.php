@@ -469,14 +469,7 @@
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="age_group">{{__("messages.AgeGroup")}}  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
-{{--                                                <select name="age_group" id="age_group" class="form-control">--}}
-{{--                                                    <option @if(isset($age) && strtolower($age) == '12') selected @else @endif value="12">Max Age 12</option>--}}
-{{--                                                    <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">Max Age 18</option>--}}
-{{--                                                    <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">Max Age 30</option>--}}
-{{--                                                    <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">Any Age</option>--}}
-{{--                                                </select>--}}
                                                 <select name="age_group" id="age_group" class="form-control">
-                                                    <option @if(isset($age) && strtolower($age) == '12') selected @else @endif value="12">{{__("messages.MaxAge12")}}</option>
                                                     <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">{{__("messages.MaxAge18")}}</option>
                                                     <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">{{__("messages.MaxAge30")}}</option>
                                                     <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">{{__("messages.AnyAge")}}</option>
@@ -537,10 +530,11 @@
     <script>
         $('input[name="dates"]').daterangepicker({
             autoApply: true, 
+            timePicker: true,
             startDate: moment().add(1, 'days'),
             endDate: moment().add({{$days+1}}, 'days'),
             minDate: moment().add(1, 'days'), 
-            locale: { format: 'YYYY-MM-DD' },
+            locale: { format: 'YYYY-MM-DD hh:mm A' },
         });
         $('.steps').hide();
         $('#step1').show();

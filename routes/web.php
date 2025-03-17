@@ -51,8 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Social Media Integration
    
-    Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'redirectToTikTok'])->name('redirect_to_tiktok');
-    Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handle_callback');
+    Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'authTiktok'])->name('authTiktok');
+    Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handleTikTokCallback');
     Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign'])->name('create_campaign');
     Route::post('/tiktok/create-ad', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createAd'])->name('create_ad');
 

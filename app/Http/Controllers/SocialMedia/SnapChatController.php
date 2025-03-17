@@ -115,14 +115,14 @@ class SnapChatController extends Controller
                 [
                     'name' => $campaignName,
                     'ad_account_id' => $this->adAccountId,
-                    'status' => 'PAUSED',
+                    'status' => 'ACTIVE',
                     'objective' => $request->goal,
                     'start_time' => $from,
                     'end_time' => $to,
                 ]
             ]
         ];
-
+        
         $url = $this->apiUrl."adaccounts/".$this->adAccountId."/campaigns";
         $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
@@ -154,6 +154,7 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
+            dd($response);
             return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
@@ -191,7 +192,7 @@ class SnapChatController extends Controller
             $minAge['min_age'] = (int)$ageRange[$max_age];
             $maxAge['max_age'] = (int)$max_age;
             
-            if($gender != "BOTH"){
+            if($gender != "Both"){
                 $minAge['gender'] = strtoupper($gender);
                 $maxAge['gender'] = strtoupper($gender);
             }
@@ -214,7 +215,7 @@ class SnapChatController extends Controller
             "adsquads" => [
                 [
                     "name" => $adGroupName,
-                    "status" => "PAUSED",
+                    "status" => "ACTIVE",
                     "campaign_id" => $campaign->campaign_id,
                     'type'=> 'SNAP_ADS',
                     "targeting" => [
@@ -270,6 +271,8 @@ class SnapChatController extends Controller
                 'url' => $url,
                 'response' => json_encode($response),
             ];
+            dd($response);
+
             $this->logResponse($log);
             return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
@@ -348,6 +351,8 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
+            dd($response);
+
             return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
@@ -410,6 +415,7 @@ class SnapChatController extends Controller
             ];
             $this->logResponse($log);
         }
+        dd($response);
         
         return [];
     }
@@ -458,6 +464,8 @@ class SnapChatController extends Controller
                 'url' => $url,
                 'response' => json_encode($response),
             ];
+            dd($response);
+
             $this->logResponse($log);
         }
     }

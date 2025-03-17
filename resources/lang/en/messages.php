@@ -1,4 +1,5 @@
 <?php
+
 return [
     'USERS' => 'Users',
     'ADS' => 'Ads',
@@ -19,7 +20,7 @@ return [
     'AD_TYPE' => 'Ad Type',
     'BUDGET' => 'Budget',
     'COPYRIGHT' => 'COPYRIGHT',
-    'ALL_RIGHTS_RESERVED' => 'All Rights Reserved', // please make sure that you type the first things as capital with _ in place of space....
+    'ALL_RIGHTS_RESERVED' => 'All Rights Reserved',
     'DEVELOPED_BY_SPACESHIPTECH' => 'Developed By SPACESHIPTECH',
     'DASHBOARD'=>'Dashboard',
     'VIEW'=>'View',
@@ -101,8 +102,8 @@ return [
     "ChooseYourContent"=>"Choose Your Content",
     "AISuggested"=>"AI Suggested",
     "Back"=> "Back",
-"Next"=> "Next",
-"CreateAd"=> "Create Ad",
+    "Next"=> "Next",
+    "CreateAd"=> "Create Ad",
     "Locations"=> "Locations",
     "SelectCountry" => "Select a Country",
     "SaudiArabia" => "Saudi Arabia",
@@ -170,12 +171,8 @@ return [
     "Signin"=>"Sign in",
     "c_password"=>"Confirm Password",
     "Register" => "Register",
-
-
-
-
-
-
-
-
+    "MaxAge18" => "Max Age 18",
+    "MaxAge30" => "Max Age 30",
+    "MaxAge12" => "Max Age 12",
+    "AnyAge" => "Any Age",
 ];

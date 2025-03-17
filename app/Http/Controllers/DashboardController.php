@@ -13,6 +13,7 @@ use App\Models\Package;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Ads;
 use Carbon\Carbon;
 use DateTime;
 use DB;
@@ -39,6 +40,7 @@ class DashboardController extends Controller
     $data['pages'] = Page::count();
     $data['events'] = Event::count();
     $data['media'] = Gallery::count();
+    $data['ads'] = Ads::with('adGroup','campaign')->limit(6)->get();
 
     return view('dashboard', $data);
   }
