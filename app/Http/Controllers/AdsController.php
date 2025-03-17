@@ -53,7 +53,7 @@ class AdsController extends Controller
         }
         $data['title'] = $this->title;
         $data['days'] = 0;
-        if(isset($_GET['ai']) && $_GET['ai'] == 1){
+        if($ai == 1){
             $aiSuggestion = session(self::AI_SESSION_KEY);
             if($aiSuggestion !== null && $aiSuggestion !== ''){
                 $data = $aiSuggestion;
@@ -194,6 +194,7 @@ class AdsController extends Controller
             $data['age'] = $age;
             $data['social_media'] = $request->social_media;
             $data['ai_sugguested'] = 1;
+            
             session([self::AI_SESSION_KEY=>$data]);
             return redirect()->route('add.ads',['ai'=>1]);
         }

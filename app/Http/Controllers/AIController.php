@@ -39,7 +39,7 @@ class AIController extends Controller
             ])
             ->post($url, $payload);
         $response = $response->json();
-
+       
         if(array_key_exists('choices',$response)){
             return $response['choices'][0]['message']['content'];
         }

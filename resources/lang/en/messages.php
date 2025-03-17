@@ -175,4 +175,5 @@ return [
     "MaxAge30" => "Max Age 30",
     "MaxAge12" => "Max Age 12",
     "AnyAge" => "Any Age",
+    "WITH_AI" => "With help of AI"
 ];

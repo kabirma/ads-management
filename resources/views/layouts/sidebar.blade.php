@@ -101,6 +101,7 @@
                         <i class="fa fa-plus"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.ADD')}}</span>
                     </a>
                 </li>
+              
             </ul>
         </li>
 

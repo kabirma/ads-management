@@ -94,7 +94,7 @@
                             <h4 class="fw-bolder mb-0">{{ __('messages.DIGITAL_ADS') }}</h4>
                             <p class="card-text">{{ __('messages.ENHANCE_YOUR_VISIBILITY_BY_AMPLIFYING_YOUR_ADS') }}</p>
                             <br><br>
-                            <a href="{{route('addAI.ads')}}" class="btn btn-dark">{{ __('messages.START_YOUR_ADS') }}</a>
+                            <a href="{{route('addAI.ads')}}" class="btn btn-dark">{{ __('messages.START_YOUR_ADS') }}  {{ __('messages.WITH_AI') }} </a>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">    
@@ -109,7 +109,7 @@
                 <div class="card bg-light-primary ">
                     <div class="card-header">
                         <div>
-                            <h5 class="card-text">{{ __('messages.START_YOUR_ADS') }} </h5>
+                            <h5 class="card-text">{{ __('messages.WALLET') }}</h5>
                             <h1 class="fw-bolder mb-0">0.0 {{ __('messages.SAR') }}</h1>
                             <br><br>
                         
