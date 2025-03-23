@@ -143,7 +143,7 @@
                     <div class="card-header">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                                    Details</span></li>
+                            {{__('messages.Details')}}</span></li>
                         </ol>
 
                     </div>
@@ -164,34 +164,34 @@
                 </div>
                 <div class="col-md-4">
                     <h4>
-                        <small>Campaign Name</small>
+                        <small>{{__('messages.CampaignName')}}</small>
                         {{$ad->campaign->name}}
                     </h4>
                 </div>
 
                 <div class="col-md-4">
                     <h4>
-                        <small>Campaign Objective</small>
+                        <small>{{__('messages.CampaignObjective')}}</small>
                         {{$ad->campaign->objective_type}}
                     </h4>
                 </div>
 
                 <div class="col-md-4">
                     <h4>
-                        <small>Campaign Budget</small>
+                        <small>{{__('messages.CampaignBudget')}}</small>
                         {{$ad->campaign->budget}}
                     </h4>
                 </div>
 
                 <div class="col-md-4">
                     <h4>
-                        <small>Campaign Start</small>
+                        <small>{{__('messages.CampaignStart')}}</small>
                         {{date("F d, Y",strtotime($ad->adGroup->from))}}
                     </h4>
                 </div>
                 <div class="col-md-4">
                     <h4>
-                        <small>Campaign End</small>
+                        <small>{{__('messages.CampaignEnd')}}</small>
                         {{date("F d, Y",strtotime($ad->adGroup->to))}}
                     </h4>
                 </div>

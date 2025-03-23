@@ -136,7 +136,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
-    Route::group(['prefix' => 'customer'], function () {
+    Route::group(['prefix' => 'profile'], function () {
         Route::controller(App\Http\Controllers\CustomerController::class)->group(function () {
             Route::get('/', 'index')->name('view.customer');
             Route::get('/add', 'add')->name('add.customer');

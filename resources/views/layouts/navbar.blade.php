@@ -24,7 +24,7 @@
                 <div class="dropdown-divider"></div>
 
                 <a class="dropdown-item" href="{{ route('logout.admin') }}"><i class="me-50" data-feather="power"></i>
-                    Logout</a>
+                {{__('messages.Logout')}}</a>
             </div>
         </li>
 

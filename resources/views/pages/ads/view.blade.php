@@ -20,10 +20,10 @@
                     <div class="card-header">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                                    List</span></li>
+                            {{ __("messages.List")}}</span></li>
                         </ol>
                         <a href="{{ route('add.ads',0) }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
+                            <i class="fa fa-plus"></i> <span>{{ __("messages.New")}} {{ $title }}</span>
                         </a>
                     </div>
                     <div class="card-content">
@@ -58,7 +58,7 @@
                                                 @endif
                                                 <td>
                                                     <a href="{{ route('detail.ads', ['id'=>$list->id, 'platform'=>$list->platform]) }}"
-                                                        class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Details</a>
+                                                        class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> {{ __("messages.Details")}}</a>
 <!--                                                 
                                                     <a href="{{ route('status.ads', $list->id) }}"
                                                         class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>

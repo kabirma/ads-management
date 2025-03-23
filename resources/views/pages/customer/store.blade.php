@@ -9,8 +9,8 @@
                     <div class="card-header">
                         <ol class="breadcrumb">
 
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">@if(Auth::user()->role_id === 1) Edit
-                                    {{ $title }} @else Profile @endif</span>
+                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">@if(Auth::user()->role_id === 1) {{__('messages.EDIT')}}
+                                    {{ $title }} @else {{__('messages.Profile')}} @endif</span>
                             </li>
                         </ol>
                         @if(Auth::user()->role_id === 1)
@@ -59,14 +59,23 @@
                                         value="{{ isset($record) ? $record->name : '' }}" type="text" required
                                         class="form-control">
                                 </div>
-                                @if (!isset($record->password))
-                                    <div class="form-group col-md-6">
-                                        <label for="password">{{__('messages.Password')}}</label>
-                                        <input id="password" name="password"
-                                            value="{{ isset($record) ? $record->password : '' }}" type="text" required
-                                            class="form-control">
-                                    </div>
-                                @endif
+                                
+
+                                <div class="col-md-12">
+                                    <hr>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="password">{{__('messages.Password')}}</label>
+                                    <input id="password" name="password" type="password"
+                                        class="form-control">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="password">{{__('messages.ConfirmPassword')}}</label>
+                                    <input id="password" name="confirmPassword"  type="password"
+                                        class="form-control">
+                                </div>
+                                
                                 <div class="form-group col-md-12">
                                     <hr>
                                     <button class="btn btn-primary"><i class="fa fa-check"></i> {{__('messages.SAVE')}}</button>

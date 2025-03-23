@@ -21,7 +21,7 @@
                         <ol class="breadcrumb">
 
                             <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                                    List</span></li>
+                            {{__('messages.List')}}</span></li>
                         </ol>
 
                         <a href="{{ route('add.customer') }}" class="btn btn-sm btn-primary waves-effect">

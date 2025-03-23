@@ -19,7 +19,6 @@ class CustomerMiddleware
         if (Auth::guard($guard)->check()) {
             return $next($request);
         } else {
-            dd(Auth::guard($guard)->user());
             return redirect()->to('/?login=0');
         }
     }

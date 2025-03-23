@@ -175,5 +175,16 @@ return [
     "MaxAge30" => "Max Age 30",
     "MaxAge12" => "Max Age 12",
     "AnyAge" => "Any Age",
-    "WITH_AI" => "With help of AI"
+    "WITH_AI" => "With help of AI",
+    "Details" => "Details",
+    "New" => "New",
+    "List" => "List",
+    "Profile" => "Profile",
+    "EDIT" => "Edit",
+    "CampaignName" => "Campaign Name",
+    "CampaignObjective" => "Campaign Objective",
+    "CampaignBudget" => "Campaign Budget",
+    "CampaignStart" => "Campaign Start",
+    "CampaignEnd" => "Campaign End",
+    "ConfirmPassword"=> "Confirm Password",
 ];

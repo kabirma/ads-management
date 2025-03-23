@@ -51,9 +51,13 @@ class CustomerController extends Controller
 
     public function save(Request $request)
     {
+        if($request->password != $request->confirmPassword){
+            return redirect()->route($this->redirect_page)->with("error", "Password Does Not Match");
+        }
+        
         $model = $request->id > 0 ? $this->model::where($this->model_primary, $request->id)->first() : new $this->model;
         foreach ($request->all() as $key => $req) {
-            if ($key != "_token" && $key != "id") {
+            if ($key != "_token" && $key != "id" && $key != 'confirmPassword') {
                 $model->$key = $req;
             }
         }

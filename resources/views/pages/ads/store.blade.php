@@ -263,7 +263,7 @@
                     <div class="card-header">
                         <ol class="breadcrumb">
 
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">Add
+                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ __("messages.ADD")}}
                                     {{ $title }}</span>
                             </li>
                         </ol>
