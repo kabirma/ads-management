@@ -244,15 +244,24 @@
 
     <script>
         @error('password')
-        $(".header__btn--signup").click();
+        setTimeout(() => {
+			$(".modal--signuplogin").addClass('modal--visible');
+			$(".modal__content--signup").addClass('modal__content--visible');
+		}, 500);
         @enderror
 
         @error('email')
-        $(".header__btn--signup").click();
+		setTimeout(() => {
+			$(".modal--signuplogin").addClass('modal--visible');
+			$(".modal__content--signup").addClass('modal__content--visible');
+		}, 500);
         @enderror
 
         @error('name')
-        $(".header__btn--signup").click();
+		setTimeout(() => {
+			$(".modal--signuplogin").addClass('modal--visible');
+			$(".modal__content--signup").addClass('modal__content--visible');
+		}, 500);
         @enderror
     </script>
 
