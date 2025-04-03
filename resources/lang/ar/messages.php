@@ -186,4 +186,5 @@ return [
     "CampaignStart" => "بداية الحملة",
     "CampaignEnd" => "نهاية الحملة",
     "ConfirmPassword"=> "تأكيد كلمة المرور",
+    "MEDIA"=> "Media",
 ];

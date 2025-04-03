@@ -148,15 +148,15 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-    Route::group(['prefix' => 'gallery'], function () {
+    Route::group(['prefix' => 'media'], function () {
         Route::controller(App\Http\Controllers\GalleryController::class)->group(function () {
-            Route::get('/', 'index')->name('view.gallery');
-            Route::get('/add', 'add')->name('add.gallery');
-            Route::get('/edit/{id}', 'edit')->name('edit.gallery');
-            Route::get('/detail/{id}', 'detail')->name('detail.gallery');
-            Route::post('/save', 'save')->name('save.gallery');
-            Route::get('/delete/{id}', 'delete')->name('delete.gallery');
-            Route::get('/status/{id}', 'status')->name('status.gallery');
+            Route::get('/', 'index')->name('view.media');
+            Route::get('/add', 'add')->name('add.media');
+            Route::get('/edit/{id}', 'edit')->name('edit.media');
+            Route::get('/detail/{id}', 'detail')->name('detail.media');
+            Route::post('/save', 'save')->name('save.media');
+            Route::get('/delete/{id}', 'delete')->name('delete.media');
+            Route::get('/status/{id}', 'status')->name('status.media');
         });
     });
 

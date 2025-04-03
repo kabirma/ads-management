@@ -187,4 +187,5 @@ return [
     "CampaignStart" => "Campaign Start",
     "CampaignEnd" => "Campaign End",
     "ConfirmPassword"=> "Confirm Password",
+    "MEDIA"=> "Media",
 ];

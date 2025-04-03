@@ -105,6 +105,26 @@
             </ul>
         </li>
 
+        <li class=" nav-item">
+            <a class="d-flex align-items-center" href="#">
+                <i class="fa fa-camera"></i><span class="menu-title text-truncate" data-i18n="Invoice">{{__('messages.MEDIA')}}
+                </span>
+            </a>
+            <ul class="menu-content">
+                <li class="{{ Route::currentRouteName() == 'view.media' ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('view.media') }}">
+                        <i class="fa fa-list"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.VIEW')}}</span>
+                    </a>
+                </li>
+                <li class="{{ Route::currentRouteName() == 'add.media' ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('add.media',0) }}">
+                        <i class="fa fa-plus"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.ADD')}}</span>
+                    </a>
+                </li>
+              
+            </ul>
+        </li>
+
 
         <li class=" nav-item {{ Route::currentRouteName() == 'edit.customer' ? 'active' : '' }}">
             <a class="d-flex align-items-center" href="{{ route('edit.customer',Auth::user()->id) }}">

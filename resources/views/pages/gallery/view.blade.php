@@ -24,7 +24,7 @@
                                     List</span></li>
                         </ol>
 
-                        <a href="{{ route('add.gallery') }}" class="btn btn-sm btn-primary waves-effect">
+                        <a href="{{ route('add.media') }}" class="btn btn-sm btn-primary waves-effect">
                             <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
                         </a>
 
@@ -36,10 +36,8 @@
                                     <thead>
                                         <tr style="">
                                             <th>ID</th>
-                                            <th>Event</th>
-                                            <th>Artist</th>
-                                            <th>Date</th>
                                             <th>Media</th>
+                                            <th>Created at</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -47,9 +45,6 @@
                                         @foreach ($listing as $list)
                                             <tr>
                                                 <td>{{ $list->id }}</td>
-                                                <td>{{ $list->event->title }}</td>
-                                                <td>{{ $list->artist }}</td>
-                                                <td>{{ date("M d,Y",strtotime($list->date)) }}</td>
                                                 <td>
                                                     @if($list->media_type=="image")
                                                         <img src="{{ asset($list->media) }}" style="height:100px">
@@ -61,14 +56,15 @@
                                                         </video>
                                                     @endif
                                                 </td>
+                                                <td>{{ date("M d,Y",strtotime($list->created_at)) }}</td>
                                                 <td>
-                                                    <a href="{{ route('status.gallery', $list->id) }}"
-                                                        class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
-                                                    <a href="{{ route('edit.gallery', $list->id) }}"
-                                                        class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                                    <!-- <a href="{{ route('status.media', $list->id) }}"
+                                                        class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a> -->
+                                                    <!-- <a href="{{ route('edit.media', $list->id) }}"
+                                                        class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a> -->
                                                     <a href="#0" class="btn btn-sm btn-danger delete"
-                                                        data-title="{{ $list->event->title }} Gallery"
-                                                        data-href="{{ route('delete.gallery', $list->id) }}"><i
+                                                        data-title="{{ $list->id }} Gallery"
+                                                        data-href="{{ route('delete.media', $list->id) }}"><i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Gallery;
+use App\Models\Media;
 use App\Models\Role;
 use App\Models\Event;
 
@@ -19,13 +19,12 @@ class GalleryController extends Controller
 
     public function __construct()
     {
-        $this->title = "Gallery";
+        $this->title = "Media";
         $this->model_primary = "id";
         $this->view_page = "pages.gallery.view";
         $this->store_page = "pages.gallery.store";
         $this->redirect_page = "view.gallery";
-        $this->model = Gallery::class;
-        $this->model_parent = Event::class;
+        $this->model = Media::class;
     }
 
     public function index()
@@ -38,14 +37,12 @@ class GalleryController extends Controller
     public function add()
     {
         $data['title'] = $this->title;
-        $data['parent'] = $this->model_parent::orderBy('id','desc')->get();
         return view($this->store_page, $data);
     }
 
     public function edit($id)
     {
         $data['title'] = $this->title;
-        $data['parent'] = $this->model_parent::orderBy('id','desc')->get();
         $data['record'] = $this->model::where($this->model_primary, $id)->first();
         return view($this->store_page, $data);
     }
