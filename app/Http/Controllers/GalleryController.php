@@ -23,7 +23,7 @@ class GalleryController extends Controller
         $this->model_primary = "id";
         $this->view_page = "pages.gallery.view";
         $this->store_page = "pages.gallery.store";
-        $this->redirect_page = "view.gallery";
+        $this->redirect_page = "view.media";
         $this->model = Media::class;
     }
 

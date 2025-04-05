@@ -503,11 +503,12 @@
                                     <hr>
                                     <button type="button" class="btn btn-secondary prev"><i class="fa fa-arrow-left"></i>
                                         {{__("messages.Back")}}</button>
+                                    <button type="button" class="btn btn-success" id="saveDraft"><i class="fa fa-save"></i>
+                                        {{__("messages.SAVE_AND_CLOSE")}}</button>
                                     <button type="button" class="btn btn-dark next" id="nextButton"><i class="fa fa-arrow-right"></i>
                                         {{__("messages.Next")}}</button>
                                     <button class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> {{__("messages.CreateAd")}}</button>
-                                    <button type="button" class="btn btn-success" id="saveDraft"><i class="fa fa-save"></i>
-                                        {{__("messages.SAVE_AND_CLOSE")}}</button>
+
                                 </div>
                             </form>
                         </div>
