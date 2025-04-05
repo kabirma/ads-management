@@ -24,7 +24,7 @@
                                     List</span></li>
                         </ol>
 
-                        <a href="{{ route('add.bts') }}" class="btn btn-sm btn-primary waves-effect">
+                        <a href="{{ route('add.draft') }}" class="btn btn-sm btn-primary waves-effect">
                             <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
                         </a>
 
@@ -35,28 +35,27 @@
                                 <table id="dataTable" class="table zero-configuration ">
                                     <thead>
                                         <tr style="">
-                                            <th>ID</th>
-                                            <th>Event</th>
-                                            <th>Date</th>
-                                            <th>Image</th>
-                                            <th>Action</th>
+                                            <th>{{__('messages.ID')}}</th>
+                                            <th>Social Media</th>
+                                            <th>Drafted At</th>
+                                            <th>Data</th>
+                                            <th>{{__('messages.ACTION')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($listing as $list)
                                             <tr>
                                                 <td>{{ $list->id }}</td>
-                                                <td>{{ $list->event->title }}</td>
-                                                <td>{{ date("M d,Y",strtotime($list->date)) }}</td>
-                                                <td><img src="{{ asset($list->image) }}" style="height:100px"></td>
+                                                <td>{{ $list->name }}</td>
+                                                <td>{{ date("M d, Y h:i A",strtotime($list->created_at)) }}</td>
+                                                <td><?=  $list->getDraftPretty() ?></td>
                                                 <td>
-                                                    <a href="{{ route('status.bts', $list->id) }}"
-                                                        class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
-                                                    <a href="{{ route('edit.bts', $list->id) }}"
-                                                        class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                                 
+                                                    <a href="{{ route('continue.draft', $list->id) }}"
+                                                        class="btn btn-sm btn-primary">{{__('messages.CONTINUE_CREATION')}} <i class="fa fa-arrow-right"></i></a>
                                                     <a href="#0" class="btn btn-sm btn-danger delete"
-                                                        data-title="{{ $list->event->title }} BTS"
-                                                        data-href="{{ route('delete.bts', $list->id) }}"><i
+                                                        data-title="{{ $list->name }} Draft"
+                                                        data-href="{{ route('delete.draft', $list->id) }}"><i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>

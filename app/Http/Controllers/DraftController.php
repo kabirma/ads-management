@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\BTS;
+use App\Models\Draft;
 use App\Models\Role;
-use App\Models\Event;
 
-class BTSController extends Controller
+class DraftController extends Controller
 {
     protected $title;
     protected $model;
@@ -19,19 +18,18 @@ class BTSController extends Controller
 
     public function __construct()
     {
-        $this->title = "BTS";
+        $this->title = "Draft";
         $this->model_primary = "id";
-        $this->view_page = "pages.bts.view";
-        $this->store_page = "pages.bts.store";
-        $this->redirect_page = "view.bts";
-        $this->model = BTS::class;
-        $this->model_parent = Event::class;
+        $this->view_page = "pages.draft.view";
+        $this->store_page = "pages.draft.store";
+        $this->redirect_page = "view.draft";
+        $this->model = Draft::class;
     }
 
     public function index()
     {
         $data['title'] = $this->title;
-        $data['listing'] = $this->model::orderBy('id','desc')->get();
+        $data['listing'] = $this->model::where('status',0)->orderBy('id','desc')->get();
         return view($this->view_page, $data);
     }
 
@@ -42,25 +40,41 @@ class BTSController extends Controller
         return view($this->store_page, $data);
     }
 
-    public function edit($id)
+    public function continue($id)
     {
         $data['title'] = $this->title;
-        $data['parent'] = $this->model_parent::orderBy('id','desc')->get();
-        $data['record'] = $this->model::where($this->model_primary, $id)->first();
-        return view($this->store_page, $data);
+        $record = $this->model::where($this->model_primary, $id)->first();
+        $draft = json_decode($record->value);
+        $dates = explode(' - ', $draft->dates);
+        $data['name'] = $draft->title;
+        $data['description'] = $draft->description;
+        $data['website_url'] = $draft->website_url;
+        $data['call_to_action'] = $draft->call_to_action;
+        $data['budget'] = $draft->budget;
+        $data['goal'] = $draft->goal;
+        $data['gender'] = $draft->gender;
+        $data['days'] = $this->dateDiff(...$dates);
+        $data['start_date'] = $dates[0];
+        $data['end_date'] = $dates[1];
+        $data['social_media'] = $draft->social_media;
+        $data['ai_sugguested'] = 0;
+        return view('pages.ads.store', $data);
     }
 
     public function save(Request $request)
     {
         $model = $request->id > 0 ? $this->model::where('id', $request->id)->first() : new $this->model;
-        foreach ($request->all() as $key => $req) {
-            if ($key != "_token" && $key != "id") {
-                $model->$key = $req;
-            }
-        }
-        $this->ImageUpload($model,"image",$request,"btss");
+        $data = $request->all();
+        unset($data['id']);
+        unset($data['_token']);
+        $data_json = json_encode($data);
+        $model->name = $data['social_media'];
+        $model->value = $data_json;
+        $model->status = 0;
+        $model->type = 'ads';
+        // $this->ImageUpload($model,"image",$request,"drafts");
         $model->save();
-        return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
+        return $model->id;
     }
 
     public function delete($id)

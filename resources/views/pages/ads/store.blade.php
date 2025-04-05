@@ -276,7 +276,7 @@
                                 </div>
                             @endif
                         
-                            <form action="{{ route('save.ads') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('save.ads') }}" method="post" id="adForm" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
@@ -334,33 +334,33 @@
                                             <h2>{{__("messages.Goal")}}</h2>
                                          </div>
                                         <ul id="imageRadio">
-                                            <li class='tiktok_goal'><input type="radio" name="goal" checked value="TRAFFIC" id="tk1" />
+                                            <li class='tiktok_goal'><input @if(isset($goal)) @if($goal == 'TRAFFIC') checked @endif @else @endif  type="radio" name="goal" checked value="TRAFFIC" id="tk1" />
                                                 <label for="tk1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
                                                     <h4>{{ __("messages.WebsiteTraffic") }}</h4>
                                                     <p>{{__("messages.GetMoreWebsiteVisits")}}</p>
                                                 </label>
                                             </li>
-                                            <li class='tiktok_goal'><input type="radio" name="goal" value="TRAFFIC" id="tk2" />
+                                            <li class='tiktok_goal'><input @if(isset($goal)) @if($goal == 'TRAFFIC') checked @endif @else @endif  type="radio" name="goal" value="TRAFFIC" id="tk2" />
                                                 <label for="tk2"> <img src="{{asset('front/images/video-chat.png')}}" alt="">
                                                     <h4>{{__("messages.Reach")}}</h4>
                                                     <p>{{__("messages.IncreaseTheOverallReach")}}</p>
                                                 </label>
                                             </li>
 
-                                            <li class='snapchat_goal'><input type="radio" name="goal" checked value="WEB_CONVERSION" id="sc1" />
+                                            <li class='snapchat_goal'><input @if(isset($goal)) @if($goal == 'WEB_CONVERSION') checked @endif @else @endif  type="radio" name="goal" checked value="WEB_CONVERSION" id="sc1" />
                                                 <label for="sc1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
                                                     <h4>{{ __("messages.WebsiteTraffic") }}</h4>
                                                     <p>{{ __("messages.GetMoreWebsiteVisits")}}</p>
                                                 </label>
                                             </li>
-                                            <li class='snapchat_goal'><input type="radio" name="goal" value="ENGAGEMENT" id="sc2" />
+                                            <li class='snapchat_goal'><input @if(isset($goal)) @if($goal == 'ENGAGEMENT') checked @endif @else @endif  type="radio" name="goal" value="ENGAGEMENT" id="sc2" />
                                                 <label for="sc2"> <img src="{{asset('front/images/video-chat.png')}}" alt="">
                                                     <h4>{{ __("messages.Reach")}}</h4>
                                                     <p>{{ __("messages.IncreaseTheOverallReach")}}</p>
                                                 </label>
                                             </li>
 
-                                            <li class='snapchat_goal'><input type="radio" name="goal" value="BRAND_AWARENESS " id="sc3" />
+                                            <li class='snapchat_goal'><input @if(isset($goal)) @if($goal == 'BRAND_AWARENESS') checked @endif @else @endif  type="radio" name="goal" value="BRAND_AWARENESS " id="sc3" />
                                                 <label for="sc3"> <img src="{{asset('front/images/web.png')}}" alt="">
                                                     <h4>{{__("messages.BrandPromotion")}}</h4>
                                                     <p>{{__("messages.IncreaseBrandAwareness")}}</p>
@@ -376,29 +376,29 @@
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="title">{{__("messages.Title")}} @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                <label for="title">{{__("messages.Title")}} @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                     {{__("messages.AISuggested")}} )</small> @endif</label>
                                                 <input id="title" name="title" type="text" @if(isset($name)) value="{{$name}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="description">{{__("messages.Description")}} @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                <label for="description">{{__("messages.Description")}} @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                     {{__("messages.AISuggested")}} )</small> @endif</label>
                                                 <textarea name="description" class="form-control" cols="30" rows="10"> @if(isset($name)){{$description}}@endif</textarea>
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">{{__("messages.CallToAction")}}</label>
                                                 <select name="call_to_action" id="call_to_action" class="form-control">
-                                                    <option class="tiktok" selected value="BOOK_NOW">{{__("messages.BookNow")}}</option>
-                                                    <option class="tiktok" value="CONTACT_US">{{__("messages.ContactUs")}}</option>
-                                                    <option class="tiktok" value="APPLY_NOW">{{__("messages.ApplyNow")}}</option>
-                                                    <option class="tiktok" value="CALL_NOW">{{__("messages.CallNow")}}</option>
-                                                    <option class="tiktok" value="LEARN_MORE">{{__("messages.LearnMore")}}</option>
-                                                    <option class="tiktok" value="READ_MORE">{{__("messages.ReadMore")}}</option>
+                                                    <option class="tiktok" @if(isset($call_to_action)) @if($call_to_action == 'BOOK_NOW') selected @endif @else selected @endif value="BOOK_NOW">{{__("messages.BookNow")}}</option>
+                                                    <option class="tiktok" @if(isset($call_to_action)) @if($call_to_action == 'CONTACT_US') selected @endif @else @endif value="CONTACT_US">{{__("messages.ContactUs")}}</option>
+                                                    <option class="tiktok" @if(isset($call_to_action)) @if($call_to_action == 'APPLY_NOW') selected @endif @else @endif value="APPLY_NOW">{{__("messages.ApplyNow")}}</option>
+                                                    <option class="tiktok" @if(isset($call_to_action)) @if($call_to_action == 'CALL_NOW') selected @endif @else @endif value="CALL_NOW">{{__("messages.CallNow")}}</option>
+                                                    <option class="tiktok" @if(isset($call_to_action)) @if($call_to_action == 'LEARN_MORE') selected @endif @else @endif value="LEARN_MORE">{{__("messages.LearnMore")}}</option>
+                                                    <option class="tiktok" @if(isset($call_to_action)) @if($call_to_action == 'READ_MORE') selected @endif @else @endif value="READ_MORE">{{__("messages.ReadMore")}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6" id="websiteUrlArea">
                                                 <label for="website_url">{{__("messages.WebsiteUrl")}}</label>
-                                                <input id="website_url" name="website_url" type="text" required class="form-control">
+                                                <input id="website_url" name="website_url" @if(isset($website_url)) value="{{$website_url}}" @endif type="text" required class="form-control">
                                             </div>
                                         </div>
 
@@ -436,7 +436,7 @@
                                             <div class="form-group col-md-12">
                                                 <label for="dates">
                                                     {{__("messages.ScheduleDates")}}
-                                                    @if(isset($ai_sugguested))
+                                                    @if(isset($ai_sugguested) && $ai_sugguested== 1)
                                                         <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
                                                     @endif
                                                 </label>
@@ -445,7 +445,7 @@
                                             <div class="form-group col-md-12">
                                                 <label for="budget">
                                                     {{__("messages.Budget")}}
-                                                    @if(isset($ai_sugguested))
+                                                    @if(isset($ai_sugguested) && $ai_sugguested== 1)
                                                         <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
                                                     @endif
                                                 </label>
@@ -460,7 +460,7 @@
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="gender">{{__("messages.Gender")}}  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
+                                                <label for="gender">{{__("messages.Gender")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
                                                 <select name="gender" id="gender" class="form-control">
                                                     <option @if(isset($gender) && strtolower($gender) == 'male') selected @else @endif value="Male">{{__("messages.Male")}}</option>
                                                     <option @if(isset($gender) && strtolower($gender) == 'female') selected @else @endif value="Female">{{__("messages.Female")}}</option>
@@ -468,7 +468,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="age_group">{{__("messages.AgeGroup")}}  @if(isset($ai_sugguested)) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
+                                                <label for="age_group">{{__("messages.AgeGroup")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
                                                 <select name="age_group" id="age_group" class="form-control">
                                                     <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">{{__("messages.MaxAge18")}}</option>
                                                     <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">{{__("messages.MaxAge30")}}</option>
@@ -506,6 +506,8 @@
                                     <button type="button" class="btn btn-dark next" id="nextButton"><i class="fa fa-arrow-right"></i>
                                         {{__("messages.Next")}}</button>
                                     <button class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> {{__("messages.CreateAd")}}</button>
+                                    <button type="button" class="btn btn-success" id="saveDraft"><i class="fa fa-save"></i>
+                                        {{__("messages.SAVE_AND_CLOSE")}}</button>
                                 </div>
                             </form>
                         </div>
@@ -514,7 +516,7 @@
             </div>
         </div>
 
-
+    <input type="hidden" value="0" id="draftId">
     </section>
     <!-- Dashboard Analytics end -->
 
@@ -597,7 +599,7 @@
         CKEDITOR.replace('ckeditor');
     
              document.getElementById('image').addEventListener('change', function (event) {
-                const file = event.target.files[0]; // Get the selected file
+                const file = event.target.files[0];
                 const errorMessage = document.getElementById('error-message');
                 const submitButton = document.getElementById('nextButton');
 
@@ -644,7 +646,6 @@
                     };
                 }
             });
-
             $("#step1 input").change(function(){
                 var currentVal = $("#step1 input:checked").val();
                 $("#step3 ul li").hide();
@@ -657,7 +658,25 @@
             })
 
             $("#step1 input").change();
+
+            $("#saveDraft").click(function(){
+                saveDraft();
+            })
+
+            function saveDraft(){
+                var formData = $("#adForm").serialize();
+                $.ajax({
+                    url: '{{route('save.draft')}}',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        window.location.href = "{{route('view.ads')}}"
+                    },
+                    error: function (xhr) {
+                        // console.log('Error:', xhr.responseText);
+                    }
+                });
+            }
         </script>
 
-   
 @endsection

@@ -96,6 +96,11 @@
                         <i class="fa fa-list"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.VIEW')}}</span>
                     </a>
                 </li>
+                <li class="{{ Route::currentRouteName() == 'view.draft' ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('view.draft') }}">
+                        <i class="fa fa-save"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.VIEW')}} {{__('messages.DRAFT')}}</span>
+                    </a>
+                </li>
                 <li class="{{ Route::currentRouteName() == 'add.ads' ? 'active' : '' }}">
                     <a class="d-flex align-items-center" href="{{ route('add.ads',0) }}">
                         <i class="fa fa-plus"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.ADD')}}</span>
@@ -104,6 +109,8 @@
               
             </ul>
         </li>
+
+
 
         <li class=" nav-item">
             <a class="d-flex align-items-center" href="#">

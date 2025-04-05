@@ -188,4 +188,7 @@ return [
     "CampaignEnd" => "Campaign End",
     "ConfirmPassword"=> "Confirm Password",
     "MEDIA"=> "Media",
+    "DRAFT"=> "Draft",
+    "CONTINUE_CREATION"=> "Continue Creation",
+    "SAVE_AND_CLOSE"=> "Save and Close",
 ];

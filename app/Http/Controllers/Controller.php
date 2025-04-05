@@ -15,6 +15,7 @@ use App\Models\Ads;
 use App\Models\Media;
 use App\Models\Company;
 use App\Models\LogResponse;
+use DateTime;
 
 
 class Controller extends BaseController
@@ -204,5 +205,13 @@ class Controller extends BaseController
         $log->response = $data['response'];
         $log->user_id = Auth::guard('web')->user()->id;
         $log->save();
+    }
+
+    function dateDiff($start,$end){
+        $date1 = new DateTime($start);
+        $date2 = new DateTime($end);
+
+        $diff = $date1->diff($date2);
+        return $diff->days + 1;
     }
 }

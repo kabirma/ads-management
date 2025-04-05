@@ -115,6 +115,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/detail/{id}/{platform}', 'detail')->name('detail.ads');
 
             Route::post('/save', 'save')->name('save.ads');
+            Route::post('/save', 'save')->name('save.ads');
             Route::post('/generate/ad', 'generateAd')->name('generateAd.ads');
             Route::get('/delete/{id}', 'delete')->name('delete.ads');
             Route::get('/delete/image/{id}', 'delete_image')->name('delete.ads.image');
@@ -161,15 +162,15 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-    Route::group(['prefix' => 'bts'], function () {
-        Route::controller(App\Http\Controllers\BTSController::class)->group(function () {
-            Route::get('/', 'index')->name('view.bts');
-            Route::get('/add', 'add')->name('add.bts');
-            Route::get('/edit/{id}', 'edit')->name('edit.bts');
-            Route::get('/detail/{id}', 'detail')->name('detail.bts');
-            Route::post('/save', 'save')->name('save.bts');
-            Route::get('/delete/{id}', 'delete')->name('delete.bts');
-            Route::get('/status/{id}', 'status')->name('status.bts');
+    Route::group(['prefix' => 'draft'], function () {
+        Route::controller(App\Http\Controllers\DraftController::class)->group(function () {
+            Route::get('/', 'index')->name('view.draft');
+            Route::get('/add', 'add')->name('add.draft');
+            Route::get('/continue/{id}', 'continue')->name('continue.draft');
+            Route::get('/detail/{id}', 'detail')->name('detail.draft');
+            Route::post('/save', 'save')->name('save.draft');
+            Route::get('/delete/{id}', 'delete')->name('delete.draft');
+            Route::get('/status/{id}', 'status')->name('status.draft');
         });
     });
 });
