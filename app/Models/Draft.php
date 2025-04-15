@@ -18,6 +18,8 @@ class Draft extends Model
             'media_type',
             'age_group',
             'location',
+            'media',
+            'step',
         ];
         foreach ($draft as $key => $value) {
             if (!is_null($value) && $value !== '' && !in_array($key, $notIncluded)) {
@@ -26,5 +28,16 @@ class Draft extends Model
         }
 
         return $output;
+    }
+
+    public function getMedia(){
+        $output = '';
+        $draft = json_decode($this->value, true);
+     
+        foreach ($draft as $key => $value) {
+            if (!is_null($value) && $value !== '' && $key == 'media') {
+                return $value;
+            }
+        }
     }
 }

@@ -367,8 +367,8 @@
                             <section class="pricing-section">
                                 <div class="container">
                                     <div class="sec-title text-center">
-                                        <span class="title">Get plan</span>
-                                        <h2>Choose a Plan</h2>
+                                        <span class="title">{{__('messages.GetPlan')}}</span>
+                                        <h2>{{__('messages.ChooseAPlan')}}</h2>
                                     </div>
                                     @php
                                         $icons = ['fa-paper-plane','fa-gem','fa-rocket'];
@@ -389,13 +389,13 @@
                                                     </div>
                                                     <div class="price-box">
                                                         @if($package->is_popular)
-                                                        <span class="badge btn-success">POPULAR</span>
+                                                        <span class="badge btn-success">{{__('messages.POPULAR')}}</span>
                                                         @endif
                                                         <div class="title">{{$package->name}}</div>
                                                         <h4 class="price">SAR {{number_format($package->price,2)}}</h4>
                                                     </div>
                                                     <div class="socialMedia">
-                                                        <h4>Publish Ads On</h4>
+                                                        <h4>{{__('messages.PublishAdsOn')}}</h4>
                                                         @foreach($socialMedia as $media)
                                                             <i class="fab fa-{{$media}}"></i>
                                                         @endforeach
@@ -410,7 +410,7 @@
                                                             @csrf
                                                             <input type="hidden" name="package_id" value="{{$package->id}}">
                                                             <input type="hidden" name="price" value="{{$package->price}}">
-                                                            <button class="theme-btn">Buy Plan</button>
+                                                            <button class="theme-btn">{{__('messages.BuyPlan')}}</button>
                                                         </form>
                                                     </div>
                                                 </div>

@@ -79,4 +79,21 @@ class CustomerController extends Controller
         }
         return redirect()->route($this->redirect_page)->with("error", "No Record Found");
     }
+
+    function verify_email(){
+        $user = Auth::user();
+        
+        $to = 'user@example.com';
+        $subject = 'Welcome to Our Platform!';
+        $data = [
+            'name' => 'John Doe',
+            'verificationUrl' => route('verify.email', ['token' => encrypt('user@example.com')])
+        ];
+    
+        Mail::send('emails.custom', $data, function ($message) use ($to, $subject) {
+            $message->to($to)
+                    ->subject($subject);
+        });
+        dd($user);
+    }
 }

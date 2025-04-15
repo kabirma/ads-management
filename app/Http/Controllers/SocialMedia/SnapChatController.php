@@ -46,7 +46,7 @@ class SnapChatController extends Controller
         }
 
         $mediaType = $request->media_type == 1 ? "image" : "video";
-        if (!$request->hasFile($mediaType)) {
+        if ($request->media == '') {
             return ['error' => 'No '.$mediaType.' uploaded'];
         }
 
@@ -351,7 +351,6 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
-            dd($response);
 
             return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
@@ -361,9 +360,8 @@ class SnapChatController extends Controller
 
         $mediaType = $request->media_type == 1 ? "IMAGE" : "VIDEO";
 
-        $mediaPath = $this->saveMedia(strtolower($mediaType),$request,'socialMedia/Snapchat', $reference_id);
+        $mediaPath = $request->media;
         $fileName = str_replace(" ","_",$request->title) .'-'. date('YMDHis') . '-' . $reference_id;
-
         $payload = [
             "media" => [
                 [
@@ -386,13 +384,13 @@ class SnapChatController extends Controller
             $mediaResponse = $response['media'][0]['media'];
             $url = $this->apiUrl."media/".$mediaResponse['id']."/upload";
 
-            $file = $request->file(strtolower($mediaType));
-    
+            $file = public_path($request->media);
+            $extension = pathinfo($file, PATHINFO_EXTENSION);
             $response = Http::withToken($this->accessToken)
-                ->attach('file', file_get_contents($file), $file->getClientOriginalName())
+                ->attach('file', file_get_contents($file), $fileName.'.'.$extension)
                 ->post($url);
-
             $response = $response->json();
+
             if($response['request_status']=="SUCCESS"){
                 return $response['result'];
             }else{
@@ -472,7 +470,14 @@ class SnapChatController extends Controller
 
     function fetchAds($adId){
         $ad = Ads::with('adGroup','campaign')->find($adId);
-
-        return [$ad, []];
+        $adId = $ad->ads_id;
+        $url = $this->apiUrl."ads/$adId/stats";
+        $response = Http::withToken($this->accessToken)->get($url);
+        $response = $response->json();
+        $statsResponse = [];
+        if($response['request_status'] === 'SUCCESS'){
+            $statsResponse = $response['total_stats'][0]['total_stat']['stats'];
+        }
+        return [$ad, $statsResponse];
     }
 }

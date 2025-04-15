@@ -143,6 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/add', 'add')->name('add.customer');
             Route::get('/edit/{id}', 'edit')->name('edit.customer');
 
+            Route::get('/verify/email', 'verify_email')->name('verify.email');
             Route::post('/save', 'save')->name('save.customer');
             Route::get('/delete/{id}', 'delete')->name('delete.customer');
         });

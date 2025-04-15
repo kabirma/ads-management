@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Media extends Model
 {
     use HasFactory;
+
+    function getImageSize(){
+        $imagePath = $this->media;
+
+        if (file_exists($imagePath)) {
+            $size = getimagesize($imagePath);
+            $width = $size[0];
+            $height = $size[1];
+            echo "Image resolution: {$width} x {$height}";
+        } else {
+            echo "Image not found!";
+        }
+    }
 }

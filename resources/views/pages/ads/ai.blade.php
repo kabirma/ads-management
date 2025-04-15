@@ -27,26 +27,26 @@
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
                                 <div class="form-group col-md-12">
-                                    <label for="social_media">On Which Social Media you want your ad to run?</label>
+                                    <label for="social_media">{{__('messages.SocialMediaOption')}}</label>
                                     <select name="social_media" class="form-control" required>
-                                        <option value="" selected disabled>Select Social Media</option>
+                                        <option value="" selected disabled>{{__('messages.Select')}} {{__('messages.SocialMedia')}}</option>
 
-                                        <option value="snapchat">Snapchat</option>
-                                        <option value="tiktok">TikTok</option>
+                                        <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                        <option value="tiktok">{{__('messages.TikTok')}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="reason">What are you looking to achieve from this Ad?</label>
-                                    <input type="text" class="form-control" name="reason" placeholder="Ads Reason" required>
+                                    <label for="reason">{{__('messages.AdsReason')}}</label>
+                                    <input type="text" class="form-control" name="reason" placeholder="{{__('messages.AdsReason')}}" required>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="summary">Where do you want to run your ad?</label>
-                                    <input type="text" class="form-control" name="location" placeholder="Ads Target" required>
+                                    <label for="summary">{{__('messages.AdsTarget')}}</label>
+                                    <input type="text" class="form-control" name="location" placeholder="{{__('messages.AdsTarget')}}" required>
                                 </div>
                            
                                 <div class="form-group col-md-12">
                                     <hr>
-                                    <button class="btn btn-primary"><i class="fa fa-pencil"></i> Suggest Ad Content</button>
+                                    <button class="btn btn-primary"><i class="fa fa-pencil"></i> {{__('messages.SuggestContent')}}</button>
                                 </div>
                             </form>
                         </div>

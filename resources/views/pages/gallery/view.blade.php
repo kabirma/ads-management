@@ -19,13 +19,12 @@
                 <div class="card">
                     <div class="card-header">
                         <ol class="breadcrumb">
-
                             <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                                    List</span></li>
+                            {{__('messages.List')}}</span></li>
                         </ol>
 
                         <a href="{{ route('add.media') }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
+                            <i class="fa fa-plus"></i> <span>{{__('messages.New')}} {{ $title }}</span>
                         </a>
 
                     </div>
@@ -35,10 +34,10 @@
                                 <table id="dataTable" class="table zero-configuration ">
                                     <thead>
                                         <tr style="">
-                                            <th>ID</th>
-                                            <th>Media</th>
-                                            <th>Created at</th>
-                                            <th>Action</th>
+                                            <th>{{__('messages.ID')}}</th>
+                                            <th>{{__('messages.MEDIA')}}</th>
+                                            <th>{{__('messages.CREATED_AT')}}</th>
+                                            <th>{{__('messages.Action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

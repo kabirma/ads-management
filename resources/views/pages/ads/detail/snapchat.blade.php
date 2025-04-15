@@ -195,6 +195,18 @@
                         {{date("F d, Y",strtotime($ad->adGroup->to))}}
                     </h4>
                 </div>
+                <div class="col-md-6">
+                    <h4>
+                        <small>{{__('messages.IMPRESSION')}} <i class="fa fa-eye text-success"></i></small>
+                        {{$apiResponse['impressions']}}
+                    </h4>
+                </div>
+                <div class="col-md-6">
+                    <h4>
+                        <small>{{__('messages.SPENDS')}} <i class="fa fa-dollar text-danger"></i></small>
+                        {{$apiResponse['spend']}} SAR
+                    </h4>
+                </div>
                 <div class="col-md-12">
                     <hr>
                 </div>
@@ -215,6 +227,7 @@
                             </div>
                         </div>
                         <div class="bottom">
+                            
                             <a class="bottom-item" target="_blank" href="{{$ad->landing_page_url}}">
                                 <span class="bottom-icon"><i class="fa fa-star"></i></span>
                                 <span class="bottom-number">{{str_replace("_"," ",$ad->call_to_action)}}</span>

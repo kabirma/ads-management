@@ -31,16 +31,22 @@
                                 
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="full_name">{{__('messages.Name')}}</label>
                                     <input id="full_name" name="full_name" value="{{ isset($record) ? $record->full_name : '' }}"
                                         type="text" required class="form-control">
                                 </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="email">{{__('messages.Email')}}</label>
-                                    <input id="email" name="email" value="{{ isset($record) ? $record->email : '' }}"
-                                        type="email" required class="form-control">
+                                <div class="form-group col-md-12">
+                                <label for="email">{{__('messages.Email')}}</label>
+                                    <div class="input-group">
+                                        <input id="email" name="email" value="{{ isset($record) ? $record->email : '' }}"
+                                            type="email" required class="form-control">    
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <a href="{{route('verify.email')}}" class="btn btn-success btn-sm">{{ __('messages.VerifyEmail') }}</a>.
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="phone">{{__('messages.Phone')}}</label>

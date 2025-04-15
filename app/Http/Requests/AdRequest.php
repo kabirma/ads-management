@@ -28,7 +28,11 @@ class AdRequest extends FormRequest
             'title' => ['required', 'string', 'min:5', 'max:255'],
             'description' => ['required', 'string', 'min:20', 'max:500'],
             'call_to_action' => ['required', Rule::in(['READ_MORE', 'LEARN_MORE', 'CALL_NOW', 'APPLY_NOW', 'CONTACT_US'])],
-            'website_url' => ['required', 'url'],
+            'website_url' => [
+                'required', 
+                'url', 
+                'regex:/^https:\/\/.+$/i'
+            ],
             'media_type' => ['required', 'integer', 'in:1,2'],
             'dates' => ['required', 'regex:/^\d{4}-\d{2}-\d{2} - \d{4}-\d{2}-\d{2}$/', 'after_or_equal:today'],
             'budget' => ['required', 'numeric', 'min:160'],
@@ -47,6 +51,7 @@ class AdRequest extends FormRequest
             'call_to_action.required' => 'Please select a valid call-to-action option.',
             'website_url.required' => 'A valid website URL is required.',
             'website_url.url' => 'Enter a valid URL.',
+            'website_url.regex' => 'Enter a valid URL.',
             'media_type.required' => 'The media type is required.',
             'media_type.in' => 'Invalid media type selected.',
             'dates.required' => 'You must provide a date range.',

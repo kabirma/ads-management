@@ -8,13 +8,12 @@
                 <div class="card">
                     <div class="card-header">
                         <ol class="breadcrumb">
-
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">Edit
+                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{__('messages.EDIT')}}
                                     {{ $title }}</span>
                             </li>
                         </ol>
                         <a href="{{ route('view.media') }}" class="btn btn-sm btn-primary waves-effect addnew">
-                            <i class="fa fa-list"></i> <span>View {{ $title }}</span>
+                            <i class="fa fa-list"></i> <span>{{__('messages.VIEW')}} {{ $title }}</span>
                         </a>
                     </div>
                     <div class="card-content">
@@ -24,18 +23,18 @@
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
-                                <div class="col-md-6">
-                                    <label for="media_type">Media type</label>
+                                <div class="col-md-12">
+                                    <label for="media_type">{{__('messages.MEDIA_TYPE')}}</label>
                                     <select name="media_type" class="form-control">
                                         <option value="" selected disabled>Select Media Type</option>
                                         <option {{ isset($record) && $record->media_type == 'image' ? 'selected' : '' }}
-                                            value="image">Image</option>
+                                            value="image">{{__('messages.Image')}}</option>
                                         <option {{ isset($record) && $record->media_type == 'video' ? 'selected' : '' }}
-                                            value="video">Video</option>
+                                            value="video">{{__('messages.Video')}}</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="media">Media</label>
+                                <div class="form-group col-md-12">
+                                    <label for="media">{{__('messages.Media')}}</label>
                                     <input id="media" name="media" type="file" class="form-control">
                                     @if (isset($record))
                                         <br>
@@ -52,7 +51,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <hr>
-                                    <button class="btn btn-primary"><i class="fa fa-check"></i> SAVE</button>
+                                    <button class="btn btn-primary"><i class="fa fa-check"></i> {{__('messages.SAVE')}}</button>
                                 </div>
                             </form>
                         </div>

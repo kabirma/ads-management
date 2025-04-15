@@ -114,7 +114,7 @@
 
         <li class=" nav-item">
             <a class="d-flex align-items-center" href="#">
-                <i class="fa fa-camera"></i><span class="menu-title text-truncate" data-i18n="Invoice">{{__('messages.MEDIA')}}
+                <i class="fa fa-camera"></i><span class="menu-title text-truncate" data-i18n="Invoice">{{__('messages.Media')}}
                 </span>
             </a>
             <ul class="menu-content">

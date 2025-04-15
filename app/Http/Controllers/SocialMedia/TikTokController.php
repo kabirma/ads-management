@@ -270,8 +270,9 @@ class TikTokController extends Controller
 
     function uploadMedia($request, $reference_id){
 
+        $mediaPath = public_path($request->media);
+
         if($request->media_type == 1){
-            $mediaPath = $this->saveMedia('image',$request,'socialMedia/TikTok', $reference_id);
             $fileName = str_replace(" ","_",$request->title) .'-'. date('YMDHis') . '-'.$reference_id;
 
             $response = Http::withHeaders([
@@ -285,7 +286,6 @@ class TikTokController extends Controller
             ]);
         }else{
 
-            $mediaPath = $this->saveMedia('video',$request,'socialMedia/TikTok', $reference_id);
             $fileName = str_replace(" ","_",$request->name) .'-'. date('YMDHis') . '-'.$reference_id;
 
             $response = Http::withHeaders([

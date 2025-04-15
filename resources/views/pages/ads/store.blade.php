@@ -254,6 +254,11 @@
             display: flex;
             justify-content: space-between;  
         }
+
+        #mediaArea img{
+            height:200px!important;
+            width:auto;
+        }
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
@@ -409,21 +414,25 @@
                                             <h2>{{__("messages.UploadMedia")}}</h2>
                                         </div>
                                         <div class="titleRow">
-                                            <div class="form-group col-md-12">
-                                                <label for="website_url">{{__("messages.ChooseMediaType")}}</label>
-                                                <select name="media_type" id="media_type" class="form-control">
-                                                    <option selected value="1">{{__("messages.Image")}}</option>
-                                                    <option value="2">{{__("messages.Video")}}</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-12" id="media_image">
-                                                <label for="image">{{__("messages.Image")}}</label>
-                                                <input id="image" name="image" type="file" accept="image/*" class="form-control">
-                                                <small id="error-message" style="color: red; display: none;"></small>
-                                            </div>
-                                            <div class="form-group col-md-12" id="media_video">
-                                                <label for="video">{{__("messages.Video")}}</label>
-                                                <input id="video" name="video" type="file" class="form-control">
+                                           
+                                            <div class="form-group col-md-12 text-center">
+                                                <div id="mediaArea" class="mb-2">
+                                                    @if(isset($media) && isset($media_type))
+                                                        @if($media_type == "1")
+                                                            <img src="{{asset($media)}}" height="200">
+                                                        @else
+                                                            <video width="320" height="240" controls>
+                                                                <source src="{{asset($media)}}" type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                                    <i class="fa fa-image"></i> Choose Media
+                                                </button>
+                                                <input type="hidden" id="selectedMedia" name="media" value="{{isset($media) ? $media : ''}}">
+                                                <input type="hidden" id="selectedType" name="media_type" value="{{isset($media_type) ? $media_type : ''}}">
                                             </div>
                                         </div>
                                     </div>
@@ -498,7 +507,7 @@
                                     </div>
                                  
                                 </div>
-
+                                <input type="hidden" name="step" value="1" id="stepNo">
                                 <div class="form-group col-md-12 text-center">
                                     <hr>
                                     <button type="button" class="btn btn-secondary prev"><i class="fa fa-arrow-left"></i>
@@ -520,7 +529,7 @@
     <input type="hidden" value="0" id="draftId">
     </section>
     <!-- Dashboard Analytics end -->
-
+    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
    
@@ -541,32 +550,38 @@
         });
         $('.steps').hide();
         $('#step1').show();
-        var stepCount = 1;
+       
+        var stepCount = {{isset($step_count) ? $step_count : 1}};
+        function showStep(){
+            $(".steps").hide();
+            $("#step"+stepCount).show();
+        }
         var finalCount = 7;
         $(".createAd").hide();
         if(stepCount === finalCount){
             $(".prev").hide();
         }
-
+        $("#stepNo").val(stepCount)
+        showStep();
         $(".next").click(function(){
             $(".prev").show();
             ++stepCount;
-            $(".steps").hide();
-            $("#step"+stepCount).show();
+            showStep();
             if(stepCount === finalCount){
                 $(this).hide();
                 $(".createAd").show();
             }
+            $("#stepNo").val(stepCount);
         })
 
         $(".prev").click(function(){
             $(".next").show();
             --stepCount;
-            $(".steps").hide();
-            $("#step"+stepCount).show();
+            showStep();
             if(stepCount === finalCount){
                 $(this).hide();
             }
+            $("#stepNo").val(stepCount);
         })
         var mediaType  = 'image'
 
@@ -599,54 +614,54 @@
 
         CKEDITOR.replace('ckeditor');
     
-             document.getElementById('image').addEventListener('change', function (event) {
-                const file = event.target.files[0];
-                const errorMessage = document.getElementById('error-message');
-                const submitButton = document.getElementById('nextButton');
+            //  document.getElementById('image').addEventListener('change', function (event) {
+            //     const file = event.target.files[0];
+            //     const errorMessage = document.getElementById('error-message');
+            //     const submitButton = document.getElementById('nextButton');
 
-                if (file) {
-                    const img = new Image();
-                    img.src = URL.createObjectURL(file); 
+            //     if (file) {
+            //         const img = new Image();
+            //         img.src = URL.createObjectURL(file); 
 
-                    img.onload = function () {
-                        const width = img.width;
-                        const height = img.height;
-                        // Allowed image sizes
+            //         img.onload = function () {
+            //             const width = img.width;
+            //             const height = img.height;
+            //             // Allowed image sizes
 
-                        var socialMedia = $("input[name='social_media']:checked").val();
+            //             var socialMedia = $("input[name='social_media']:checked").val();
 
-                        const snapchatallowedSizes = [
-                            { width: 1080 , height: 1920 }
-                        ]
+            //             const snapchatallowedSizes = [
+            //                 { width: 1080 , height: 1920 }
+            //             ]
 
-                        const tiktokallowedSizes = [
-                            { width: 720, height: 1280 },
-                            { width: 1200, height: 628 },
-                            // { width: 640, height: 640 },
-                            // { width: 640, height: 100 },
-                            // { width: 600, height: 500 },
-                            // { width: 640, height: 200 }
-                        ];
+            //             const tiktokallowedSizes = [
+            //                 { width: 720, height: 1280 },
+            //                 { width: 1200, height: 628 },
+            //                 // { width: 640, height: 640 },
+            //                 // { width: 640, height: 100 },
+            //                 // { width: 600, height: 500 },
+            //                 // { width: 640, height: 200 }
+            //             ];
 
-                        // Check if the uploaded image matches any of the allowed sizes
-                        if(socialMedia == 'snapchat'){
-                            const isValidSize = snapchatallowedSizes.some(size => size.width === width && size.height === height);
+            //             // Check if the uploaded image matches any of the allowed sizes
+            //             if(socialMedia == 'snapchat'){
+            //                 const isValidSize = snapchatallowedSizes.some(size => size.width === width && size.height === height);
 
-                        }else if(socialMedia == 'tiktok'){
-                            const isValidSize = tiktokallowedSizes.some(size => size.width <= width && size.height <= height);
-                        }
+            //             }else if(socialMedia == 'tiktok'){
+            //                 const isValidSize = tiktokallowedSizes.some(size => size.width <= width && size.height <= height);
+            //             }
 
-                        if (!isValidSize) {
-                            errorMessage.innerText = "Invalid image size. Allowed sizes: 720x1280, 1200x628, 640x640, 640x100, 600x500, 640x200 pixels.";
-                            errorMessage.style.display = "block";
-                            submitButton.disabled = true;
-                        } else {
-                            errorMessage.style.display = "none";
-                            submitButton.disabled = false;
-                        }
-                    };
-                }
-            });
+            //             if (!isValidSize) {
+            //                 errorMessage.innerText = "Invalid image size. Allowed sizes: 720x1280, 1200x628, 640x640, 640x100, 600x500, 640x200 pixels.";
+            //                 errorMessage.style.display = "block";
+            //                 submitButton.disabled = true;
+            //             } else {
+            //                 errorMessage.style.display = "none";
+            //                 submitButton.disabled = false;
+            //             }
+            //         };
+            //     }
+            // });
             $("#step1 input").change(function(){
                 var currentVal = $("#step1 input:checked").val();
                 $("#step3 ul li").hide();

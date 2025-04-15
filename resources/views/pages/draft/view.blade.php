@@ -21,11 +21,11 @@
                         <ol class="breadcrumb">
 
                             <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                                    List</span></li>
+                            {{__('messages.List')}}</span></li>
                         </ol>
 
                         <a href="{{ route('add.draft') }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
+                            <i class="fa fa-plus"></i> <span>{{__('messages.New')}} {{ $title }}</span>
                         </a>
 
                     </div>
@@ -36,10 +36,11 @@
                                     <thead>
                                         <tr style="">
                                             <th>{{__('messages.ID')}}</th>
-                                            <th>Social Media</th>
-                                            <th>Drafted At</th>
-                                            <th>Data</th>
-                                            <th>{{__('messages.ACTION')}}</th>
+                                            <th>{{__('messages.SocialMedia')}}</th>
+                                            <th>{{__('messages.MEDIA')}}</th>
+                                            <th>{{__('messages.DRAFTED_AT')}}</th>
+                                            <th>{{__('messages.DATA')}}</th>
+                                            <th>{{__('messages.Action')}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -49,6 +50,7 @@
                                                 <td>{{ $list->name }}</td>
                                                 <td>{{ date("M d, Y h:i A",strtotime($list->created_at)) }}</td>
                                                 <td><?=  $list->getDraftPretty() ?></td>
+                                                <td><img src="{{asset($list->getMedia())}}" height="150"></td>
                                                 <td>
                                                  
                                                     <a href="{{ route('continue.draft', $list->id) }}"
