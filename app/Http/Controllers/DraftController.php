@@ -57,10 +57,12 @@ class DraftController extends Controller
         $data['start_date'] = $dates[0];
         $data['end_date'] = $dates[1];
         $data['social_media'] = $draft->social_media;
-        $data['step_count'] = $draft->step;
-        $data['media'] = $draft->media;
-        $data['media_type'] = $draft->media_type;
+        $data['step_count'] = $draft->step ?? 0;
+        $data['media'] = $draft->media ?? '';
+        $data['media_type'] = $draft->media_type ?? '';
         $data['ai_sugguested'] = 0;
+        $record->status = 1;
+        $record->save();
         return view('pages.ads.store', $data);
     }
 
