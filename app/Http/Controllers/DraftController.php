@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Draft;
 use App\Models\Role;
+use Auth;
 
 class DraftController extends Controller
 {
@@ -28,8 +29,9 @@ class DraftController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         $data['title'] = $this->title;
-        $data['listing'] = $this->model::where('status',0)->orderBy('id','desc')->get();
+        $data['listing'] = $this->model::where('status',0)->where('user_id',$user->id)->orderBy('id','desc')->get();
         return view($this->view_page, $data);
     }
 
@@ -68,6 +70,7 @@ class DraftController extends Controller
 
     public function save(Request $request)
     {
+        $user = Auth::user();
         $model = $request->id > 0 ? $this->model::where('id', $request->id)->first() : new $this->model;
         $data = $request->all();
         unset($data['id']);
@@ -77,6 +80,7 @@ class DraftController extends Controller
         $model->value = $data_json;
         $model->status = 0;
         $model->type = 'ads';
+        $model->user_id = $user->id;
         // $this->ImageUpload($model,"image",$request,"drafts");
         $model->save();
         return $model->id;

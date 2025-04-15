@@ -37,9 +37,9 @@
                                         <tr style="">
                                             <th>{{__('messages.ID')}}</th>
                                             <th>{{__('messages.SocialMedia')}}</th>
-                                            <th>{{__('messages.MEDIA')}}</th>
                                             <th>{{__('messages.DRAFTED_AT')}}</th>
                                             <th>{{__('messages.DATA')}}</th>
+                                            <th>{{__('messages.MEDIA')}}</th>
                                             <th>{{__('messages.Action')}}</th>
                                         </tr>
                                     </thead>
