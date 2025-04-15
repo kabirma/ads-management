@@ -107,7 +107,7 @@ class AdsController extends Controller
             $snapchatController = new SnapChatController();
             $response = $snapchatController->campiagnCreation($request);
             if($response !== null && array_key_exists('error',$response)){
-                return redirect()->route($this->redirect_store_page)->with("error", $response['error']);
+                return redirect()->route($this->redirect_store_page,1)->with("error", $response['error']);
             }
         }
         return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
