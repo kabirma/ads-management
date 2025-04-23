@@ -106,7 +106,8 @@ class SnapChatController extends Controller
         $campaignId = $this->campaignCreationDB($data);
 
         if($campaignId === 0){
-            return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
+            // return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
+            return ['error'=>'Error Creating Campaign'];
         }
         $campaignName = $this->setting->name.'-SC-'.$campaignId . date('His');
 
@@ -144,7 +145,10 @@ class SnapChatController extends Controller
                 'data'=> json_encode($campaignResponse),
             ];
             $campaignId = $this->campaignCreationDB($data);
-            $this->createAdGroup($request,$campaignId);
+            $response = $this->createAdGroup($request,$campaignId);
+            if(is_array($response) && array_key_exists('error',$response)) {
+                return ['error' => $response];
+            }
         }else{
             $log = [
                 'reference_id' => $campaignId,
@@ -154,14 +158,17 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
-            dd($response);
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            return ['error'=>$response['debug_message']];
+
+            // return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
 
     function createAdGroup($request,$campaignId){
         if($campaignId === 0){
-            return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
+            // return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
+            return ['error'=>"Error Creating Campaign"];
+
         }
         $campaign = Campaign::find($campaignId);
         $from = (new \DateTime($request->from))->format('Y-m-d\TH:i:s.u\Z');
@@ -262,7 +269,10 @@ class SnapChatController extends Controller
                 'data'=> json_encode($adsquadsResponse),
             ];
             $adGroupId = $this->adGroupCreationDB($data);
-            $this->createAd($adGroupId,$request);
+            $response = $this->createAd($adGroupId,$request);
+            if(is_array($response) && array_key_exists('error',$response)) {
+                return ['error' => $response];
+            }
         }else{
             $log = [
                 'reference_id' => $adGroupId,
@@ -271,17 +281,20 @@ class SnapChatController extends Controller
                 'url' => $url,
                 'response' => json_encode($response),
             ];
-            dd($response);
+            // dd($response);
 
             $this->logResponse($log);
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            return ['error'=>$response['debug_message']];
+
+            // return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
 
 
     public function createAd($adGroupId,$request){
         if($adGroupId === 0){
-            return redirect()->route('add.ads')->with("error", "Error Creating Ads");
+            // return redirect()->route('add.ads')->with("error", "Error Creating Ads");
+            return ['error'=>"Error Creating Ads"];
         }
 
         $adGroup = AdGroup::find($adGroupId);
@@ -302,9 +315,15 @@ class SnapChatController extends Controller
 
         $adId = $this->adCreationDB($data);
         $media = $this->uploadMedia($request, $adId);
-        if(count($media) === 0){
-            return redirect()->route('add.ads')->with("error", "Error Uploading Media");
+        if(array_key_exists('error',$media)) {
+            return ['error' => $media];
         }
+        
+        // if(count($media) === 0){
+        //     // return redirect()->route('add.ads')->with("error", "Error Uploading Media");
+        //     return ['error'=>"Error Uploading Media"];
+
+        // }
         $creative = $this->createCreative($media,$request);
        
         $payload = [
@@ -351,8 +370,9 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
+            return ['error'=>$response['debug_message']];
 
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            // return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
         }
     }
 
@@ -402,6 +422,7 @@ class SnapChatController extends Controller
                     'response' => json_encode($response),
                 ];
                 $this->logResponse($log);
+                return ['error'=>$response['debug_message']];
             }
         }else{
             $log = [
@@ -412,10 +433,9 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
+            return ['error'=>$response['debug_message']];
+
         }
-        dd($response);
-        
-        return [];
     }
 
     function createCreative($mediaResponse,$request){

@@ -3,63 +3,99 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+use Intervention\Image\Facades\Image;
 
 class AdRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            'goal' => ['required', Rule::in(['TRAFFIC'])], 
             'title' => ['required', 'string', 'min:5', 'max:255'],
             'description' => ['required', 'string', 'min:20', 'max:500'],
-            'call_to_action' => ['required', Rule::in(['READ_MORE', 'LEARN_MORE', 'CALL_NOW', 'APPLY_NOW', 'CONTACT_US'])],
-            'website_url' => [
-                'required', 
-                'url', 
-                'regex:/^https:\/\/.+$/i'
-            ],
+            'website_url' => ['required', 'url', 'regex:/^https:\/\/.+$/i'],
             'media_type' => ['required', 'integer', 'in:1,2'],
-            'dates' => ['required', 'regex:/^\d{4}-\d{2}-\d{2} - \d{4}-\d{2}-\d{2}$/', 'after_or_equal:today'],
+            'media' => ['required'], 
+            'social_media' => ['required', Rule::in(['snapchat', 'tiktok'])],
             'budget' => ['required', 'numeric', 'min:160'],
+            'from' => ['required', 'date', 'after_or_equal:today'],
+            'to' => ['required', 'date', 'after_or_equal:from'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'goal.required' => 'The ad goal is required.',
-            'goal.in' => 'The selected goal is invalid.',
             'title.required' => 'The title is required.',
             'title.min' => 'The title must be at least 5 characters long.',
             'description.required' => 'The description is required.',
-            'description.min' => 'The description must be at least 100 characters long.',
-            'call_to_action.required' => 'Please select a valid call-to-action option.',
+            'description.min' => 'The description must be at least 20 characters long.',
+            'description.max' => 'The description should not be greater than 500 characters.',
             'website_url.required' => 'A valid website URL is required.',
-            'website_url.url' => 'Enter a valid URL.',
-            'website_url.regex' => 'Enter a valid URL.',
+            'website_url.url' => 'Enter a valid Website URL.',
+            'website_url.regex' => 'The Website URL must begin with https://',
             'media_type.required' => 'The media type is required.',
             'media_type.in' => 'Invalid media type selected.',
-            'dates.required' => 'You must provide a date range.',
-            'dates.regex' => 'The date format should be YYYY-MM-DD - YYYY-MM-DD.',
-            'dates.after_or_equal' => 'The date range must start from today or a future date.',
+            'media.required' => 'A Media is required.',
+            'social_media.required' => 'Please specify the target social media platform.',
             'budget.required' => 'A budget is required.',
             'budget.numeric' => 'Budget must be a valid number.',
             'budget.min' => 'The budget must be at least 160.',
+            'from.required' => 'The start date is required.',
+            'from.date' => 'The start date must be a valid date.',
+            'from.after_or_equal' => 'The start date cannot be in the past.',
+            'to.required' => 'The end date is required.',
+            'to.date' => 'The end date must be a valid date.',
+            'to.after_or_equal' => 'The end date must be after or equal to the start date.',
         ];
+    }
+
+    protected function withValidator(Validator $validator)
+    {
+        dd("asd");
+        $validator->after(function ($validator) {
+            $url = $this->input('media');
+            $social = $this->input('social_media');
+
+            try {
+                $image = Image::make(asset($url));
+                $width = $image->width();
+                $height = $image->height();
+
+                $valid = false;
+
+                if ($social === 'snapchat') {
+                    $valid = ($width === 1080 && $height === 1920);
+                }
+
+                if ($social === 'tiktok') {
+                    $allowed = [
+                        ['width' => 720, 'height' => 1280],
+                        ['width' => 1200, 'height' => 628],
+                        ['width' => 640, 'height' => 640],
+                        ['width' => 640, 'height' => 100],
+                        ['width' => 600, 'height' => 500],
+                        ['width' => 640, 'height' => 200],
+                    ];
+
+                    $valid = collect($allowed)->contains(function ($size) use ($width, $height) {
+                        return $width >= $size['width'] && $height >= $size['height'];
+                    });
+                }
+
+                if (!$valid) {
+                    $validator->errors()->add('media', 'Invalid image dimensions for selected social platform.');
+                }
+            } catch (\Exception $e) {
+                $validator->errors()->add('media', 'Could not load or process the image.');
+            }
+        });
     }
 }

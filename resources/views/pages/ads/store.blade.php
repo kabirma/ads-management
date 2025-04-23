@@ -259,6 +259,22 @@
             height:200px!important;
             width:auto;
         }
+        .loading-overlay {
+            display: none;
+            background: rgba(255, 255, 255, 0.7);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.is-active {
+            display: flex;
+        }
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
@@ -267,24 +283,36 @@
                 <div class="card">
                     <div class="card-header">
                         <ol class="breadcrumb">
-
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ __("messages.ADD")}}
-                                    {{ $title }}</span>
+                            <li class="breadcrumb-item active"> 
+                                <span class="badge badge-light-primary">{{ __("messages.ADD")}}
+                                    {{ $title }}
+                                </span>
                             </li>
                         </ol>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">
-                            @if (Session::has('error'))
-                                <div class="alert alert-danger text-center">
-                                    <i class="fa fa-times"></i> {{ Session::get('error') }}
-                                </div>
-                            @endif
+                            <div class="alert alert-danger text-center" id="error">
+                                <i class="fa fa-times"></i> <span id="errorMessage"></span>
+                            </div>
+
+                            <div class="alert alert-success text-center" id="success">
+                                <i class="fa fa-check"></i> <span id="successMessage"></span>
+                            </div>
                         
                             <form action="{{ route('save.ads') }}" method="post" id="adForm" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
-
+                                <div class="loading-overlay" id="loader">
+                                    <dotlottie-player
+                                        src="https://lottie.host/0b9fb8be-cfaf-467c-bb48-dd461b508487/l8zI4IHnpj.lottie"
+                                        background="transparent"
+                                        speed="1"
+                                        style="width: 300px; height: 300px"
+                                        loop
+                                        autoplay
+                                    ></dotlottie-player>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12 steps" id="step1">
                                          <div class="step-heading">
@@ -516,7 +544,7 @@
                                         {{__("messages.SAVE_AND_CLOSE")}}</button>
                                     <button type="button" class="btn btn-dark next" id="nextButton"><i class="fa fa-arrow-right"></i>
                                         {{__("messages.Next")}}</button>
-                                    <button class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> {{__("messages.CreateAd")}}</button>
+                                    <button type="button" class="btn btn-primary createAd"><i class="fa fa-checkbox"></i> {{__("messages.CreateAd")}}</button>
 
                                 </div>
                             </form>
@@ -558,12 +586,17 @@
         }
         var finalCount = 7;
         $(".createAd").hide();
-        if(stepCount === finalCount){
+        if(stepCount === 1){
             $(".prev").hide();
+        }
+        if(stepCount === finalCount){
+            $(".next").hide();
+            $(".createAd").show();
         }
         $("#stepNo").val(stepCount)
         showStep();
         $(".next").click(function(){
+            $(".alert").hide();
             $(".prev").show();
             ++stepCount;
             showStep();
@@ -575,11 +608,13 @@
         })
 
         $(".prev").click(function(){
+            $(".createAd").hide();
             $(".next").show();
             --stepCount;
             showStep();
-            if(stepCount === finalCount){
+            if(stepCount === 1){
                 $(this).hide();
+                $(".createAd").show();
             }
             $("#stepNo").val(stepCount);
         })
@@ -693,6 +728,45 @@
                     }
                 });
             }
+
+            $(".alert").hide();
+            $(".createAd").click(function(){
+                $("#loader").addClass("is-active");
+                $(".alert").hide();
+                var formData = $("#adForm").serialize();
+                $.ajax({
+                    url: '{{route('save.ads')}}',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        $("#loader").removeClass("is-active");
+
+                        response = JSON.parse(response);
+                        if(response[0] == 200){
+                            $("#success").show();
+                            $("#successMessage").text(response[1]);
+                            setTimeout(() => {
+                                window.location.href = "{{route('view.ads')}}"
+                            }, 2000);
+                        } else {
+                            let error = response[1].error.error.error;
+                            $("#error").show();
+                            $("#errorMessage").text(error)
+                        }
+                    },
+                    error: function (xhr) {
+                        $("#loader").removeClass("is-active");
+                        $("#error").show();
+                        $("#errorMessage").text(xhr.responseText)
+                        // console.log('Error:', xhr.responseText);
+                    }
+                });
+            })
+
         </script>
+        <script
+            src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+            type="module"
+        ></script>
 
 @endsection

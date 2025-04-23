@@ -1,9 +1,13 @@
 <?php return array (
-  'barryvdh/laravel-translation-manager' => 
+  'intervention/image' => 
   array (
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
     'providers' => 
     array (
-      0 => 'Barryvdh\\TranslationManager\\ManagerServiceProvider',
+      0 => 'Intervention\\Image\\ImageServiceProvider',
     ),
   ),
   'kitloong/laravel-migrations-generator' => 

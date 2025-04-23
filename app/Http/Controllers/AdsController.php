@@ -13,6 +13,11 @@ use App\Http\Controllers\SocialMedia\SnapChatController;
 use App\Http\Controllers\AIController;
 use Auth;
 use session;
+use App\Http\Requests\AdRequest;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Carbon\Carbon;
+
 
 class AdsController extends Controller
 {
@@ -90,8 +95,46 @@ class AdsController extends Controller
         return view($this->store_page, $data);
     }
 
+    private function validateImageResolution(Request $request){
+        $url = $request->media;
+        $social = $request->social_media;
+       
+        $image = Image::make(public_path($url));
+        $width = $image->width();
+        $height = $image->height();
+
+        $valid = false;
+
+        if ($social === 'snapchat') {
+            $allowed = [
+                ['width' => 1080, 'height' => 1920],
+            ];
+        }
+        else if ($social === 'tiktok') {
+            $allowed = [
+                ['width' => 720, 'height' => 1280],
+                ['width' => 1200, 'height' => 628],
+                ['width' => 640, 'height' => 640],
+                ['width' => 640, 'height' => 100],
+                ['width' => 600, 'height' => 500],
+                ['width' => 640, 'height' => 200],
+            ];
+        }
+
+        $valid = collect($allowed)->contains(function ($size) use ($width, $height) {
+            return $width >= $size['width'] && $height >= $size['height'];
+        });
+
+        if (!$valid) {
+            return $allowed;
+        }
+
+        return [];
+    }
+
     public function save(Request $request)
     {
+        
         $dates = explode(" - ",$request->dates);
         $request->merge(
             [
@@ -99,6 +142,33 @@ class AdsController extends Controller
                 'to'=>$dates[1]
             ]
         );
+        
+        $adRequest = new AdRequest();
+
+        $validator = Validator::make(
+            $request->all(),
+            $adRequest->rules(),
+            $adRequest->messages()
+        );
+
+        if ($validator->fails()) {
+            $error['error']['error']['error']= collect($validator->errors()->all())->first();
+            return json_encode([400, $error]);
+        }
+
+        $allowedRes = $this->validateImageResolution($request);
+        if(count($allowedRes)){
+            $sizes = array_map(fn($size) => "{$size['width']} x {$size['height']}", $allowedRes);
+            $error['error']['error']['error']= 'Image Should be in following Width & Height '. implode(", ", $sizes);
+            return json_encode([400, $error]);
+        }
+
+        $from = Carbon::parse($request->from);
+        $to = Carbon::parse($request->to);
+        if ($to->diffInDays($from) < 1) {
+            $error['error']['error']['error']= 'The end date must be at least one day after the start date.';
+            return json_encode([400, $error]);
+        }
 
         if($request->social_media == 'tiktok'){
             $tiktokController = new TikTokController();
@@ -107,10 +177,13 @@ class AdsController extends Controller
             $snapchatController = new SnapChatController();
             $response = $snapchatController->campiagnCreation($request);
             if($response !== null && array_key_exists('error',$response)){
-                return redirect()->route($this->redirect_store_page,1)->with("error", $response['error']);
+                return json_encode([400, $response['error']]);
+                // return redirect()->route($this->redirect_store_page,1)->with("error", $response['error']);
             }
         }
-        return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
+
+        return json_encode([200, $this->title . " Saved Successfully"]);
+        // return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
     }
 
     public function delete($id)
