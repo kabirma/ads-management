@@ -14,10 +14,13 @@ class Media extends Model
 
         if (file_exists($imagePath)) {
             $size = getimagesize($imagePath);
-            dump($size);
-            $width = $size[0];
-            $height = $size[1];
-            echo "Image resolution: {$width} x {$height}";
+            if(count($size)){
+                $width = $size[0];
+                $height = $size[1];
+                echo "Image resolution: {$width} x {$height}";
+            }else{
+                echo "Image not found!";
+            }
         } else {
             echo "Image not found!";
         }
