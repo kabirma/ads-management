@@ -14,6 +14,7 @@ class Media extends Model
 
         if (file_exists($imagePath)) {
             $size = getimagesize($imagePath);
+            dump($size);
             $width = $size[0];
             $height = $size[1];
             echo "Image resolution: {$width} x {$height}";
