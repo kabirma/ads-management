@@ -18,12 +18,12 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">
-                            <form action="{{ route('save.media') }}" method="post" class="row"
+                            <form action="{{ route('save.media') }}" method="post" class=""
                                 enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
-                                <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="media_type">{{__('messages.MEDIA_TYPE')}}</label>
                                     <select name="media_type" class="form-control">
                                         <option value="" selected disabled>Select Media Type</option>
@@ -33,7 +33,7 @@
                                             value="video">{{__('messages.Video')}}</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group">
                                     <label for="media">{{__('messages.Media')}}</label>
                                     <input id="media" name="media" type="file" class="form-control">
                                     @if (isset($record))
@@ -49,7 +49,7 @@
                                         @endif
                                     @endif
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group">
                                     <hr>
                                     <button class="btn btn-primary"><i class="fa fa-check"></i> {{__('messages.SAVE')}}</button>
                                 </div>

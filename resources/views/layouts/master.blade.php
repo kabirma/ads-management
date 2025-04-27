@@ -268,7 +268,10 @@
             <div class="modal-content">
                 <form id="imageForm">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="imageModalLabel">Select Image</h5>
+                        <div class="row" style="width:100%">
+                            <div class="col-md-6"><h4 class="modal-title" id="imageModalLabel">{{__('messages.ChooseYourMedia')}}</h4></div>
+                            <div class="col-md-6" style="text-align: right"><a href="{{route('add.media')}}" class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i></a></div>
+                        </div>
                     </div>
                     <div class="modal-body">
                         <div class="row g-3">
@@ -296,8 +299,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Select</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success">{{__('messages.Select')}}</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('messages.Cancel')}}</button>
                     </div>
                 </form>
             </div>

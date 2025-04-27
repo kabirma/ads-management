@@ -715,7 +715,6 @@
                         $("#loader").removeClass("is-active");
                         $("#error").show();
                         $("#errorMessage").text(xhr.responseText)
-                        // console.log('Error:', xhr.responseText);
                     }
                 });
             })
