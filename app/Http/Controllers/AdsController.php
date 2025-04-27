@@ -238,10 +238,13 @@ class AdsController extends Controller
 
     public function generateAd(Request $request){
         $aiController = new AIController();
+        tryAgain:
         $response = $aiController->fetchContent($request);
         if($response != ''){
             $suggestion = explode("$==$",$response);
-            if(count($suggestion) !== 6){
+            
+            if(count($suggestion) !== 7){
+                goto tryAgain;
                 return redirect()->back()->with("error", "Something went wrong. Please try again.");
             }
 
@@ -251,6 +254,7 @@ class AdsController extends Controller
             $days = (int)$suggestion[3];
             $gender = $suggestion[4];
             $age = $suggestion[5];
+            $socialMedia = $suggestion[6];
 
             $startDate = new \DateTime('tomorrow');
             $endDate = new \DateTime('tomorrow');
@@ -265,9 +269,8 @@ class AdsController extends Controller
             $data['days'] = $days;
             $data['gender'] = $gender;
             $data['age'] = $age;
-            $data['social_media'] = $request->social_media;
+            $data['social_media'] = $socialMedia;
             $data['ai_sugguested'] = 1;
-            
             session([self::AI_SESSION_KEY=>$data]);
             return redirect()->route('add.ads',['ai'=>1]);
         }

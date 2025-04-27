@@ -198,7 +198,9 @@ return [
     "DRAFTED_AT"=> "Drafted At",
     "SocialMediaOption"=>"On Which Social Media you want your ad to run?",
     "AdsReason"=>"What are you looking to achieve from this Ad?",
-    "AdsTarget"=>"Where do you want to run your ad?",
+    "AdsTarget"=>"Where do you want to run your Ad?",
+    "AdsKeywords"=>"Give some keywords related to Ad?",
+    "AdsComments"=>"Add anyother thing thats need to keep in context like budget, gender while suggesting",
     "SuggestContent"=>"Suggest Ad Content",
     "ChooseAPlan"=>"Choose a Plan",
     "GetPlan"=>"Get a plan",
@@ -208,4 +210,5 @@ return [
     "VerifyEmail"=> "Verify Email",
     "SPENDS"=>"Spend",
     "IMPRESSION"=>"Impression",
+    "NeedHelpWithContent"=>"Do you need help with your content",
 ];

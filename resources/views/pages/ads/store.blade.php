@@ -314,16 +314,22 @@
                                     ></dotlottie-player>
                                 </div>
                                 <div class="row">
+                                    @if(isset($ai_sugguested) && $ai_sugguested== 1)
+                                        <div class="col-md-12" style="text-align: right">
+                                            <button type="button" class="btn btn-secondary btn-sm" id="suggestAi"><i class="fa-solid fa-robot"></i> {{__("messages.NeedHelpWithContent")}}</button>
+                                        </div>
+                                    @endif
                                     <div class="col-md-12 steps" id="step1">
                                          <div class="step-heading">
                                             <h2>{{__("messages.ChooseYourMedia")}}</h2>
+                                            @if(isset($ai_sugguested) && $ai_sugguested== 1) <h4 class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                    {{__("messages.AISuggested")}} {{$social_media}})</h4> @endif
                                          </div>
-                                        
                                         <ul id="imageRadio">
                                             <li><input type="radio" name="social_media" disabled value="facebook" id="facebook" />
                                                 <label for="facebook"> <i class="fab fa-facebook"></i> </label>
                                             </li>
-                                            <li><input type="radio" name="social_media"  @if(isset($social_media)) @if($social_media == 'tiktok') checked @endif @else checked @endif value="tiktok" id="tiktok" />
+                                            <li><input type="radio" name="social_media"  @if(isset($social_media)) @if(strtolower($social_media) == 'tiktok') checked @endif @else checked @endif value="tiktok" id="tiktok" />
                                                 <label for="tiktok"><i class="fab fa-tiktok"></i></label>
                                             </li>
                                             <li><input type="radio" name="social_media" disabled value="twitter" id="twitter" />
@@ -332,7 +338,7 @@
                                             <li><input type="radio" name="social_media" disabled value="google" id="google" />
                                                 <label for="google"><i class="fab fa-google"></i></label>
                                             </li>
-                                            <li><input type="radio" name="social_media" @if(isset($social_media)) @if($social_media == 'snapchat') checked @endif @else @endif value="snapchat" id="snapchat" />
+                                            <li><input type="radio" name="social_media" @if(isset($social_media)) @if(strtolower($social_media) == 'snapchat') checked @endif @else @endif value="snapchat" id="snapchat" />
                                                 <label for="snapchat"><i class="fab fa-snapchat"></i></label>
                                             </li>
                                            
@@ -411,12 +417,12 @@
                                             <div class="form-group col-md-12">
                                                 <label for="title">{{__("messages.Title")}} @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                     {{__("messages.AISuggested")}} )</small> @endif</label>
-                                                <input id="title" name="title" type="text" @if(isset($name)) value="{{$name}}" @endif class="form-control">
+                                                <input id="title" name="title" type="text" class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="description">{{__("messages.Description")}} @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                     {{__("messages.AISuggested")}} )</small> @endif</label>
-                                                <textarea name="description" class="form-control" cols="30" rows="10"> @if(isset($name)){{$description}}@endif</textarea>
+                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"></textarea>
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">{{__("messages.CallToAction")}}</label>
@@ -486,7 +492,7 @@
                                                         <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
                                                     @endif
                                                 </label>
-                                                <input id="budget" name="budget" @if(isset($budget)) value="{{$budget}}" @endif type="number" required class="form-control">
+                                                <input id="budget" name="budget" type="number" required class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -499,17 +505,17 @@
                                             <div class="form-group col-md-12">
                                                 <label for="gender">{{__("messages.Gender")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
                                                 <select name="gender" id="gender" class="form-control">
-                                                    <option @if(isset($gender) && strtolower($gender) == 'male') selected @else @endif value="Male">{{__("messages.Male")}}</option>
-                                                    <option @if(isset($gender) && strtolower($gender) == 'female') selected @else @endif value="Female">{{__("messages.Female")}}</option>
-                                                    <option @if(isset($gender) && strtolower($gender) == 'both') selected @else @endif value="Both">{{__("messages.Both")}}</option>
+                                                    <option value="male">{{__("messages.Male")}}</option>
+                                                    <option value="female">{{__("messages.Female")}}</option>
+                                                    <option value="both">{{__("messages.Both")}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="age_group">{{__("messages.AgeGroup")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
                                                 <select name="age_group" id="age_group" class="form-control">
-                                                    <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">{{__("messages.MaxAge18")}}</option>
-                                                    <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">{{__("messages.MaxAge30")}}</option>
-                                                    <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">{{__("messages.AnyAge")}}</option>
+                                                    <option value="18">{{__("messages.MaxAge18")}}</option>
+                                                    <option value="30">{{__("messages.MaxAge30")}}</option>
+                                                    <option value="0">{{__("messages.AnyAge")}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
@@ -553,7 +559,6 @@
                 </div>
             </div>
         </div>
-
     <input type="hidden" value="0" id="draftId">
     </section>
     <!-- Dashboard Analytics end -->
@@ -649,54 +654,6 @@
 
         CKEDITOR.replace('ckeditor');
     
-            //  document.getElementById('image').addEventListener('change', function (event) {
-            //     const file = event.target.files[0];
-            //     const errorMessage = document.getElementById('error-message');
-            //     const submitButton = document.getElementById('nextButton');
-
-            //     if (file) {
-            //         const img = new Image();
-            //         img.src = URL.createObjectURL(file); 
-
-            //         img.onload = function () {
-            //             const width = img.width;
-            //             const height = img.height;
-            //             // Allowed image sizes
-
-            //             var socialMedia = $("input[name='social_media']:checked").val();
-
-            //             const snapchatallowedSizes = [
-            //                 { width: 1080 , height: 1920 }
-            //             ]
-
-            //             const tiktokallowedSizes = [
-            //                 { width: 720, height: 1280 },
-            //                 { width: 1200, height: 628 },
-            //                 // { width: 640, height: 640 },
-            //                 // { width: 640, height: 100 },
-            //                 // { width: 600, height: 500 },
-            //                 // { width: 640, height: 200 }
-            //             ];
-
-            //             // Check if the uploaded image matches any of the allowed sizes
-            //             if(socialMedia == 'snapchat'){
-            //                 const isValidSize = snapchatallowedSizes.some(size => size.width === width && size.height === height);
-
-            //             }else if(socialMedia == 'tiktok'){
-            //                 const isValidSize = tiktokallowedSizes.some(size => size.width <= width && size.height <= height);
-            //             }
-
-            //             if (!isValidSize) {
-            //                 errorMessage.innerText = "Invalid image size. Allowed sizes: 720x1280, 1200x628, 640x640, 640x100, 600x500, 640x200 pixels.";
-            //                 errorMessage.style.display = "block";
-            //                 submitButton.disabled = true;
-            //             } else {
-            //                 errorMessage.style.display = "none";
-            //                 submitButton.disabled = false;
-            //             }
-            //         };
-            //     }
-            // });
             $("#step1 input").change(function(){
                 var currentVal = $("#step1 input:checked").val();
                 $("#step3 ul li").hide();
@@ -762,7 +719,33 @@
                     }
                 });
             })
+           
+            @if(isset($title) && isset($ai_sugguested) && $ai_sugguested== 1)
+                $(".ai-suggestion").hide();
+                $("#suggestAi").click(function(){
+                    $(".ai-suggestion").show();
 
+                    // $("#title").val('{{$name}}')
+                    // $("#description").val('{{$description}}')
+
+                    type(0, $("#title"), "{{$name}}");
+                    type(0, $("#description"), "{{$description}}");
+                    $("#budget").val('{{$budget}}')
+                    $("#age_group").val('{{strtolower($age)}}')
+                    $("#gender").val('{{strtolower($gender)}}')
+                });
+
+
+                function type(index, input, text) {
+                    if (index < text.length) {
+                        input.val(input.val() + text.charAt(index));
+                        index++;
+                        setTimeout(function() {
+                            type(index, input, text);
+                        }, 50);
+                    }
+                }
+            @endif
         </script>
         <script
             src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
