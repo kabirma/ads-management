@@ -26,7 +26,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2 class="fw-bolder mb-0">{{ $spotlight_events }}</h2>
+                            <h2 class="fw-bolder mb-0">{{ $users }}</h2>
                             <p class="card-text">{{ __('messages.USERS') }}</p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
@@ -42,7 +42,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div>
-                            <h2 class="fw-bolder mb-0">{{ $events }}</h2>
+                            <h2 class="fw-bolder mb-0">{{ $adsCount }}</h2>
                             <p class="card-text">{{ __('messages.ADS') }}</p>
                         </div>
                         <div class="avatar bg-light-primary p-50 m-0">
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-12 col-sm-12 col-12">
+            <div class="col-lg-6 col-sm-6 col-12">
                 <div class="card">
                     <div class="card-header">
                         <div>
@@ -64,6 +64,22 @@
                         <div class="avatar bg-light-primary p-50 m-0">
                             <div class="avatar-content">
                                 <i class="fa fa-pencil font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="fw-bolder mb-0">{{ $media }}</h2>
+                            <p class="card-text">{{ __('messages.MEDIA') }}</p>
+                        </div>
+                        <div class="avatar bg-light-primary p-50 m-0">
+                            <div class="avatar-content">
+                                <i class="fa fa-camera font-medium-5"></i>
                             </div>
                         </div>
                     </div>

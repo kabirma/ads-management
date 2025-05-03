@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\BTS;
 use App\Models\Expense;
 use App\Models\Invoice;
 use App\Models\InvoiceProduct;
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\Package;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -17,8 +15,7 @@ use App\Models\Ads;
 use Carbon\Carbon;
 use DateTime;
 use DB;
-use App\Models\Event;
-use App\Models\Gallery;
+use App\Models\Media;
 
 class DashboardController extends Controller
 {
@@ -35,11 +32,10 @@ class DashboardController extends Controller
   public function index()
   {
     $data = array();
-    $data['spotlight_events'] = Package::count();
-    $data['bts'] = BTS::count();
     $data['pages'] = Page::count();
-    $data['events'] = Event::count();
-    $data['media'] = Gallery::count();
+    $data['users'] = User::count();
+    $data['media'] = Media::count();
+    $data['adsCount'] = Ads::count();
     $data['ads'] = Ads::with('adGroup','campaign')->limit(6)->get();
 
     return view('dashboard', $data);
