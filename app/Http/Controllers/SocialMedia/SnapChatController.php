@@ -34,29 +34,6 @@ class SnapChatController extends Controller
         $this->accessToken = $this->setting->snapchat_access_token;
     }
 
-    public function validateData($request){
-        $from = (new \DateTime($request->from));
-        $to = (new \DateTime($request->to));
-        $budget = (int)$request->budget;
-
-        $diff = $from->diff($to);
-        
-        if($budget/($diff->days + 1) < 5){
-            return ['error'=>'Budget should be atleast 5 SAR per day'];
-        }
-
-        $mediaType = $request->media_type == 1 ? "image" : "video";
-        if ($request->media == '') {
-            return ['error' => 'No '.$mediaType.' uploaded'];
-        }
-
-        if($to->format('Y-m-d') < $from->format('Y-m-d')){
-            return ['error' => 'Campaign end date can not be before start date'];
-        }
-
-        return [];
-    }
-
     public function authSnapChat(){
       
         $clientId = $this->clientId;
@@ -106,7 +83,6 @@ class SnapChatController extends Controller
         $campaignId = $this->campaignCreationDB($data);
 
         if($campaignId === 0){
-            // return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
             return ['error'=>'Error Creating Campaign'];
         }
         $campaignName = $this->setting->name.'-SC-'.$campaignId . date('His');
@@ -158,15 +134,12 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
-            return ['error'=>$response['debug_message']];
-
-            // return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            return ['error'=>$this->modifyError($response['debug_message'])];
         }
     }
 
     function createAdGroup($request,$campaignId){
         if($campaignId === 0){
-            // return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
             return ['error'=>"Error Creating Campaign"];
 
         }
@@ -281,19 +254,15 @@ class SnapChatController extends Controller
                 'url' => $url,
                 'response' => json_encode($response),
             ];
-            // dd($response);
 
             $this->logResponse($log);
-            return ['error'=>$response['debug_message']];
-
-            // return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            return ['error'=>$this->modifyError($response['debug_message'])];
         }
     }
 
 
     public function createAd($adGroupId,$request){
         if($adGroupId === 0){
-            // return redirect()->route('add.ads')->with("error", "Error Creating Ads");
             return ['error'=>"Error Creating Ads"];
         }
 
@@ -316,14 +285,9 @@ class SnapChatController extends Controller
         $adId = $this->adCreationDB($data);
         $media = $this->uploadMedia($request, $adId);
         if(array_key_exists('error',$media)) {
-            return ['error' => $media];
+            return ['error' => $this->modifyError($media)];
         }
-        
-        // if(count($media) === 0){
-        //     // return redirect()->route('add.ads')->with("error", "Error Uploading Media");
-        //     return ['error'=>"Error Uploading Media"];
-
-        // }
+       
         $creative = $this->createCreative($media,$request);
        
         $payload = [
@@ -370,9 +334,7 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
-            return ['error'=>$response['debug_message']];
-
-            // return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            return ['error'=>$this->modifyError($response['debug_message'])];
         }
     }
 
@@ -422,7 +384,7 @@ class SnapChatController extends Controller
                     'response' => json_encode($response),
                 ];
                 $this->logResponse($log);
-                return ['error'=>$response['debug_message']];
+                return ['error'=>$this->modifyError($response['debug_message'])];
             }
         }else{
             $log = [
@@ -433,7 +395,7 @@ class SnapChatController extends Controller
                 'response' => json_encode($response),
             ];
             $this->logResponse($log);
-            return ['error'=>$response['debug_message']];
+            return ['error'=>$this->modifyError($response['debug_message'])];
 
         }
     }
@@ -482,7 +444,6 @@ class SnapChatController extends Controller
                 'url' => $url,
                 'response' => json_encode($response),
             ];
-            dd($response);
 
             $this->logResponse($log);
         }

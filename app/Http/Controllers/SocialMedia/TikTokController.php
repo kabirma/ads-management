@@ -69,6 +69,10 @@ class TikTokController extends Controller
 
 
     function campiagnCreation($request){
+        $errors = $this->validateData($request);
+        if(count($errors)){
+            return $errors;
+        }
         $data = [
             'user_id'=>Auth::guard('web')->user()->id,
             'objective_type' => $request->goal,
@@ -77,23 +81,23 @@ class TikTokController extends Controller
         $campaignId = $this->campaignCreationDB($data);
 
         if($campaignId === 0){
-            return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
+            return ['error'=>'Error Creating Campaign'];
         }
         $campaignName = $this->setting->name.'-TK-'.$campaignId . date('His');
-
-        $response = Http::withHeaders([
-            'Access-Token' => $this->accessToken,
-            'Content-Type' => 'application/json',
-        ])->post($this->apiUrl.'/open_api/v1.3/campaign/create/', [
+        $payload = [
             'advertiser_id' => $this->advertiserId,
             'objective_type' => $request->goal,
             'campaign_name' => $campaignName,
-            'budget_mode' => 'BUDGET_MODE_TOTAL',
+            'budget_mode' => 'BUDGET_MssODE_TOTAL',
             'budget' => $request->budget,
-        ]);
+        ];
+        $url = $this->apiUrl.'/open_api/v1.3/campaign/create/';
+        $response = Http::withHeaders([
+            'Access-Token' => $this->accessToken,
+            'Content-Type' => 'application/json',
+        ])->post($url, $payload);
        
         $data = $response->json();
-        dd($data,$this->apiUrl);
         if($data['message']=='OK'){
             $data = [
                 'budget'=>$request->budget,
@@ -106,17 +110,27 @@ class TikTokController extends Controller
                 'data'=> json_encode($data['data']),
             ];
             $campaignId = $this->campaignCreationDB($data);
-            $this->createAdGroup($campaignId,$request);
+            $response = $this->createAdGroup($campaignId,$request);
+            if(is_array($response) && array_key_exists('error',$response)) {
+                return ['error' => $response];
+            }
         }else{
-            dd($data);
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            $log = [
+                'reference_id' => $campaignId,
+                'reference_table' => 'campaigns',
+                'request' => json_encode($payload),
+                'url' => $url,
+                'response' => json_encode($data),
+            ];
+            $this->logResponse($log);
+            return ['error'=>$this->modifyError($data['message'])];
         }
     }
 
 
     function createAdGroup($campaignId,$request){
         if($campaignId === 0){
-            return redirect()->route('add.ads')->with("error", "Error Creating Campaign");
+            return ['error'=>"Error Creating Campaign"];
         }
         $campaign = Campaign::find($campaignId);
         $from = (new \DateTime($request->from))->format('Y-m-d H:i:s');
@@ -146,7 +160,7 @@ class TikTokController extends Controller
             $promotion_type = 'LEAD_GENERATION';
         }
 
-        $postData = array(
+        $payload = array(
             'advertiser_id' => $this->advertiserId,
             'campaign_id' => $campaign->campaign_id,
             'adgroup_name' => $adGroupName,
@@ -170,13 +184,14 @@ class TikTokController extends Controller
         );
 
         if($billing_event === 'CPM'){
-            $postData['frequency'] = 3;
-            $postData['frequency_schedule'] = 3;
+            $payload['frequency'] = 3;
+            $payload['frequency_schedule'] = 3;
         }
+        $url = $this->apiUrl.'/open_api/v1.3/adgroup/create/';
         $response = Http::withHeaders([
             'Access-Token' => $this->accessToken,
             'Content-Type' => 'application/json',
-        ])->post($this->apiUrl.'/open_api/v1.3/adgroup/create/', $postData);
+        ])->post($url, $payload);
         $data = $response->json();
 
         if($data['message']==='OK'){
@@ -190,16 +205,27 @@ class TikTokController extends Controller
                 'data'=> json_encode($data['data']),
             ];
             $adGroupId = $this->adGroupCreationDB($data);
-            $this->createAd($adGroupId,$request);
+            $response = $this->createAd($adGroupId,$request);
+            if(is_array($response) && array_key_exists('error',$response)) {
+                return ['error' => $response];
+            }
         }else{
-            dd($data);
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            $log = [
+                'reference_id' => $adGroupId,
+                'reference_table' => 'ad_groups',
+                'request' => json_encode($payload),
+                'url' => $url,
+                'response' => json_encode($data),
+            ];
+
+            $this->logResponse($log);
+            return ['error'=>$this->modifyError($data['message'])];
         }
     }
 
     public function createAd($adGroupId,$request){
         if($adGroupId === 0){
-            return redirect()->route('add.ads')->with("error", "Error Creating Ads");
+            return ['error'=>"Error Creating Ads"];
         }
 
         $adGroup = AdGroup::find($adGroupId);
@@ -220,9 +246,10 @@ class TikTokController extends Controller
 
         $adId = $this->adCreationDB($data);
         $media = $this->uploadMedia($request, $adId);
-        if(count($media) === 0){
-            return redirect()->route('add.ads')->with("error", "Error Uploading Media");
+        if(array_key_exists('error',$media)) {
+            return ['error' => $this->modifyError($media)];
         }
+
 
         $creatives = [
             'ad_name' => $request->title,
@@ -239,15 +266,16 @@ class TikTokController extends Controller
         }else{
             $creatives['video_id'] = $media['video_id'];
         }
-
-        $response = Http::withHeaders([
-            'Access-Token' => $this->accessToken,
-            'Content-Type' => 'application/json',
-        ])->post($this->apiUrl.'/open_api/v1.3/ad/create/', [
+        $payload = [
             'advertiser_id' => $this->advertiserId,
             'adgroup_id' => $adGroup->adgroup_id,
             'creatives' => [$creatives]
-        ]);
+        ];
+        $url = $this->apiUrl.'/open_api/v1.3/ad/create/';
+        $response = Http::withHeaders([
+            'Access-Token' => $this->accessToken,
+            'Content-Type' => 'application/json',
+        ])->post($url, $payload);
         $data = $response->json();
         if($data['message']==='OK'){
             $data = [
@@ -263,8 +291,15 @@ class TikTokController extends Controller
             $adId = $this->adCreationDB($data);
             return redirect()->route("view.ads")->with("success", "Ads Created Successfully");
         }else{
-            dd($data);
-            return redirect()->route("view.ads")->with("error", "Something went wrong try again later.");
+            $log = [
+                'reference_id' => $adId,
+                'reference_table' => 'ads',
+                'request' => json_encode($payload),
+                'url' => $url,
+                'response' => json_encode($data),
+            ];
+            $this->logResponse($log);
+            return ['error'=>$this->modifyError($data['message'])];
         }
     }
 
@@ -274,25 +309,21 @@ class TikTokController extends Controller
 
         if($request->media_type == 1){
             $fileName = str_replace(" ","_",$request->title) .'-'. date('YMDHis') . '-'.$reference_id;
-
+            $url = $this->apiUrl.'/open_api/v1.3/file/image/ad/upload/';
+            $payload = [
+                'advertiser_id' => $this->advertiserId,
+                'file_name' => $fileName,
+                'image_signature' => md5(file_get_contents($mediaPath)),
+            ];
             $response = Http::withHeaders([
                 'Access-Token' => $this->accessToken,
             ])->attach(
                 'image_file', file_get_contents($mediaPath), $fileName
-            )->post($this->apiUrl.'/open_api/v1.3/file/image/ad/upload/', [
-                'advertiser_id' => $this->advertiserId,
-                'file_name' => $fileName,
-                'image_signature' => md5(file_get_contents($mediaPath)),
-            ]);
+            )->post($url, $payload);
         }else{
-
+            $url = $this->apiUrl.'/open_api/v1.3/file/video/ad/upload/';
             $fileName = str_replace(" ","_",$request->name) .'-'. date('YMDHis') . '-'.$reference_id;
-
-            $response = Http::withHeaders([
-                'Access-Token' => $this->accessToken,
-            ])->attach(
-                'video_file', file_get_contents($mediaPath), $fileName
-            )->post($this->apiUrl.'/open_api/v1.3/file/video/ad/upload/', [
+            $payload =  [
                 'advertiser_id' => $this->advertiserId,
                 'file_name' => $fileName,
                 'upload_type' => 'UPLOAD_BY_FILE',
@@ -300,15 +331,28 @@ class TikTokController extends Controller
                 'flaw_detect' => 'true',
                 'auto_fix_enabled' => 'true',
                 'auto_bind_enabled' => 'true',
-            ]);
+            ];
+            $response = Http::withHeaders([
+                'Access-Token' => $this->accessToken,
+            ])->attach(
+                'video_file', file_get_contents($mediaPath), $fileName
+            )->post($url, $payload);
         }
 
         $data = $response->json();
         if($data['message']=="OK"){
             return $data['data'];
         }
-        dd($data);
-        return [];
+        
+        $log = [
+            'reference_id' => $reference_id,
+            'reference_table' => 'mediaUpload',
+            'request' => json_encode($payload),
+            'url' => $url,
+            'response' => json_encode($data),
+        ];
+        $this->logResponse($log);
+        return ['error'=>$this->modifyError($data['message'])];
     }
 
     function createIdentity(){

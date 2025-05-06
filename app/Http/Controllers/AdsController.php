@@ -177,18 +177,19 @@ class AdsController extends Controller
 
         if($request->social_media == 'tiktok'){
             $tiktokController = new TikTokController();
-            $tiktokController->campiagnCreation($request);
+            $response = $tiktokController->campiagnCreation($request);
+            if($response !== null && array_key_exists('error',$response)){
+                return json_encode([400, $response['error']]);
+            }
         }else if($request->social_media == 'snapchat'){
             $snapchatController = new SnapChatController();
             $response = $snapchatController->campiagnCreation($request);
             if($response !== null && array_key_exists('error',$response)){
                 return json_encode([400, $response['error']]);
-                // return redirect()->route($this->redirect_store_page,1)->with("error", $response['error']);
             }
         }
 
         return json_encode([200, $this->title . " Saved Successfully"]);
-        // return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
     }
 
     public function delete($id)

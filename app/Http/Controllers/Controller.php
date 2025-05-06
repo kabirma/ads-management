@@ -16,7 +16,7 @@ use App\Models\Media;
 use App\Models\Company;
 use App\Models\LogResponse;
 use DateTime;
-
+use App\Http\Controllers\AIController;
 
 class Controller extends BaseController
 {
@@ -213,5 +213,34 @@ class Controller extends BaseController
 
         $diff = $date1->diff($date2);
         return $diff->days + 1;
+    }
+
+    
+    public function validateData($request){
+        $from = (new \DateTime($request->from));
+        $to = (new \DateTime($request->to));
+        $budget = (int)$request->budget;
+
+        $diff = $from->diff($to);
+        
+        if($budget/($diff->days + 1) < 5){
+            return ['error'=>'Budget should be atleast 5 SAR per day'];
+        }
+
+        $mediaType = $request->media_type == 1 ? "image" : "video";
+        if ($request->media == '') {
+            return ['error' => 'No '.$mediaType.' uploaded'];
+        }
+
+        if($to->format('Y-m-d') < $from->format('Y-m-d')){
+            return ['error' => 'Campaign end date can not be before start date'];
+        }
+
+        return [];
+    }
+
+    public function modifyError($error){
+        $aiController = new AIController();
+        return $aiController->modifyErrorContent($error);
     }
 }

@@ -634,15 +634,16 @@
                 $("#media_video").show();
             }
         })
-
+        $("input[name='social_media']").change();
         $("input[name='social_media']").change(function() {
-            $("#call_to_action option").hide();
-
-            if($(this).val() === 'snapchat'){
+            // $("#call_to_action option").hide();
+            var currentSocialMedia = $("input[name='social_media']:checked").val()
+            if(currentSocialMedia == 'snapchat'){
                 $("#callTOActionArea").hide();
                 $("#websiteUrlArea").removeClass("col-md-6");
                 $("#websiteUrlArea").addClass("col-md-12");
-            }else if($(this).val() === 'tiktok'){
+            }
+            else if(currentSocialMedia == 'tiktok'){
                 $(".tiktok").show();
                 $("#callTOActionArea").show();
                 $("#websiteUrlArea").addClass("col-md-6");

@@ -270,7 +270,7 @@
                     <div class="modal-header">
                         <div class="row" style="width:100%">
                             <div class="col-md-6"><h4 class="modal-title" id="imageModalLabel">{{__('messages.ChooseYourMedia')}}</h4></div>
-                            <div class="col-md-6" style="text-align: right"><a href="{{route('add.media')}}" class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i></a></div>
+                            <div class="col-md-6" style="text-align: right"><a href="{{route('add.media')}}" class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i> {{__('messages.UploadMedia')}}</a></div>
                         </div>
                     </div>
                     <div class="modal-body">
@@ -351,6 +351,21 @@
                 $('#mediaArea').html(html);
             }
         });
+    </script>
+
+    <script>
+    window.intercomSettings = {
+        api_base: "https://api-iam.intercom.io",
+        app_id: "a67agzdn",
+        name: '{{Auth::user()->full_name != '' ? Auth::user()->full_name : Auth::user()->name}}',
+        email: '{{Auth::user()->email}}',
+    };
+    </script>
+
+
+    <script>
+    // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/a67agzdn'
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/a67agzdn';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
     </script>
 </body>
 <!-- END: Body-->
