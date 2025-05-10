@@ -61,4 +61,15 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserPackage', 'id', 'user_id');
     }
 
+    
+    public function ads()
+    {
+        return $this->hasMany('App\Models\Ads', 'user_id', 'id');
+    }
+
+    public function medias()
+    {
+        return $this->hasMany('App\Models\Media', 'user_id', 'id');
+    }
+
 }

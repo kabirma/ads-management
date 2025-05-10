@@ -109,6 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'ads'], function () {
         Route::controller(App\Http\Controllers\AdsController::class)->group(function () {
             Route::get('/', 'index')->name('view.ads');
+            Route::get('/user/{id}', 'userAds')->name('view.userads');
             Route::get('/add/{ai}', 'add')->name('add.ads');
             Route::get('/AI/add/', 'addAI')->name('addAI.ads');
             Route::get('/edit/{id}', 'edit')->name('edit.ads');
@@ -153,6 +154,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'media'], function () {
         Route::controller(App\Http\Controllers\GalleryController::class)->group(function () {
             Route::get('/', 'index')->name('view.media');
+            Route::get('/user/{id}', 'userMedia')->name('view.usermedias');
             Route::get('/add', 'add')->name('add.media');
             Route::get('/edit/{id}', 'edit')->name('edit.media');
             Route::get('/detail/{id}', 'detail')->name('detail.media');

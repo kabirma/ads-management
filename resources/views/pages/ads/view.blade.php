@@ -19,12 +19,13 @@
                 <div class="card">
                     <div class="card-header">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                            {{ __("messages.List")}}</span></li>
+                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}</span></li>
                         </ol>
-                        <a href="{{ route('add.ads',0) }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>{{ __("messages.New")}} {{ $title }}</span>
-                        </a>
+                        @if(!isset($addHide) || $addHide == 0)
+                            <a href="{{ route('add.ads',0) }}" class="btn btn-sm btn-primary waves-effect">
+                                <i class="fa fa-plus"></i> <span>{{ __("messages.New")}} {{ $title }}</span>
+                            </a>
+                        @endif
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">

@@ -160,7 +160,46 @@
             
             <div class="titleRow row">
 
+             
                 <div class="col-md-12">
+                </div>
+                <div class="col-md-12">
+                    <section class="codepen-box">
+                        <div class="top">
+                            <div class="top-image">
+                                <img src="{{$ad->image_url}}" alt="image 1">
+                            </div>
+                            <div class="profile">
+                                <div class="profile-pic">
+                                    <img src="{{asset($setting->logo)}}" alt="">
+                                </div>
+                                <div class="profile-info">
+                                    <h3 class="name">{{$ad->name}}</h3>
+                                    <p class="desc">{{$ad->description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            
+                            <a class="bottom-item" target="_blank" href="{{$ad->landing_page_url}}">
+                                <span class="bottom-icon"><i class="fa fa-star"></i></span>
+                                <span class="bottom-number">{{str_replace("_"," ",$ad->call_to_action)}}</span>
+                            </a>
+                          
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="col-md-8 offset-md-2 mt-4 mb-4">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-2">
+                    <hr>
                 </div>
                 <div class="col-md-4">
                     <h4>
@@ -195,47 +234,22 @@
                         {{date("F d, Y",strtotime($ad->adGroup->to))}}
                     </h4>
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-4">
                     <h4>
-                        <small>{{__('messages.IMPRESSION')}} <i class="fa fa-eye text-success"></i></small>
-                        {{$apiResponse['impressions']}}
+                        <small>{{__('messages.SPENDS')}} <i class="fa fa-dollar text-success"></i></small>
+                        {{$apiResponse['spends_total']}}
                     </h4>
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-4">
                     <h4>
-                        <small>{{__('messages.SPENDS')}} <i class="fa fa-dollar text-danger"></i></small>
-                        {{$apiResponse['spend']}} SAR
+                        <small>{{__('messages.IMPRESSION')}} <i class="fa fa-eye text-primary"></i></small>
+                        {{$apiResponse['impression_total']}}
                     </h4>
                 </div>
-                <div class="col-md-12">
-                    <hr>
-                </div>
-                <div class="col-md-12">
-                    <section class="codepen-box">
-                        <div class="top">
-                            <div class="top-image">
-                                <img src="{{$ad->image_url}}" alt="image 1">
-                            </div>
-                            <div class="profile">
-                                <div class="profile-pic">
-                                    <img src="{{asset($setting->logo)}}" alt="">
-                                </div>
-                                <div class="profile-info">
-                                    <h3 class="name">{{$ad->name}}</h3>
-                                    <p class="desc">{{$ad->description}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bottom">
-                            
-                            <a class="bottom-item" target="_blank" href="{{$ad->landing_page_url}}">
-                                <span class="bottom-icon"><i class="fa fa-star"></i></span>
-                                <span class="bottom-number">{{str_replace("_"," ",$ad->call_to_action)}}</span>
-                            </a>
-                          
-                        </div>
-                    </section>
-                </div>
+                
+               
 
             </div>
 
@@ -244,4 +258,34 @@
 
     </section>
     <!-- Dashboard Analytics end -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+            labels: [
+               <?= $apiResponse['labels'] ?>
+            ],
+            datasets: [{
+                label: '{{__('messages.SPENDS')}}',
+                data: [{{$apiResponse['spends']}}],
+                borderWidth: 4
+            },{
+                label: '{{__('messages.IMPRESSION')}}',
+                data: [{{$apiResponse['impressions']}}],
+                borderWidth: 4
+            }]
+            },
+            options: {
+            scales: {
+                y: {
+                beginAtZero: true
+                }
+            }
+            }
+        });
+        </script>
 @endsection

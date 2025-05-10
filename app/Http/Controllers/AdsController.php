@@ -7,6 +7,7 @@ use App\Models\Ads;
 use App\Models\Company;
 // use App\Models\AdsImage;
 use App\Models\Role;
+use App\Models\User;
 use App\Models\UserPackage;
 use App\Http\Controllers\SocialMedia\TikTokController;
 use App\Http\Controllers\SocialMedia\SnapChatController;
@@ -51,7 +52,17 @@ class AdsController extends Controller
         }else{
             $data['listing'] = $this->model::where('user_id',Auth::guard('web')->user()->id)->orderBy('id','desc')->get();
         }
+        $data['addHide'] = 0;
 
+        return view($this->view_page, $data);
+    }
+
+    public function userAds($id)
+    {
+        $user = User::find($id);
+        $data['title'] = ($user->full_name ?? $user->name) . "'s ".$this->title;
+        $data['listing'] = $this->model::where('user_id',$id)->orderBy('id','desc')->get();
+        $data['addHide'] = 1;
         return view($this->view_page, $data);
     }
 

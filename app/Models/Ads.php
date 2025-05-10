@@ -18,4 +18,9 @@ class Ads extends Model
     {
         return $this->belongsTo(AdGroup::class, 'adgroup_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

@@ -452,12 +452,28 @@ class SnapChatController extends Controller
     function fetchAds($adId){
         $ad = Ads::with('adGroup','campaign')->find($adId);
         $adId = $ad->ads_id;
-        $url = $this->apiUrl."ads/$adId/stats";
+        $start = date('Y-m-d', strtotime('-15 days')).'T00:00:00';
+        $end = date('Y-m-d').'T00:00:00';
+        $url = $this->apiUrl."ads/$adId/stats?granularity=DAY&start_time=$start&end_time=$end&limit=10";
         $response = Http::withToken($this->accessToken)->get($url);
         $response = $response->json();
         $statsResponse = [];
         if($response['request_status'] === 'SUCCESS'){
-            $statsResponse = $response['total_stats'][0]['total_stat']['stats'];
+            $timeSeries = $response['timeseries_stats'][0]['timeseries_stat']['timeseries'];
+            $impressions = [];
+            $spends = [];
+            $labels = [];
+            foreach($timeSeries as $timeSerie){
+                $labels[] = '"'.date("j F", strtotime($timeSerie['start_time'])).'"';
+                $spends[] = $timeSerie['stats']['spend'];
+                $impressions[] = $timeSerie['stats']['impressions'];
+            } 
+
+            $statsResponse['impressions'] = implode(", ", $impressions);
+            $statsResponse['spends'] = implode(", ", $spends);
+            $statsResponse['labels'] = implode(", ", $labels);
+            $statsResponse['impression_total'] = array_sum($impressions);
+            $statsResponse['spends_total'] = array_sum($spends);
         }
         return [$ad, $statsResponse];
     }

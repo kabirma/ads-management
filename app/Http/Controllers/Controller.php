@@ -68,6 +68,7 @@ class Controller extends BaseController
             $mediaDB->media_type = $field;
             $mediaDB->reference_id = $reference_id;
             $mediaDB->reference_table = 'ads';
+            $mediaDB->user_id = Auth::guard('web')->user()->id;
             $mediaDB->save();
             
             return $fullPath;
@@ -243,4 +244,18 @@ class Controller extends BaseController
         $aiController = new AIController();
         return $aiController->modifyErrorContent($error);
     }
+
+    public function dateRangeList($start, $end, $format){
+        $startDate = new DateTime(substr($start, 0, 10));
+        $endDate = new DateTime(substr($end, 0, 10));
+
+        $dates = [];
+
+        while ($startDate <= $endDate) {
+            $dates[] = $startDate->format($format);
+            $startDate->modify('+1 day');
+        }
+
+        return $dates;
+    } 
 }

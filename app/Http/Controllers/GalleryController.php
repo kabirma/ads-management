@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Media;
 use App\Models\Role;
-use App\Models\Event;
+use App\Models\User;
+use Auth;
 
 class GalleryController extends Controller
 {
@@ -30,7 +31,19 @@ class GalleryController extends Controller
     public function index()
     {
         $data['title'] = $this->title;
-        $data['listing'] = $this->model::orderBy('id','desc')->get();
+        if(Auth::user()->role_id === 1){
+            $data['listing'] = $this->model::orderBy('id','desc')->get();
+        }else{
+            $data['listing'] = $this->model::where('user_id',Auth::guard('web')->user()->id)->orderBy('id','desc')->get();
+        }
+        return view($this->view_page, $data);
+    }
+
+    public function userMedia($id)
+    {
+        $user = User::find($id);
+        $data['title'] = ($user->full_name ?? $user->name) . "'s ".$this->title;
+        $data['listing'] = $this->model::where('user_id',$id)->orderBy('id','desc')->get();
         return view($this->view_page, $data);
     }
 
@@ -56,6 +69,7 @@ class GalleryController extends Controller
             }
         }
         $this->ImageUpload($model,"media",$request,"gallery","media");
+        $model->user_id =  Auth::guard('web')->user()->id;
         $model->save();
         return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
     }

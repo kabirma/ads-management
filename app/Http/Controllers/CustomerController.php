@@ -32,7 +32,7 @@ class CustomerController extends Controller
     public function index()
     {
         $data['title'] = $this->title;
-        $data['listing'] = $this->model::where('id',"!=",1)->orderBy('id','desc')->get();
+        $data['listing'] = $this->model::with('ads')->where('id',"!=",1)->orderBy('id','desc')->get();
         return view($this->view_page, $data);
     }
 

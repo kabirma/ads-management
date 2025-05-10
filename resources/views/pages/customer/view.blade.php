@@ -41,6 +41,9 @@
                                             <th>{{__('messages.Phone')}}</th>
                                             <th>{{__('messages.Mobile')}}</th>
                                             <th>{{__('messages.Username')}}</th>
+                                            <th>{{__('messages.ADS')}}</th>
+                                            <th>{{__('messages.Media')}}</th>
+                                            <th>{{__('messages.SPENDS')}}</th>
                                             <th>{{__('messages.Action')}}</th>
                                         </tr>
                                     </thead>
@@ -53,8 +56,14 @@
                                                 <td>{{ $list->phone }}</td>
                                                 <td>{{ $list->mobile }}</td>
                                                 <td>{{ $list->name }}</td>
-                                               
+                                                <td><span class="btn btn-primary btn-sm">{{ count($list->ads) }}</span></td>
+                                                <td><span class="btn btn-primary btn-sm">{{ count($list->medias) }}</span></td>
+                                                <td><span class="btn btn-success btn-sm">{{rand(100,6000)}} SAR</span></td>
                                                 <td>
+                                                    <a href="{{ route('view.userads', $list->id) }}"
+                                                    class="btn btn-sm btn-dark"><i class="fa fa-dollar"></i> {{__('messages.VIEW')}} {{__('messages.ADS')}}</a>
+                                                    <a href="{{ route('view.usermedias', $list->id) }}"
+                                                    class="btn btn-sm btn-secondary"><i class="fa fa-camera"></i> {{__('messages.VIEW')}} {{__('messages.Media')}}</a>
                                                     <a href="{{ route('edit.customer', $list->id) }}"
                                                         class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                                     <a href="#0" class="btn btn-sm btn-danger delete"
