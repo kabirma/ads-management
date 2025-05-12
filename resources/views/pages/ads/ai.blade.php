@@ -2,7 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.css" integrity="sha512-3uVpgbpX33N/XhyD3eWlOgFVAraGn3AfpxywfOTEQeBDByJ/J7HkLvl4mJE1fvArGh4ye1EiPfSBnJo2fgfZmg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <style>
         .bootstrap-tagsinput{
             width: 100%;
             padding: 0.571rem 1rem;
@@ -46,32 +46,86 @@
                                     </div>
                                 @endif
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
+                                <div class="form-group col-md-12">
+                                    <label for="reason">{{__('messages.FirstCampaign')}}</label>
+                                    <br>
+                                    <label for="first_campaign_yes">
+                                        <input type="radio" class="first_campaign" name="first_campaign" id="first_campaign_yes" checked value="1"> {{__('messages.Yes')}}
+                                    </label>
+                                    <label for="first_campaign_no">
+                                        <input type="radio" class="first_campaign" name="first_campaign" id="first_campaign_no"  value="0"> {{__('messages.No')}}
+                                    </label>
+                                </div>
+                                <div class="firstCampaignYes">
 
-                                <!-- <div class="form-group col-md-12">
-                                    <label for="social_media">{{__('messages.SocialMediaOption')}}</label>
-                                    <select name="social_media" class="form-control" required>
-                                        <option value="" selected disabled>{{__('messages.Select')}} {{__('messages.SocialMedia')}}</option>
+                                    <div class="form-group col-md-12">
+                                        <label for="reason">{{__('messages.CampaignGoal')}}</label>
+                                        <input type="text" class="form-control" name="campaignGoal" placeholder="{{__('messages.CampaignGoal')}}" required>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="social_media">{{__('messages.SocialMediaOption')}}</label>
+                                        <select name="social_media" class="form-control select2" required>
+                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
+                                        </select>
+                                    </div>
 
-                                        <option value="snapchat">{{__('messages.Snapchat')}}</option>
-                                        <option value="tiktok">{{__('messages.TikTok')}}</option>
-                                    </select>
-                                </div> -->
-                                <div class="form-group col-md-12">
-                                    <label for="reason">{{__('messages.AdsReason')}}</label>
-                                    <input type="text" class="form-control" name="reason" placeholder="{{__('messages.AdsReason')}}" required>
+                                    <div class="form-group col-md-12">
+                                        <label for="location">{{__('messages.BudgetRange')}}</label>
+                                        <input type="text" class="form-control" name="budgetRange" placeholder="{{__('messages.BudgetRange')}}" required>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label for="location">{{__('messages.CampaignTarget')}}</label>
+                                        <input type="text" class="form-control" name="target" placeholder="{{__('messages.CampaignTarget')}}" required>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label for="keywords">{{__('messages.AdsKeywords')}}</label>
+                                        <input type="text" class="form-control" data-role="tagsinput" name="keywords" placeholder="{{__('messages.AdsKeywords')}}" required>
+                                    </div>
+                                    
                                 </div>
-                                <div class="form-group col-md-12">
-                                    <label for="location">{{__('messages.AdsTarget')}}</label>
-                                    <input type="text" class="form-control" name="location" placeholder="{{__('messages.AdsTarget')}}" required>
+
+                                <div class="firstCampaignNo">
+                                    <div class="form-group col-md-12">
+                                        <label for="social_media">{{__('messages.UsedSocialMedia')}}</label>
+                                        <select name="used_social_media[]" class="form-control select2" multiple required>
+                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="social_media">{{__('messages.BestSocialMedia')}}</label>
+                                        <select name="best_social_media[]" class="form-control select2" multiple required>
+                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="social_media">{{__('messages.WorstSocialMedia')}}</label>
+                                        <select name="worst_social_media[]" class="form-control select2" multiple required>
+                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="keywords">{{__('messages.BudgetUsed')}}</label>
+                                        <input type="text" class="form-control" name="budget" placeholder="{{__('messages.BudgetUsed')}}" required>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="keywords">{{__('messages.CampaignDuration')}}</label>
+                                        <input type="text" class="form-control" name="duration" placeholder="{{__('messages.CampaignDuration')}}" required>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="comments">{{__('messages.AdsComments')}}</label>
+                                        <textarea name="comments" class="form-control" required  placeholder="{{__('messages.AdsComments')}}"></textarea>
+                                    </div>
+
                                 </div>
-                                <div class="form-group col-md-12">
-                                    <label for="keywords">{{__('messages.AdsKeywords')}}</label>
-                                    <input type="text" class="form-control" data-role="tagsinput" name="keywords" placeholder="{{__('messages.AdsKeywords')}}" required>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="comments">{{__('messages.AdsComments')}}</label>
-                                    <textarea name="comments" class="form-control"  placeholder="{{__('messages.AdsComments')}}"></textarea>
-                                </div>
+                               
+                                
+                               
                            
                                 <div class="form-group col-md-12">
                                     <hr>
@@ -89,10 +143,27 @@
     <!-- Dashboard Analytics end -->
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.js" integrity="sha512-SXJkO2QQrKk2amHckjns/RYjUIBCI34edl9yh0dzgw3scKu0q4Bo/dUr+sGHMUha0j9Q1Y7fJXJMaBi4xtyfDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        CKEDITOR.replace( 'ckeditor' );
-        $(".select2").select2();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
+
+        $(".firstCampaignYes").hide();
+        $(".firstCampaignNo").hide();
+        $(".first_campaign").change(function(){
+            
+            $(".firstCampaignYes").hide();
+            $(".firstCampaignNo").hide();
+            $(".firstCampaignYes .form-control").removeAttr("required")
+            $(".firstCampaignNo .form-control").removeAttr("required")
+
+            if($(".first_campaign:checked").val() == "1"){
+                $(".firstCampaignYes").show();
+                $(".firstCampaignYes .form-control").prop("required",true)
+            } else{
+                $(".firstCampaignNo").show();
+                $(".firstCampaignNo .form-control").prop("required",true)
+            }
+        });
+
+        $(".first_campaign").change();
     </script>
 @endsection
