@@ -190,7 +190,8 @@ class AdsController extends Controller
             $tiktokController = new TikTokController();
             $response = $tiktokController->campiagnCreation($request);
             if($response !== null && array_key_exists('error',$response)){
-                return json_encode([400, $response['error']]);
+                $error['error']['error']['error'] = $response['error']; 
+                return json_encode([400, $error]);
             }
         }else if($request->social_media == 'snapchat'){
             $snapchatController = new SnapChatController();

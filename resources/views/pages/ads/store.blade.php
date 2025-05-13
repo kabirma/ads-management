@@ -728,8 +728,8 @@
                     // $("#title").val('{{$name}}')
                     // $("#description").val('{{$description}}')
 
-                    type(0, $("#title"), "{{$name}}");
-                    type(0, $("#description"), "{{$description}}");
+                    type(0, $("#title"), "<?= $name ?>");
+                    type(0, $("#description"), "<?= $description ?>");
                     $("#budget").val('{{$budget}}')
                     $("#age_group").val('{{strtolower($age)}}')
                     $("#gender").val('{{strtolower($gender)}}')

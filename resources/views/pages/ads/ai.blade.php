@@ -21,6 +21,12 @@
             padding: 4px 6px;
             border-radius: 3px;
         }
+        .form-group label{
+            margin-bottom: 5px!important;
+        }
+        .form-group{
+            margin-bottom: 1%!important;
+        }
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
@@ -56,6 +62,45 @@
                                         <input type="radio" class="first_campaign" name="first_campaign" id="first_campaign_no"  value="0"> {{__('messages.No')}}
                                     </label>
                                 </div>
+
+                                
+                                <div class="firstCampaignNo">
+                                    <div class="form-group col-md-12">
+                                        <label for="social_media">{{__('messages.UsedSocialMedia')}}</label>
+                                        <select name="used_social_media[]" class="form-control select2" multiple required>
+                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="social_media">{{__('messages.BestSocialMedia')}}</label>
+                                        <select name="best_social_media[]" class="form-control select2" multiple required>
+                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="social_media">{{__('messages.WorstSocialMedia')}}</label>
+                                        <select name="worst_social_media[]" class="form-control select2" multiple required>
+                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
+                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="keywords">{{__('messages.BudgetUsed')}}</label>
+                                        <input type="text" class="form-control" name="used_budget" placeholder="{{__('messages.BudgetUsed')}}" required>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="keywords">{{__('messages.CampaignDuration')}}</label>
+                                        <input type="text" class="form-control" name="duration" placeholder="{{__('messages.CampaignDuration')}}" required>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="comments">{{__('messages.AdsComments')}}</label>
+                                        <textarea name="comments" class="form-control" required  placeholder="{{__('messages.AdsComments')}}"></textarea>
+                                    </div>
+
+                                </div>
+                               
                                 <div class="firstCampaignYes">
 
                                     <div class="form-group col-md-12">
@@ -87,43 +132,6 @@
                                     
                                 </div>
 
-                                <div class="firstCampaignNo">
-                                    <div class="form-group col-md-12">
-                                        <label for="social_media">{{__('messages.UsedSocialMedia')}}</label>
-                                        <select name="used_social_media[]" class="form-control select2" multiple required>
-                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
-                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="social_media">{{__('messages.BestSocialMedia')}}</label>
-                                        <select name="best_social_media[]" class="form-control select2" multiple required>
-                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
-                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="social_media">{{__('messages.WorstSocialMedia')}}</label>
-                                        <select name="worst_social_media[]" class="form-control select2" multiple required>
-                                            <option value="snapchat">{{__('messages.Snapchat')}}</option>
-                                            <option value="tiktok">{{__('messages.TikTok')}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="keywords">{{__('messages.BudgetUsed')}}</label>
-                                        <input type="text" class="form-control" name="budget" placeholder="{{__('messages.BudgetUsed')}}" required>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="keywords">{{__('messages.CampaignDuration')}}</label>
-                                        <input type="text" class="form-control" name="duration" placeholder="{{__('messages.CampaignDuration')}}" required>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="comments">{{__('messages.AdsComments')}}</label>
-                                        <textarea name="comments" class="form-control" required  placeholder="{{__('messages.AdsComments')}}"></textarea>
-                                    </div>
-
-                                </div>
-                               
                                 
                                
                            
@@ -146,19 +154,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.js" integrity="sha512-SXJkO2QQrKk2amHckjns/RYjUIBCI34edl9yh0dzgw3scKu0q4Bo/dUr+sGHMUha0j9Q1Y7fJXJMaBi4xtyfDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
 
-        $(".firstCampaignYes").hide();
         $(".firstCampaignNo").hide();
         $(".first_campaign").change(function(){
             
-            $(".firstCampaignYes").hide();
             $(".firstCampaignNo").hide();
-            $(".firstCampaignYes .form-control").removeAttr("required")
             $(".firstCampaignNo .form-control").removeAttr("required")
 
-            if($(".first_campaign:checked").val() == "1"){
-                $(".firstCampaignYes").show();
-                $(".firstCampaignYes .form-control").prop("required",true)
-            } else{
+            if($(".first_campaign:checked").val() == "0"){
                 $(".firstCampaignNo").show();
                 $(".firstCampaignNo .form-control").prop("required",true)
             }
