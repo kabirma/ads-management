@@ -88,7 +88,7 @@ class TikTokController extends Controller
             'advertiser_id' => $this->advertiserId,
             'objective_type' => $request->goal,
             'campaign_name' => $campaignName,
-            'budget_mode' => 'BUDGET_MssODE_TOTAL',
+            'budget_mode' => 'BUDGET_MODE_TOTAL',
             'budget' => $request->budget,
         ];
         $url = $this->apiUrl.'/open_api/v1.3/campaign/create/';
