@@ -127,13 +127,10 @@
 
                                     <div class="form-group col-md-12">
                                         <label for="keywords">{{__('messages.AdsKeywords')}}</label>
-                                        <input type="text" class="form-control" data-role="tagsinput" name="keywords" placeholder="{{__('messages.AdsKeywords')}}" required>
+                                        <input type="text" class="form-control" id="tags-input" name="keywords" placeholder="{{__('messages.AdsKeywords')}}">
                                     </div>
                                     
                                 </div>
-
-                                
-                               
                            
                                 <div class="form-group col-md-12">
                                     <hr>
@@ -152,7 +149,9 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.6.0/bootstrap-tagsinput.min.js" integrity="sha512-SXJkO2QQrKk2amHckjns/RYjUIBCI34edl9yh0dzgw3scKu0q4Bo/dUr+sGHMUha0j9Q1Y7fJXJMaBi4xtyfDw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   
+    
+    <script>
 
         $(".firstCampaignNo").hide();
         $(".first_campaign").change(function(){
@@ -167,5 +166,16 @@
         });
 
         $(".first_campaign").change();
+
+        $('#tags-input').tagsinput({
+            confirmKeys: [13, 188]
+        });
+
+        $('.bootstrap-tagsinput input').on('keypress', function(e){
+            if (e.keyCode == 13){
+                e.keyCode = 188;
+                e.preventDefault();
+            };
+        });
     </script>
 @endsection

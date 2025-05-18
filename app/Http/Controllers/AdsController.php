@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ads;
+use App\Models\Campaign;
 use App\Models\Company;
 // use App\Models\AdsImage;
 use App\Models\Role;
@@ -82,7 +83,10 @@ class AdsController extends Controller
         }else{
             session([self::AI_SESSION_KEY=>'']);
         }
-        
+
+        $campaignId = Campaign::latest()->first()->id + 1;
+        $setting = Company::first();
+        $data['campaignName'] = $setting->name.'-TK-'.$campaignId . date('His');
         return view($this->store_page, $data);
     }
 
@@ -190,7 +194,7 @@ class AdsController extends Controller
             $tiktokController = new TikTokController();
             $response = $tiktokController->campiagnCreation($request);
             if($response !== null && array_key_exists('error',$response)){
-                $error['error']['error']['error'] = $response['error']; 
+                $error['error']['error']['error'] = $this->flattenError($response['error']); 
                 return json_encode([400, $error]);
             }
         }else if($request->social_media == 'snapchat'){
@@ -202,6 +206,13 @@ class AdsController extends Controller
         }
 
         return json_encode([200, $this->title . " Saved Successfully"]);
+    }
+
+    function flattenError($response) {
+        while (is_array($response) && isset($response['error'])) {
+            $response = $response['error'];
+        }
+        return ['error' => $response];
     }
 
     public function delete($id)
@@ -255,6 +266,9 @@ class AdsController extends Controller
     }
 
     public function generateAd(Request $request){
+        if($request->keywords == null){
+            return redirect()->back()->with("error", "Atleast 1 Keyword is Required.");
+        }
         $aiController = new AIController();
         tryAgain:
         $response = $aiController->fetchContent($request);
@@ -294,5 +308,51 @@ class AdsController extends Controller
         }
 
         return redirect()->back()->with("error", "Something went wrong. Please try again.");
+    }
+
+    public function getReachImpression(Request $request){
+        $countryNames = [
+            "SA" => "Saudi Arabia",
+            "AE" => "United Arab Emirates",
+            "QA" => "Qatar",
+            "BH" => "Bahrain",
+            "KW" => "Kuwait",
+            "OM" => "Oman",
+            "YE" => "Yemen",
+            "IQ" => "Iraq",
+            "SY" => "Syria",
+            "LB" => "Lebanon",
+            "JO" => "Jordan",
+            "PS" => "Palestine",
+            "EG" => "Egypt",
+        ];
+        $country = 'Saudi Arabia';
+        if($request->location != ''){
+            $country = $countryNames[$request->location];
+        }
+
+        $paramteres = $request->all();
+        $exclude = ['_token', 'id', 'step'];
+        $paramteres = collect($paramteres)
+            ->except($exclude)
+            ->map(function ($value, $key) {
+                if (is_array($value)) {
+                    $value = implode(', ', $value); 
+                }
+                return "$key: $value";
+            })->implode(', ');
+
+        $aiController = new AIController();
+        $response = $aiController->getContentWithPrompt('Based on '.$country.' give me the reach in range like {reachStartRange}-{reachEndRange} if I run a campaign here with following parameters ('.$paramteres.') and also how much impression I can get in range {impressionStartRange}-{impressionEndRange}, just give response as exactly like two $ sepereted values like {reachStartRange}-{reachEndRange}${impressionStartRange}-{impressionEndRange}');
+        if($response != ''){
+            $data = explode("$", $response);
+            return [$this->keepOnlyNumbersAndDashes($data[0]), $this->keepOnlyNumbersAndDashes($data[1])];
+        }
+
+        return ['4,000 – 2,700,000', '5,100 – 3,000,000'];
+    }
+
+    function keepOnlyNumbersAndDashes($string) {
+        return preg_replace('/[^0-9\-]/', '', $string);
     }
 }

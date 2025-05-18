@@ -2,19 +2,26 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <div class="row justify-content-center" style="margin-top:15%">
+        <div class="col-md-12" style="">
+            <div class="card" style=" margin: auto; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 30px;">
+                <div class=" text-center" style="margin-bottom:6%">
+                    <h1>{{__("messages.EmailVerification")}}</h1>
+                   
+                </div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    @if (isset($success))
+                        <div class="alert alert-success text-center">
+                            <h4><i class="fa fa-check"></i> {{__("messages.EmailVerifiedSuccess")}}</h4>
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    @if (isset($error))
+                        <div class="alert alert-danger text-center">
+                           <h4> <i class="fa fa-times"></i> {{__("messages.EmailVerifiedError")}}</h4>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -68,6 +68,10 @@ class AIController extends Controller
 
 
     function modifyErrorContent($error){
+        return $error;
+        if(is_array($error)){
+            $error = implode(", ", $error);
+        }
         $prompt = "Modify the error in more human readable form this is the errror '".$error."'"; 
 
         $url = "https://api.openai.com/v1/chat/completions";
@@ -78,6 +82,33 @@ class AIController extends Controller
                 [
                     "role" => "user",
                     "content" => $prompt. ' give me a short one line response and remove unnecessary words'
+                ]
+            ]
+        ];
+        $response = Http::withToken($this->openAiToken)
+            ->withHeaders([
+                'Content-Type' => 'application/json'
+            ])
+            ->post($url, $payload);
+        $response = $response->json();
+        if(array_key_exists('choices',$response)){
+            return $response['choices'][0]['message']['content'];
+        }
+
+        return '';
+    }
+
+
+    function getContentWithPrompt($prompt){
+
+        $url = "https://api.openai.com/v1/chat/completions";
+
+        $payload = [
+            "model" => "gpt-3.5-turbo",
+            "messages" => [
+                [
+                    "role" => "user",
+                    "content" => $prompt
                 ]
             ]
         ];

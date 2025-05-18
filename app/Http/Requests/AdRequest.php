@@ -21,7 +21,6 @@ class AdRequest extends FormRequest
             'title' => ['required', 'string', 'min:5', 'max:255'],
             'description' => ['required', 'string', 'min:20', 'max:500'],
             'website_url' => ['required', 'url', 'regex:/^https:\/\/.+$/i'],
-            'media_type' => ['required', 'integer', 'in:1,2'],
             'media' => ['required'], 
             'social_media' => ['required', Rule::in(['snapchat', 'tiktok'])],
             'budget' => ['required', 'numeric', 'min:160'],
@@ -59,7 +58,6 @@ class AdRequest extends FormRequest
 
     protected function withValidator(Validator $validator)
     {
-        dd("asd");
         $validator->after(function ($validator) {
             $url = $this->input('media');
             $social = $this->input('social_media');

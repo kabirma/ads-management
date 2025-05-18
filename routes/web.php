@@ -31,6 +31,8 @@ Route::get('/change-language/{lang}', function ($lang) {
     return redirect()->back()->with('success', __('messages.language_changed'));
 })->name('change.language');
 
+Route::get('/verfiy/user/{token}', [App\Http\Controllers\CustomerController::class, 'verifyUser'])->name('verify_user');
+
 
 Route::post('/login/submit',  [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
  
@@ -95,6 +97,18 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/status/{id}', 'status')->name('status.page');
         });
     });
+    
+    Route::group(['prefix' => 'business'], function () {
+        Route::controller(App\Http\Controllers\BusinessProfileController::class)->group(function () {
+            Route::get('/', 'index')->name('view.business');
+            Route::get('/add', 'add')->name('add.business');
+            Route::get('/edit/{id}', 'edit')->name('edit.business');
+
+            Route::post('/save', 'save')->name('save.business');
+            Route::get('/delete/{id}', 'delete')->name('delete.business');
+            Route::get('/status/{id}', 'status')->name('status.business');
+        });
+    });
 
 
     Route::group(['prefix' => 'company'], function () {
@@ -118,6 +132,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/save', 'save')->name('save.ads');
             Route::post('/save', 'save')->name('save.ads');
             Route::post('/generate/ad', 'generateAd')->name('generateAd.ads');
+            Route::post('/get/reachimpressions', 'getReachImpression')->name('getReachImpression.ads');
             Route::get('/delete/{id}', 'delete')->name('delete.ads');
             Route::get('/delete/image/{id}', 'delete_image')->name('delete.ads.image');
             Route::get('/status/{id}', 'status')->name('status.ads');

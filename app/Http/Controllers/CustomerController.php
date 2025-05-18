@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Company;
 use Laravel\Socialite\Facades\Socialite;
 use Auth;
+use App\Http\Services\MailService;
 
 class CustomerController extends Controller
 {
@@ -80,20 +82,52 @@ class CustomerController extends Controller
         return redirect()->route($this->redirect_page)->with("error", "No Record Found");
     }
 
-    function verify_email(){
+    function verify_email(MailService $mailService){
+        $company = Company::first();
         $user = Auth::user();
         
-        $to = 'user@example.com';
-        $subject = 'Welcome to Our Platform!';
-        $data = [
-            'name' => 'John Doe',
-            'verificationUrl' => route('verify.email', ['token' => encrypt('user@example.com')])
-        ];
-    
-        Mail::send('emails.custom', $data, function ($message) use ($to, $subject) {
-            $message->to($to)
-                    ->subject($subject);
-        });
-        dd($user);
+        $to = $user->email;
+        $subject = 'Verify Your Email Address';
+        $verificationUrl = url('/verfiy/user/' . rand(100000,999999).urlencode($user->id).rand(100000,999999));
+
+        $html = '
+            <html>
+                <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+                    <div style="max-width: 600px; margin: auto; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 30px;">
+                        <h2 style="color: #333;">Hi ' . htmlspecialchars($user->name) . ',</h2>
+                        <p style="font-size: 16px; color: #555;">
+                            Thank you for registering with us! Please verify your email address by clicking the button below.
+                        </p>
+                        <p style="text-align: center; margin: 30px 0;">
+                            <a href="' . $verificationUrl . '" style="background-color: #4CAF50; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+                                Verify Email
+                            </a>
+                        </p>
+                        <p style="font-size: 14px; color: #888;">
+                            If you did not create an account, no further action is required.
+                        </p>
+                        <p style="font-size: 14px; color: #aaa; text-align: center; margin-top: 40px;">
+                            &copy; ' . date('Y') . ' ' . $company->name . ' All rights reserved.
+                        </p>
+                    </div>
+                </body>
+            </html>
+        ';
+
+        $mailService->sendMail($to, $subject, $html);
+        return redirect()->back()->with("success", "Verification Email Sent");
+    }
+
+    function verifyUser($token){
+
+        $userId = substr($token, 6, -6);
+        $user = User::find($userId);
+        if ($user != null){
+            $user->email_verified_at = date('Y-m-d h:i:s');
+            $user->save();
+            return view('home', ['success' => 1]);
+        } else{
+            return view('home', ['error' => 1]);
+        }
     }
 }

@@ -43,7 +43,11 @@
                                             type="email" required class="form-control">    
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <a href="{{route('verify.email')}}" class="btn btn-success btn-sm">{{ __('messages.VerifyEmail') }}</a>.
+                                                @if($record->email_verified_at == null)
+                                                <a href="{{route('verify.email')}}" class="btn btn-success btn-sm">{{ __('messages.VerifyEmail') }}</a>
+                                                @else
+                                                {{__('messages.EmailVerified')}}
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

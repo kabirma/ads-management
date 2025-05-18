@@ -125,6 +125,8 @@ class TikTokController extends Controller
             $this->logResponse($log);
             return ['error'=>$this->modifyError($data['message'])];
         }
+
+        return $response;
     }
 
 
@@ -249,8 +251,6 @@ class TikTokController extends Controller
         if(array_key_exists('error',$media)) {
             return ['error' => $this->modifyError($media)];
         }
-
-
         $creatives = [
             'ad_name' => $request->title,
             'identity_type' => 'CUSTOMIZED_USER',
@@ -277,6 +277,7 @@ class TikTokController extends Controller
             'Content-Type' => 'application/json',
         ])->post($url, $payload);
         $data = $response->json();
+
         if($data['message']==='OK'){
             $data = [
                 'image_id'=>$request->media_type == 1 ? $media['image_id'] : '',
@@ -289,7 +290,7 @@ class TikTokController extends Controller
                 'ads_id'=>$data['data']['ad_ids'][0],
             ];
             $adId = $this->adCreationDB($data);
-            return redirect()->route("view.ads")->with("success", "Ads Created Successfully");
+            return $response;
         }else{
             $log = [
                 'reference_id' => $adId,
@@ -306,7 +307,7 @@ class TikTokController extends Controller
     function uploadMedia($request, $reference_id){
 
         $mediaPath = public_path($request->media);
-
+        
         if($request->media_type == 1){
             $fileName = str_replace(" ","_",$request->title) .'-'. date('YMDHis') . '-'.$reference_id;
             $url = $this->apiUrl.'/open_api/v1.3/file/image/ad/upload/';
@@ -340,6 +341,7 @@ class TikTokController extends Controller
         }
 
         $data = $response->json();
+        
         if($data['message']=="OK"){
             return $data['data'];
         }
@@ -358,7 +360,6 @@ class TikTokController extends Controller
     function createIdentity(){
         $mediaPath = $this->setting->logo;
         $fileName = $this->setting->name . date('YmdHis');
-
         $response = Http::withHeaders([
             'Access-Token' => $this->accessToken,
         ])->attach(
@@ -370,20 +371,21 @@ class TikTokController extends Controller
         ]);
 
         $mediaResponse = $response->json();
-        $response = Http::withHeaders([
-            'Access-Token' => $this->accessToken,
-            'Content-Type' => 'application/json',
-        ])->post($this->apiUrl.'/open_api/v1.3/identity/create/', [
-            'advertiser_id' => $this->advertiserId,
-            'image_uri' => $mediaResponse['data']['image_id'],
-            'display_name' => $fileName,
-        ]);
+        if(isset($mediaResponse['data']['image_id'])){
+            $response = Http::withHeaders([
+                'Access-Token' => $this->accessToken,
+                'Content-Type' => 'application/json',
+            ])->post($this->apiUrl.'/open_api/v1.3/identity/create/', [
+                'advertiser_id' => $this->advertiserId,
+                'image_uri' => $mediaResponse['data']['image_url'],
+                'display_name' => $fileName,
+            ]);
 
-        $data = $response->json();
-        dump($data);
-        $this->setting->tiktok_identity = $data['data']['identity_id'];
-        $this->setting->save();
-        echo 'Success '.$data['data']['identity_id'];
+            $data = $response->json();
+            $this->setting->tiktok_identity = $data['data']['identity_id'];
+            $this->setting->save();
+            echo 'Success '.$data['data']['identity_id'];
+        }
     }
 
     function fetchAds($adId){

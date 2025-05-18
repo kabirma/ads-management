@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Draft;
 use App\Models\Role;
+use App\Models\Company;
+use App\Models\Campaign;
 use Auth;
 
 class DraftController extends Controller
@@ -62,9 +64,15 @@ class DraftController extends Controller
         $data['step_count'] = $draft->step ?? 0;
         $data['media'] = $draft->media ?? '';
         $data['media_type'] = $draft->media_type ?? '';
+        $data['language'] = $draft->language ?? '';
         $data['ai_sugguested'] = 0;
         $record->status = 1;
         $record->save();
+
+        $campaignId = Campaign::latest()->first()->id + 1;
+        $setting = Company::first();
+        $data['campaignName'] = $setting->name.'-TK-'.$campaignId . date('His');
+
         return view('pages.ads.store', $data);
     }
 

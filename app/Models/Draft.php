@@ -20,10 +20,19 @@ class Draft extends Model
             'location',
             'media',
             'step',
+            'campaigName',
         ];
         foreach ($draft as $key => $value) {
             if (!is_null($value) && $value !== '' && !in_array($key, $notIncluded)) {
-                $output.= '<p><strong>' . ucwords(str_replace('_', ' ', $key)) . ':</strong> ' . htmlspecialchars($value) . '</p>';
+                if(is_array($value)){
+                    $value = array_map('ucwords', $value);
+                    $value = implode(", ", $value);
+                }
+                try{
+                    $output.= '<p><strong>' . ucwords(str_replace('_', ' ', $key)) . ':</strong> ' . ucwords(htmlspecialchars($value)) . '</p>';
+                }catch(\Exception $ex){
+                   
+                }
             }
         }
 
@@ -36,6 +45,16 @@ class Draft extends Model
      
         foreach ($draft as $key => $value) {
             if (!is_null($value) && $value !== '' && $key == 'media') {
+                return $value;
+            }
+        }
+    }
+
+    public function getCampaignName(){
+        $output = '';
+        $draft = json_decode($this->value, true);
+        foreach ($draft as $key => $value) {
+            if (!is_null($value) && $value !== '' && $key == 'campaigName') {
                 return $value;
             }
         }

@@ -12,7 +12,9 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.10",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^4.0"
+        "laravel/ui": "^4.0",
+        "league/oauth2-client": "^2.8",
+        "thenetworg/oauth2-azure": "^2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

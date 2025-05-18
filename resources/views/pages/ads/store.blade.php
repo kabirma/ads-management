@@ -275,6 +275,216 @@
         .loading-overlay.is-active {
             display: flex;
         }
+
+        .budgetTab a{
+            background-color: transparent;
+            color: #968DF3;
+            border: 2px solid #968DF3;
+            border-radius: 10px;
+        }
+
+        .budgetTypeActive{
+            background-color: #968DF3!important;
+            color: white!important;
+            border-color: #968DF3!important;
+        }
+        .budgetTab {
+            display: flex;
+            justify-content: center;
+        }
+        .budgetTab li{
+            text-decoration: none;
+            list-style:none;
+            margin-right:10px;
+        }
+        .button-group-pills{
+            display: flex;
+         }
+        .button-group-pills input{
+            list-style: none;
+        } 
+        .button-group-pills .btn {
+            border-radius: 20px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            margin-left: 10px;
+            border-color: #968DF3;
+            background-color: #FFF;
+            color: #968DF3;
+        }
+        .button-group-pills .btn.active {
+            border-color: #968DF3;
+            background-color: #968DF3;
+            color: #FFF;
+            box-shadow: none;
+        }
+        .button-group-pills .btn:hover {
+            border-color:rgb(139, 129, 253);
+            background-color: rgb(139, 129, 253);
+            color: #FFF;
+        }
+        .recommended_budget label {
+            height: 100px;
+            align-items: center;
+            text-align: center;
+        }
+        .recommended_budget label div {
+            padding: 1% 2%;
+        }
+
+        .button-group-pills label div {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .recommended_budget .active h4{
+            color: white;
+        }
+        .recommended_budget h4{
+            color: #968DF3;
+        }
+                
+
+        .card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+        }
+
+        .ad-preview {
+        width: 100%;
+        max-width: 150px;
+        margin: 10px 0;
+        }
+
+        .wallet {
+        background: linear-gradient(135deg, #968DF3, #968DF3);
+        color: white;
+        text-align: center;
+        border-radius: 10px 10px 0px 0px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        }
+
+        .wallet p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .wallet h2 {
+            margin: 5px 0 0;
+            font-size: 28px;
+            color: white;
+        }
+
+        .terms a {
+            color: #968DF3;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .left-side {
+            background: whitesmoke;
+            padding: 0px;
+            border-radius: 0px 0px 10px 10px;
+        }
+
+        .left-side .card {
+            margin: 2%;
+        }
+
+        .right-side .card {
+            background: linear-gradient(135deg,rgba(243, 242, 253, 0.21),rgb(255, 255, 255));
+        }
+
+        .card h3 {
+            margin-bottom: 2%;
+            text-transform: uppercase;
+        }
+
+        .right-side {
+            padding-top: 1%;
+        }
+
+
+        
+        #steps {
+            text-align: center;
+            margin: 50px auto;
+        }
+
+        .step {
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        display: inline-block;
+        border: 4px solid;
+        border-color: transparent;
+        border-radius: 50%;
+        color: #cdd0da;
+        font-weight: 600;
+        text-align: center;
+        line-height: 35px;
+        }
+
+        .step:first-child {
+        line-height: 40px;
+        }
+
+        .step:nth-child(n+2) {
+        margin: 0 0 0 100px;
+        transform: translate(0, -4px);
+        }
+
+        .step:nth-child(n+2):before {
+        width: 75px;
+        height: 3px;
+        display: block;
+        background-color: white;
+        transform: translate(-95px, 21px);
+        content: "";
+        }
+
+        .step:after {
+        width: 150px;
+        display: block;
+        transform: translate(-55px, 3px);
+        color: #818698;
+        content: attr(data-desc);
+        font-weight: 400;
+        font-size: 13px;
+        }
+
+        .step:first-child:after {
+        transform: translate(-55px, -1px);
+        }
+
+        .step.active {
+        border-color: #968DF3;
+        color: #968DF3;
+        }
+
+        .step.active:before {
+        background: linear-gradient(to right, #58bb58 0%, #73b5e8 100%);
+        }
+
+        .step.active:after {
+        color: #968DF3;
+        }
+
+        .step.done {
+        background-color: #968DF3;
+        border-color: #968DF3;
+        color: white;
+        }
+
+        .step.done:before {
+        background-color: #968DF3;
+        }
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
@@ -298,6 +508,17 @@
 
                             <div class="alert alert-success text-center" id="success">
                                 <i class="fa fa-check"></i> <span id="successMessage"></span>
+                            </div>
+
+                            <div id="steps">
+                                <div class="step active step1" data-desc="{{__("messages.CampaignSocialMedia")}}">1</div>
+                                <div class="step step2" data-desc="{{__("messages.ImportantNotes")}}">2</div>
+                                <div class="step step3" data-desc="{{__("messages.CampaignGoal")}}">3</div>
+                                <div class="step step4" data-desc="{{__("messages.CampaignContent")}}">4</div>
+                                <div class="step step5" data-desc="{{__("messages.CampaignMedia")}}">5</div>
+                                <div class="step step6" data-desc="{{__("messages.DurationBudget")}}">6</div>
+                                <div class="step step7" data-desc="{{__("messages.DemographicLocation")}}">7</div>
+                                <div class="step step8" data-desc="{{__("messages.Summary")}}">8</div>
                             </div>
                         
                             <form action="{{ route('save.ads') }}" method="post" id="adForm" enctype="multipart/form-data">
@@ -372,21 +593,22 @@
                                         <div class="step-heading">
                                             <h2>{{__("messages.Goal")}}</h2>
                                          </div>
+                                        
                                         <ul id="imageRadio">
-                                            <li class='tiktok_goal'><input @if(isset($goal)) @if($goal == 'TRAFFIC') checked @endif @else @endif  type="radio" name="goal" checked value="TRAFFIC" id="tk1" />
+                                            <li class='tiktok_goal'><input @if(isset($goal)) @if($goal == 'TRAFFIC') checked @endif @else @endif  type="radio" name="goal" value="TRAFFIC" id="tk1" />
                                                 <label for="tk1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
                                                     <h4>{{ __("messages.WebsiteTraffic") }}</h4>
                                                     <p>{{__("messages.GetMoreWebsiteVisits")}}</p>
                                                 </label>
                                             </li>
-                                            <li class='tiktok_goal'><input @if(isset($goal)) @if($goal == 'TRAFFIC') checked @endif @else @endif  type="radio" name="goal" value="TRAFFIC" id="tk2" />
+                                            <li class='tiktok_goal'><input @if(isset($goal)) @if($goal == 'LEAD_GENERATION') checked @endif @else @endif  type="radio" name="goal" value="LEAD_GENERATION" id="tk2" />
                                                 <label for="tk2"> <img src="{{asset('front/images/video-chat.png')}}" alt="">
                                                     <h4>{{__("messages.Reach")}}</h4>
                                                     <p>{{__("messages.IncreaseTheOverallReach")}}</p>
                                                 </label>
                                             </li>
 
-                                            <li class='snapchat_goal'><input @if(isset($goal)) @if($goal == 'WEB_CONVERSION') checked @endif @else @endif  type="radio" name="goal" checked value="WEB_CONVERSION" id="sc1" />
+                                            <li class='snapchat_goal'><input @if(isset($goal)) @if($goal == 'WEB_CONVERSION') checked @endif @else @endif  type="radio" name="goal" value="WEB_CONVERSION" id="sc1" />
                                                 <label for="sc1"> <img src="{{asset('front/images/cost-per-click.png')}}" alt="">
                                                     <h4>{{ __("messages.WebsiteTraffic") }}</h4>
                                                     <p>{{ __("messages.GetMoreWebsiteVisits")}}</p>
@@ -415,14 +637,18 @@
                                          </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
+                                                <label for="campaigName">{{__("messages.CampaignTitle")}}</label>
+                                                <input id="campaigName" name="campaigName" value="{{$campaignName}}" type="text" readonly class="form-control">
+                                            </div>
+                                            <div class="form-group col-md-12">
                                                 <label for="title">{{__("messages.Title")}} @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                     {{__("messages.AISuggested")}} )</small> @endif</label>
-                                                <input id="title" name="title" type="text" class="form-control">
+                                                <input id="title" name="title" @if(isset($name)) value="{{$name}}" @endif type="text" class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
                                                 <label for="description">{{__("messages.Description")}} @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                     {{__("messages.AISuggested")}} )</small> @endif</label>
-                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"></textarea>
+                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"> @if(isset($name)){{$description}}@endif</textarea>
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">{{__("messages.CallToAction")}}</label>
@@ -476,24 +702,80 @@
                                             <h2>{{__("messages.ChooseDurationBudget")}}</h2>
                                         </div>
                                         <div class="titleRow row">
-                                            <div class="form-group col-md-12">
-                                                <label for="dates">
-                                                    {{__("messages.ScheduleDates")}}
-                                                    @if(isset($ai_sugguested) && $ai_sugguested== 1)
-                                                        <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
-                                                    @endif
-                                                </label>
-                                                <input id="dates" name="dates" type="text" required class="form-control">
+                                            <div class="col-md-12">
+                                                <ul class="budgetTab">
+                                                    <li>
+                                                        <a class="btn budgetTypeActive" data-id="customBudget">Custom Budget</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="btn" data-id="recommendedBudget">Recommended Budget</a>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="budget">
-                                                    {{__("messages.Budget")}}
-                                                    @if(isset($ai_sugguested) && $ai_sugguested== 1)
-                                                        <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
-                                                    @endif
-                                                </label>
-                                                <input id="budget" name="budget" type="number" required class="form-control">
+                                            <div class="col-md-12">
+                                                <div id="customBudget" class="budgetType">
+                                                    <div class="form-group">
+                                                        <label for="dates">
+                                                            {{__("messages.ScheduleDates")}}
+                                                            @if(isset($ai_sugguested) && $ai_sugguested== 1)
+                                                                <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
+                                                            @endif
+                                                        </label>
+                                                        <input id="dates" name="dates" type="text" class="form-control">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label for="budget">
+                                                            {{__("messages.Budget")}}
+                                                            @if(isset($ai_sugguested) && $ai_sugguested== 1)
+                                                                <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i> {{__("messages.AISuggested")}})</small>
+                                                            @endif
+                                                        </label>
+                                                        <input id="budget" name="budget" @if(isset($budget)) value="{{$budget}}" @endif type="number" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div id="recommendedBudget" class="budgetType">
+                                                    <div class="form-group">
+                                                        <label for="dates">
+                                                            {{__("messages.ScheduleDates")}}
+                                                        </label>
+                                                        <div class="button-group-pills recommended_dates text-center" data-toggle="buttons">
+                                                            <label class="btn btn-default active">
+                                                                <input type="radio" name="recommended_dates" value="{{date('Y-m-d h:m A')}} - {{date('Y-m-d h:m A', strtotime('+7 days'))}}" checked="">
+                                                                <div>1 Weeks</div>
+                                                            </label>
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="recommended_dates" value="{{date('Y-m-d h:m A')}} - {{date('Y-m-d h:m A', strtotime('+15 days'))}}">
+                                                                <div>2 Weeks</div>
+                                                            </label>
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="recommended_dates" value="{{date('Y-m-d h:m A')}} - {{date('Y-m-d h:m A', strtotime('+21 days'))}}">
+                                                                <div>3 Weeks</div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="dates">
+                                                            {{__("messages.Budget")}}
+                                                        </label>
+                                                        <div class="button-group-pills recommended_budget text-center" data-toggle="buttons">
+                                                            <label class="btn btn-default active">
+                                                                <input type="radio" name="recommended_budget" value="150" checked="">
+                                                                <div><h4>150 SAR</h4> <hr> {{__("messages.MinBudget")}}</div>
+                                                            </label>
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="recommended_budget" value="400">
+                                                                <div><h4>400 SAR</h4> <hr> {{__("messages.MidBudget")}}</div>
+                                                            </label>
+                                                            <label class="btn btn-default">
+                                                                <input type="radio" name="recommended_budget" value="700">
+                                                                <div><h4>700 SAR</h4> <hr> {{__("messages.MaxBudget")}}</div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                     
@@ -502,44 +784,110 @@
                                             <h2>{{__("messages.ChooseDemographic&Location")}}</h2>
                                          </div>
                                         <div class="titleRow row">
-                                            <div class="form-group col-md-12">
-                                                <label for="gender">{{__("messages.Gender")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
-                                                <select name="gender" id="gender" class="form-control">
-                                                    <option value="male">{{__("messages.Male")}}</option>
-                                                    <option value="female">{{__("messages.Female")}}</option>
-                                                    <option value="both">{{__("messages.Both")}}</option>
-                                                </select>
+                                            <div class="col-md-12">
+                                                <div class="mb-2 col-md-12">
+                                                    <label for="language">{{__("messages.Language")}} </label><br>
+                                                    <br>
+                                                    <label for="english">
+                                                        <input type="checkbox" name="language[]" @if(isset($language) && in_array('english', $language)) checked @endif value="english"> English
+                                                    </label>
+                                                    <br>
+                                                    <label for="english">
+                                                        <input type="checkbox" name="language[]" @if(isset($language) && in_array('arabic', $language)) checked @endif value="arabic"> عربي
+                                                    </label>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="gender">{{__("messages.Gender")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
+                                                    <select name="gender" id="gender" class="form-control">
+                                                        <option @if(isset($gender) && strtolower($gender) == 'male') selected @else @endif value="Male">{{__("messages.Male")}}</option>
+                                                        <option @if(isset($gender) && strtolower($gender) == 'female') selected @else @endif value="Female">{{__("messages.Female")}}</option>
+                                                        <option @if(isset($gender) && strtolower($gender) == 'both') selected @else @endif value="Both">{{__("messages.Both")}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="age_group">{{__("messages.AgeGroup")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
+                                                    <select name="age_group" id="age_group" class="form-control">
+                                                        <option @if(isset($age) && strtolower($age) == '18') selected @else @endif value="18">{{__("messages.MaxAge18")}}</option>
+                                                        <option @if(isset($age) && strtolower($age) == '30') selected @else @endif value="30">{{__("messages.MaxAge30")}}</option>
+                                                        <option @if(isset($age) && strtolower($age) == '0') selected @else @endif value="0">{{__("messages.AnyAge")}}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="location">{{__("messages.Locations")}}</label>
+                                                    <select name="location" id="locationSelect" class="form-control select2">
+                                                        <option value="">{{__("messages.SelectCountry")}}</option>
+                                                        <option value="SA" selected>{{__("messages.SaudiArabia")}}</option>
+                                                        <option value="AE">{{__("messages.UnitedArabEmirates")}}</option>
+                                                        <option value="QA">{{__("messages.Qatar")}}</option>
+                                                        <option value="BH">{{__("messages.Bahrain")}}</option>
+                                                        <option value="KW">{{__("messages.Kuwait")}}</option>
+                                                        <option value="OM">{{__("messages.Oman")}}</option>
+                                                        <option value="YE">{{__("messages.Yemen")}}</option>
+                                                        <option value="IQ">{{__("messages.Iraq")}}</option>
+                                                        <option value="SY">{{__("messages.Syria")}}</option>
+                                                        <option value="LB">{{__("messages.Lebanon")}}</option>
+                                                        <option value="JO">{{__("messages.Jordan")}}</option>
+                                                        <option value="PS">{{__("messages.Palestine")}}</option>
+                                                        <option value="EG">{{__("messages.Egypt")}}</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="age_group">{{__("messages.AgeGroup")}}  @if(isset($ai_sugguested) && $ai_sugguested== 1) <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>  {{__("messages.AISuggested")}})</small> @endif</label>
-                                                <select name="age_group" id="age_group" class="form-control">
-                                                    <option value="18">{{__("messages.MaxAge18")}}</option>
-                                                    <option value="30">{{__("messages.MaxAge30")}}</option>
-                                                    <option value="0">{{__("messages.AnyAge")}}</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="location">{{__("messages.Locations")}}</label>
-                                                <select name="location[]" id="location" class="form-control select2" multiple>
-                                                    <option value="">{{__("messages.SelectCountry")}}</option>
-                                                    <option value="SA">{{__("messages.SaudiArabia")}}</option>
-                                                    <option value="AE">{{__("messages.UnitedArabEmirates")}}</option>
-                                                    <option value="QA">{{__("messages.Qatar")}}</option>
-                                                    <option value="BH">{{__("messages.Bahrain")}}</option>
-                                                    <option value="KW">{{__("messages.Kuwait")}}</option>
-                                                    <option value="OM">{{__("messages.Oman")}}</option>
-                                                    <option value="YE">{{__("messages.Yemen")}}</option>
-                                                    <option value="IQ">{{__("messages.Iraq")}}</option>
-                                                    <option value="SY">{{__("messages.Syria")}}</option>
-                                                    <option value="LB">{{__("messages.Lebanon")}}</option>
-                                                    <option value="JO">{{__("messages.Jordan")}}</option>
-                                                    <option value="PS">{{__("messages.Palestine")}}</option>
-                                                    <option value="EG">{{__("messages.Egypt")}}</option>
-                                                </select>
-                                            </div>
+                                            {{-- <div class="col-md-4">
+                                                <div id="map" style="height: 300px; margin-top: 20px;"></div>
+                                            </div> --}}
                                         </div>
                                     </div>
-                                 
+
+                                    <div class="col-md-12 steps" id="step8">
+                                        <div class="step-heading">
+                                            <h2>{{__("messages.SummaryAds")}}</h2>
+                                        </div>
+                                        <div class="titleRow row">
+                                            <div class="col-md-8 right-side">
+                                                <div class="card">
+                                                <h3>{{__("messages.AdCreativity")}}</h3>
+                                                <div id="mediaValue"></div>
+                                                </div>
+
+                                                <div class="card">
+                                                <h3>{{__("messages.CampaignDetails")}}</h3>
+                                                <p><strong>{{__("messages.CampaignType")}}:</strong> <span id="goalValue"></span></p>
+                                                <p><strong>{{__("messages.CurrentBalance")}}:</strong> {{$campaignName}}</p>
+                                                </div>
+
+                                                <div class="card">
+                                                <h3>{{__("messages.Audience")}}</h3>
+                                                <p><strong>{{__("messages.Locations")}}:</strong> <span id="locationValue"></span></p>
+                                                <p><strong>{{__("messages.Language")}}:</strong> <span id="languageValue"></span></p>
+                                                <p><strong>{{__("messages.Gender")}}:</strong> <span id="genderValue"></span></p>
+                                                <p><strong>{{__("messages.AgeGroup")}}:</strong> <span id="age_groupValue"></span></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 left-side">
+                                                <div class="wallet">
+                                                <p>{{__("messages.CurrentBalance")}}</p>
+                                                <h2>00 SAR</h2>
+                                                </div>
+
+                                                <div class="card">
+                                                <h3>{{__("messages.CampaignSummary")}}</h3>
+                                                <p><strong>{{__("messages.Duration")}}:</strong> <span id="datesValue"></span></p>
+                                                <p><strong>{{__("messages.DailyBudget")}}:</strong> <span id="dailybudgetValue"></span> SAR</p>
+                                                <p><strong>{{__("messages.TotalBudget")}}:</strong> <span id="budgetValue"></span> SAR</p>
+                                                </div>
+
+                                                <div class="card">
+                                                <h3>{{__("messages.EstimatedCampaignPerformance")}}</h3>
+                                                <p><strong>{{__("messages.Reach")}}:</strong> <span id="reach"></span></p>
+                                                <p><strong>{{__("messages.IMPRESSION")}}:</strong> <span id="impression"></span></p>
+                                                </div>
+
+                                              
+                                            </div>
+                                            </div>
+
+                                    </div>
                                 </div>
                                 <input type="hidden" name="step" value="1" id="stepNo">
                                 <div class="form-group col-md-12 text-center">
@@ -567,12 +915,133 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBDymzR-k83U6xBmrlrTFF2cqYNWysHK0U">
-    </script>
-    
-    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+   
     <script>
+
+       
+
+        function fillSpansFromSerialized(serializedStr) {
+            getReachImpression();
+            const countryNames = {
+                "SA": "{{ __('messages.SaudiArabia') }}",
+                "AE": "{{ __('messages.UnitedArabEmirates') }}",
+                "QA": "{{ __('messages.Qatar') }}",
+                "BH": "{{ __('messages.Bahrain') }}",
+                "KW": "{{ __('messages.Kuwait') }}",
+                "OM": "{{ __('messages.Oman') }}",
+                "YE": "{{ __('messages.Yemen') }}",
+                "IQ": "{{ __('messages.Iraq') }}",
+                "SY": "{{ __('messages.Syria') }}",
+                "LB": "{{ __('messages.Lebanon') }}",
+                "JO": "{{ __('messages.Jordan') }}",
+                "PS": "{{ __('messages.Palestine') }}",
+                "EG": "{{ __('messages.Egypt') }}"
+            };
+
+            const ageGroup = {
+                "18": "{{ __('messages.MaxAge18') }}",
+                "30": "{{ __('messages.MaxAge30') }}",
+                "0": "{{ __('messages.AnyAge') }}",
+              
+            };
+
+            const params = new URLSearchParams(serializedStr);
+            
+            for (const [key, value] of params.entries()) {
+                const cleanKey = key.replace(/\[\]$/, '');
+                const span = $(`#${cleanKey}Value`);
+                var spanValue = decodeURIComponent(value.replace(/\+/g, ' ')).toUpperCase();
+                console.log(cleanKey, spanValue);
+                if(cleanKey == 'location'){
+                    locationValue = countryNames[spanValue] || spanValue;
+                    span.text(locationValue);
+                } 
+                else if(cleanKey == 'age_group'){
+            
+                    age_group = ageGroup[spanValue] || spanValue;
+                    span.text(age_group);
+
+                } else if(cleanKey == 'media'){
+                    @if(isset($media))
+                        const selectedType = '{{ $media_type ? "image" : "video" }}';
+                        const selectedpath = '{{asset($media)}}';
+                    @else
+                        const selectedType = $('input[name="image"]:checked').attr('data-type');
+                        const selectedpath = $('input[name="image"]:checked').attr('data-path');
+                    @endif
+
+                    mediahtml = fetchMediaContent(selectedType, selectedpath)
+                    span.html(mediahtml)
+
+                } else if(cleanKey == 'dates'){
+                    var dates = formatDatesForPreview(decodeURIComponent(value.replace(/\+/g, ' ')))
+                    span.text(dates);
+                } else if(cleanKey == 'language'){
+                       let selectedLanguages = [];
+
+                        $('input[name="language[]"]:checked').each(function () {
+                            selectedLanguages.push($(this).val());
+                        });
+
+                        span.text(selectedLanguages.join(', '));
+                } else{
+                    span.text(spanValue);
+                }
+
+            }
+
+            calculateDailyBudget();
+        }
+
+        function fetchMediaContent(selectedType, selectedpath){
+            let mediahtml = '';
+
+            if (selectedType === 'video') {
+                mediahtml = `
+                    <video width="320" height="240" controls>
+                        <source src="${selectedpath}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+            } else if (selectedType === 'image') {
+                mediahtml = `<img src="${selectedpath}" alt="Media" height="200">`;
+            }
+            
+            return mediahtml;
+        }
+
+        function formatDatesForPreview(date){
+            const [startRaw, endRaw] = date.split(' - ');
+
+            const startDate = new Date(startRaw);
+            const endDate = new Date(endRaw);
+
+            const options = { day: 'numeric', month: 'short' }; 
+            const formattedStart = startDate.toLocaleDateString('en-US', options);
+            const formattedEnd = endDate.toLocaleDateString('en-US', options);
+            const year = endDate.getFullYear();
+
+            const formattedRange = `${formattedStart} - ${formattedEnd}, ${year}`;
+            return formattedRange;
+        }
+
+        function calculateDailyBudget() {
+            const dateRange = $('input[name="dates"]').val();
+            const budget = parseFloat($('input[name="budget"]').val());
+
+            const [startStr, endStr] = dateRange.split(' - ');
+
+            const startDate = new Date(startStr);
+            const endDate = new Date(endStr);
+
+            const timeDiff = Math.abs(endDate - startDate);
+            const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+            const dailyBudget = days > 0 ? (budget / days).toFixed(2) : budget;
+
+            $('#dailybudgetValue').text(dailyBudget);
+        }
+
         $('input[name="dates"]').daterangepicker({
             autoApply: true, 
             timePicker: true,
@@ -586,31 +1055,41 @@
        
         var stepCount = {{isset($step_count) ? $step_count : 1}};
         function showStep(){
+            $(".step").removeClass('active');
             $(".steps").hide();
             $("#step"+stepCount).show();
+            $(".step"+stepCount).addClass('active');
         }
-        var finalCount = 7;
+
+        var finalCount = 8;
         $(".createAd").hide();
+
         if(stepCount === 1){
             $(".prev").hide();
         }
+
         if(stepCount === finalCount){
             $(".next").hide();
             $(".createAd").show();
         }
-        $("#stepNo").val(stepCount)
+
+        $("#stepNo").val(stepCount);
         showStep();
+
         $(".next").click(function(){
             $(".alert").hide();
             $(".prev").show();
             ++stepCount;
-            showStep();
             if(stepCount === finalCount){
                 $(this).hide();
                 $(".createAd").show();
+                var formData = $("#adForm").serialize();
+                fillSpansFromSerialized(formData);
             }
+            showStep();
             $("#stepNo").val(stepCount);
-        })
+            updateStepProgress();
+        });
 
         $(".prev").click(function(){
             $(".createAd").hide();
@@ -619,10 +1098,11 @@
             showStep();
             if(stepCount === 1){
                 $(this).hide();
-                $(".createAd").show();
             }
             $("#stepNo").val(stepCount);
-        })
+            updateStepProgress();
+        });
+
         var mediaType  = 'image'
 
         $("#media_type").change(function(){
@@ -652,8 +1132,6 @@
         })
 
         $("#media_type").change();
-
-        CKEDITOR.replace('ckeditor');
     
             $("#step1 input").change(function(){
                 var currentVal = $("#step1 input:checked").val();
@@ -680,6 +1158,25 @@
                     data: formData,
                     success: function (response) {
                         window.location.href = "{{route('view.ads')}}"
+                    },
+                    error: function (xhr) {
+                        // console.log('Error:', xhr.responseText);
+                    }
+                });
+            }
+
+            function getReachImpression(){
+                $("#reach").text('Calculating...');
+                $("#impression").text('Calculating...');
+                var formData = $("#adForm").serialize();
+                $.ajax({
+                    url: '{{route('getReachImpression.ads')}}',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        console.log(response);
+                        $("#reach").text(response[0]);
+                        $("#impression").text(response[1]);
                     },
                     error: function (xhr) {
                         // console.log('Error:', xhr.responseText);
@@ -746,6 +1243,61 @@
                     }
                 }
             @endif
+
+            $(".budgetType").hide();
+            $("#customBudget").show();
+            $(".budgetTab a").click(function(){
+                $(".budgetTab a").toggleClass('budgetTypeActive');
+                $(this).addClass("budgetTypeActive")
+                var id = $(this).attr('data-id');
+                $(".budgetType").hide();
+                $("#"+id).show();
+            });
+
+            $(".recommended_budget label").click(function(){
+                $(".recommended_budget label").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            $(".recommended_dates label").click(function(){
+                $(".recommended_dates label").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            $('#locationSelect').on('change', function () {
+                let code = $(this).val();
+                alert(code);
+                $("#map").html('<iframewidth="100%"height="400"style="border:0"loading="lazy"allowfullscreensrc="https://www.google.com/maps?q='+code+'&output=embed"></iframe>')
+            });
+
+            $('input[name="recommended_dates"]').change();
+            $('input[name="recommended_budget"]').change();
+            $(document).on('change', 'input[name="recommended_dates"]', function () {
+                const selectedValue = $(this).val();
+                $('input[name="dates"]').val(selectedValue);
+            });
+
+            $(document).on('change', 'input[name="recommended_budget"]', function () {
+                const selectedValue = $(this).val();
+                $('input[name="budget"]').val(selectedValue);
+            });
+            
+
+            var formData = $("#adForm").serialize();
+            fillSpansFromSerialized(formData);
+
+            function updateStepProgress(){
+                 $('.step').each(function(index, element) {
+                    // element == this
+                    $(element).not('.active').addClass('done');
+                
+                    if($(this).is('.active')) {
+                    return false;
+                    }
+                });    
+            }
+
+            updateStepProgress();
         </script>
         <script
             src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"

@@ -154,6 +154,26 @@
             </ul>
         </li>
 
+        <li class=" nav-item">
+            <a class="d-flex align-items-center" href="#">
+                <i class="fa fa-shopping-cart"></i><span class="menu-title text-truncate" data-i18n="Invoice">{{__('messages.BusinessProfile')}}
+                </span>
+            </a>
+            <ul class="menu-content">
+                <li class="{{ Route::currentRouteName() == 'view.business' ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('view.business') }}">
+                        <i class="fa fa-list"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.VIEW')}}</span>
+                    </a>
+                </li>
+                <li class="{{ Route::currentRouteName() == 'add.business' ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('add.business',0) }}">
+                        <i class="fa fa-plus"></i><span class="menu-item text-truncate" data-i18n="List">{{__('messages.ADD')}}</span>
+                    </a>
+                </li>
+              
+            </ul>
+        </li>
+
 
 
         <li class=" nav-item">

@@ -21,11 +21,11 @@
                         <ol class="breadcrumb">
 
                             <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                            {{__('messages.List')}}</span></li>
+                                    List</span></li>
                         </ol>
 
-                        <a href="{{ route('add.draft') }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>{{__('messages.New')}} {{ $title }}</span>
+                        <a href="{{ route('add.business') }}" class="btn btn-sm btn-primary waves-effect">
+                            <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
                         </a>
 
                     </div>
@@ -35,31 +35,30 @@
                                 <table id="dataTable" class="table zero-configuration ">
                                     <thead>
                                         <tr style="">
-                                            <th>{{__('messages.ID')}}</th>
-                                            <th>{{__('messages.CampaignName')}}</th>
-                                            <th>{{__('messages.SocialMedia')}}</th>
-                                            <th>{{__('messages.DRAFTED_AT')}}</th>
-                                            <th>{{__('messages.DATA')}}</th>
-                                            <th>{{__('messages.MEDIA')}}</th>
-                                            <th>{{__('messages.Action')}}</th>
+                                            <th>{{__("messages.ID")}}</th>
+                                            <th>{{__("messages.Name")}}</th>
+                                            <th>{{__("messages.BusinessPlatform")}}</th>
+                                            <th>{{__("messages.WebsiteUrl")}}</th>
+                                            <th>{{__("messages.Currency")}}</th>
+                                            <th>{{__("messages.Action")}}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($listing as $list)
                                             <tr>
                                                 <td>{{ $list->id }}</td>
-                                                <td>{{ $list->getCampaignName() }}</td>
                                                 <td>{{ $list->name }}</td>
-                                                <td>{{ date("M d, Y h:i A",strtotime($list->created_at)) }}</td>
-                                                <td><?=  $list->getDraftPretty() ?></td>
-                                                <td><img src="{{asset($list->getMedia())}}" height="150"></td>
+                                                <td>{{ $list->platform }}</td>
+                                                <td><a href="{{ $list->url }}" class="btn btn-primary"> {{__("messages.WebsiteUrl")}} <i class="fa fa-arrow-right"></i> </a></td>
+                                                <td>{{ $list->currency }}</td>
                                                 <td>
-                                                 
-                                                    <a href="{{ route('continue.draft', $list->id) }}"
-                                                        class="btn btn-sm btn-primary">{{__('messages.CONTINUE_CREATION')}} <i class="fa fa-arrow-right"></i></a>
+                                                    <a href="{{ route('status.page', $list->id) }}"
+                                                        class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
+                                                    <a href="{{ route('edit.business', $list->id) }}"
+                                                        class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                                     <a href="#0" class="btn btn-sm btn-danger delete"
-                                                        data-title="{{ $list->name }} Draft"
-                                                        data-href="{{ route('delete.draft', $list->id) }}"><i
+                                                        data-title="{{ $list->title }}"
+                                                        data-href="{{ route('delete.business', $list->id) }}"><i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
