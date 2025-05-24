@@ -246,6 +246,7 @@ return [
     "Duration" => "Duration",
     "DailyBudget" => "Daily Budget",
     "TotalBudget" => "Total Budget",
+    "Total" => "Total",
     "EstimatedCampaignPerformance" => "Estimated Campaign Performance",
     "DemographicLocation"=>"Demographic",
     "DurationBudget" => "Duration & Budget",
@@ -255,5 +256,12 @@ return [
     "CampaignContent" => "Campaign Content",
     "ImportantNotes" => "Important Note",
     "Summary" => "Summary",
+    "Reference" => "Reference",
+    "Amount" => "Amount",
+    "User" => "User",
+    "Transactions" => "Transactions",
+    "AmountTopUp" => "Top-Up Amount",
+    "Top_Up" => "Top-Up",
+    "VAT" => "VAT",
 
 ];

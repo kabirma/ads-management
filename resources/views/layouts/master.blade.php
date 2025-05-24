@@ -306,6 +306,34 @@
             </div>
         </div>
     </div>
+    <!-- Dashboard Analytics end -->
+        <div id="popupModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="popupModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form action="{{ route('wallet_top_up') }}" method="post">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title">{{ __('messages.TOP_UP_CREDITS') }}</h4>
+                        </div>
+                        <div class="modal-body">
+                            @csrf
+                            <div class="form-group">
+                                <label for="">{{ __('messages.AmountTopUp') }} SAR</label>
+                                <input type="number" id="walletTopUpAmount" min="100" class="form-control" name="amount"
+                                    placeholder="{{ __('messages.AmountTopUp') }}" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary">{{ __('messages.Top_Up') }}</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
 
     <script>
         $(document).ready(function () {

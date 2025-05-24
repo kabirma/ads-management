@@ -49,8 +49,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/wallet', [App\Http\Controllers\DashboardController::class, 'wallet'])->name('user_wallet');
    
     Route::get('/package', [App\Http\Controllers\PurchaseController::class, 'index'])->name('user_package');
+    Route::get('/transactions', [App\Http\Controllers\PurchaseController::class, 'viewTransaction'])->name('view_transactions');
     Route::post('/package/purchase', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('purchase_package');
+    Route::post('/wallet/topup', [App\Http\Controllers\PurchaseController::class, 'walletTopUp'])->name('wallet_top_up');
 
+    
     // Social Media Integration
    
     Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'authTiktok'])->name('authTiktok');

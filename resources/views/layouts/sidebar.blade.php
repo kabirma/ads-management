@@ -126,7 +126,19 @@
             </ul>
         </li>
 
+        <li class=" nav-item {{ Route::currentRouteName() == 'view_transactions' ? 'active' : '' }}">
+            <a class="d-flex align-items-center" href="{{ route('view_transactions') }}">
+                <i class="fa fa-dollar"></i>
+                <span class="menu-title text-truncate" data-i18n="{{__('messages.Transactions')}}">{{__('messages.Transactions')}}</span>
+            </a>
+        </li>
 
+        <li class=" nav-item">
+            <a class="d-flex align-items-center" href="{{ route('logout.admin') }}">
+                <i class="fa fa-arrow-left"></i>
+                <span class="menu-title text-truncate" data-i18n="Logot">{{__('messages.Logout')}}</span>
+            </a>
+        </li>
 
         @else
         <li class=" nav-item">
@@ -204,7 +216,12 @@
             </a>
         </li>
 
-     
+        <li class=" nav-item {{ Route::currentRouteName() == 'view_transactions' ? 'active' : '' }}">
+            <a class="d-flex align-items-center" href="{{ route('view_transactions') }}">
+                <i class="fa fa-dollar"></i>
+                <span class="menu-title text-truncate" data-i18n="Profile">{{__('messages.Transactions')}}</span>
+            </a>
+        </li>
 
         <li class=" nav-item">
             <a class="d-flex align-items-center" href="{{ route('logout.admin') }}">

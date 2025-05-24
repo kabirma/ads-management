@@ -15,8 +15,10 @@ use App\Models\Ads;
 use App\Models\Media;
 use App\Models\Company;
 use App\Models\LogResponse;
+use App\Models\Transaction;
 use DateTime;
 use App\Http\Controllers\AIController;
+
 
 class Controller extends BaseController
 {
@@ -258,4 +260,14 @@ class Controller extends BaseController
 
         return $dates;
     } 
+
+    public function createTransaction($data){
+        $transaction = new Transaction();
+        $transaction->user_id = $data['user_id'];
+        $transaction->amount = $data['amount'];
+        $transaction->ref_id = $data['ref_id'];
+        $transaction->ref = $data['ref'];
+        $transaction->payment_id = $data['payment_id'];
+        $transaction->save();
+    }
 }
