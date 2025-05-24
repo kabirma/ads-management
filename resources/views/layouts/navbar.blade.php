@@ -12,7 +12,11 @@
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="user-nav d-sm-flex ">
                     <span class="user-name fw-bolder">{{ Auth::user()->name }}</span>
+                    @if(Auth::user()->role_id !== 1)
                     <span class="user-status">{{Auth::user()->wallet}} SAR <i class="fa fa-wallet"></i></span>
+                    @else
+                    <span class="user-status">{{Auth::user()->email}}</span>
+                    @endif
                 </div>
                 <span class="avatar"><img class="round" src="{{ asset('user.png') }}" alt="avatar" height="40"
                         width="40">

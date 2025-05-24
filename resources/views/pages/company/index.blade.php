@@ -43,8 +43,8 @@
                                         type="text" required class="form-control">
                                 </div>
 
-                          <div class="form-group col-md-12">
-                                <label for="phone">{{__("messages.Phone")}}</label>
+                                <div class="form-group col-md-12">
+                                    <label for="phone">{{__("messages.Phone")}}</label>
                                   <input id="phone" name="phone" value="{{ isset($record) ? $record->phone : '' }}"
                                        type="text"  class="form-control">
                                 </div>
@@ -65,6 +65,12 @@
                                     <label for="short_description">{{__('messages.ShortDescription')}}</label>
                                     <input id="short_description" name="short_description" value="{{ isset($record) ? $record->short_description : '' }}"
                                         type="text" required class="form-control">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="vat">{{__("messages.VAT")}}</label>
+                                  <input id="tax" name="tax" min="1" max="100" value="{{ isset($record) ? $record->tax : '' }}"
+                                       type="number" class="form-control">
                                 </div>
 
                                 <div class="col-md-12">

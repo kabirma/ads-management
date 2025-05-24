@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\Gallery;
 use App\Models\User;
 use App\Models\Package;
-use App\Models\Event;
-use App\Models\EventImage;
-use App\Models\InterestedEvents;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,11 +57,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $today = date("Y-m-d");
-        $spot_light_events = Package::orderBy("id", "DESC")->inRandomOrder()->limit(6)->get();
-        $events = Event::orderBy("date", "ASC")->limit(8)->where('status',1)->where('date','>', $today)->get();
-        $genres = Event::groupBy('genre')->pluck('genre')->toArray();
-        return view('front.index', compact("spot_light_events", "events", "genres"));
+        return view('front.index');
     }
 
     public function content($category)
