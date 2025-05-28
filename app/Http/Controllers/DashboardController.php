@@ -37,8 +37,7 @@ class DashboardController extends Controller
     $data['media'] = Media::count();
     $data['adsCount'] = Ads::count();
     $data['ads'] = Ads::with('adGroup','campaign')->limit(6)->get();
-
-    return view('dashboard', $data);
+    return view('dashboard', $data)->with('success','YAYAYAYAYY');
   }
 
   public function ajax(Request $request)

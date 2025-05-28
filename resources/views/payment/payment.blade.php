@@ -1,60 +1,52 @@
-@extends('layouts.master')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<script src="https://test-gateway.mastercard.com/checkout/version/61/checkout.js" 
-            data-error="errorCallback"
-            data-complete="completeCallback">
-    </script>
-    <!-- Dashboard Analytics Start -->
-    <section id="dashboard-analytics">
-        <div class="row">
-            <div class="col-12">
-                @if (Session::has('success'))
-                    <div class="alert alert-success text-center">
-                        <i class="fa fa-check"></i> {{ Session::get('success') }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ $setting->name }} | {{ __('messages.PaymentCheckout') }} </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #timer {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <section>
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+
+            <div class="card">
+                <div class="card-header" style="text-align: center">
+                    <img src="{{ asset($setting->logo) }}" alt="{{ $setting->name }}">
+                    <br>
+                    <h5>{{ __('messages.Dear') }} {{ $user->full_name == '' ? $user->name : $user->full_name }}</h5>
+                    <p>
+                        {!! __('messages.ProvidePaymentInformation', ['AMOUNT' => $amount]) !!}
+                    </p>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+
+                        <form action="{{ route('wallet_top_up_redirect') }}?ref={{ $ref }}"
+                            class="paymentWidgets" data-brands="VISA MASTER"></form>
                     </div>
-                @endif
-
-                @if (Session::has('error'))
-                    <div class="alert alert-danger text-center">
-                        <i class="fa fa-times"></i> {{ Session::get('error') }}
-                    </div>
-                @endif
-                <div class="card">
-                    <div class="card-header">
-                        <ol class="breadcrumb">
-
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{ $title }}
-                                    List</span></li>
-                        </ol>
-
-                        <a href="{{ route('add.package') }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>New {{ $title }}</span>
-                        </a>
-
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body card-dashboard" style="padding-top: 0px;">
-  
-                        <h1>Processing Payment...</h1>
-                        <script type="text/javascript">
-                            function completeCallback(response) {
-                                alert("Success")
-                                // window.location.href = "{{ route('mastercard.success') }}";
-                            }
-
-                            function errorCallback(error) {
-                                window.location.href = "{{ route('mastercard.cancel') }}";
-                            }
-
-                            Checkout.configure({
-                                session: {
-                                    id: "{{ $sessionData['session']['id'] }}"
-                                }
-                            });
-
-                            Checkout.showPaymentPage();
-                        </script>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ __('messages.SessionExpire') }} <span id="timer">03:00</span>
+                        </div>
+                        <div class="col-md-6" style="text-align: right">
+                            <a href="{{ route('wallet_top_up_cancel') }}"
+                                class="btn btn-danger btn-sm">{{ __('messages.CancelWalletTopUp') }}</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -62,6 +54,38 @@
 
 
     </section>
-    <!-- Dashboard Analytics end -->
-@endsection
 
+    <script src="{{ $checkoutUrl }}" integrity="{{ $integrity }}" crossorigin="anonymous"></script>
+    <script>
+        const countdownSeconds = 180;
+        let timeLeft = countdownSeconds;
+        let isCountingDown = true;
+        const redirectUrl = "{{ route('wallet_top_up_cancel') }}";
+        const timerDisplay = document.getElementById('timer');
+
+        function formatTime(seconds) {
+            const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const sec = String(seconds % 60).padStart(2, '0');
+            return `${min}:${sec}`;
+        }
+
+        const interval = setInterval(() => {
+            if (isCountingDown) {
+                timerDisplay.textContent = formatTime(timeLeft);
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    isCountingDown = false;
+                    timeLeft = 0;
+                    timerDisplay.textContent = '{{ __('messages.SessionExpired') }}';
+                    setTimeout(() => {
+                        window.location.href = redirectUrl;
+                    }, 1000);
+                }
+            }
+        }, 1000);
+    </script>
+
+</body>
+
+</html>

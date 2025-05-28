@@ -40,22 +40,6 @@ class PurchaseController extends Controller
         return redirect()->route('dashboard')->with("success", "Purcahse Was Successful");
     }
 
-    public function walletTopUp(Request $request){
-
-        $user = Auth::user();
-        $user->wallet += $request->amount;
-        $user->save();
-
-        $this->createTransaction([
-            'user_id' => $user->id,
-            'amount' => $request->amount,
-            'ref_id' => 0,
-            'ref' => 'wallet',
-            'payment_id' => '',
-        ]);
-
-        return redirect()->back()->with("success", "Wallet Top Up Successfull");
-    }
 
     public function viewTransaction()
     {

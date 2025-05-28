@@ -263,5 +263,15 @@ return [
     "AmountTopUp" => "Top-Up Amount",
     "Top_Up" => "Top-Up",
     "VAT" => "VAT",
-
+    "Dear" => "Dear",
+    "ProvidePaymentInformation" => "In order to Complete Top Up of <b>:AMOUNT SAR</b> Please Provide Your Payment Information.",
+    "PaymentCheckout" => "Payment Checkout",
+    "SessionExpire" => "Session expires in",
+    "SessionExpired" => "Session expired redirect back",
+    "CancelWalletTopUp" => "Cancel Wallet Top Up",
+    "Error" => "Error",
+    "Success" => "Success",
+    "Warning" => "Warning",
+    "ConfirmMessageDelete" => "Are you sure you want to delete this Record",
+    "Confirm" => "Confirm",
 ];

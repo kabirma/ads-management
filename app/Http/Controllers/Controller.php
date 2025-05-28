@@ -268,6 +268,9 @@ class Controller extends BaseController
         $transaction->ref_id = $data['ref_id'];
         $transaction->ref = $data['ref'];
         $transaction->payment_id = $data['payment_id'];
+        if(array_key_exists('payment_response', $data)){
+            $transaction->payment_response = $data['payment_response'];
+        }
         $transaction->save();
     }
 }
