@@ -24,7 +24,7 @@
 
             <div class="card">
                 <div class="card-header" style="text-align: center">
-                    <img src="{{ asset($setting->logo) }}" alt="{{ $setting->name }}">
+                    <img src="{{ asset($setting->logo) }}" alt="{{ $setting->name }}" style="height:100px">
                     <br>
                     <h5>{{ __('messages.Dear') }} {{ $user->full_name == '' ? $user->name : $user->full_name }}</h5>
                     <p>
