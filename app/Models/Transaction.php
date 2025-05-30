@@ -32,9 +32,9 @@ class Transaction extends Model
 
     public function getAmount() {
          if($this->ref == 'wallet') {
-            return '<span class="btn btn-sm btn-danger">-'.$this->amount.' SAR</span>';
-        } else if($this->ref == 'ads') {
             return '<span class="btn btn-sm btn-success">+'.$this->amount.' SAR</span>';
+        } else if($this->ref == 'ads') {
+            return '<span class="btn btn-sm btn-danger">-'.$this->amount.' SAR</span>';
         } else {
             return '<span class="btn btn-sm btn-danger">-'.$this->amount.' SAR</span>';
         }
