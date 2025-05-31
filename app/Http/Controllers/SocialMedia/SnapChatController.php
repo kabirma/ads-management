@@ -289,7 +289,9 @@ class SnapChatController extends Controller
         }
        
         $creative = $this->createCreative($media,$request);
-       
+        if(array_key_exists('error',$creative)) {
+            return ['error' => $this->modifyError($creative)];
+        }
         $payload = [
             "ads" => [
                 [
@@ -446,6 +448,7 @@ class SnapChatController extends Controller
             ];
 
             $this->logResponse($log);
+            return ['error'=>$this->modifyError($response['debug_message'])];
         }
     }
 
@@ -457,8 +460,14 @@ class SnapChatController extends Controller
         $url = $this->apiUrl."ads/$adId/stats?granularity=DAY&start_time=$start&end_time=$end&limit=10";
         $response = Http::withToken($this->accessToken)->get($url);
         $response = $response->json();
-        $statsResponse = [];
-        if($response['request_status'] === 'SUCCESS'){
+        $statsResponse = [
+            'impressions' => '',
+            'spends' => '',
+            'labels' => '',
+            'impression_total'=>0,
+            'spends_total'=>0,
+        ];
+        if(!empty($response) && $response['request_status'] === 'SUCCESS'){
             $timeSeries = $response['timeseries_stats'][0]['timeseries_stat']['timeseries'];
             $impressions = [];
             $spends = [];

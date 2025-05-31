@@ -444,7 +444,7 @@
             background-color: white;
             display: inline-block;
             border: 4px solid;
-            border-color: transparent;
+            border-color: whitesmoke;
             border-radius: 50%;
             color: #cdd0da;
             font-weight: 600;
@@ -465,7 +465,7 @@
             width: 75px;
             height: 3px;
             display: block;
-            background-color: white;
+            background-color: whitesmoke;
             transform: translate(-95px, 21px);
             content: "";
         }
