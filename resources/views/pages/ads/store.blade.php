@@ -433,7 +433,10 @@
             padding-top: 1%;
         }
 
-
+        .col-md-4.left-side span {
+            right: 20px;
+            position: absolute;
+        }
 
         #steps {
             text-align: center;
@@ -1005,6 +1008,7 @@
                                                 <div class="wallet">
                                                     <p>{{ __('messages.CurrentBalance') }}</p>
                                                     <h2>00 SAR</h2>
+                                                    <h2>{{Auth::user()->getWallet()}} SAR</h2>
                                                 </div>
 
                                                 <div class="card">
@@ -1032,6 +1036,7 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="step" value="1" id="stepNo">
+                                <input type="hidden" name="walletDeduct" value="0" id="walletDeduct">
                                 <div class="form-group col-md-12 text-center">
                                     <hr>
                                     <button type="button" class="btn btn-secondary prev"><i
@@ -1045,6 +1050,9 @@
                                         {{ __('messages.Next') }}</button>
                                     <button type="button" class="btn btn-primary createAd"><i
                                             class="fa fa-checkbox"></i> {{ __('messages.CreateAd') }}</button>
+                                    <button type="button" id="topUpButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
+                                        <i class="fa fa-dollar"></i> {{ __('messages.Top_Up') }} <span id="remaingAmount"></span>
+                                    </button>
 
                                 </div>
                             </form>
@@ -1170,9 +1178,14 @@
             return formattedRange;
         }
 
+        let maintotal = 0;
+        const wallet = {{Auth::user()->wallet}};
+        $("#topUpButton").hide();
+
         function calculateDailyBudget() {
             const dateRange = $('input[name="dates"]').val();
             const budget = parseFloat($('input[name="budget"]').val());
+            const vat = {{$setting->tax}};
 
             const [startStr, endStr] = dateRange.split(' - ');
 
@@ -1182,10 +1195,32 @@
             const timeDiff = Math.abs(endDate - startDate);
             const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-            const dailyBudget = days > 0 ? (budget / days).toFixed(2) : budget;
+            const dailyBudget = Number(days > 0 ? (budget / days).toFixed(2) : budget);
 
-            $('#dailybudgetValue').text(dailyBudget);
+            const vatRate = parseInt(vat)/100;
+            const vatAmount = budget * vatRate;
+            maintotal = budget + (budget * vatRate);
+            $('#dailybudgetValue').text(dailyBudget.toFixed(2) + ' SAR');
+            $('#budgetValue').text(budget.toFixed(2) + ' SAR');
+            $('#VatValue').text(vatAmount.toFixed(2) + ' SAR');
+            $("#totalValue").text(maintotal.toFixed(2) + ' SAR');
+            $("#walletDeduct").val(maintotal);
+            if(maintotal > wallet){
+                $(".createAd").hide();
+                $("#topUpButton").show();
+                $("#remaingAmount").text((parseInt(maintotal) - parseFloat(wallet)).toFixed(2) + ' SAR')
+            } else{
+                $(".createAd").show();
+                $("#topUpButton").hide();
+            }
         }
+
+        $("#topUpButton").click(function(){
+            var walletTopUP =(parseInt(maintotal) - parseFloat(wallet));
+            if(walletTopUP > 0){
+                $("#walletTopUpAmount").val(walletTopUP);
+            }
+        })
 
         $('input[name="dates"]').daterangepicker({
             autoApply: true,

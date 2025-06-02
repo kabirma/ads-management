@@ -152,9 +152,24 @@ class AdsController extends Controller
         return [];
     }
 
+    private function deductWallet($data) {
+        $user = Auth::user();
+        $user->wallet -= $data['walletDeduct'];
+        $user->save();
+
+        $this->createTransaction([
+            'user_id' => $user->id,
+            'amount' => $data['walletDeduct'],
+            'ref_id' => Auth::user()->ads()->latest()->first()->id,
+            'ref' => 'ads',
+            'payment_id' => '',
+        ]);
+
+    }
+
     public function save(Request $request)
     {
-        
+
         $dates = explode(" - ",$request->dates);
         $request->merge(
             [
@@ -204,7 +219,10 @@ class AdsController extends Controller
                 return json_encode([400, $response['error']]);
             }
         }
-
+        
+        $this->deductWallet([
+            'walletDeduct' => $request->walletDeduct
+        ]);
         return json_encode([200, $this->title . " Saved Successfully"]);
     }
 

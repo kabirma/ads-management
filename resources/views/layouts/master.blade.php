@@ -10,7 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <title>{{$title ?? "Dashboard"}} | {{$setting->name}}</title>
+    <title>{{ $title ?? 'Dashboard' }} | {{ $setting->name }}</title>
     <link rel="apple-touch-icon" href="{{ asset('assets/images/ico/apple-icon-120.png') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
@@ -31,13 +31,13 @@
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/bootstrap.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/bootstrap-extended.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/colors.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/components.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/themes/dark-layout.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/themes/bordered-layout.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/themes/semi-dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/themes/dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/themes/bordered-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/themes/semi-dark-layout.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -45,10 +45,10 @@
 
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder.'/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset($cssFolder . '/core/menu/menu-types/vertical-menu.css') }}">
 
     <link rel="stylesheet" type="text/css"
-        href="{{ asset($cssFolder.'/plugins/extensions/ext-component-toastr.css') }}">
+        href="{{ asset($cssFolder . '/plugins/extensions/ext-component-toastr.css') }}">
 
     <!-- END: Page CSS-->
 
@@ -79,7 +79,7 @@
             }
         }
     </style>
-    
+
     <style>
         .image-radio {
             position: relative;
@@ -87,7 +87,7 @@
             border: 2px solid transparent;
             transition: border 0.3s;
             border-radius: 8px;
-            max-width:100%;
+            max-width: 100%;
         }
 
         .image-radio input[type="radio"] {
@@ -97,7 +97,7 @@
         .image-radio img {
             width: 100%;
             height: auto;
-            object-fit:cover;
+            object-fit: cover;
             border-radius: 8px;
         }
 
@@ -122,9 +122,9 @@
             display: block;
         }
 
-        #imageModal .modal-body{
-            height:500px;
-            overflow-y : scroll;
+        #imageModal .modal-body {
+            height: 500px;
+            overflow-y: scroll;
         }
     </style>
     @stack('stylesheets')
@@ -228,8 +228,8 @@
             "positionClass": "toast-top-right",
             "preventDuplicates": true,
             "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
+            "showDuration": "2000",
+            "hideDuration": "2000",
             "timeOut": "2000",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
@@ -238,14 +238,33 @@
             "hideMethod": "fadeOut"
         };
 
+        @if(Session::has('success'))
+            toastr.remove();
+            toastr['success']("{{ Session::get('success') }}",
+                '{{ __('messages.Success') }}', {
+                    closeButton: true,
+                    tapToDismiss: true,
+                    progressBar: true
+                });
+        @endif
+
+        @if(Session::has('error'))
+            toastr.remove();
+            toastr['error']("{{ Session::get('error') }}",
+                '{{ __('messages.Error') }}', {
+                    closeButton: true,
+                    tapToDismiss: true,
+                    progressBar: true
+                });
+        @endif
+
         $(".select2").select2();
 
         $(document).on('click', '.delete', function() {
             toastr.remove();
-            toastr['warning']('Are you sure you want to delete this Record for <b>' + $(this).attr('data-title') +
-                '</b>?<br /><br /><a type="button" href="' + $(this).attr('data-href') +
-                '" class="btn-sm btn-danger clear">Confirm</a>',
-                'Warning', {
+            toastr['warning']('{{ __('messages.ConfirmMessageDelete') }}?<br /><br /><a type="button" href="' + $(this).attr('data-href') +
+                '" class="btn-sm btn-danger clear">{{ __('messages.Confirm') }}</a>',
+                '{{ __('messages.Warning') }}', {
                     closeButton: true,
                     tapToDismiss: false,
                     progressBar: false
@@ -259,37 +278,48 @@
                 'csvHtml5',
                 'pdfHtml5'
             ],
-            "order": [[ 0, 'desc' ]]
+            "order": [
+                [0, 'desc']
+            ]
         });
     </script>
-    
+
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <form id="imageForm">
                     <div class="modal-header">
                         <div class="row" style="width:100%">
-                            <div class="col-md-6"><h4 class="modal-title" id="imageModalLabel">{{__('messages.ChooseYourMedia')}}</h4></div>
-                            <div class="col-md-6" style="text-align: right"><a href="{{route('add.media')}}" class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i> {{__('messages.UploadMedia')}}</a></div>
+                            <div class="col-md-6">
+                                <h4 class="modal-title" id="imageModalLabel">{{ __('messages.ChooseYourMedia') }}
+                                </h4>
+                            </div>
+                            <div class="col-md-6" style="text-align: right"><a href="{{ route('add.media') }}"
+                                    class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i>
+                                    {{ __('messages.UploadMedia') }}</a></div>
                         </div>
                     </div>
                     <div class="modal-body">
                         <div class="row g-3">
                             @foreach ($medias as $media)
-                                @if($media->media_type == 'image')
+                                @if ($media->media_type == 'image')
                                     <div class="col-4">
                                         <label class="image-radio">
-                                            <input type="radio" name="image" value="{{$media->media}}" data-path="{{asset($media->media)}}" data-type="{{$media->media_type}}">
-                                            <img src="{{asset($media->media)}}" alt="{{$media->name}}">
-                                            {{$media->getImageSize()}}
+                                            <input type="radio" name="image" value="{{ $media->media }}"
+                                                data-path="{{ asset($media->media) }}"
+                                                data-type="{{ $media->media_type }}">
+                                            <img src="{{ asset($media->media) }}" alt="{{ $media->name }}">
+                                            {{ $media->getImageSize() }}
                                         </label>
                                     </div>
                                 @else
                                     <div class="col-4">
                                         <label class="image-radio">
-                                            <input type="radio" name="image" value="{{$media->media}}" data-path="{{asset($media->media)}}" data-type="{{$media->media_type}}">
+                                            <input type="radio" name="image" value="{{ $media->media }}"
+                                                data-path="{{ asset($media->media) }}"
+                                                data-type="{{ $media->media_type }}">
                                             <video width="320" height="240" controls>
-                                                <source src="{{asset($media->media)}}" type="video/mp4">
+                                                <source src="{{ asset($media->media) }}" type="video/mp4">
                                                 Your browser does not support the video tag.
                                             </video>
                                         </label>
@@ -299,17 +329,46 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">{{__('messages.Select')}}</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('messages.Cancel')}}</button>
+                        <button type="submit" class="btn btn-success">{{ __('messages.Select') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('messages.Cancel') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <!-- Dashboard Analytics end -->
+    <div id="popupModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="popupModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form action="{{ route('wallet_top_up') }}" method="post">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ __('messages.TOP_UP_CREDITS') }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label for="">{{ __('messages.AmountTopUp') }} SAR</label>
+                            <input type="number" id="walletTopUpAmount" min="100" class="form-control"
+                                name="amount" placeholder="{{ __('messages.AmountTopUp') }}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary">{{ __('messages.Top_Up') }}</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
 
     <script>
-        $(document).ready(function () {
-            $('.image-radio').on('click', function () {
+        $(document).ready(function() {
+            $('.image-radio').on('click', function() {
                 $('.image-radio input[type="radio"]').prop('checked', false);
                 $('.image-radio').removeClass('checked');
 
@@ -318,7 +377,7 @@
                 $(this).addClass('checked');
             });
 
-            $('#imageForm').on('submit', function (e) {
+            $('#imageForm').on('submit', function(e) {
                 e.preventDefault();
                 const selected = $('input[name="image"]:checked').val();
                 const selectedType = $('input[name="image"]:checked').attr('data-type');
@@ -327,7 +386,7 @@
                     $('#selectedMedia').val(selected);
                     $('#selectedType').val(selectedType == 'image' ? 1 : 0);
                     renderMedia(selectedType, selectedpath)
-                    $('#imageModal').modal('hide'); 
+                    $('#imageModal').modal('hide');
                 } else {
                     alert('Please select an image.');
                 }
@@ -354,18 +413,50 @@
     </script>
 
     <script>
-    window.intercomSettings = {
-        api_base: "https://api-iam.intercom.io",
-        app_id: "a67agzdn",
-        name: '{{Auth::user()->full_name != '' ? Auth::user()->full_name : Auth::user()->name}}',
-        email: '{{Auth::user()->email}}',
-    };
+        window.intercomSettings = {
+            api_base: "https://api-iam.intercom.io",
+            app_id: "a67agzdn",
+            name: '{{ Auth::user()->full_name != '' ? Auth::user()->full_name : Auth::user()->name }}',
+            email: '{{ Auth::user()->email }}',
+        };
     </script>
 
 
     <script>
-    // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/a67agzdn'
-    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/a67agzdn';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+        // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/a67agzdn'
+        (function() {
+            var w = window;
+            var ic = w.Intercom;
+            if (typeof ic === "function") {
+                ic('reattach_activator');
+                ic('update', w.intercomSettings);
+            } else {
+                var d = document;
+                var i = function() {
+                    i.c(arguments);
+                };
+                i.q = [];
+                i.c = function(args) {
+                    i.q.push(args);
+                };
+                w.Intercom = i;
+                var l = function() {
+                    var s = d.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = 'https://widget.intercom.io/widget/a67agzdn';
+                    var x = d.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                };
+                if (document.readyState === 'complete') {
+                    l();
+                } else if (w.attachEvent) {
+                    w.attachEvent('onload', l);
+                } else {
+                    w.addEventListener('load', l, false);
+                }
+            }
+        })();
     </script>
 </body>
 <!-- END: Body-->
