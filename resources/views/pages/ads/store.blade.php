@@ -294,11 +294,8 @@
 
         .budgetTab a {
             background-color: transparent;
-            background: linear-gradient(to right, #1487b3, #38afc3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            border: 2px solid #968DF3;
+            border: 2px solid #1487b3;
+            color: white;
             border-radius: 10px;
         }
 
@@ -306,7 +303,7 @@
             /* background-color: #968DF3 !important; */
             background: linear-gradient(to right, #1487b3, #38afc3) !important;
             color: white !important;
-            border-color: #968DF3 !important;
+            border-color: #1487b3 !important;
 
         }
 
@@ -334,17 +331,18 @@
             line-height: 1.2;
             margin-bottom: 15px;
             margin-left: 10px;
-            border-color: #968DF3;
-            /* background-color: #FFF; */
-            /* color: #968DF3; */
-            background: linear-gradient(to right, #1487b3, #38afc3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            border-color: #1487b3;
+            color: white
+                /* background-color: #FFF; */
+                /* color: #968DF3; */
+                /* background: linear-gradient(to right, #1487b3, #38afc3);
+                                                -webkit-background-clip: text;
+                                                -webkit-text-fill-color: transparent; */
 
         }
 
         .button-group-pills .btn.active {
-            border-color: #968DF3;
+            border-color: #1487b3;
             /* background-color: #968DF3; */
             background: linear-gradient(to right, #1487b3, #38afc3);
             color: #FFF;
@@ -352,14 +350,15 @@
         }
 
         .button-group-pills .btn:hover {
-            border-color: rgb(139, 129, 253);
+            border-color: #1487b3;
+
             /* background-color: rgb(139, 129, 253); */
             background: linear-gradient(to right, #1487b3, #38afc3);
             color: #FFF;
         }
 
         .recommended_budget label {
-            height: 100px;
+            height: 150px;
             align-items: center;
             text-align: center;
         }
@@ -378,7 +377,7 @@
         }
 
         .recommended_budget h4 {
-            color: #968DF3;
+            color: white;
         }
 
 
@@ -449,10 +448,7 @@
             padding-top: 1%;
         }
 
-        .col-md-4.left-side span {
-            right: 20px;
-            position: absolute;
-        }
+
 
         #steps {
             text-align: center;
@@ -467,7 +463,7 @@
             border: 4px solid;
             border-color: transparent;
             border-radius: 50%;
-            color: #cdd0da;
+            color: #1487b3;
             font-weight: 600;
             text-align: center;
             line-height: 35px;
@@ -495,7 +491,7 @@
             width: 150px;
             display: block;
             transform: translate(-55px, 3px);
-            color: #818698;
+            color: white;
             content: attr(data-desc);
             font-weight: 400;
             font-size: 13px;
@@ -509,10 +505,7 @@
             border-color: #1487b3;
 
             /* color: #968DF3; */
-            background: linear-gradient(to right, #1487b3, #38afc3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
+            color: #1487b3
         }
 
 
@@ -523,7 +516,7 @@
         }
 
         .step.active:after {
-            color: #968DF3;
+            color: #1487b3;
         }
 
         .step.done {
@@ -803,8 +796,8 @@
                                                         @endif
                                                     @endif
                                                 </div>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#imageModal">
+                                                <button type="button" class="btn btn-primary primary-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#imageModal">
                                                     <i class="fa fa-image"></i> Choose Media
                                                 </button>
                                                 <input type="hidden" id="selectedMedia" name="media"
@@ -1038,7 +1031,6 @@
                                                 <div class="wallet">
                                                     <p>{{ __('messages.CurrentBalance') }}</p>
                                                     <h2>00 SAR</h2>
-                                                    <h2>{{Auth::user()->getWallet()}} SAR</h2>
                                                 </div>
 
                                                 <div class="card">
@@ -1066,7 +1058,6 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="step" value="1" id="stepNo">
-                                <input type="hidden" name="walletDeduct" value="0" id="walletDeduct">
                                 <div class="form-group col-md-12 text-center">
                                     <hr>
                                     <button type="button" class="btn btn-secondary prev"><i
@@ -1078,11 +1069,8 @@
                                     <button type="button" class="btn btn-dark next primary-btn" id="nextButton"><i
                                             class="fa fa-arrow-right"></i>
                                         {{ __('messages.Next') }}</button>
-                                    <button type="button" class="btn btn-primary  createAd"><i
+                                    <button type="button" class="btn btn-primary primary-btn  createAd"><i
                                             class="fa fa-checkbox"></i> {{ __('messages.CreateAd') }}</button>
-                                    <button type="button" id="topUpButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
-                                        <i class="fa fa-dollar"></i> {{ __('messages.Top_Up') }} <span id="remaingAmount"></span>
-                                    </button>
 
                                 </div>
                             </form>
@@ -1208,14 +1196,9 @@
             return formattedRange;
         }
 
-        let maintotal = 0;
-        const wallet = {{Auth::user()->wallet}};
-        $("#topUpButton").hide();
-
         function calculateDailyBudget() {
             const dateRange = $('input[name="dates"]').val();
             const budget = parseFloat($('input[name="budget"]').val());
-            const vat = {{$setting->tax}};
 
             const [startStr, endStr] = dateRange.split(' - ');
 
@@ -1225,32 +1208,10 @@
             const timeDiff = Math.abs(endDate - startDate);
             const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-            const dailyBudget = Number(days > 0 ? (budget / days).toFixed(2) : budget);
+            const dailyBudget = days > 0 ? (budget / days).toFixed(2) : budget;
 
-            const vatRate = parseInt(vat)/100;
-            const vatAmount = budget * vatRate;
-            maintotal = budget + (budget * vatRate);
-            $('#dailybudgetValue').text(dailyBudget.toFixed(2) + ' SAR');
-            $('#budgetValue').text(budget.toFixed(2) + ' SAR');
-            $('#VatValue').text(vatAmount.toFixed(2) + ' SAR');
-            $("#totalValue").text(maintotal.toFixed(2) + ' SAR');
-            $("#walletDeduct").val(maintotal);
-            if(maintotal > wallet){
-                $(".createAd").hide();
-                $("#topUpButton").show();
-                $("#remaingAmount").text((parseInt(maintotal) - parseFloat(wallet)).toFixed(2) + ' SAR')
-            } else{
-                $(".createAd").show();
-                $("#topUpButton").hide();
-            }
+            $('#dailybudgetValue').text(dailyBudget);
         }
-
-        $("#topUpButton").click(function(){
-            var walletTopUP =(parseInt(maintotal) - parseFloat(wallet));
-            if(walletTopUP > 0){
-                $("#walletTopUpAmount").val(walletTopUP);
-            }
-        })
 
         $('input[name="dates"]').daterangepicker({
             autoApply: true,
