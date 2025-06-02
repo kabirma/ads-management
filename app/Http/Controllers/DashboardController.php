@@ -19,37 +19,36 @@ use App\Models\Media;
 
 class DashboardController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $data = array();
-        $data['pages'] = Page::count();
-        $data['users'] = User::count();
-        $data['media'] = Media::count();
-        $data['adsCount'] = Ads::count();
-        $data['ads'] = Ads::with('adGroup', 'campaign')->limit(6)->get();
+  /**
+   * Show the application dashboard.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function index()
+  {
+    $data = array();
+    $data['pages'] = Page::count();
+    $data['users'] = User::count();
+    $data['media'] = Media::count();
+    $data['adsCount'] = Ads::count();
+    $data['ads'] = Ads::with('adGroup','campaign')->limit(6)->get();
+    return view('dashboard', $data)->with('success','YAYAYAYAYY');
+  }
 
-        return view('admin.dashboard.dashboard', $data);
-    }
-
-    public function ajax(Request $request)
-    {
-        $date = explode(" - ", $request->date);
-        if ($request->action == "invoice") {
-            $data = Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
-            $output = '';
-            if (count($data)) {
-                foreach ($data as $item) {
-                    $output .= '
+  public function ajax(Request $request)
+  {
+    $date = explode(" - ", $request->date);
+    if ($request->action == "invoice") {
+      $data = Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
+      $output = '';
+      if (count($data)) {
+        foreach ($data as $item) {
+          $output .= '
           <tr>
               <td>' . $item->id . '</td>
               <td>' . $item->invoice_number . '</td>

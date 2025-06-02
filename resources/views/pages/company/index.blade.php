@@ -5,6 +5,12 @@
 
 
 
+                                <div class="form-group col-md-12">
+                                    <label for="phone">{{__("messages.Phone")}}</label>
+                                  <input id="phone" name="phone" value="{{ isset($record) ? $record->phone : '' }}"
+                                       type="text"  class="form-control">
+                                </div>
+
     <!-- wallet header -->
     <div class="mb-4 mt-3 welcome">
         <div class="row align-items-center">

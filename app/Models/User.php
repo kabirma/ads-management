@@ -72,4 +72,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Media', 'user_id', 'id');
     }
 
+    public function getWallet(){
+        return number_format($this->wallet, 2);
+    }
 }

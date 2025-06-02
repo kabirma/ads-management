@@ -49,11 +49,11 @@
                                                 <td>{{ $list->id }}</td>
                                                 <td>{{ $list->name }}</td>
                                                 <td>{{ $list->platform }}</td>
-                                                <td><a href="{{ $list->url }}" class="btn btn-primary"> {{__("messages.WebsiteUrl")}} <i class="fa fa-arrow-right"></i> </a></td>
+                                                <td><a href="{{ $list->url }}" target="_blank" class="btn btn-primary"> {{__("messages.WebsiteUrl")}} <i class="fa fa-arrow-right"></i> </a></td>
                                                 <td>{{ $list->currency }}</td>
                                                 <td>
-                                                    <a href="{{ route('status.page', $list->id) }}"
-                                                        class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
+                                                    {{-- <a href="{{ route('status.page', $list->id) }}"
+                                                        class="btn btn-sm btn-{{$list->status==1 ? "success" : "danger"}}"><?= $list->status==1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a> --}}
                                                     <a href="{{ route('edit.business', $list->id) }}"
                                                         class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                                     <a href="#0" class="btn btn-sm btn-danger delete"

@@ -63,4 +63,10 @@ return [
         'snapchat_client_secret' => env('SNAPCHAT_CLIENT_SECRET'),
         'snapchat_profile_id' => env('SNAPCHAT_PROFILE_ID'),   
     ],
+    'payment' => [
+        'checkout_url' => env('PAYMENT_CHECKOUT_URL'),
+        'entity_id' => env('PAYMENT_ENTITY_ID'),
+        'token' => env('PAYMENT_TOKEN'),
+        'script_url' => env('PAYMENT_SCRIPT_URL'),
+    ],
 ];

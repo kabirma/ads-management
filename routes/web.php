@@ -59,8 +59,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/wallet', [App\Http\Controllers\DashboardController::class, 'wallet'])->name('user_wallet');
 
     Route::get('/package', [App\Http\Controllers\PurchaseController::class, 'index'])->name('user_package');
+    Route::get('/transactions', [App\Http\Controllers\PurchaseController::class, 'viewTransaction'])->name('view_transactions');
     Route::post('/package/purchase', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('purchase_package');
 
+    Route::post('/wallet/topup', [App\Http\Controllers\PaymentController::class, 'walletTopUp'])->name('wallet_top_up');
+    Route::get('/wallet/topup/redirect/', [App\Http\Controllers\PaymentController::class, 'walletTopUpRedirect'])->name('wallet_top_up_redirect');
+    Route::get('/wallet/topup/cancel/', [App\Http\Controllers\PaymentController::class, 'walletTopUpCancel'])->name('wallet_top_up_cancel');
+
+    
     // Social Media Integration
 
     Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'authTiktok'])->name('authTiktok');

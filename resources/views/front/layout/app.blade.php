@@ -28,10 +28,15 @@
 					<li><a href="{{route('index')}}#pricing" class="header-link">PRICING</a></li>
 					<li><a href="{{route('index')}}#joinus" class="header-link">JOIN US</a></li>
 					<li><a href="{{route('index')}}#contact" class="header-link">CONTACT</a></li>
-					<li class="header__btn header__btn--signup modal-toggle" data-openpopup="signuplogin"
+					@if(Auth::user())
+						<li class="header__btn header__btn--signup"><a href="{{route('dashboard')}}">Dashboard</a></li>
+						<li class="header__btn header__btn--signup"><a href="{{route('logout')}}">Logout</a></li>
+					@else
+						<li class="header__btn header__btn--signup modal-toggle" data-openpopup="signuplogin"
 						data-popup="login"><a href="#">LOGIN</a></li>
-					<li class="header__btn header__btn--signup modal-toggle" data-openpopup="signuplogin"
-						data-popup="signup"><a href="#">GET STARTED</a></li>
+						<li class="header__btn header__btn--signup modal-toggle" data-openpopup="signuplogin"
+							data-popup="signup"><a href="#">GET STARTED</a></li>
+					@endif
 				</ul>
 			</nav>
 		</div>
