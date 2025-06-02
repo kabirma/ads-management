@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -146,7 +146,8 @@
         }
 
         #imageRadio :checked+label {
-            border: 1px solid #968DF3;
+            border: 1px solid #1487b3;
+
         }
 
         #imageRadio :checked+label:before {
@@ -158,7 +159,7 @@
         #imageRadio :checked+label i {
             transform: scale(0.9);
             z-index: -1;
-            color: #968DF3;
+            color: #1487b3;
         }
 
         .important-note {
@@ -249,8 +250,11 @@
         .step-heading h2 {
             font-size: 45px;
             font-weight: bold;
-            color: #938AF4;
+            background: linear-gradient(to right, #1487b3, #38afc3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
 
         .titleRow {
             padding: 1% 15%;
@@ -290,15 +294,20 @@
 
         .budgetTab a {
             background-color: transparent;
-            color: #968DF3;
+            background: linear-gradient(to right, #1487b3, #38afc3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
             border: 2px solid #968DF3;
             border-radius: 10px;
         }
 
         .budgetTypeActive {
-            background-color: #968DF3 !important;
+            /* background-color: #968DF3 !important; */
+            background: linear-gradient(to right, #1487b3, #38afc3) !important;
             color: white !important;
             border-color: #968DF3 !important;
+
         }
 
         .budgetTab {
@@ -326,20 +335,26 @@
             margin-bottom: 15px;
             margin-left: 10px;
             border-color: #968DF3;
-            background-color: #FFF;
-            color: #968DF3;
+            /* background-color: #FFF; */
+            /* color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
         }
 
         .button-group-pills .btn.active {
             border-color: #968DF3;
-            background-color: #968DF3;
+            /* background-color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
             color: #FFF;
             box-shadow: none;
         }
 
         .button-group-pills .btn:hover {
             border-color: rgb(139, 129, 253);
-            background-color: rgb(139, 129, 253);
+            /* background-color: rgb(139, 129, 253); */
+            background: linear-gradient(to right, #1487b3, #38afc3);
             color: #FFF;
         }
 
@@ -368,7 +383,6 @@
 
 
         .card {
-            background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
@@ -382,7 +396,9 @@
         }
 
         .wallet {
-            background: linear-gradient(135deg, #968DF3, #968DF3);
+            /* background: linear-gradient(135deg, #968DF3, #968DF3); */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+
             color: white;
             text-align: center;
             border-radius: 10px 10px 0px 0px;
@@ -490,12 +506,20 @@
         }
 
         .step.active {
-            border-color: #968DF3;
-            color: #968DF3;
+            border-color: #1487b3;
+
+            /* color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
         }
 
+
         .step.active:before {
-            background: linear-gradient(to right, #58bb58 0%, #73b5e8 100%);
+            /* background: linear-gradient(to right, #58bb58 0%, #73b5e8 100%); */
+            background: linear-gradient(to right, #1487b3 0%, #38afc3 100%);
+
         }
 
         .step.active:after {
@@ -503,18 +527,24 @@
         }
 
         .step.done {
-            background-color: #968DF3;
-            border-color: #968DF3;
+            /* background-color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+
+            border-color: #1487b3;
+
             color: white;
         }
 
         .step.done:before {
-            background-color: #968DF3;
+            /* background-color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+
+
         }
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -1042,13 +1072,13 @@
                                     <button type="button" class="btn btn-secondary prev"><i
                                             class="fa fa-arrow-left"></i>
                                         {{ __('messages.Back') }}</button>
-                                    <button type="button" class="btn btn-success" id="saveDraft"><i
+                                    <button type="button" class="btn btn-success primary-btn" id="saveDraft"><i
                                             class="fa fa-save"></i>
                                         {{ __('messages.SAVE_AND_CLOSE') }}</button>
-                                    <button type="button" class="btn btn-dark next" id="nextButton"><i
+                                    <button type="button" class="btn btn-dark next primary-btn" id="nextButton"><i
                                             class="fa fa-arrow-right"></i>
                                         {{ __('messages.Next') }}</button>
-                                    <button type="button" class="btn btn-primary createAd"><i
+                                    <button type="button" class="btn btn-primary  createAd"><i
                                             class="fa fa-checkbox"></i> {{ __('messages.CreateAd') }}</button>
                                     <button type="button" id="topUpButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
                                         <i class="fa fa-dollar"></i> {{ __('messages.Top_Up') }} <span id="remaingAmount"></span>
