@@ -1,19 +1,20 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active"> <span class="badge badge-light-primary">{{__('messages.EDIT')}}
+                            <li class="breadcrumb-item active"> <span
+                                    class="badge badge-light-primary">{{ __('messages.EDIT') }}
                                     {{ $title }}</span>
                             </li>
                         </ol>
-                        <a href="{{ route('view.media') }}" class="btn btn-sm btn-primary waves-effect addnew">
-                            <i class="fa fa-list"></i> <span>{{__('messages.VIEW')}} {{ $title }}</span>
+                        <a href="{{ route('view.media') }}" class="btn btn-sm btn-primary primary-btn waves-effect addnew">
+                            <i class="fa fa-list"></i> <span>{{ __('messages.VIEW') }} {{ $title }}</span>
                         </a>
                     </div>
                     <div class="card-content">
@@ -24,17 +25,50 @@
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
 
                                 <div class="form-group">
-                                    <label for="media_type">{{__('messages.MEDIA_TYPE')}}</label>
+                                    <label for="media_type">{{ __('messages.MEDIA_TYPE') }}</label>
                                     <select name="media_type" class="form-control">
                                         <option value="" selected disabled>Select Media Type</option>
                                         <option {{ isset($record) && $record->media_type == 'image' ? 'selected' : '' }}
-                                            value="image">{{__('messages.Image')}}</option>
+                                            value="image">{{ __('messages.Image') }}</option>
                                         <option {{ isset($record) && $record->media_type == 'video' ? 'selected' : '' }}
-                                            value="video">{{__('messages.Video')}}</option>
+                                            value="video">{{ __('messages.Video') }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="media">{{__('messages.Media')}}</label>
+                                    <label for="media">{{ __('messages.Media') }}</label>
+                                    <style>
+                                        #media {
+                                            /* background: linear-gradient(to right, #1487b3, #38afc3); */
+                                            color: white;
+                                            padding: 8px;
+                                            border: none;
+                                            border-radius: 5px;
+                                            cursor: pointer;
+                                        }
+
+                                        /* Optional: Hide default file input text and customize label */
+                                        #media::-webkit-file-upload-button {
+                                            /* background: rgba(255, 255, 255, 0.2); */
+                                            background: linear-gradient(to right, #1487b3, #38afc3);
+                                            ;
+                                            border: none;
+                                            padding: 8px 12px;
+                                            color: white;
+                                            border-radius: 4px;
+                                            cursor: pointer;
+                                        }
+
+                                        #media::file-selector-button {
+                                            background: linear-gradient(to right, #1487b3, #38afc3);
+                                            ;
+                                            border: none;
+                                            padding: 8px 12px;
+                                            color: white;
+                                            border-radius: 4px;
+                                            cursor: pointer;
+                                        }
+                                    </style>
+
                                     <input id="media" name="media" type="file" class="form-control">
                                     @if (isset($record))
                                         <br>
@@ -51,7 +85,8 @@
                                 </div>
                                 <div class="form-group">
                                     <hr>
-                                    <button class="btn btn-primary"><i class="fa fa-check"></i> {{__('messages.SAVE')}}</button>
+                                    <button class="btn btn-primary primary-btn"><i class="fa fa-check"></i>
+                                        {{ __('messages.SAVE') }}</button>
                                 </div>
                             </form>
                         </div>

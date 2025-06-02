@@ -11,6 +11,11 @@
             height: 500px;
         }
 
+        .card {
+            /* background: linear-gradient(linear-gradient(to right, #1487b3, #38afc3)) !important; */
+
+        }
+
         .controls {
             margin-top: 10px;
             border: 1px solid transparent;
@@ -444,7 +449,7 @@
             background-color: white;
             display: inline-block;
             border: 4px solid;
-            border-color: whitesmoke;
+            border-color: transparent;
             border-radius: 50%;
             color: #cdd0da;
             font-weight: 600;
@@ -465,7 +470,7 @@
             width: 75px;
             height: 3px;
             display: block;
-            background-color: whitesmoke;
+            background-color: white;
             transform: translate(-95px, 21px);
             content: "";
         }
@@ -707,7 +712,8 @@
                                                             class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                             {{ __('messages.AISuggested') }} )</small> @endif
                                                 </label>
-                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"> @if (isset($name)){{ $description }}@endif</textarea>
+                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"> @if (isset($name)){{ $description }}@endif
+</textarea>
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">{{ __('messages.CallToAction') }}</label>
@@ -1001,6 +1007,7 @@
                                             <div class="col-md-4 left-side">
                                                 <div class="wallet">
                                                     <p>{{ __('messages.CurrentBalance') }}</p>
+                                                    <h2>00 SAR</h2>
                                                     <h2>{{Auth::user()->getWallet()}} SAR</h2>
                                                 </div>
 
@@ -1009,14 +1016,9 @@
                                                     <p><strong>{{ __('messages.Duration') }}:</strong> <span
                                                             id="datesValue"></span></p>
                                                     <p><strong>{{ __('messages.DailyBudget') }}:</strong> <span
-                                                            id="dailybudgetValue"></span></p>
+                                                            id="dailybudgetValue"></span> SAR</p>
                                                     <p><strong>{{ __('messages.TotalBudget') }}:</strong> <span
-                                                            id="budgetValue"></span></p>
-                                                    <p><strong>{{ __('messages.VAT') }} {{$setting->tax}}% :</strong> <span
-                                                            id="VatValue"></span></p>
-                                                    <hr>
-                                                    <h4><strong>{{ __('messages.Total') }}:</strong> <span
-                                                            id="totalValue"></span></h4>
+                                                            id="budgetValue"></span> SAR</p>
                                                 </div>
 
                                                 <div class="card">
@@ -1040,14 +1042,14 @@
                                     <button type="button" class="btn btn-secondary prev"><i
                                             class="fa fa-arrow-left"></i>
                                         {{ __('messages.Back') }}</button>
-                                    <button type="button" class="btn btn-info" id="saveDraft"><i
+                                    <button type="button" class="btn btn-success" id="saveDraft"><i
                                             class="fa fa-save"></i>
                                         {{ __('messages.SAVE_AND_CLOSE') }}</button>
                                     <button type="button" class="btn btn-dark next" id="nextButton"><i
                                             class="fa fa-arrow-right"></i>
                                         {{ __('messages.Next') }}</button>
                                     <button type="button" class="btn btn-primary createAd"><i
-                                            class="fa fa-check"></i> {{ __('messages.CreateAd') }}</button>
+                                            class="fa fa-checkbox"></i> {{ __('messages.CreateAd') }}</button>
                                     <button type="button" id="topUpButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
                                         <i class="fa fa-dollar"></i> {{ __('messages.Top_Up') }} <span id="remaingAmount"></span>
                                     </button>
@@ -1100,7 +1102,7 @@
                 const cleanKey = key.replace(/\[\]$/, '');
                 const span = $(`#${cleanKey}Value`);
                 var spanValue = decodeURIComponent(value.replace(/\+/g, ' ')).toUpperCase();
-
+                console.log(cleanKey, spanValue);
                 if (cleanKey == 'location') {
                     locationValue = countryNames[spanValue] || spanValue;
                     span.text(locationValue);
@@ -1353,6 +1355,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(response) {
+                    console.log(response);
                     $("#reach").text(response[0]);
                     $("#impression").text(response[1]);
                 },
