@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/hash', function () {
+    $email = 'admin@admin.com';
+    $hashedEmail = Hash::make($email);
+
+    return response()->json([
+        'email' => $email,
+        'hashed_email' => $hashedEmail
+    ]);
+});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, 'content'])->name('content');
@@ -35,7 +45,7 @@ Route::get('/verfiy/user/{token}', [App\Http\Controllers\CustomerController::cla
 
 
 Route::post('/login/submit',  [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.submit');
- 
+
 Route::get('/snapchat/auth', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'authSnapChat'])->name('auth_snapchat');
 Route::get('/snapchat/redirect', [App\Http\Controllers\SocialMedia\SnapChatController::class, 'redirectToSnapChat'])->name('redirect_to_snapchat');
 
@@ -47,12 +57,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/setting', [App\Http\Controllers\DashboardController::class, 'setting'])->name('user_setting');
     Route::get('/wallet', [App\Http\Controllers\DashboardController::class, 'wallet'])->name('user_wallet');
-   
+
     Route::get('/package', [App\Http\Controllers\PurchaseController::class, 'index'])->name('user_package');
     Route::post('/package/purchase', [App\Http\Controllers\PurchaseController::class, 'purchase'])->name('purchase_package');
 
     // Social Media Integration
-   
+
     Route::get('/tiktok/auth', [App\Http\Controllers\SocialMedia\TikTokController::class, 'authTiktok'])->name('authTiktok');
     Route::get('/tiktok/callback', [App\Http\Controllers\SocialMedia\TikTokController::class, 'handleTikTokCallback'])->name('handleTikTokCallback');
     Route::post('/tiktok/create-campaign', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createCampaign'])->name('create_campaign');
@@ -60,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/tiktok/create-identity', [App\Http\Controllers\SocialMedia\TikTokController::class, 'createIdentity'])->name('createIdentity');
 
-    // Payment 
+    // Payment
     Route::get('/checkout', [App\Http\Controllers\MastercardController::class, 'showCheckout'])->name('payment.checkout');
     Route::post('/checkout/create', [App\Http\Controllers\MastercardController::class, 'createCheckout'])->name('payment.create');
     Route::get('/checkout/success', [App\Http\Controllers\MastercardController::class, 'paymentSuccess'])->name('payment.success');
@@ -97,7 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/status/{id}', 'status')->name('status.page');
         });
     });
-    
+
     Route::group(['prefix' => 'business'], function () {
         Route::controller(App\Http\Controllers\BusinessProfileController::class)->group(function () {
             Route::get('/', 'index')->name('view.business');

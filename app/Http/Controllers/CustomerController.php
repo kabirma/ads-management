@@ -34,13 +34,14 @@ class CustomerController extends Controller
     public function index()
     {
         $data['title'] = $this->title;
-        $data['listing'] = $this->model::with('ads')->where('id',"!=",1)->orderBy('id','desc')->get();
+        $data['listing'] = $this->model::with('ads')->where('id', "!=", 1)->orderBy('id', 'desc')->get();
         return view($this->view_page, $data);
     }
 
     public function add()
     {
         $data['title'] = $this->title;
+        $data['record'] = null; // Pass null for creating a new record
         return view($this->store_page, $data);
     }
 
@@ -53,10 +54,10 @@ class CustomerController extends Controller
 
     public function save(Request $request)
     {
-        if($request->password != $request->confirmPassword){
+        if ($request->password != $request->confirmPassword) {
             return redirect()->route($this->redirect_page)->with("error", "Password Does Not Match");
         }
-        
+
         $model = $request->id > 0 ? $this->model::where($this->model_primary, $request->id)->first() : new $this->model;
         foreach ($request->all() as $key => $req) {
             if ($key != "_token" && $key != "id" && $key != 'confirmPassword') {
@@ -65,7 +66,7 @@ class CustomerController extends Controller
         }
         $model->save();
 
-        if(Auth::user()->role_id !== 1){
+        if (Auth::user()->role_id !== 1) {
             return redirect()->back()->with("success", "Profile Updated Successfully");
         }
 
@@ -82,13 +83,14 @@ class CustomerController extends Controller
         return redirect()->route($this->redirect_page)->with("error", "No Record Found");
     }
 
-    function verify_email(MailService $mailService){
+    function verify_email(MailService $mailService)
+    {
         $company = Company::first();
         $user = Auth::user();
-        
+
         $to = $user->email;
         $subject = 'Verify Your Email Address';
-        $verificationUrl = url('/verfiy/user/' . rand(100000,999999).urlencode($user->id).rand(100000,999999));
+        $verificationUrl = url('/verfiy/user/' . rand(100000, 999999) . urlencode($user->id) . rand(100000, 999999));
 
         $html = '
             <html>
@@ -118,15 +120,16 @@ class CustomerController extends Controller
         return redirect()->back()->with("success", "Verification Email Sent");
     }
 
-    function verifyUser($token){
+    function verifyUser($token)
+    {
 
         $userId = substr($token, 6, -6);
         $user = User::find($userId);
-        if ($user != null){
+        if ($user != null) {
             $user->email_verified_at = date('Y-m-d h:i:s');
             $user->save();
             return view('home', ['success' => 1]);
-        } else{
+        } else {
             return view('home', ['error' => 1]);
         }
     }

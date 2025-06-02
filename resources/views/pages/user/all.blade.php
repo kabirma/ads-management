@@ -81,7 +81,7 @@
                             Discard
                         </button>
                         <button type="submit" class="btn btn-primary me-1">Save <span class="upbtn" role="status" aria-hidden="true"></span></button>
-                        
+
                     </div>
                 </form>
             </div>
@@ -167,7 +167,7 @@
                             Discard
                         </button>
                         <button type="submit" class="btn btn-success me-1">Update <span class="upbtn" role="status" aria-hidden="true"></span></button>
-                       
+
                     </div>
                 </form>
             </div>
@@ -179,7 +179,7 @@
 
 
 
-                
+
                 <!-- Dashboard Analytics Start -->
                 <section id="dashboard-analytics">
                          <div class="row">
@@ -187,14 +187,14 @@
             <div class="card">
                 <div class="card-header" >
                     <ol class="breadcrumb">
-         
+
                         <li class="breadcrumb-item active"> <span class="badge badge-light-info">All User List</span></li>
                     </ol>
-               
+
                     <a  type="button" class="btn btn-sm btn-info waves-effect addnew">
                         <i data-feather='plus-circle'></i>   <span>New User</span>
                     </a >
-                  
+
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard" style="padding-top: 0px;">
@@ -211,7 +211,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>           
+                                <tbody>
                                 </tbody>
                             </table>
                         </div>
@@ -221,7 +221,7 @@
         </div>
     </div>
 
-              
+
                 </section>
                 <!-- Dashboard Analytics end -->
 @endsection
@@ -237,7 +237,7 @@
     <script src="{{asset('assets/vendors/js/forms/select/select2.full.min.js')}}"></script>
      <script src="{{ asset('assets/js/scripts/forms/form-select2.min.js') }}"></script>
 
-    <!--<script src="{{asset('assets/js/scripts/pages/app-invoice-list.js')}}"></script>--> 
+    <!--<script src="{{asset('assets/js/scripts/pages/app-invoice-list.js')}}"></script>-->
     <script>
         function generatePass(length) {
    var result           = '';
@@ -248,7 +248,7 @@
    }
    $("#password").val('ITD'+result);
    return false;
- 
+
 }
 function ugeneratePass(length) {
    var result           = '';
@@ -259,7 +259,7 @@ function ugeneratePass(length) {
    }
    $("#upassword").val('ITD'+result);
    return false;
- 
+
 }
 
    var table = $('#dataTable').DataTable(
@@ -279,7 +279,7 @@ function ugeneratePass(length) {
         "columns":[
         {"data":"a"},{"data":"b"},{"data":"c"},{"data":"d"},{"data":"e"},{"data":"f"},{"data":"g","searchable":false,"orderable":false}
     ],
-        "order": [[0, 'desc']]   
+        "order": [[0, 'desc']]
 });
 $(".addnew").on('click',function()
 {
@@ -294,7 +294,7 @@ $("#changePass").on('click',function()
 
 
 $("#addForm").on('submit',function(event)
-{ 
+{
     $('.addbtn').removeClass('spinner-border spinner-border-sm');
     event.preventDefault();
     $('.addbtn').addClass('spinner-border spinner-border-sm');
@@ -327,7 +327,7 @@ $(document).on('click', '.editmdl', function()
     $('#generatePass').css('display','none'); $("#upassword").attr('disabled','disabled');$('.upModel').modal('show');
 });
 $("#upForm").on('submit',function(event)
-{ 
+{
     event.preventDefault();
     var formData = new FormData(this);
     formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
@@ -353,7 +353,7 @@ $("#upForm").on('submit',function(event)
 
 $(document).on('click', '.delbs', function()
 {
-  toastr.remove();  
+  toastr.remove();
   toastr['warning']('Are you sure you want to delete this User <b>'+$(this).data('ttl')+'</b>?<br /><br /><button type="button" data-did="'+$(this).data('did')+'" class="btn-sm btn-danger clear condel">Confirm</button>',
  'Warning', {
       closeButton: true,
@@ -368,7 +368,7 @@ $(document).on('click', '.condel', function()
     success: function(data){
         toastr.remove();toastr[data.type](data.message);table.ajax.reload( null, false );}
     });
-}); 
+});
 
 
     </script>
