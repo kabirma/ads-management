@@ -260,6 +260,7 @@ class TikTokController extends Controller
             'ad_text' => $request->description,
             'call_to_action' => $request->call_to_action,
             'landing_page_url' => $request->website_url,
+            'operation_status' => 'DISABLE'
         ];
         if($request->media_type == 1){
             $creatives['image_ids'] = [$media['image_id']];
@@ -407,16 +408,17 @@ class TikTokController extends Controller
 
         $response = Http::withHeaders([
             'Access-Token' => $this->accessToken,
-        ])->get('https://sandbox-ads.tiktok.com/open_api/v1.3/ad/get/', [
+        ])->get($this->apiUrl.'/open_api/v1.3/ad/get/', [
             'advertiser_id' => $this->advertiserId,
             'filtering' => json_encode(['ad_ids' => [$tiktokAdId]]),
         ]);
 
         $data = $response->json();
-        if($data['message']!=='OK'){
-            return [$ad, []];
+        if($data['message']==='OK'){
+            $apiResponse = $data['data']['list'][0] ?? [];
+            return [$ad, $apiResponse];
         }
-        return [$ad, $data];
+        return [$ad, []];
     }
 
 }

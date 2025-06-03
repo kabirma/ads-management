@@ -1508,7 +1508,9 @@
 
                 // $("#title").val('{{ $name }}')
                 // $("#description").val('{{ $description }}')
-
+                
+                $("#title").val()
+                $("#description").val()
                 type(0, $("#title"), "<?= $name ?>");
                 type(0, $("#description"), "<?= $description ?>");
                 $("#budget").val('{{ $budget }}')
