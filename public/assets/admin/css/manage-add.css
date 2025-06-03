@@ -1,0 +1,226 @@
+.chnage-periodbtn {
+  width: 226px;
+  height: 47px;
+  border-radius: 8px !important;
+  border: none;
+  background-color: #1b3041;
+  color: white;
+}
+.chnage-periodbtn:hover {
+  background-color: #1b3041;
+}
+
+
+.customs-btn {
+  display: inline-block;
+  padding: 7px 12px;
+  font-size: 14px !important;
+  color: white;
+  background: linear-gradient(to right, #38afc3, #1487b3);
+ width: 113px;
+ height: 47px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+.chnage-periodbtn .calender-img {
+  margin-right: 10px;
+}
+.chnage-periodbtn .down-arrow-img {
+  margin-left: 10px;
+}
+.addition-btn-manage .custom-btn {
+  background: linear-gradient(to right, #38afc3, #1487b3);
+  width: 113px;
+  height: 47px;
+  border-radius: 8px;
+  border: none;
+}
+.addition-btn-manage .custom-btn:hover {
+  background: linear-gradient(to right, #38afc3, #1487b3);
+}
+.filter-downarrow {
+  margin-left: 6px;
+}
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.filter-dropdowns .dropdown-menu {
+  background-color: #263044 !important;
+}
+
+.filter-dropdowns .dropdown-menu .dropdown-item {
+  color: white !important;
+}
+
+.filter-dropdowns .dropdown-menu .dropdown-item:hover {
+  background-color: #3d424d !important;
+  color: white;
+}
+
+/* media section css */
+.all {
+  width: 51px;
+  height: 47px;
+  border-radius: 8px;
+  color: white;
+  background: linear-gradient(to right, #38afc3, #1487b3);
+}
+.manage-social-icons a {
+  text-decoration: none;
+}
+
+.toggle-manage-btn {
+  border: 2px solid; /* required to show the border */
+  border-image: linear-gradient(to right, #38afc3, #1487b3) 1;
+  border-radius: 10px !important;
+  background: transparent; /* No background */
+  display: inline-block;
+}
+
+.custom-btn-group {
+  border: 2px solid linear-gradient(to right, #38afc3, #1487b3) !important;
+  border-radius: 8px !important;
+}
+
+.custom-btn-group button {
+  border: none !important;
+}
+.custom-btn-group button:hover {
+  border: none !important;
+}
+
+/* manage card buttons */
+.manage-card {
+  background: linear-gradient(135deg, #2e3e4a, #0c2c3e) !important;
+  /* background-image: url('../assets/img/icons/top-left-card-bg.jpeg'); */
+  width: 354px;
+  height: 213px;
+  border-radius: 8px;
+}
+.manage-card {
+  width: 354px;
+  height: 213px;
+  border-radius: 8px;
+}
+.card-cicle-img{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 57%;
+    width: 144px;
+    height: 82px;
+    z-index: 10; 
+    opacity: 36%;
+}
+.left-card-cicle-img{
+    position: absolute;
+    top: 6%;
+    right: 0;
+    left: 77%;
+    width: 80px;
+    height: 135px;
+    z-index: 10; 
+    opacity: 36%; 
+    overflow: hidden !important;
+}
+.snap-logo span {
+  color: #38afc3;
+  font-weight: bold;
+}
+.manage-card-btn .manage-trafic-btn {
+  background: linear-gradient(to right, #38afc3, #1487b3);
+  width: 80px;
+  height: 32px;
+  border-radius: 8px;
+  color: white;
+  border: none;
+}
+.manage-card-btn .manage-find-btn {
+  background-color: transparent;
+  width: 175px;
+  height: 32px;
+  border-radius: 8px;
+  color: #38afc3;
+  border: 2px solid; /* required to show the border */
+  border-top: 1px solid #00a8ff !important;
+  border-right: 1px solid #136ca1 !important;
+  border-bottom: 1px solid #00a8ff !important;
+  border-left: 1px solid #164058 !important;
+  text-decoration: none;
+}
+
+.pagination-numbering .page-item , .page-link{
+ border: 1px solid #1487B3 ;
+ border-radius: 50%;
+}
+.pagination-numbering .page-item {
+  margin: 0 6px; /* Adjust spacing as needed */
+}
+
+
+/* campaign table */
+.table-container {
+      /* background: linear-gradient(to bottom, #0f2c3e, #132d3f) !important; */
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+    }
+    .table th{
+ height: 78px;
+    }
+    .table th, .table td {
+      color: white;
+      vertical-align: middle;
+    }
+    .table  td {
+      color: white;
+   background: linear-gradient(to bottom, #1b3041 5%, #0d2132 75%);
+    }
+    .btn-status {
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      width: 103px;
+      height: 32px;
+      border-radius: 25px;
+    }
+    .btn-finish {
+     background: linear-gradient(to right, #1487B3, #38AFC3);
+      color: white;
+    }
+    .btn-pending {
+       background: linear-gradient(to right, #1487B3, #38AFC3);
+      color: white;
+    }
+    .icon {
+      font-size: 1.2rem;
+      color: white;
+      cursor: pointer;
+    }
+    .table .small{
+      margin-left: -75px;
+    }
+    @media (max-width: 768px) {
+      .table th, .table td {
+        font-size: 13px;
+      }
+    }
+
+#show-table.active {
+ background: linear-gradient(to right, #1487B3, #38AFC3);
+  color: white;
+  border-radius: 0px !important;
+}
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 
 @section('content')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -9,6 +9,11 @@
 
         #map2 {
             height: 500px;
+        }
+
+        .card {
+            /* background: linear-gradient(linear-gradient(to right, #1487b3, #38afc3)) !important; */
+
         }
 
         .controls {
@@ -141,7 +146,8 @@
         }
 
         #imageRadio :checked+label {
-            border: 1px solid #968DF3;
+            border: 1px solid #1487b3;
+
         }
 
         #imageRadio :checked+label:before {
@@ -153,7 +159,7 @@
         #imageRadio :checked+label i {
             transform: scale(0.9);
             z-index: -1;
-            color: #968DF3;
+            color: #1487b3;
         }
 
         .important-note {
@@ -244,8 +250,11 @@
         .step-heading h2 {
             font-size: 45px;
             font-weight: bold;
-            color: #938AF4;
+            background: linear-gradient(to right, #1487b3, #38afc3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
 
         .titleRow {
             padding: 1% 15%;
@@ -285,15 +294,17 @@
 
         .budgetTab a {
             background-color: transparent;
-            color: #968DF3;
-            border: 2px solid #968DF3;
+            border: 2px solid #1487b3;
+            color: white;
             border-radius: 10px;
         }
 
         .budgetTypeActive {
-            background-color: #968DF3 !important;
+            /* background-color: #968DF3 !important; */
+            background: linear-gradient(to right, #1487b3, #38afc3) !important;
             color: white !important;
-            border-color: #968DF3 !important;
+            border-color: #1487b3 !important;
+
         }
 
         .budgetTab {
@@ -320,26 +331,34 @@
             line-height: 1.2;
             margin-bottom: 15px;
             margin-left: 10px;
-            border-color: #968DF3;
-            background-color: #FFF;
-            color: #968DF3;
+            border-color: #1487b3;
+            color: white
+                /* background-color: #FFF; */
+                /* color: #968DF3; */
+                /* background: linear-gradient(to right, #1487b3, #38afc3);
+                                                -webkit-background-clip: text;
+                                                -webkit-text-fill-color: transparent; */
+
         }
 
         .button-group-pills .btn.active {
-            border-color: #968DF3;
-            background-color: #968DF3;
+            border-color: #1487b3;
+            /* background-color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
             color: #FFF;
             box-shadow: none;
         }
 
         .button-group-pills .btn:hover {
-            border-color: rgb(139, 129, 253);
-            background-color: rgb(139, 129, 253);
+            border-color: #1487b3;
+
+            /* background-color: rgb(139, 129, 253); */
+            background: linear-gradient(to right, #1487b3, #38afc3);
             color: #FFF;
         }
 
         .recommended_budget label {
-            height: 100px;
+            height: 150px;
             align-items: center;
             text-align: center;
         }
@@ -358,12 +377,11 @@
         }
 
         .recommended_budget h4 {
-            color: #968DF3;
+            color: white;
         }
 
 
         .card {
-            background: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
@@ -377,7 +395,9 @@
         }
 
         .wallet {
-            background: linear-gradient(135deg, #968DF3, #968DF3);
+            /* background: linear-gradient(135deg, #968DF3, #968DF3); */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+
             color: white;
             text-align: center;
             border-radius: 10px 10px 0px 0px;
@@ -428,10 +448,7 @@
             padding-top: 1%;
         }
 
-        .col-md-4.left-side span {
-            right: 20px;
-            position: absolute;
-        }
+
 
         #steps {
             text-align: center;
@@ -444,9 +461,9 @@
             background-color: white;
             display: inline-block;
             border: 4px solid;
-            border-color: whitesmoke;
+            border-color: transparent;
             border-radius: 50%;
-            color: #cdd0da;
+            color: #1487b3;
             font-weight: 600;
             text-align: center;
             line-height: 35px;
@@ -465,7 +482,7 @@
             width: 75px;
             height: 3px;
             display: block;
-            background-color: whitesmoke;
+            background-color: white;
             transform: translate(-95px, 21px);
             content: "";
         }
@@ -474,7 +491,7 @@
             width: 150px;
             display: block;
             transform: translate(-55px, 3px);
-            color: #818698;
+            color: white;
             content: attr(data-desc);
             font-weight: 400;
             font-size: 13px;
@@ -485,31 +502,42 @@
         }
 
         .step.active {
-            border-color: #968DF3;
-            color: #968DF3;
+            border-color: #1487b3;
+
+            /* color: #968DF3; */
+            color: #1487b3
         }
 
+
         .step.active:before {
-            background: linear-gradient(to right, #58bb58 0%, #73b5e8 100%);
+            /* background: linear-gradient(to right, #58bb58 0%, #73b5e8 100%); */
+            background: linear-gradient(to right, #1487b3 0%, #38afc3 100%);
+
         }
 
         .step.active:after {
-            color: #968DF3;
+            color: #1487b3;
         }
 
         .step.done {
-            background-color: #968DF3;
-            border-color: #968DF3;
+            /* background-color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+
+            border-color: #1487b3;
+
             color: white;
         }
 
         .step.done:before {
-            background-color: #968DF3;
+            /* background-color: #968DF3; */
+            background: linear-gradient(to right, #1487b3, #38afc3);
+
+
         }
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -707,7 +735,8 @@
                                                             class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                             {{ __('messages.AISuggested') }} )</small> @endif
                                                 </label>
-                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"> @if (isset($name)){{ $description }}@endif</textarea>
+                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"> @if (isset($name)){{ $description }}@endif
+</textarea>
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">{{ __('messages.CallToAction') }}</label>
@@ -767,8 +796,8 @@
                                                         @endif
                                                     @endif
                                                 </div>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#imageModal">
+                                                <button type="button" class="btn btn-primary primary-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#imageModal">
                                                     <i class="fa fa-image"></i> Choose Media
                                                 </button>
                                                 <input type="hidden" id="selectedMedia" name="media"
@@ -1001,7 +1030,7 @@
                                             <div class="col-md-4 left-side">
                                                 <div class="wallet">
                                                     <p>{{ __('messages.CurrentBalance') }}</p>
-                                                    <h2>{{Auth::user()->getWallet()}} SAR</h2>
+                                                    <h2>00 SAR</h2>
                                                 </div>
 
                                                 <div class="card">
@@ -1009,14 +1038,9 @@
                                                     <p><strong>{{ __('messages.Duration') }}:</strong> <span
                                                             id="datesValue"></span></p>
                                                     <p><strong>{{ __('messages.DailyBudget') }}:</strong> <span
-                                                            id="dailybudgetValue"></span></p>
+                                                            id="dailybudgetValue"></span> SAR</p>
                                                     <p><strong>{{ __('messages.TotalBudget') }}:</strong> <span
-                                                            id="budgetValue"></span></p>
-                                                    <p><strong>{{ __('messages.VAT') }} {{$setting->tax}}% :</strong> <span
-                                                            id="VatValue"></span></p>
-                                                    <hr>
-                                                    <h4><strong>{{ __('messages.Total') }}:</strong> <span
-                                                            id="totalValue"></span></h4>
+                                                            id="budgetValue"></span> SAR</p>
                                                 </div>
 
                                                 <div class="card">
@@ -1034,23 +1058,19 @@
                                     </div>
                                 </div>
                                 <input type="hidden" name="step" value="1" id="stepNo">
-                                <input type="hidden" name="walletDeduct" value="0" id="walletDeduct">
                                 <div class="form-group col-md-12 text-center">
                                     <hr>
                                     <button type="button" class="btn btn-secondary prev"><i
                                             class="fa fa-arrow-left"></i>
                                         {{ __('messages.Back') }}</button>
-                                    <button type="button" class="btn btn-info" id="saveDraft"><i
+                                    <button type="button" class="btn btn-success primary-btn" id="saveDraft"><i
                                             class="fa fa-save"></i>
                                         {{ __('messages.SAVE_AND_CLOSE') }}</button>
-                                    <button type="button" class="btn btn-dark next" id="nextButton"><i
+                                    <button type="button" class="btn btn-dark next primary-btn" id="nextButton"><i
                                             class="fa fa-arrow-right"></i>
                                         {{ __('messages.Next') }}</button>
-                                    <button type="button" class="btn btn-primary createAd"><i
-                                            class="fa fa-check"></i> {{ __('messages.CreateAd') }}</button>
-                                    <button type="button" id="topUpButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
-                                        <i class="fa fa-dollar"></i> {{ __('messages.Top_Up') }} <span id="remaingAmount"></span>
-                                    </button>
+                                    <button type="button" class="btn btn-primary primary-btn  createAd"><i
+                                            class="fa fa-checkbox"></i> {{ __('messages.CreateAd') }}</button>
 
                                 </div>
                             </form>
@@ -1100,7 +1120,7 @@
                 const cleanKey = key.replace(/\[\]$/, '');
                 const span = $(`#${cleanKey}Value`);
                 var spanValue = decodeURIComponent(value.replace(/\+/g, ' ')).toUpperCase();
-
+                console.log(cleanKey, spanValue);
                 if (cleanKey == 'location') {
                     locationValue = countryNames[spanValue] || spanValue;
                     span.text(locationValue);
@@ -1176,14 +1196,9 @@
             return formattedRange;
         }
 
-        let maintotal = 0;
-        const wallet = {{Auth::user()->wallet}};
-        $("#topUpButton").hide();
-
         function calculateDailyBudget() {
             const dateRange = $('input[name="dates"]').val();
             const budget = parseFloat($('input[name="budget"]').val());
-            const vat = {{$setting->tax}};
 
             const [startStr, endStr] = dateRange.split(' - ');
 
@@ -1193,32 +1208,10 @@
             const timeDiff = Math.abs(endDate - startDate);
             const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-            const dailyBudget = Number(days > 0 ? (budget / days).toFixed(2) : budget);
+            const dailyBudget = days > 0 ? (budget / days).toFixed(2) : budget;
 
-            const vatRate = parseInt(vat)/100;
-            const vatAmount = budget * vatRate;
-            maintotal = budget + (budget * vatRate);
-            $('#dailybudgetValue').text(dailyBudget.toFixed(2) + ' SAR');
-            $('#budgetValue').text(budget.toFixed(2) + ' SAR');
-            $('#VatValue').text(vatAmount.toFixed(2) + ' SAR');
-            $("#totalValue").text(maintotal.toFixed(2) + ' SAR');
-            $("#walletDeduct").val(maintotal);
-            if(maintotal > wallet){
-                $(".createAd").hide();
-                $("#topUpButton").show();
-                $("#remaingAmount").text((parseInt(maintotal) - parseFloat(wallet)).toFixed(2) + ' SAR')
-            } else{
-                $(".createAd").show();
-                $("#topUpButton").hide();
-            }
+            $('#dailybudgetValue').text(dailyBudget);
         }
-
-        $("#topUpButton").click(function(){
-            var walletTopUP =(parseInt(maintotal) - parseFloat(wallet));
-            if(walletTopUP > 0){
-                $("#walletTopUpAmount").val(walletTopUP);
-            }
-        })
 
         $('input[name="dates"]').daterangepicker({
             autoApply: true,
@@ -1353,6 +1346,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(response) {
+                    console.log(response);
                     $("#reach").text(response[0]);
                     $("#impression").text(response[1]);
                 },

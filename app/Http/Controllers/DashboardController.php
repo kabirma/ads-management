@@ -2,53 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use DateTime;
+use Carbon\Carbon;
+use App\Models\Ads;
 use App\Models\Page;
+use App\Models\Todo;
+use App\Models\User;
+use App\Models\Media;
 use App\Models\Expense;
 use App\Models\Invoice;
-use App\Models\InvoiceProduct;
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\Todo;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Ads;
-use Carbon\Carbon;
-use DateTime;
-use DB;
-use App\Models\Media;
+use App\Models\InvoiceProduct;
+use App\Mail\TeamInvitationMail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('auth');
-  }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-  /**
-   * Show the application dashboard.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function index()
-  {
-    $data = array();
-    $data['pages'] = Page::count();
-    $data['users'] = User::count();
-    $data['media'] = Media::count();
-    $data['adsCount'] = Ads::count();
-    $data['ads'] = Ads::with('adGroup','campaign')->limit(6)->get();
-    return view('dashboard', $data)->with('success','YAYAYAYAYY');
-  }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $data = array();
+        $data['pages'] = Page::count();
+        $data['users'] = User::count();
+        $data['media'] = Media::count();
+        $data['adsCount'] = Ads::count();
+        $data['ads'] = Ads::with('adGroup', 'campaign')->limit(6)->get();
+        return view('admin.dashboard.dashboard', $data)->with('success', 'YAYAYAYAYY');
+    }
 
-  public function ajax(Request $request)
-  {
-    $date = explode(" - ", $request->date);
-    if ($request->action == "invoice") {
-      $data = Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
-      $output = '';
-      if (count($data)) {
-        foreach ($data as $item) {
-          $output .= '
+
+    public function ajax(Request $request)
+    {
+        $date = explode(" - ", $request->date);
+        if ($request->action == "invoice") {
+            $data = Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
+            $output = '';
+            if (count($data)) {
+                foreach ($data as $item) {
+                    $output .= '
           <tr>
               <td>' . $item->id . '</td>
               <td>' . $item->invoice_number . '</td>
@@ -72,24 +77,24 @@ class DashboardController extends Controller
               </td>
           </tr>
           ';
-        }
-      } else {
-        $output .= '
+                }
+            } else {
+                $output .= '
         <tr>
           <td colspan="6" align="center"><b>No Records Found</b></td>
         </tr>
       ';
-      }
+            }
 
-      echo $output;
-    }
+            echo $output;
+        }
 
-    if ($request->action == "projects") {
-      $data = Project::where('start_date', '>=', date("Y-m-d", strtotime($date[0])))->where('start_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
-      $output = '';
-      if (count($data)) {
-        foreach ($data as $item) {
-          $output .= '
+        if ($request->action == "projects") {
+            $data = Project::where('start_date', '>=', date("Y-m-d", strtotime($date[0])))->where('start_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
+            $output = '';
+            if (count($data)) {
+                foreach ($data as $item) {
+                    $output .= '
           <tr>
             <td>' . $item->id . '</td>
             <td>' . $item->project_number . '</td>
@@ -116,51 +121,51 @@ class DashboardController extends Controller
             </td>
           </tr>
           ';
-        }
-      } else {
-        $output .= '
+                }
+            } else {
+                $output .= '
         <tr>
           <td colspan="6" align="center"><b>No Records Found</b></td>
         </tr>
       ';
-      }
+            }
 
-      echo $output;
-    }
-    if ($request->action == "project_summary") {
-      $data = DB::select("select count(*) as total_count,sum(project_total) as total_earning from projects where start_date >=? and start_date <=? ", [date("Y-m-d", strtotime($date[0])), date("Y-m-d", strtotime($date[1]))]);
-      $output = '';
-      if (count($data)) {
-        foreach ($data as $item) {
-          $output .= '
+            echo $output;
+        }
+        if ($request->action == "project_summary") {
+            $data = DB::select("select count(*) as total_count,sum(project_total) as total_earning from projects where start_date >=? and start_date <=? ", [date("Y-m-d", strtotime($date[0])), date("Y-m-d", strtotime($date[1]))]);
+            $output = '';
+            if (count($data)) {
+                foreach ($data as $item) {
+                    $output .= '
           <tr>
             <td>' . $item->total_count . '</td>
             <td>' . $item->total_earning . '</td>
-            
+
           </tr>
           ';
-        }
-      } else {
-        $output .= '
+                }
+            } else {
+                $output .= '
         <tr>
           <td colspan="2" align="center"><b>No Records Found</b></td>
         </tr>
       ';
-      }
+            }
 
-      echo $output;
-    }
+            echo $output;
+        }
 
 
-    if ($request->action == "sales") {
-      $expense_total = (float)Expense::where('expddate', '>=', date("Y-m-d", strtotime($date[0])))->where('expddate', '<=', date("Y-m-d", strtotime($date[1])))->sum("expenseamount");
-      $earning_total = (float)Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->sum("amount_paid");
-      $data = DB::select("SELECT payment_method,sum(invoice_total) as invoice_total,sum(amount_paid) as amount_paid, sum(balance) as balance FROM `invoices` where invoice_date >= '" . date("Y-m-d", strtotime($date[0])) . "' and invoice_date <= '" . date("Y-m-d", strtotime($date[1])) . "' GROUP BY payment_method;");
-      $profit = $earning_total - $expense_total;
-      $output = '';
-      if (count($data)) {
-        foreach ($data as $item) {
-          $output .= '
+        if ($request->action == "sales") {
+            $expense_total = (float) Expense::where('expddate', '>=', date("Y-m-d", strtotime($date[0])))->where('expddate', '<=', date("Y-m-d", strtotime($date[1])))->sum("expenseamount");
+            $earning_total = (float) Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->sum("amount_paid");
+            $data = DB::select("SELECT payment_method,sum(invoice_total) as invoice_total,sum(amount_paid) as amount_paid, sum(balance) as balance FROM `invoices` where invoice_date >= '" . date("Y-m-d", strtotime($date[0])) . "' and invoice_date <= '" . date("Y-m-d", strtotime($date[1])) . "' GROUP BY payment_method;");
+            $profit = $earning_total - $expense_total;
+            $output = '';
+            if (count($data)) {
+                foreach ($data as $item) {
+                    $output .= '
           <tr>
             <td>£' . $item->invoice_total . '</td>
             <td>' . $item->payment_method . '</td>
@@ -168,36 +173,76 @@ class DashboardController extends Controller
             <td>£' . $item->balance . '</td>
           </tr>
           ';
-        }
-      } else {
-        $output .= '
+                }
+            } else {
+                $output .= '
         <tr>
           <td colspan="4" align="center"><b>No Records Found</b></td>
         </tr>
       ';
-      }
+            }
 
 
-      $output_array[] = number_format($earning_total, 2);
-      $output_array[] = number_format($expense_total, 2);
-      $output_array[] = number_format($profit, 2);
-      $output_array[] = $output;
+            $output_array[] = number_format($earning_total, 2);
+            $output_array[] = number_format($expense_total, 2);
+            $output_array[] = number_format($profit, 2);
+            $output_array[] = $output;
 
-      echo json_encode($output_array);
+            echo json_encode($output_array);
+        }
     }
-  }
 
 
-  public function setting()
-  {
-    $data['title'] = 'Connect Social Media';
-    return view('auth.setting',$data);
-  }
+    public function setting()
+    {
+        $data['title'] = 'Connect Social Media';
+        return view('auth.setting', $data);
+    }
 
-  public function wallet()
-  {
-    $data['title'] = 'Wallet';
-    return view('auth.wallet',$data);
-  }
+    public function wallet()
+    {
+        $data['title'] = 'Wallet';
+        return view('auth.wallet', $data);
+    }
+
+
+    public function resetPass()
+    {
+
+        // dd(request()->all());
+        request()->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ], [
+            'new_password.confirmed' => 'The new password and confirm password must match.',
+            'new_password.min' => 'The new password must be at least 8 characters.',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check(request()->old_password, $user->password)) {
+            return back()->withErrors(['old_password' => 'Current password is incorrect']);
+        }
+
+        $user->password = Hash::make(request()->new_password);
+        $user->save();
+
+        return back()->with('success', 'Password changed successfully.');
+    }
+
+    public function invite(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->email;
+
+        // Send the email
+        Mail::to($email)->send(new TeamInvitationMail($email));
+
+        return back()->with('success', 'Invitation sent to ' . $email);
+    }
+
 
 }
