@@ -4,24 +4,7 @@
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
 
-        <style>
-            /* Toolbar (top) */
-            /* .cke_top {
-                            background: linear-gradient(to right, #1487b3, #38afc3) !important;
 
-                        } */
-
-
-            /* Bottom bar */
-            .cke_bottom {
-                background: linear-gradient(to right, #2e3e4a, #0c2c3e) !important;
-            }
-
-            /* Buttons in the toolbar */
-            .cke_button {
-                background: transparent !important;
-                color: white !important;
-            }
         </style>
         <div class="row">
             <div class="col-12">

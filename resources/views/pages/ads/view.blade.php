@@ -8,6 +8,564 @@
 @endsection
 @section('content')
     <!-- Dashboard Analytics Start -->
+
+
+
+
+    <!-- end top nav -->
+
+    <div class="mb-4 mt-3 welcome position-relative">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+            <h4 class="mb-2 mb-md-0" style="font-weight: 500; font-size: 23px;">
+                Manage Ad
+            </h4>
+            <!-- manage ad section -->
+            <div class="addition-btn-manage d-flex flex-wrap gap-3">
+                <div class="col-auto">
+                    <div class="dropdown filter-dropdowns">
+                        <button class="btn customs-btn dropdown-toggle" type="button" id="filterDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter by
+                            <img src="{{ asset('assets/admin/img/icons/manage-downarrow.png') }}"
+                                class="filter-downarrow ms-1" alt="">
+                        </button>
+                        <ul class="dropdown-menu " aria-labelledby="filterDropdown">
+                            <li><a class="dropdown-item" href="#">Option 1</a></li>
+                            <li><a class="dropdown-item" href="#">Option 2</a></li>
+                            <li><a class="dropdown-item" href="#">Option 3</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div>
+                    <div id="period-control">
+                        <button id="changePeriodBtn" class="btn chnage-periodbtn d-block w-100 w-md-auto">
+                            <img src="{{ asset('assets/admin/img/icons/calender.png') }}" alt=""
+                                class="calender-img"> change
+                            period
+                            <img src="{{ asset('assets/admin/img/icons/manage-downarrow.png') }}" class="down-arrow-img"
+                                alt="" width="13" />
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="custom-para m-0">
+            It's recommended to complete these steps before you start
+            advertising.
+        </div>
+    </div>
+
+    <!-- media section -->
+    <div
+        class="media-container d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+
+        <!-- Left side: Button + Icons -->
+        <div class="media-manage-contents d-flex align-items-center gap-2">
+            <button type="button" class="btn btn all me-3">All</button>
+            <a href="#"><img src="{{ asset('assets/admin/img/icons/manage-tiktok-icon.png') }}"
+                    alt="img not found"></a>
+            <a href="#"><img src="{{ asset('assets/admin/img/icons/manage-snapchat-icon.png') }}"
+                    alt="img not found"></a>
+            <a href="#"><img src="{{ asset('assets/admin/img/icons/manage-addsense-icon.png') }}"
+                    alt="img not found"></a>
+            <a href="#"><img src="{{ asset('assets/admin/img/icons/manage-fb-icon.png') }}" alt="img not found"></a>
+            <a href="#"><img src="{{ asset('assets/admin/img/icons/manage-youtube-icon.png') }}"
+                    alt="img not found"></a>
+            <a href="#"><img src="{{ asset('assets/admin/img/icons/manage-insta-icon.png') }}"
+                    alt="img not found"></a>
+        </div>
+
+        <!-- Right side: Button group aligned to the end -->
+
+        <div class="toggle-manage-btn">
+            <div class="custom-btn-group d-flex gap-2">
+                <button type="button" class="btn custom-btn" id="show-card">
+                    <img src="{{ asset('assets/admin/img/icons/goal-humber-btn.png') }}" alt="img not found">
+                </button>
+                <button type="button" class="btn custom-btn" id="show-table">
+                    <img src="{{ asset('assets/admin/img/icons/dash-humber-btn.png') }}" alt="img not found">
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- manage card section -->
+    <div class="card-container">
+        <div class="row mt-3">
+            <!-- first card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- second card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- third card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- fourth card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fifth card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- sixth card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- seventh card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- eight card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- nine card -->
+            <div class="col-sm-12 col-md-4 mb-4">
+                <div class="card manage-card position-relative">
+                    <img src="{{ asset('assets/admin/img/icons/card-goal-icon.png') }}" class="card-cicle-img"
+                        alt="">
+                    <img src="{{ asset('assets/admin/img/icons/left-card-circle.png') }}" class="left-card-cicle-img"
+                        alt="">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="snap-logo">
+                                <img src="{{ asset('assets/admin/img/icons/campaign-snap-logo.png') }}" alt="Logo"
+                                    style="width: 30px; height: 30px;">
+                                <span class="">Sweply-SW-19674</span>
+                            </div>
+                            <div class="dropdown campaign-custom-dropdown">
+                                <button class="btn btn-link" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Resume editing whenever <br>
+                            you’re ready to launch!</p>
+                        <div class="manage-card-btn text-center">
+                            <a href="" class="btn btn manage-trafic-btn">Traffic</a>
+                            <a href="" class="btn btn manage-find-btn">Find Your Compaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- add table -->
+    <div class="table-container d-none mt-3" id="campaignTable">
+
+        <div class="table-responsive">
+            <table class="table table-bordered  align-middle text-center">
+
+                <thead>
+
+                    <tr>
+                        <th class="text-start ms-1">Name</th>
+                        <th>Impression</th>
+                        <th>Clicks</th>
+                        <th>Spend</th>
+                        <th>Total Budget</th>
+                        <th>Status</th>
+                        <th>...</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample Row -->
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="{{ asset('assets/admin/img/icons/manage-snapchat-icon.png') }}" width="24"
+                                    height="24" />
+                                <div>
+                                    <div>Sweply-SW-19674</div>
+                                    <span class="white small text-start">Traffic</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>3222456 SAR</td>
+                        <td><button class="btn btn-status btn-finish">Finish</button></td>
+                        <td><span class="icon">⋮</span></td>
+                    </tr>
+                    <!-- Duplicate this <tr> for more rows -->
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="{{ asset('assets/admin/img/icons/manage-snapchat-icon.png') }}" width="24"
+                                    height="24" />
+                                <div>
+                                    <div>Sweply-SW-19674</div>
+                                    <span class="white small text-start">Traffic</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>3222456 SAR</td>
+                        <td><button class="btn btn-status btn-pending">Pending</button></td>
+                        <td><span class="icon">⋮</span></td>
+                    </tr>
+
+                    <!-- Add more rows as needed -->
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="{{ asset('assets/admin/img/icons/manage-snapchat-icon.png') }}" width="24"
+                                    height="24" />
+                                <div>
+                                    <div>Sweply-SW-19674</div>
+                                    <span class="white small text-start">Traffic</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>3222456 SAR</td>
+                        <td><button class="btn btn-status btn-pending">Pending</button></td>
+                        <td><span class="icon">⋮</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <img src="{{ asset('assets/admin/img/icons/manage-snapchat-icon.png') }}" width="24"
+                                    height="24" />
+                                <div>
+                                    <div>Sweply-SW-19674</div>
+                                    <span class="white small text-start">Traffic</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>3222456 SAR</td>
+                        <td><button class="btn btn-status btn-pending">Pending</button></td>
+                        <td><span class="icon">⋮</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <section id="dashboard-analytics">
         <div class="row">
             <div class="col-12">
@@ -69,14 +627,14 @@
                                                     class="btn btn-sm btn-primary primary-btn"><i class="fa fa-eye"></i>
                                                     {{ __('messages.Details') }}</a>
                                                 <!--
-                                                                                <a href="{{ route('status.ads', $list->id) }}"
-                                                                                    class="btn btn-sm btn-{{ $list->status == 1 ? 'success' : 'danger' }}"><?= $list->status == 1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
-                                                                                <a href="{{ route('edit.ads', $list->id) }}"
-                                                                                    class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                                                                <a href="#0" class="btn btn-sm btn-danger delete"
-                                                                                    data-title="{{ $list->title }}"
-                                                                                    data-href="{{ route('delete.ads', $list->id) }}"><i
-                                                                                        class="fa fa-trash"></i></a> -->
+                                                                                                                    <a href="{{ route('status.ads', $list->id) }}"
+                                                                                                                        class="btn btn-sm btn-{{ $list->status == 1 ? 'success' : 'danger' }}"><?= $list->status == 1 ? "<i class='fa fa-times'></i> Deactive" : "<i class='fa fa-check'></i> Active" ?></a>
+                                                                                                                    <a href="{{ route('edit.ads', $list->id) }}"
+                                                                                                                        class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                                                                                                    <a href="#0" class="btn btn-sm btn-danger delete"
+                                                                                                                        data-title="{{ $list->title }}"
+                                                                                                                        data-href="{{ route('delete.ads', $list->id) }}"><i
+                                                                                                                            class="fa fa-trash"></i></a> -->
                                             </td>
                                         </tr>
                                     @endforeach

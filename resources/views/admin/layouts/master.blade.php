@@ -36,6 +36,54 @@
                     } */
 
     /* Optional: Style for active and non-disabled pagination buttons to match primary-btn */
+    #media {
+        /* background: linear-gradient(to right, #1487b3, #38afc3); */
+        color: white;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Optional: Hide default file input text and customize label */
+    #media::-webkit-file-upload-button {
+        /* background: rgba(255, 255, 255, 0.2); */
+        background: linear-gradient(to right, #1487b3, #38afc3);
+        ;
+        border: none;
+        padding: 8px 12px;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #media::file-selector-button {
+        background: linear-gradient(to right, #1487b3, #38afc3);
+        ;
+        border: none;
+        padding: 8px 12px;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* Toolbar (top) */
+    /* .cke_top {
+                            background: linear-gradient(to right, #1487b3, #38afc3) !important;
+
+                        } */
+
+
+    /* Bottom bar */
+    .cke_bottom {
+        background: linear-gradient(to right, #2e3e4a, #0c2c3e) !important;
+    }
+
+    /* Buttons in the toolbar */
+    .cke_button {
+        background: transparent !important;
+        color: white !important;
+    }
 </style>
 {{-- Sidebar --}}
 @include('admin.layouts.sidebar')
@@ -48,6 +96,18 @@
     <!-- end top nav -->
 
 
+
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $err)
+                <div>{{ $err }}</div>
+            @endforeach
+        </div>
+    @endif
 
     @yield('content')
 
@@ -265,8 +325,8 @@
     })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
-integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
-crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 @stack('scripts')

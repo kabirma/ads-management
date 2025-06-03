@@ -210,7 +210,7 @@
                                                         placceholder="Features">
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <a href="#" class="btn btn-secondary primary-btn"
+                                                    <a href="#" class="btn btn-secondary primary-btndash"
                                                         id="addFeatures"><i class="fa fa-plus"></i></a>
                                                 </div>
                                             </div>

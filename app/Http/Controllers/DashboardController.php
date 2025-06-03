@@ -2,53 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use DateTime;
+use Carbon\Carbon;
+use App\Models\Ads;
 use App\Models\Page;
+use App\Models\Todo;
+use App\Models\User;
+use App\Models\Media;
 use App\Models\Expense;
 use App\Models\Invoice;
-use App\Models\InvoiceProduct;
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\Todo;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Ads;
-use Carbon\Carbon;
-use DateTime;
-use DB;
-use App\Models\Media;
+use App\Models\InvoiceProduct;
+use App\Mail\TeamInvitationMail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class DashboardController extends Controller
 {
-  public function __construct()
-  {
-    $this->middleware('auth');
-  }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-  /**
-   * Show the application dashboard.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
-  public function index()
-  {
-    $data = array();
-    $data['pages'] = Page::count();
-    $data['users'] = User::count();
-    $data['media'] = Media::count();
-    $data['adsCount'] = Ads::count();
-    $data['ads'] = Ads::with('adGroup','campaign')->limit(6)->get();
-    return view('dashboard', $data)->with('success','YAYAYAYAYY');
-  }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        $data = array();
+        $data['pages'] = Page::count();
+        $data['users'] = User::count();
+        $data['media'] = Media::count();
+        $data['adsCount'] = Ads::count();
+        $data['ads'] = Ads::with('adGroup', 'campaign')->limit(6)->get();
+        return view('admin.dashboard.dashboard', $data)->with('success', 'YAYAYAYAYY');
+    }
 
-  public function ajax(Request $request)
-  {
-    $date = explode(" - ", $request->date);
-    if ($request->action == "invoice") {
-      $data = Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
-      $output = '';
-      if (count($data)) {
-        foreach ($data as $item) {
-          $output .= '
+
+    public function ajax(Request $request)
+    {
+        $date = explode(" - ", $request->date);
+        if ($request->action == "invoice") {
+            $data = Invoice::where('invoice_date', '>=', date("Y-m-d", strtotime($date[0])))->where('invoice_date', '<=', date("Y-m-d", strtotime($date[1])))->orderBy('id', 'desc')->get();
+            $output = '';
+            if (count($data)) {
+                foreach ($data as $item) {
+                    $output .= '
           <tr>
               <td>' . $item->id . '</td>
               <td>' . $item->invoice_number . '</td>
@@ -199,5 +204,45 @@ class DashboardController extends Controller
         $data['title'] = 'Wallet';
         return view('auth.wallet', $data);
     }
+
+
+    public function resetPass()
+    {
+
+        // dd(request()->all());
+        request()->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ], [
+            'new_password.confirmed' => 'The new password and confirm password must match.',
+            'new_password.min' => 'The new password must be at least 8 characters.',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check(request()->old_password, $user->password)) {
+            return back()->withErrors(['old_password' => 'Current password is incorrect']);
+        }
+
+        $user->password = Hash::make(request()->new_password);
+        $user->save();
+
+        return back()->with('success', 'Password changed successfully.');
+    }
+
+    public function invite(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->email;
+
+        // Send the email
+        Mail::to($email)->send(new TeamInvitationMail($email));
+
+        return back()->with('success', 'Invitation sent to ' . $email);
+    }
+
 
 }

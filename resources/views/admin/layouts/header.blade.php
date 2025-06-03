@@ -13,6 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="{{ asset('assets/admin/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/admin/css/mediaqueries.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/manage-add.css') }}">
+
     @stack('stylesheets')
 
     <!-- DataTables core + Bootstrap 5 theme -->
