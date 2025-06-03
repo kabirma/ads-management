@@ -36,7 +36,7 @@ class AdRequest extends FormRequest
             'title.min' => 'The title must be at least 5 characters long.',
             'description.required' => 'The description is required.',
             'description.min' => 'The description must be at least 20 characters long.',
-            'description.max' => 'The description should not be greater than 500 characters.',
+            'description.max' => 'The description should not be greater than 100 characters.',
             'website_url.required' => 'A valid website URL is required.',
             'website_url.url' => 'Enter a valid Website URL.',
             'website_url.regex' => 'The Website URL must begin with https://',

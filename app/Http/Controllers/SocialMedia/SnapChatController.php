@@ -452,8 +452,20 @@ class SnapChatController extends Controller
         }
     }
 
+    function fetchCampaign($campaignId) {
+        $url = $this->apiUrl."campaigns/$campaignId";
+        $response = Http::withToken($this->accessToken)->get($url);
+        $response = $response->json();
+        if($response['request_status'] === 'SUCCESS') {
+            return $response['campaigns'][0]['campaign'];
+        }
+        return [];
+    }
+
     function fetchAds($adId){
         $ad = Ads::with('adGroup','campaign')->find($adId);
+        $campaignId = $ad->campaign->campaign_id;
+        $campaign = $this->fetchCampaign($campaignId);
         $adId = $ad->ads_id;
         $start = date('Y-m-d', strtotime('-15 days')).'T00:00:00';
         $end = date('Y-m-d').'T00:00:00';
@@ -466,6 +478,7 @@ class SnapChatController extends Controller
             'labels' => '',
             'impression_total'=>0,
             'spends_total'=>0,
+            'campaign' => $campaign
         ];
         if(!empty($response) && $response['request_status'] === 'SUCCESS'){
             $timeSeries = $response['timeseries_stats'][0]['timeseries_stat']['timeseries'];

@@ -149,7 +149,16 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">
-                                <h2>{{$ad->name}}</h2>
+                               <div class="row">
+                                    <div class="col-md-6">
+                                        <h2>{{$ad->name}}</h2>
+                                    </div>
+                                    <div class="col-md-6" style="text-align-last: end">
+                                        <a href="#0" class="btn btn-{{$apiResponse['campaign']['status'] == 'ACTIVE' ? 'success' : 'danger'}}">
+                                            {{$apiResponse['campaign']['status']}}
+                                        </a>
+                                    </div>
+                               </div>
                         </div>
                     </div>
                 </div>

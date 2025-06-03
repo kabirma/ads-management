@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Draft;
 use App\Models\Role;
 use App\Models\Company;
+use App\Models\Media;
 use App\Models\Campaign;
 use Auth;
 
@@ -66,8 +67,9 @@ class DraftController extends Controller
         $data['media_type'] = $draft->media_type ?? '';
         $data['language'] = $draft->language ?? '';
         $data['ai_sugguested'] = 0;
-        $record->status = 1;
-        $record->save();
+        $data['medias'] = Media::where('user_id', Auth::user()->id)->get();
+        // $record->status = 1;
+        // $record->save();
 
         $campaignId = Campaign::latest()->first()->id + 1;
         $setting = Company::first();
@@ -99,9 +101,9 @@ class DraftController extends Controller
         $data = $this->model::where($this->model_primary, $id)->first();
         if (!is_null($data)) {
             $data->delete();
-            return redirect()->route($this->redirect_page)->with("success", $this->title . " Deleted Successfully");
+            return redirect()->route($this->redirect_page)->with("success", $this->title .' '. __('messages.deleted_successfully'));
         }
-        return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+        return redirect()->route($this->redirect_page)->with("error", __('messages.no_record_found'));
     }
 
     public function status($id)
@@ -110,8 +112,8 @@ class DraftController extends Controller
         $change_status=$data->status==1 ? 0 : 1;
         if (!is_null($data)) {
             $this->model::where('id',$id)->update(['status'=>$change_status]);
-            return redirect()->route($this->redirect_page)->with("success", $this->title . " Status Updated Successfully");
+            return redirect()->route($this->redirect_page)->with("success", $this->title .' ' . __('messages.status_updated_successfully'));
         }
-        return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+        return redirect()->route($this->redirect_page)->with("error", __('messages.no_record_found'));
     }
 }

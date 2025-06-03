@@ -55,7 +55,7 @@ class BusinessProfileController extends Controller
         }
         $this->ImageUpload($model,"image",$request,"businessprofile");
         $model->save();
-        return redirect()->route($this->redirect_page)->with("success", $this->title . " Saved Successfully");
+        return redirect()->route($this->redirect_page)->with("success", $this->title . " " .   __('messages.saved_successfully'));
     }
 
     public function delete($id)
@@ -63,9 +63,9 @@ class BusinessProfileController extends Controller
         $data = $this->model::where($this->model_primary, $id)->first();
         if (!is_null($data)) {
             $data->delete();
-            return redirect()->route($this->redirect_page)->with("success", $this->title . " Deleted Successfully");
+            return redirect()->route($this->redirect_page)->with("success", $this->title . " ".  __('messages.deleted_successfully'));
         }
-        return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+        return redirect()->route($this->redirect_page)->with("error", __('messages.no_record_found'));
     }
 
     public function status($id)
@@ -74,8 +74,8 @@ class BusinessProfileController extends Controller
         $change_status=$data->status==1 ? 0 : 1;
         if (!is_null($data)) {
             $this->model::where('id',$id)->update(['status'=>$change_status]);
-            return redirect()->route($this->redirect_page)->with("success", $this->title . " Status Updated Successfully");
+            return redirect()->route($this->redirect_page)->with("success", $this->title . " " . __('messages.status_updated_successfully'));
         }
-        return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+        return redirect()->route($this->redirect_page)->with("error", __('messages.no_record_found'));
     }
 }

@@ -10,6 +10,7 @@ use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserPackage;
+use App\Models\Media;
 use App\Http\Controllers\SocialMedia\TikTokController;
 use App\Http\Controllers\SocialMedia\SnapChatController;
 use App\Http\Controllers\AIController;
@@ -70,6 +71,7 @@ class AdsController extends Controller
     public function add($ai = 0)
     {
         $userPackage = UserPackage::where('user_id',Auth::guard('web')->user()->id)->where('expire_at','>=', date("Y-m-d"))->first();
+        $data['medias'] = Media::where('user_id', Auth::user()->id)->get();
         if(!isset($userPackage)){
             return view('auth.package',['title'=>'Subscribe to Packages']);
         }
@@ -223,14 +225,14 @@ class AdsController extends Controller
         $this->deductWallet([
             'walletDeduct' => $request->walletDeduct
         ]);
-        return json_encode([200, $this->title . " Saved Successfully"]);
+        return json_encode([200, $this->title .' '.  __('messages.saved_successfully')]);
     }
 
     function flattenError($response) {
         while (is_array($response) && isset($response['error'])) {
             $response = $response['error'];
         }
-        return ['error' => $response];
+        return $response;
     }
 
     public function delete($id)
@@ -238,9 +240,9 @@ class AdsController extends Controller
         $data = $this->model::where($this->model_primary, $id)->first();
         if (!is_null($data)) {
             $data->delete();
-            return redirect()->route($this->redirect_page)->with("success", $this->title . " Deleted Successfully");
+            return redirect()->route($this->redirect_page)->with("success", $this->title . ' '.  __('messages.deleted_successfully'));
         }
-        return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+        return redirect()->route($this->redirect_page)->with("error",  __('messages.no_record_found'));
     }
 
     public function delete_image($id)
@@ -248,9 +250,9 @@ class AdsController extends Controller
         $data = $this->child_model::where($this->model_primary, $id)->first();
         if (!is_null($data)) {
             $data->delete();
-            return redirect()->route($this->redirect_page)->with("success","Image Deleted Successfully");
+            return redirect()->route($this->redirect_page)->with("success",__('messages.image_deleted_successfully'));
         }
-        return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+        return redirect()->route($this->redirect_page)->with("error", __('messages.no_record_found'));
     }
 
     public function status($id)
@@ -259,9 +261,9 @@ class AdsController extends Controller
         $change_status=$data->status==1 ? 0 : 1;
         if (!is_null($data)) {
             $this->model::where('id',$id)->update(['status'=>$change_status]);
-            return redirect()->route($this->redirect_page)->with("success", $this->title . " Status Updated Successfully");
+            return redirect()->route($this->redirect_page)->with("success", $this->title . ' '.  __('messages.status_updated_successfully'));
         }
-        return redirect()->route($this->redirect_page)->with("error", "No Record Found");
+        return redirect()->route($this->redirect_page)->with("error", __('messages.no_record_found'));
     }
 
     public function detail($id, $platform){
@@ -285,7 +287,7 @@ class AdsController extends Controller
 
     public function generateAd(Request $request){
         if($request->keywords == null){
-            return redirect()->back()->with("error", "Atleast 1 Keyword is Required.");
+            return redirect()->back()->with("error", __('messages.keyword_required'));
         }
         $aiController = new AIController();
         tryAgain:
@@ -295,7 +297,7 @@ class AdsController extends Controller
             
             if(count($suggestion) !== 7){
                 goto tryAgain;
-                return redirect()->back()->with("error", "Something went wrong. Please try again.");
+                return redirect()->back()->with("error", __('messages.something_went_wrong'));
             }
 
             $name = $suggestion[0];
@@ -321,6 +323,7 @@ class AdsController extends Controller
             $data['age'] = $age;
             $data['social_media'] = $socialMedia;
             $data['ai_sugguested'] = 1;
+            $data['medias'] = Media::where('user_id', Auth::user()->id)->get();
             session([self::AI_SESSION_KEY=>$data]);
             return redirect()->route('add.ads',['ai'=>1]);
         }

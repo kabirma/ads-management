@@ -274,4 +274,12 @@ return [
     "Warning" => "Warning",
     "ConfirmMessageDelete" => "Are you sure you want to delete this Record",
     "Confirm" => "Confirm",
+    'saved_successfully' => 'Saved successfully',
+    'no_record_found' => 'No record found',
+    'deleted_successfully' => 'Deleted successfully',
+    'image_deleted_successfully' => 'Image deleted successfully',
+    'status_updated_successfully' => 'Status updated successfully',
+    "VerificationEmailSent" => "Verification Email Sent",
+    "PasswordDoesNotMatch" => "Password Does Not Match",
+    "ProfileUpdatedSuccessfully" => "Profile Updated Successfully",
 ];

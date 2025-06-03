@@ -284,59 +284,6 @@
         });
     </script>
 
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form id="imageForm">
-                    <div class="modal-header">
-                        <div class="row" style="width:100%">
-                            <div class="col-md-6">
-                                <h4 class="modal-title" id="imageModalLabel">{{ __('messages.ChooseYourMedia') }}
-                                </h4>
-                            </div>
-                            <div class="col-md-6" style="text-align: right"><a href="{{ route('add.media') }}"
-                                    class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i>
-                                    {{ __('messages.UploadMedia') }}</a></div>
-                        </div>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row g-3">
-                            @foreach ($medias as $media)
-                                @if ($media->media_type == 'image')
-                                    <div class="col-4">
-                                        <label class="image-radio">
-                                            <input type="radio" name="image" value="{{ $media->media }}"
-                                                data-path="{{ asset($media->media) }}"
-                                                data-type="{{ $media->media_type }}">
-                                            <img src="{{ asset($media->media) }}" alt="{{ $media->name }}">
-                                            {{ $media->getImageSize() }}
-                                        </label>
-                                    </div>
-                                @else
-                                    <div class="col-4">
-                                        <label class="image-radio">
-                                            <input type="radio" name="image" value="{{ $media->media }}"
-                                                data-path="{{ asset($media->media) }}"
-                                                data-type="{{ $media->media_type }}">
-                                            <video width="320" height="240" controls>
-                                                <source src="{{ asset($media->media) }}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </label>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">{{ __('messages.Select') }}</button>
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">{{ __('messages.Cancel') }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <!-- Dashboard Analytics end -->
     <div id="popupModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="popupModalLabel"
         aria-hidden="true">
@@ -366,51 +313,7 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('.image-radio').on('click', function() {
-                $('.image-radio input[type="radio"]').prop('checked', false);
-                $('.image-radio').removeClass('checked');
-
-                const input = $(this).find('input[type="radio"]');
-                input.prop('checked', true);
-                $(this).addClass('checked');
-            });
-
-            $('#imageForm').on('submit', function(e) {
-                e.preventDefault();
-                const selected = $('input[name="image"]:checked').val();
-                const selectedType = $('input[name="image"]:checked').attr('data-type');
-                const selectedpath = $('input[name="image"]:checked').attr('data-path');
-                if (selected) {
-                    $('#selectedMedia').val(selected);
-                    $('#selectedType').val(selectedType == 'image' ? 1 : 0);
-                    renderMedia(selectedType, selectedpath)
-                    $('#imageModal').modal('hide');
-                } else {
-                    alert('Please select an image.');
-                }
-            });
-
-
-            function renderMedia(mediaType, mediaSrc) {
-                let html = '';
-
-                if (mediaType === 'video') {
-                    html = `
-                        <video width="320" height="240" controls>
-                            <source src="${mediaSrc}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    `;
-                } else if (mediaType === 'image') {
-                    html = `<img src="${mediaSrc}" alt="Media" height="200">`;
-                }
-
-                $('#mediaArea').html(html);
-            }
-        });
-    </script>
+   
 
     <script>
         window.intercomSettings = {

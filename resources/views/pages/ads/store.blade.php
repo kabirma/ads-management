@@ -858,25 +858,25 @@
                                                             data-toggle="buttons">
                                                             <label class="btn btn-default active">
                                                                 <input type="radio" name="recommended_budget"
-                                                                    value="150" checked="">
+                                                                    value="200" checked="">
                                                                 <div>
-                                                                    <h4>150 SAR</h4>
+                                                                    <h4>200 SAR</h4>
                                                                     <hr> {{ __('messages.MinBudget') }}
                                                                 </div>
                                                             </label>
                                                             <label class="btn btn-default">
                                                                 <input type="radio" name="recommended_budget"
-                                                                    value="400">
+                                                                    value="450">
                                                                 <div>
-                                                                    <h4>400 SAR</h4>
+                                                                    <h4>450 SAR</h4>
                                                                     <hr> {{ __('messages.MidBudget') }}
                                                                 </div>
                                                             </label>
                                                             <label class="btn btn-default">
                                                                 <input type="radio" name="recommended_budget"
-                                                                    value="700">
+                                                                    value="750">
                                                                 <div>
-                                                                    <h4>700 SAR</h4>
+                                                                    <h4>750 SAR</h4>
                                                                     <hr> {{ __('messages.MaxBudget') }}
                                                                 </div>
                                                             </label>
@@ -1063,10 +1063,120 @@
     </section>
     <!-- Dashboard Analytics end -->
 
+    
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="imageForm">
+                    <div class="modal-header">
+                        <div class="row" style="width:100%">
+                            <div class="col-md-6">
+                                <h4 class="modal-title" id="imageModalLabel">{{ __('messages.ChooseYourMedia') }}
+                                </h4>
+                            </div>
+                            <div class="col-md-6" style="text-align: right"><a href="{{ route('add.media') }}"
+                                    class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i>
+                                    {{ __('messages.UploadMedia') }}</a></div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            @foreach ($medias as $val)
+                                <?php
+                                    $checked = '';
+                                    if(isset($media) && isset($media_type)) {
+                                        if($media == $val->media && $media_type == ($val->media_type == 'image' ? 1 : 0)){
+                                            $checked = 'checked';
+                                        }
+                                    }
+                                ?>
+
+                                @if ($val->media_type == 'image')
+                                    <div class="col-4">
+                                        <label class="image-radio">
+                                            <input type="radio" name="image" value="{{ $val->media }}"
+                                                data-path="{{ asset($val->media) }}"
+                                                data-type="{{ $val->media_type }}" {{$checked}}>
+                                            <img src="{{ asset($val->media) }}" alt="{{ $val->name }}">
+                                            {{ $val->getImageSize() }}
+                                        </label>
+                                    </div>
+                                @else
+                                    <div class="col-4">
+                                        <label class="image-radio">
+                                            <input type="radio" name="image" value="{{ $val->media }}"
+                                                data-path="{{ asset($val->media) }}"
+                                                data-type="{{ $val->media_type }}" {{$checked}}>
+                                            <video width="320" height="240" controls>
+                                                <source src="{{ asset($val->media) }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </label>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">{{ __('messages.Select') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ __('messages.Cancel') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+     <script>
+        $(document).ready(function() {
+            $('.image-radio').on('click', function() {
+                $('.image-radio input[type="radio"]').prop('checked', false);
+                $('.image-radio').removeClass('checked');
+
+                const input = $(this).find('input[type="radio"]');
+                input.prop('checked', true);
+                $(this).addClass('checked');
+            });
+
+            $('#imageForm').on('submit', function(e) {
+                e.preventDefault();
+                const selected = $('input[name="image"]:checked').val();
+                const selectedType = $('input[name="image"]:checked').attr('data-type');
+                const selectedpath = $('input[name="image"]:checked').attr('data-path');
+                if (selected) {
+                    $('#selectedMedia').val(selected);
+                    $('#selectedType').val(selectedType == 'image' ? 1 : 0);
+                    renderMedia(selectedType, selectedpath)
+                    $('#imageModal').modal('hide');
+                } else {
+                    alert('Please select an image.');
+                }
+            });
+
+
+            function renderMedia(mediaType, mediaSrc) {
+                let html = '';
+
+                if (mediaType === 'video') {
+                    html = `
+                        <video width="320" height="240" controls>
+                            <source src="${mediaSrc}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    `;
+                } else if (mediaType === 'image') {
+                    html = `<img src="${mediaSrc}" alt="Media" height="200">`;
+                }
+
+                $('#mediaArea').html(html);
+            }
+        });
+    </script>
+
 
     <script>
         function fillSpansFromSerialized(serializedStr) {
@@ -1110,13 +1220,9 @@
                     span.text(age_group);
 
                 } else if (cleanKey == 'media') {
-                    @if (isset($media))
-                        const selectedType = '{{ $media_type ? 'image' : 'video' }}';
-                        const selectedpath = '{{ asset($media) }}';
-                    @else
+                  
                         const selectedType = $('input[name="image"]:checked').attr('data-type');
                         const selectedpath = $('input[name="image"]:checked').attr('data-path');
-                    @endif
 
                     mediahtml = fetchMediaContent(selectedType, selectedpath)
                     span.html(mediahtml)

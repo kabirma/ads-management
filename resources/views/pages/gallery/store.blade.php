@@ -26,8 +26,8 @@
                                 <div class="form-group">
                                     <label for="media_type">{{__('messages.MEDIA_TYPE')}}</label>
                                     <select name="media_type" class="form-control">
-                                        <option value="" selected disabled>Select Media Type</option>
-                                        <option {{ isset($record) && $record->media_type == 'image' ? 'selected' : '' }}
+                                        <option value="" disabled>Select Media Type</option>
+                                        <option selected {{ isset($record) && $record->media_type == 'image' ? 'selected' : '' }}
                                             value="image">{{__('messages.Image')}}</option>
                                         <option {{ isset($record) && $record->media_type == 'video' ? 'selected' : '' }}
                                             value="video">{{__('messages.Video')}}</option>
