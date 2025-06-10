@@ -531,529 +531,546 @@
                                 <i class="fa fa-check"></i> <span id="successMessage"></span>
                             </div>
 
-                            <div id="steps">
-                                <div class="step active step1" data-desc="{{ __('messages.CampaignSocialMedia') }}">1</div>
-                                <div class="step step2" data-desc="{{ __('messages.ImportantNotes') }}">2</div>
-                                <div class="step step3" data-desc="{{ __('messages.CampaignGoal') }}">3</div>
-                                <div class="step step4" data-desc="{{ __('messages.CampaignContent') }}">4</div>
-                                <div class="step step5" data-desc="{{ __('messages.CampaignMedia') }}">5</div>
-                                <div class="step step6" data-desc="{{ __('messages.DurationBudget') }}">6</div>
-                                <div class="step step7" data-desc="{{ __('messages.DemographicLocation') }}">7</div>
-                                <div class="step step8" data-desc="{{ __('messages.Summary') }}">8</div>
-                            </div>
-
-                            <form action="{{ route('save.ads') }}" method="post" id="adForm"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
-                                <div class="loading-overlay" id="loader">
-                                    <dotlottie-player
-                                        src="https://lottie.host/0b9fb8be-cfaf-467c-bb48-dd461b508487/l8zI4IHnpj.lottie"
-                                        background="transparent" speed="1" style="width: 300px; height: 300px" loop
-                                        autoplay></dotlottie-player>
-                                </div>
+                            @if (isset($ai_sugguested) && $ai_sugguested == 1)
                                 <div class="row">
-                                    @if (isset($ai_sugguested) && $ai_sugguested == 1)
-                                        <div class="col-md-12" style="text-align: right">
-                                            <button type="button" class="btn btn-secondary btn-sm" id="suggestAi"><i
-                                                    class="fa-solid fa-robot"></i>
-                                                {{ __('messages.NeedHelpWithContent') }}</button>
-                                        </div>
-                                    @endif
-                                    <div class="col-md-12 steps" id="step1">
-                                        <div class="step-heading">
-                                            <h2>{{ __('messages.ChooseYourMedia') }}</h2>
-                                            @if (isset($ai_sugguested) && $ai_sugguested == 1)
-                                                <h4 class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
-                                                    {{ __('messages.AISuggested') }} {{ $social_media }})</h4>
-                                            @endif
-                                        </div>
-                                        <ul id="imageRadio">
-                                            <li><input type="radio" name="social_media" disabled value="facebook"
-                                                    id="facebook" />
-                                                <label for="facebook"> <i class="fab fa-facebook"></i> </label>
-                                            </li>
-                                            <li><input type="radio" name="social_media"
-                                                    @if (isset($social_media)) @if (strtolower($social_media) == 'tiktok') checked @endif
-                                                @else checked @endif value="tiktok" id="tiktok"
-                                                />
-                                                <label for="tiktok"><i class="fab fa-tiktok"></i></label>
-                                            </li>
-                                            <li><input type="radio" name="social_media" disabled value="twitter"
-                                                    id="twitter" />
-                                                <label for="twitter"><i class="fab fa-twitter"></i></label>
-                                            </li>
-                                            <li><input type="radio" name="social_media" disabled value="google"
-                                                    id="google" />
-                                                <label for="google"><i class="fab fa-google"></i></label>
-                                            </li>
-                                            <li><input type="radio" name="social_media"
-                                                    @if (isset($social_media)) @if (strtolower($social_media) == 'snapchat') checked @endif
-                                                @else @endif value="snapchat" id="snapchat" />
-                                                <label for="snapchat"><i class="fab fa-snapchat"></i></label>
-                                            </li>
-
-                                        </ul>
+                                    <div class="col-md-12">
+                                        <h4>{{ __('messages.StrategyAI') }}</h4>
+                                        <br>
+                                        <p style="white-space: break-spaces"><?= $strategy ?></div>          
                                     </div>
+                                    <div class="col-md-12" >
+                                        <hr>
+                                        <a href="#0" class="btn btn-sm btn-primary startAdsCreation">{{ __('messages.StartAdsCreation') }}</a>    
+                                    </div>                           
+                                </div>
+                            @endif
+                            
+                            <div class="adCreationDiv" @if (isset($ai_sugguested) && $ai_sugguested == 1) style="display: none" @endif>
+                                <div id="steps">
+                                    <div class="step active step1" data-desc="{{ __('messages.CampaignSocialMedia') }}">1</div>
+                                    <div class="step step2" data-desc="{{ __('messages.ImportantNotes') }}">2</div>
+                                    <div class="step step3" data-desc="{{ __('messages.CampaignGoal') }}">3</div>
+                                    <div class="step step4" data-desc="{{ __('messages.CampaignContent') }}">4</div>
+                                    <div class="step step5" data-desc="{{ __('messages.CampaignMedia') }}">5</div>
+                                    <div class="step step6" data-desc="{{ __('messages.DurationBudget') }}">6</div>
+                                    <div class="step step7" data-desc="{{ __('messages.DemographicLocation') }}">7</div>
+                                    <div class="step step8" data-desc="{{ __('messages.Summary') }}">8</div>
+                                </div>
 
-                                    <div class="col-md-12 steps" id="step2">
-                                        <div class="important-note">
-                                            <div class="note-header">
-                                                <div class="note-heading">
-                                                    <i class="fa fa-bell"></i>
-                                                    <h2>{{ __('messages.IMPORTANTNOTE') }}</h2>
+                                <form action="{{ route('save.ads') }}" method="post" id="adForm"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
+                                    <div class="loading-overlay" id="loader">
+                                        <dotlottie-player
+                                            src="https://lottie.host/0b9fb8be-cfaf-467c-bb48-dd461b508487/l8zI4IHnpj.lottie"
+                                            background="transparent" speed="1" style="width: 300px; height: 300px" loop
+                                            autoplay></dotlottie-player>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                            <div class="col-md-12" style="text-align: right">
+                                                <button type="button" class="btn btn-secondary btn-sm" id="suggestAi"><i
+                                                        class="fa-solid fa-robot"></i>
+                                                    {{ __('messages.NeedHelpWithContent') }}</button>
+                                            </div>
+                                        @endif
+                                        <div class="col-md-12 steps" id="step1">
+                                            <div class="step-heading">
+                                                <h2>{{ __('messages.ChooseYourMedia') }}</h2>
+                                                @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                    <h4 class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                        {{ __('messages.AISuggested') }} {{ $social_media }})</h4>
+                                                @endif
+                                            </div>
+                                            <ul id="imageRadio">
+                                                <li><input type="radio" name="social_media" disabled value="facebook"
+                                                        id="facebook" />
+                                                    <label for="facebook"> <i class="fab fa-facebook"></i> </label>
+                                                </li>
+                                                <li><input type="radio" name="social_media"
+                                                        @if (isset($social_media)) @if (strtolower($social_media) == 'tiktok') checked @endif
+                                                    @else checked @endif value="tiktok" id="tiktok"
+                                                    />
+                                                    <label for="tiktok"><i class="fab fa-tiktok"></i></label>
+                                                </li>
+                                                <li><input type="radio" name="social_media" disabled value="twitter"
+                                                        id="twitter" />
+                                                    <label for="twitter"><i class="fab fa-twitter"></i></label>
+                                                </li>
+                                                <li><input type="radio" name="social_media" disabled value="google"
+                                                        id="google" />
+                                                    <label for="google"><i class="fab fa-google"></i></label>
+                                                </li>
+                                                <li><input type="radio" name="social_media"
+                                                        @if (isset($social_media)) @if (strtolower($social_media) == 'snapchat') checked @endif
+                                                    @else @endif value="snapchat" id="snapchat" />
+                                                    <label for="snapchat"><i class="fab fa-snapchat"></i></label>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-md-12 steps" id="step2">
+                                            <div class="important-note">
+                                                <div class="note-header">
+                                                    <div class="note-heading">
+                                                        <i class="fa fa-bell"></i>
+                                                        <h2>{{ __('messages.IMPORTANTNOTE') }}</h2>
+                                                    </div>
+                                                    <p><strong>{{ __('messages.Content') }}</strong></p>
                                                 </div>
-                                                <p><strong>{{ __('messages.Content') }}</strong></p>
-                                            </div>
-                                            <div class="note-content">
-                                                <ol>
-                                                    <li>{{ __('messages.Promotion') }}</li>
-                                                    <li>{{ __('messages.Offensive') }}</li>
-                                                    <li>{{ __('messages.IllegalActivities') }}</li>
-                                                    <li>{{ __('messages.Medicines') }}</li>
-                                                </ol>
-                                            </div>
-                                            <p class="note-warning">
-                                                {{ __('messages.Warning') }}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 steps" id="step3">
-                                        <div class="step-heading">
-                                            <h2>{{ __('messages.Goal') }}</h2>
-                                        </div>
-
-                                        <ul id="imageRadio">
-                                            <li class='tiktok_goal'><input
-                                                    @if (isset($goal)) @if ($goal == 'TRAFFIC') checked @endif
-                                                @else @endif type="radio" name="goal"
-                                                value="TRAFFIC" id="tk1" />
-                                                <label for="tk1"> <img
-                                                        src="{{ asset('front/images/cost-per-click.png') }}"
-                                                        alt="">
-                                                    <h4>{{ __('messages.WebsiteTraffic') }}</h4>
-                                                    <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
-                                                </label>
-                                            </li>
-                                            <li class='tiktok_goal'><input
-                                                    @if (isset($goal)) @if ($goal == 'LEAD_GENERATION') checked @endif
-                                                @else @endif type="radio" name="goal"
-                                                value="LEAD_GENERATION" id="tk2" />
-                                                <label for="tk2"> <img
-                                                        src="{{ asset('front/images/video-chat.png') }}" alt="">
-                                                    <h4>{{ __('messages.Reach') }}</h4>
-                                                    <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
-                                                </label>
-                                            </li>
-
-                                            <li class='snapchat_goal'><input
-                                                    @if (isset($goal)) @if ($goal == 'WEB_CONVERSION') checked @endif
-                                                @else @endif type="radio" name="goal"
-                                                value="WEB_CONVERSION" id="sc1" />
-                                                <label for="sc1"> <img
-                                                        src="{{ asset('front/images/cost-per-click.png') }}"
-                                                        alt="">
-                                                    <h4>{{ __('messages.WebsiteTraffic') }}</h4>
-                                                    <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
-                                                </label>
-                                            </li>
-                                            <li class='snapchat_goal'><input
-                                                    @if (isset($goal)) @if ($goal == 'ENGAGEMENT') checked @endif
-                                                @else @endif type="radio" name="goal"
-                                                value="ENGAGEMENT" id="sc2" />
-                                                <label for="sc2"> <img
-                                                        src="{{ asset('front/images/video-chat.png') }}" alt="">
-                                                    <h4>{{ __('messages.Reach') }}</h4>
-                                                    <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
-                                                </label>
-                                            </li>
-
-                                            <li class='snapchat_goal'><input
-                                                    @if (isset($goal)) @if ($goal == 'BRAND_AWARENESS') checked @endif
-                                                @else @endif type="radio" name="goal"
-                                                value="BRAND_AWARENESS " id="sc3" />
-                                                <label for="sc3"> <img src="{{ asset('front/images/web.png') }}"
-                                                        alt="">
-                                                    <h4>{{ __('messages.BrandPromotion') }}</h4>
-                                                    <p>{{ __('messages.IncreaseBrandAwareness') }}</p>
-                                                </label>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-md-12 steps" id="step4">
-                                        <div class="step-heading">
-                                            <h2>{{ __('messages.ChooseYourContent') }}</h2>
-                                        </div>
-                                        <div class="titleRow row">
-                                            <div class="form-group col-md-12">
-                                                <label for="campaigName">{{ __('messages.CampaignTitle') }}</label>
-                                                <input id="campaigName" name="campaigName" value="{{ $campaignName }}"
-                                                    type="text" readonly class="form-control">
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="title">{{ __('messages.Title') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
-                                                            class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
-                                                            {{ __('messages.AISuggested') }} )</small> @endif
-                                                </label>
-                                                <input id="title" name="title"
-                                                    @if (isset($name)) value="{{ $name }}" @endif
-                                                    type="text" class="form-control">
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="description">{{ __('messages.Description') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
-                                                            class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
-                                                            {{ __('messages.AISuggested') }} )</small> @endif
-                                                </label>
-                                                <textarea name="description" class="form-control" cols="30" rows="10" id="description"> @if (isset($name)){{ $description }}@endif</textarea>
-                                            </div>
-                                            <div class="form-group col-md-6" id="callTOActionArea">
-                                                <label for="call_to_action">{{ __('messages.CallToAction') }}</label>
-                                                <select name="call_to_action" id="call_to_action" class="form-control">
-                                                    <option class="tiktok"
-                                                        @if (isset($call_to_action)) @if ($call_to_action == 'BOOK_NOW') selected @endif
-                                                    @else selected @endif
-                                                        value="BOOK_NOW">{{ __('messages.BookNow') }}</option>
-                                                    <option class="tiktok"
-                                                        @if (isset($call_to_action)) @if ($call_to_action == 'CONTACT_US') selected @endif
-                                                    @else @endif
-                                                        value="CONTACT_US">{{ __('messages.ContactUs') }}</option>
-                                                    <option class="tiktok"
-                                                        @if (isset($call_to_action)) @if ($call_to_action == 'APPLY_NOW') selected @endif
-                                                    @else @endif
-                                                        value="APPLY_NOW">{{ __('messages.ApplyNow') }}</option>
-                                                    <option class="tiktok"
-                                                        @if (isset($call_to_action)) @if ($call_to_action == 'CALL_NOW') selected @endif
-                                                    @else @endif
-                                                        value="CALL_NOW">{{ __('messages.CallNow') }}</option>
-                                                    <option class="tiktok"
-                                                        @if (isset($call_to_action)) @if ($call_to_action == 'LEARN_MORE') selected @endif
-                                                    @else @endif
-                                                        value="LEARN_MORE">{{ __('messages.LearnMore') }}</option>
-                                                    <option class="tiktok"
-                                                        @if (isset($call_to_action)) @if ($call_to_action == 'READ_MORE') selected @endif
-                                                    @else @endif
-                                                        value="READ_MORE">{{ __('messages.ReadMore') }}</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-md-6" id="websiteUrlArea">
-                                                <label for="website_url">{{ __('messages.WebsiteUrl') }}</label>
-                                                <input id="website_url" name="website_url"
-                                                    @if (isset($website_url)) value="{{ $website_url }}" @endif
-                                                    type="text" required class="form-control">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-md-12 steps" id="step5">
-                                        <div class="step-heading">
-                                            <h2>{{ __('messages.UploadMedia') }}</h2>
-                                        </div>
-                                        <div class="titleRow">
-
-                                            <div class="form-group col-md-12 text-center">
-                                                <div id="mediaArea" class="mb-2">
-                                                    @if (isset($media) && isset($media_type))
-                                                        @if ($media_type == '1')
-                                                            <img src="{{ asset($media) }}" height="200">
-                                                        @else
-                                                            <video width="320" height="240" controls>
-                                                                <source src="{{ asset($media) }}" type="video/mp4">
-                                                                Your browser does not support the video tag.
-                                                            </video>
-                                                        @endif
-                                                    @endif
+                                                <div class="note-content">
+                                                    <ol>
+                                                        <li>{{ __('messages.Promotion') }}</li>
+                                                        <li>{{ __('messages.Offensive') }}</li>
+                                                        <li>{{ __('messages.IllegalActivities') }}</li>
+                                                        <li>{{ __('messages.Medicines') }}</li>
+                                                    </ol>
                                                 </div>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#imageModal">
-                                                    <i class="fa fa-image"></i> Choose Media
-                                                </button>
-                                                <input type="hidden" id="selectedMedia" name="media"
-                                                    value="{{ isset($media) ? $media : '' }}">
-                                                <input type="hidden" id="selectedType" name="media_type"
-                                                    value="{{ isset($media_type) ? $media_type : '' }}">
+                                                <p class="note-warning">
+                                                    {{ __('messages.Warning') }}
+                                                </p>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-12 steps" id="step6">
-                                        <div class="step-heading">
-                                            <h2>{{ __('messages.ChooseDurationBudget') }}</h2>
-                                        </div>
-                                        <div class="titleRow row">
-                                            <div class="col-md-12">
-                                                <ul class="budgetTab">
-                                                    <li>
-                                                        <a class="btn budgetTypeActive" data-id="customBudget">Custom
-                                                            Budget</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="btn" data-id="recommendedBudget">Recommended
-                                                            Budget</a>
-                                                    </li>
-                                                </ul>
+                                        <div class="col-md-12 steps" id="step3">
+                                            <div class="step-heading">
+                                                <h2>{{ __('messages.Goal') }}</h2>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div id="customBudget" class="budgetType">
-                                                    <div class="form-group">
-                                                        <label for="dates">
-                                                            {{ __('messages.ScheduleDates') }}
-                                                            @if (isset($ai_sugguested) && $ai_sugguested == 1)
-                                                                <small class="ai-suggestion">(<i
-                                                                        class="fa-solid fa-robot"></i>
-                                                                    {{ __('messages.AISuggested') }})</small>
+
+                                            <ul id="imageRadio">
+                                                <li class='tiktok_goal'><input
+                                                        @if (isset($goal)) @if ($goal == 'TRAFFIC') checked @endif
+                                                    @else @endif type="radio" name="goal"
+                                                    value="TRAFFIC" id="tk1" />
+                                                    <label for="tk1"> <img
+                                                            src="{{ asset('front/images/cost-per-click.png') }}"
+                                                            alt="">
+                                                        <h4>{{ __('messages.WebsiteTraffic') }}</h4>
+                                                        <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class='tiktok_goal'><input
+                                                        @if (isset($goal)) @if ($goal == 'LEAD_GENERATION') checked @endif
+                                                    @else @endif type="radio" name="goal"
+                                                    value="LEAD_GENERATION" id="tk2" />
+                                                    <label for="tk2"> <img
+                                                            src="{{ asset('front/images/video-chat.png') }}" alt="">
+                                                        <h4>{{ __('messages.Reach') }}</h4>
+                                                        <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
+                                                    </label>
+                                                </li>
+
+                                                <li class='snapchat_goal'><input
+                                                        @if (isset($goal)) @if ($goal == 'WEB_CONVERSION') checked @endif
+                                                    @else @endif type="radio" name="goal"
+                                                    value="WEB_CONVERSION" id="sc1" />
+                                                    <label for="sc1"> <img
+                                                            src="{{ asset('front/images/cost-per-click.png') }}"
+                                                            alt="">
+                                                        <h4>{{ __('messages.WebsiteTraffic') }}</h4>
+                                                        <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
+                                                    </label>
+                                                </li>
+                                                <li class='snapchat_goal'><input
+                                                        @if (isset($goal)) @if ($goal == 'ENGAGEMENT') checked @endif
+                                                    @else @endif type="radio" name="goal"
+                                                    value="ENGAGEMENT" id="sc2" />
+                                                    <label for="sc2"> <img
+                                                            src="{{ asset('front/images/video-chat.png') }}" alt="">
+                                                        <h4>{{ __('messages.Reach') }}</h4>
+                                                        <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
+                                                    </label>
+                                                </li>
+
+                                                <li class='snapchat_goal'><input
+                                                        @if (isset($goal)) @if ($goal == 'BRAND_AWARENESS') checked @endif
+                                                    @else @endif type="radio" name="goal"
+                                                    value="BRAND_AWARENESS " id="sc3" />
+                                                    <label for="sc3"> <img src="{{ asset('front/images/web.png') }}"
+                                                            alt="">
+                                                        <h4>{{ __('messages.BrandPromotion') }}</h4>
+                                                        <p>{{ __('messages.IncreaseBrandAwareness') }}</p>
+                                                    </label>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="col-md-12 steps" id="step4">
+                                            <div class="step-heading">
+                                                <h2>{{ __('messages.ChooseYourContent') }}</h2>
+                                            </div>
+                                            <div class="titleRow row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="campaigName">{{ __('messages.CampaignTitle') }}</label>
+                                                    <input id="campaigName" name="campaigName" value="{{ $campaignName }}"
+                                                        type="text" readonly class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="title">{{ __('messages.Title') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
+                                                                class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                                {{ __('messages.AISuggested') }} )</small> @endif
+                                                    </label>
+                                                    <input id="title" name="title"
+                                                        @if (isset($name)) value="{{ $name }}" @endif
+                                                        type="text" class="form-control">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="description">{{ __('messages.Description') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
+                                                                class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                                {{ __('messages.AISuggested') }} )</small> @endif
+                                                    </label>
+                                                    <textarea name="description" class="form-control" cols="30" rows="10" id="description"> @if (isset($name)){{ $description }}@endif</textarea>
+                                                </div>
+                                                <div class="form-group col-md-6" id="callTOActionArea">
+                                                    <label for="call_to_action">{{ __('messages.CallToAction') }}</label>
+                                                    <select name="call_to_action" id="call_to_action" class="form-control">
+                                                        <option class="tiktok"
+                                                            @if (isset($call_to_action)) @if ($call_to_action == 'BOOK_NOW') selected @endif
+                                                        @else selected @endif
+                                                            value="BOOK_NOW">{{ __('messages.BookNow') }}</option>
+                                                        <option class="tiktok"
+                                                            @if (isset($call_to_action)) @if ($call_to_action == 'CONTACT_US') selected @endif
+                                                        @else @endif
+                                                            value="CONTACT_US">{{ __('messages.ContactUs') }}</option>
+                                                        <option class="tiktok"
+                                                            @if (isset($call_to_action)) @if ($call_to_action == 'APPLY_NOW') selected @endif
+                                                        @else @endif
+                                                            value="APPLY_NOW">{{ __('messages.ApplyNow') }}</option>
+                                                        <option class="tiktok"
+                                                            @if (isset($call_to_action)) @if ($call_to_action == 'CALL_NOW') selected @endif
+                                                        @else @endif
+                                                            value="CALL_NOW">{{ __('messages.CallNow') }}</option>
+                                                        <option class="tiktok"
+                                                            @if (isset($call_to_action)) @if ($call_to_action == 'LEARN_MORE') selected @endif
+                                                        @else @endif
+                                                            value="LEARN_MORE">{{ __('messages.LearnMore') }}</option>
+                                                        <option class="tiktok"
+                                                            @if (isset($call_to_action)) @if ($call_to_action == 'READ_MORE') selected @endif
+                                                        @else @endif
+                                                            value="READ_MORE">{{ __('messages.ReadMore') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-6" id="websiteUrlArea">
+                                                    <label for="website_url">{{ __('messages.WebsiteUrl') }}</label>
+                                                    <input id="website_url" name="website_url"
+                                                        @if (isset($website_url)) value="{{ $website_url }}" @endif
+                                                        type="text" required class="form-control">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-12 steps" id="step5">
+                                            <div class="step-heading">
+                                                <h2>{{ __('messages.UploadMedia') }}</h2>
+                                            </div>
+                                            <div class="titleRow">
+
+                                                <div class="form-group col-md-12 text-center">
+                                                    <div id="mediaArea" class="mb-2">
+                                                        @if (isset($media) && isset($media_type))
+                                                            @if ($media_type == '1')
+                                                                <img src="{{ asset($media) }}" height="200">
+                                                            @else
+                                                                <video width="320" height="240" controls>
+                                                                    <source src="{{ asset($media) }}" type="video/mp4">
+                                                                    Your browser does not support the video tag.
+                                                                </video>
                                                             @endif
+                                                        @endif
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#imageModal">
+                                                        <i class="fa fa-image"></i> Choose Media
+                                                    </button>
+                                                    <input type="hidden" id="selectedMedia" name="media"
+                                                        value="{{ isset($media) ? $media : '' }}">
+                                                    <input type="hidden" id="selectedType" name="media_type"
+                                                        value="{{ isset($media_type) ? $media_type : '' }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 steps" id="step6">
+                                            <div class="step-heading">
+                                                <h2>{{ __('messages.ChooseDurationBudget') }}</h2>
+                                            </div>
+                                            <div class="titleRow row">
+                                                <div class="col-md-12">
+                                                    <ul class="budgetTab">
+                                                        <li>
+                                                            <a class="btn budgetTypeActive" data-id="customBudget">Custom
+                                                                Budget</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="btn" data-id="recommendedBudget">Recommended
+                                                                Budget</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div id="customBudget" class="budgetType">
+                                                        <div class="form-group">
+                                                            <label for="dates">
+                                                                {{ __('messages.ScheduleDates') }}
+                                                                @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                                    <small class="ai-suggestion">(<i
+                                                                            class="fa-solid fa-robot"></i>
+                                                                        {{ __('messages.AISuggested') }})</small>
+                                                                @endif
+                                                            </label>
+                                                            <input id="dates" name="dates" type="text"
+                                                                class="form-control">
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label for="budget">
+                                                                {{ __('messages.Budget') }}
+                                                                @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                                    <small class="ai-suggestion">(<i
+                                                                            class="fa-solid fa-robot"></i>
+                                                                        {{ __('messages.AISuggested') }})</small>
+                                                                @endif
+                                                            </label>
+                                                            <input id="budget" name="budget"
+                                                                @if (isset($budget)) value="{{ $budget }}" @endif
+                                                                type="number" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div id="recommendedBudget" class="budgetType">
+                                                        <div class="form-group">
+                                                            <label for="dates">
+                                                                {{ __('messages.ScheduleDates') }}
+                                                            </label>
+                                                            <div class="button-group-pills recommended_dates text-center"
+                                                                data-toggle="buttons">
+                                                                <label class="btn btn-default active">
+                                                                    <input type="radio" name="recommended_dates"
+                                                                        value="{{ date('Y-m-d h:m A') }} - {{ date('Y-m-d h:m A', strtotime('+7 days')) }}"
+                                                                        checked="">
+                                                                    <div>1 Weeks</div>
+                                                                </label>
+                                                                <label class="btn btn-default">
+                                                                    <input type="radio" name="recommended_dates"
+                                                                        value="{{ date('Y-m-d h:m A') }} - {{ date('Y-m-d h:m A', strtotime('+15 days')) }}">
+                                                                    <div>2 Weeks</div>
+                                                                </label>
+                                                                <label class="btn btn-default">
+                                                                    <input type="radio" name="recommended_dates"
+                                                                        value="{{ date('Y-m-d h:m A') }} - {{ date('Y-m-d h:m A', strtotime('+21 days')) }}">
+                                                                    <div>3 Weeks</div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="dates">
+                                                                {{ __('messages.Budget') }}
+                                                            </label>
+                                                            <div class="button-group-pills recommended_budget text-center"
+                                                                data-toggle="buttons">
+                                                                <label class="btn btn-default active">
+                                                                    <input type="radio" name="recommended_budget"
+                                                                        value="200" checked="">
+                                                                    <div>
+                                                                        <h4>200 SAR</h4>
+                                                                        <hr> {{ __('messages.MinBudget') }}
+                                                                    </div>
+                                                                </label>
+                                                                <label class="btn btn-default">
+                                                                    <input type="radio" name="recommended_budget"
+                                                                        value="450">
+                                                                    <div>
+                                                                        <h4>450 SAR</h4>
+                                                                        <hr> {{ __('messages.MidBudget') }}
+                                                                    </div>
+                                                                </label>
+                                                                <label class="btn btn-default">
+                                                                    <input type="radio" name="recommended_budget"
+                                                                        value="750">
+                                                                    <div>
+                                                                        <h4>750 SAR</h4>
+                                                                        <hr> {{ __('messages.MaxBudget') }}
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 steps" id="step7">
+                                            <div class="step-heading">
+                                                <h2>{{ __('messages.ChooseDemographic&Location') }}</h2>
+                                            </div>
+                                            <div class="titleRow row">
+                                                <div class="col-md-12">
+                                                    <div class="mb-2 col-md-12">
+                                                        <label for="language">{{ __('messages.Language') }} </label><br>
+                                                        <br>
+                                                        <label for="english">
+                                                            <input type="checkbox" name="language[]"
+                                                                @if (isset($language) && in_array('english', $language)) checked @endif
+                                                                value="english"> English
                                                         </label>
-                                                        <input id="dates" name="dates" type="text"
-                                                            class="form-control">
+                                                        <br>
+                                                        <label for="english">
+                                                            <input type="checkbox" name="language[]"
+                                                                @if (isset($language) && in_array('arabic', $language)) checked @endif
+                                                                value="arabic"> عربي
+                                                        </label>
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label for="budget">
-                                                            {{ __('messages.Budget') }}
-                                                            @if (isset($ai_sugguested) && $ai_sugguested == 1)
-                                                                <small class="ai-suggestion">(<i
-                                                                        class="fa-solid fa-robot"></i>
-                                                                    {{ __('messages.AISuggested') }})</small>
-                                                            @endif
+                                                        <label for="gender">{{ __('messages.Gender') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
+                                                                    class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                                    {{ __('messages.AISuggested') }})</small> @endif
                                                         </label>
-                                                        <input id="budget" name="budget"
-                                                            @if (isset($budget)) value="{{ $budget }}" @endif
-                                                            type="number" class="form-control">
+                                                        <select name="gender" id="gender" class="form-control">
+                                                            <option @if (isset($gender) && strtolower($gender) == 'male') selected @else @endif
+                                                                value="Male">{{ __('messages.Male') }}</option>
+                                                            <option @if (isset($gender) && strtolower($gender) == 'female') selected @else @endif
+                                                                value="Female">{{ __('messages.Female') }}</option>
+                                                            <option @if (isset($gender) && strtolower($gender) == 'both') selected @else @endif
+                                                                value="Both">{{ __('messages.Both') }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label for="age_group">{{ __('messages.AgeGroup') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
+                                                                    class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                                    {{ __('messages.AISuggested') }})</small> @endif
+                                                        </label>
+                                                        <select name="age_group" id="age_group" class="form-control">
+                                                            <option @if (isset($age) && strtolower($age) == '18') selected @else @endif
+                                                                value="18">{{ __('messages.MaxAge18') }}</option>
+                                                            <option @if (isset($age) && strtolower($age) == '30') selected @else @endif
+                                                                value="30">{{ __('messages.MaxAge30') }}</option>
+                                                            <option @if (isset($age) && strtolower($age) == '0') selected @else @endif
+                                                                value="0">{{ __('messages.AnyAge') }}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label for="location">{{ __('messages.Locations') }}</label>
+                                                        <select name="location" id="locationSelect"
+                                                            class="form-control select2">
+                                                            <option value="">{{ __('messages.SelectCountry') }}</option>
+                                                            <option value="SA" selected>{{ __('messages.SaudiArabia') }}
+                                                            </option>
+                                                            <option value="AE">{{ __('messages.UnitedArabEmirates') }}
+                                                            </option>
+                                                            <option value="QA">{{ __('messages.Qatar') }}</option>
+                                                            <option value="BH">{{ __('messages.Bahrain') }}</option>
+                                                            <option value="KW">{{ __('messages.Kuwait') }}</option>
+                                                            <option value="OM">{{ __('messages.Oman') }}</option>
+                                                            <option value="YE">{{ __('messages.Yemen') }}</option>
+                                                            <option value="IQ">{{ __('messages.Iraq') }}</option>
+                                                            <option value="SY">{{ __('messages.Syria') }}</option>
+                                                            <option value="LB">{{ __('messages.Lebanon') }}</option>
+                                                            <option value="JO">{{ __('messages.Jordan') }}</option>
+                                                            <option value="PS">{{ __('messages.Palestine') }}</option>
+                                                            <option value="EG">{{ __('messages.Egypt') }}</option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <div id="recommendedBudget" class="budgetType">
-                                                    <div class="form-group">
-                                                        <label for="dates">
-                                                            {{ __('messages.ScheduleDates') }}
-                                                        </label>
-                                                        <div class="button-group-pills recommended_dates text-center"
-                                                            data-toggle="buttons">
-                                                            <label class="btn btn-default active">
-                                                                <input type="radio" name="recommended_dates"
-                                                                    value="{{ date('Y-m-d h:m A') }} - {{ date('Y-m-d h:m A', strtotime('+7 days')) }}"
-                                                                    checked="">
-                                                                <div>1 Weeks</div>
-                                                            </label>
-                                                            <label class="btn btn-default">
-                                                                <input type="radio" name="recommended_dates"
-                                                                    value="{{ date('Y-m-d h:m A') }} - {{ date('Y-m-d h:m A', strtotime('+15 days')) }}">
-                                                                <div>2 Weeks</div>
-                                                            </label>
-                                                            <label class="btn btn-default">
-                                                                <input type="radio" name="recommended_dates"
-                                                                    value="{{ date('Y-m-d h:m A') }} - {{ date('Y-m-d h:m A', strtotime('+21 days')) }}">
-                                                                <div>3 Weeks</div>
-                                                            </label>
-                                                        </div>
+                                                {{-- <div class="col-md-4">
+                                                    <div id="map" style="height: 300px; margin-top: 20px;"></div>
+                                                </div> --}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 steps" id="step8">
+                                            <div class="step-heading">
+                                                <h2>{{ __('messages.SummaryAds') }}</h2>
+                                            </div>
+                                            <div class="titleRow row">
+                                                <div class="col-md-8 right-side">
+                                                    <div class="card">
+                                                        <h3>{{ __('messages.AdCreativity') }}</h3>
+                                                        <div id="mediaValue"></div>
                                                     </div>
 
-                                                    <div class="form-group">
-                                                        <label for="dates">
-                                                            {{ __('messages.Budget') }}
-                                                        </label>
-                                                        <div class="button-group-pills recommended_budget text-center"
-                                                            data-toggle="buttons">
-                                                            <label class="btn btn-default active">
-                                                                <input type="radio" name="recommended_budget"
-                                                                    value="200" checked="">
-                                                                <div>
-                                                                    <h4>200 SAR</h4>
-                                                                    <hr> {{ __('messages.MinBudget') }}
-                                                                </div>
-                                                            </label>
-                                                            <label class="btn btn-default">
-                                                                <input type="radio" name="recommended_budget"
-                                                                    value="450">
-                                                                <div>
-                                                                    <h4>450 SAR</h4>
-                                                                    <hr> {{ __('messages.MidBudget') }}
-                                                                </div>
-                                                            </label>
-                                                            <label class="btn btn-default">
-                                                                <input type="radio" name="recommended_budget"
-                                                                    value="750">
-                                                                <div>
-                                                                    <h4>750 SAR</h4>
-                                                                    <hr> {{ __('messages.MaxBudget') }}
-                                                                </div>
-                                                            </label>
-                                                        </div>
+                                                    <div class="card">
+                                                        <h3>{{ __('messages.CampaignDetails') }}</h3>
+                                                        <p><strong>{{ __('messages.CampaignType') }}:</strong> <span
+                                                                id="goalValue"></span></p>
+                                                        <p><strong>{{ __('messages.CurrentBalance') }}:</strong>
+                                                            {{ $campaignName }}</p>
                                                     </div>
+
+                                                    <div class="card">
+                                                        <h3>{{ __('messages.Audience') }}</h3>
+                                                        <p><strong>{{ __('messages.Locations') }}:</strong> <span
+                                                                id="locationValue"></span></p>
+                                                        <p><strong>{{ __('messages.Language') }}:</strong> <span
+                                                                id="languageValue"></span></p>
+                                                        <p><strong>{{ __('messages.Gender') }}:</strong> <span
+                                                                id="genderValue"></span></p>
+                                                        <p><strong>{{ __('messages.AgeGroup') }}:</strong> <span
+                                                                id="age_groupValue"></span></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4 left-side">
+                                                    <div class="wallet">
+                                                        <p>{{ __('messages.CurrentBalance') }}</p>
+                                                        <h2>{{Auth::user()->getWallet()}} SAR</h2>
+                                                    </div>
+
+                                                    <div class="card">
+                                                        <h3>{{ __('messages.CampaignSummary') }}</h3>
+                                                        <p><strong>{{ __('messages.Duration') }}:</strong> <span
+                                                                id="datesValue"></span></p>
+                                                        <p><strong>{{ __('messages.DailyBudget') }}:</strong> <span
+                                                                id="dailybudgetValue"></span></p>
+                                                        <p><strong>{{ __('messages.TotalBudget') }}:</strong> <span
+                                                                id="budgetValue"></span></p>
+                                                        <p><strong>{{ __('messages.VAT') }} {{$setting->tax}}% :</strong> <span
+                                                                id="VatValue"></span></p>
+                                                        <hr>
+                                                        <h4><strong>{{ __('messages.Total') }}:</strong> <span
+                                                                id="totalValue"></span></h4>
+                                                    </div>
+
+                                                    <div class="card">
+                                                        <h3>{{ __('messages.EstimatedCampaignPerformance') }}</h3>
+                                                        <p><strong>{{ __('messages.Reach') }}:</strong> <span
+                                                                id="reach"></span></p>
+                                                        <p><strong>{{ __('messages.IMPRESSION') }}:</strong> <span
+                                                                id="impression"></span></p>
+                                                    </div>
+
+
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
-
-                                    <div class="col-md-12 steps" id="step7">
-                                        <div class="step-heading">
-                                            <h2>{{ __('messages.ChooseDemographic&Location') }}</h2>
-                                        </div>
-                                        <div class="titleRow row">
-                                            <div class="col-md-12">
-                                                <div class="mb-2 col-md-12">
-                                                    <label for="language">{{ __('messages.Language') }} </label><br>
-                                                    <br>
-                                                    <label for="english">
-                                                        <input type="checkbox" name="language[]"
-                                                            @if (isset($language) && in_array('english', $language)) checked @endif
-                                                            value="english"> English
-                                                    </label>
-                                                    <br>
-                                                    <label for="english">
-                                                        <input type="checkbox" name="language[]"
-                                                            @if (isset($language) && in_array('arabic', $language)) checked @endif
-                                                            value="arabic"> عربي
-                                                    </label>
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label for="gender">{{ __('messages.Gender') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
-                                                                class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
-                                                                {{ __('messages.AISuggested') }})</small> @endif
-                                                    </label>
-                                                    <select name="gender" id="gender" class="form-control">
-                                                        <option @if (isset($gender) && strtolower($gender) == 'male') selected @else @endif
-                                                            value="Male">{{ __('messages.Male') }}</option>
-                                                        <option @if (isset($gender) && strtolower($gender) == 'female') selected @else @endif
-                                                            value="Female">{{ __('messages.Female') }}</option>
-                                                        <option @if (isset($gender) && strtolower($gender) == 'both') selected @else @endif
-                                                            value="Both">{{ __('messages.Both') }}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label for="age_group">{{ __('messages.AgeGroup') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
-                                                                class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
-                                                                {{ __('messages.AISuggested') }})</small> @endif
-                                                    </label>
-                                                    <select name="age_group" id="age_group" class="form-control">
-                                                        <option @if (isset($age) && strtolower($age) == '18') selected @else @endif
-                                                            value="18">{{ __('messages.MaxAge18') }}</option>
-                                                        <option @if (isset($age) && strtolower($age) == '30') selected @else @endif
-                                                            value="30">{{ __('messages.MaxAge30') }}</option>
-                                                        <option @if (isset($age) && strtolower($age) == '0') selected @else @endif
-                                                            value="0">{{ __('messages.AnyAge') }}</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label for="location">{{ __('messages.Locations') }}</label>
-                                                    <select name="location" id="locationSelect"
-                                                        class="form-control select2">
-                                                        <option value="">{{ __('messages.SelectCountry') }}</option>
-                                                        <option value="SA" selected>{{ __('messages.SaudiArabia') }}
-                                                        </option>
-                                                        <option value="AE">{{ __('messages.UnitedArabEmirates') }}
-                                                        </option>
-                                                        <option value="QA">{{ __('messages.Qatar') }}</option>
-                                                        <option value="BH">{{ __('messages.Bahrain') }}</option>
-                                                        <option value="KW">{{ __('messages.Kuwait') }}</option>
-                                                        <option value="OM">{{ __('messages.Oman') }}</option>
-                                                        <option value="YE">{{ __('messages.Yemen') }}</option>
-                                                        <option value="IQ">{{ __('messages.Iraq') }}</option>
-                                                        <option value="SY">{{ __('messages.Syria') }}</option>
-                                                        <option value="LB">{{ __('messages.Lebanon') }}</option>
-                                                        <option value="JO">{{ __('messages.Jordan') }}</option>
-                                                        <option value="PS">{{ __('messages.Palestine') }}</option>
-                                                        <option value="EG">{{ __('messages.Egypt') }}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-md-4">
-                                                <div id="map" style="height: 300px; margin-top: 20px;"></div>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12 steps" id="step8">
-                                        <div class="step-heading">
-                                            <h2>{{ __('messages.SummaryAds') }}</h2>
-                                        </div>
-                                        <div class="titleRow row">
-                                            <div class="col-md-8 right-side">
-                                                <div class="card">
-                                                    <h3>{{ __('messages.AdCreativity') }}</h3>
-                                                    <div id="mediaValue"></div>
-                                                </div>
-
-                                                <div class="card">
-                                                    <h3>{{ __('messages.CampaignDetails') }}</h3>
-                                                    <p><strong>{{ __('messages.CampaignType') }}:</strong> <span
-                                                            id="goalValue"></span></p>
-                                                    <p><strong>{{ __('messages.CurrentBalance') }}:</strong>
-                                                        {{ $campaignName }}</p>
-                                                </div>
-
-                                                <div class="card">
-                                                    <h3>{{ __('messages.Audience') }}</h3>
-                                                    <p><strong>{{ __('messages.Locations') }}:</strong> <span
-                                                            id="locationValue"></span></p>
-                                                    <p><strong>{{ __('messages.Language') }}:</strong> <span
-                                                            id="languageValue"></span></p>
-                                                    <p><strong>{{ __('messages.Gender') }}:</strong> <span
-                                                            id="genderValue"></span></p>
-                                                    <p><strong>{{ __('messages.AgeGroup') }}:</strong> <span
-                                                            id="age_groupValue"></span></p>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 left-side">
-                                                <div class="wallet">
-                                                    <p>{{ __('messages.CurrentBalance') }}</p>
-                                                    <h2>{{Auth::user()->getWallet()}} SAR</h2>
-                                                </div>
-
-                                                <div class="card">
-                                                    <h3>{{ __('messages.CampaignSummary') }}</h3>
-                                                    <p><strong>{{ __('messages.Duration') }}:</strong> <span
-                                                            id="datesValue"></span></p>
-                                                    <p><strong>{{ __('messages.DailyBudget') }}:</strong> <span
-                                                            id="dailybudgetValue"></span></p>
-                                                    <p><strong>{{ __('messages.TotalBudget') }}:</strong> <span
-                                                            id="budgetValue"></span></p>
-                                                    <p><strong>{{ __('messages.VAT') }} {{$setting->tax}}% :</strong> <span
-                                                            id="VatValue"></span></p>
-                                                    <hr>
-                                                    <h4><strong>{{ __('messages.Total') }}:</strong> <span
-                                                            id="totalValue"></span></h4>
-                                                </div>
-
-                                                <div class="card">
-                                                    <h3>{{ __('messages.EstimatedCampaignPerformance') }}</h3>
-                                                    <p><strong>{{ __('messages.Reach') }}:</strong> <span
-                                                            id="reach"></span></p>
-                                                    <p><strong>{{ __('messages.IMPRESSION') }}:</strong> <span
-                                                            id="impression"></span></p>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
+                                    <input type="hidden" name="step" value="1" id="stepNo">
+                                    <input type="hidden" name="walletDeduct" value="0" id="walletDeduct">
+                                    <div class="form-group col-md-12 text-center">
+                                        <hr>
+                                        <button type="button" class="btn btn-secondary prev"><i
+                                                class="fa fa-arrow-left"></i>
+                                            {{ __('messages.Back') }}</button>
+                                        <button type="button" class="btn btn-info" id="saveDraft"><i
+                                                class="fa fa-save"></i>
+                                            {{ __('messages.SAVE_AND_CLOSE') }}</button>
+                                        <button type="button" class="btn btn-dark next" id="nextButton"><i
+                                                class="fa fa-arrow-right"></i>
+                                            {{ __('messages.Next') }}</button>
+                                        <button type="button" class="btn btn-primary createAd"><i
+                                                class="fa fa-check"></i> {{ __('messages.CreateAd') }}</button>
+                                        <button type="button" id="topUpButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
+                                            <i class="fa fa-dollar"></i> {{ __('messages.Top_Up') }} <span id="remaingAmount"></span>
+                                        </button>
 
                                     </div>
-                                </div>
-                                <input type="hidden" name="step" value="1" id="stepNo">
-                                <input type="hidden" name="walletDeduct" value="0" id="walletDeduct">
-                                <div class="form-group col-md-12 text-center">
-                                    <hr>
-                                    <button type="button" class="btn btn-secondary prev"><i
-                                            class="fa fa-arrow-left"></i>
-                                        {{ __('messages.Back') }}</button>
-                                    <button type="button" class="btn btn-info" id="saveDraft"><i
-                                            class="fa fa-save"></i>
-                                        {{ __('messages.SAVE_AND_CLOSE') }}</button>
-                                    <button type="button" class="btn btn-dark next" id="nextButton"><i
-                                            class="fa fa-arrow-right"></i>
-                                        {{ __('messages.Next') }}</button>
-                                    <button type="button" class="btn btn-primary createAd"><i
-                                            class="fa fa-check"></i> {{ __('messages.CreateAd') }}</button>
-                                    <button type="button" id="topUpButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#popupModal">
-                                        <i class="fa fa-dollar"></i> {{ __('messages.Top_Up') }} <span id="remaingAmount"></span>
-                                    </button>
-
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1126,6 +1143,22 @@
             </div>
         </div>
     </div>
+
+    @if (isset($ai_sugguested) && $ai_sugguested == 1)
+        <form action="" id="AIForm">
+            @csrf
+            @foreach($used_request as $key=>$req)
+                @if(is_array($req))
+                    @foreach($req as $r)
+                        <input type="hidden" name="{{$key}}[]" value="{{$r}}">
+                    @endforeach
+                @else
+                    <input type="hidden" name="{{$key}}" value="{{$req}}">
+                @endif
+            @endforeach
+        </form>
+
+    @endif
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -1501,34 +1534,34 @@
             });
         })
 
-        @if (isset($title) && isset($ai_sugguested) && $ai_sugguested == 1)
-            $(".ai-suggestion").hide();
-            $("#suggestAi").click(function() {
-                $(".ai-suggestion").show();
+        // @if (isset($title) && isset($ai_sugguested) && $ai_sugguested == 1)
+        //     $(".ai-suggestion").hide();
+        //     $("#suggestAi").click(function() {
+        //         $(".ai-suggestion").show();
 
-                // $("#title").val('{{ $name }}')
-                // $("#description").val('{{ $description }}')
+        //         // $("#title").val('{{ $name }}')
+        //         // $("#description").val('{{ $description }}')
                 
-                $("#title").val()
-                $("#description").val()
-                type(0, $("#title"), "<?= $name ?>");
-                type(0, $("#description"), "<?= $description ?>");
-                $("#budget").val('{{ $budget }}')
-                $("#age_group").val('{{ strtolower($age) }}')
-                $("#gender").val('{{ strtolower($gender) }}')
-            });
+        //         $("#title").val()
+        //         $("#description").val()
+        //         type(0, $("#title"), "<?= $name ?>");
+        //         type(0, $("#description"), "<?= $description ?>");
+        //         $("#budget").val('{{ $budget }}')
+        //         $("#age_group").val('{{ strtolower($age) }}')
+        //         $("#gender").val('{{ strtolower($gender) }}')
+        //     });
 
 
-            function type(index, input, text) {
-                if (index < text.length) {
-                    input.val(input.val() + text.charAt(index));
-                    index++;
-                    setTimeout(function() {
-                        type(index, input, text);
-                    }, 50);
-                }
-            }
-        @endif
+        //     function type(index, input, text) {
+        //         if (index < text.length) {
+        //             input.val(input.val() + text.charAt(index));
+        //             index++;
+        //             setTimeout(function() {
+        //                 type(index, input, text);
+        //             }, 50);
+        //         }
+        //     }
+        // @endif
 
         $(".budgetType").hide();
         $("#customBudget").show();
@@ -1576,7 +1609,6 @@
 
         function updateStepProgress() {
             $('.step').each(function(index, element) {
-                // element == this
                 $(element).not('.active').addClass('done');
 
                 if ($(this).is('.active')) {
@@ -1586,6 +1618,38 @@
         }
 
         updateStepProgress();
+
+        $(".startAdsCreation").click(function(){
+            $(".startAdsCreation").parent().parent().hide();
+            $(".adCreationDiv").slideDown(500);
+        });
+
+        @if (isset($ai_sugguested) && $ai_sugguested == 1)
+        $("#suggestAi").click(function() {
+            $("#loader").addClass("is-active");
+            $(".alert").hide();
+            var formData = $("#AIForm").serialize();
+            $.ajax({
+                url: '{{ route('reGenerateAd.ads') }}',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    $("#loader").removeClass("is-active");
+                    response = JSON.parse(response);
+                    if (response[0] == 200) {
+                        setTimeout(() => {
+                            window.location.href = "{{ route('add.ads',1) }}"
+                        }, 2000);
+                    }
+                },
+                error: function(xhr) {
+                    $("#loader").removeClass("is-active");
+                    $("#error").show();
+                    $("#errorMessage").text(xhr.responseText)
+                }
+            });
+        })
+        @endif
     </script>
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 @endsection

@@ -138,6 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/save', 'save')->name('save.ads');
             Route::post('/save', 'save')->name('save.ads');
             Route::post('/generate/ad', 'generateAd')->name('generateAd.ads');
+            Route::post('/re/generate/ad', 'reGenerateAd')->name('reGenerateAd.ads');
             Route::post('/get/reachimpressions', 'getReachImpression')->name('getReachImpression.ads');
             Route::get('/delete/{id}', 'delete')->name('delete.ads');
             Route::get('/delete/image/{id}', 'delete_image')->name('delete.ads.image');

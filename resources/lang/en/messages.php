@@ -282,4 +282,7 @@ return [
     "VerificationEmailSent" => "Verification Email Sent",
     "PasswordDoesNotMatch" => "Password Does Not Match",
     "ProfileUpdatedSuccessfully" => "Profile Updated Successfully",
+    "AgeRange"=>"Age Range",
+    "StrategyAI"=>"Strategy Suggested By AI",
+    "StartAdsCreation"=>"Start Ads Creation",
 ];

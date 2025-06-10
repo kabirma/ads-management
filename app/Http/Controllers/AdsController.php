@@ -292,21 +292,20 @@ class AdsController extends Controller
         $aiController = new AIController();
         tryAgain:
         $response = $aiController->fetchContent($request);
-        if($response != ''){
-            $suggestion = explode("$==$",$response);
-            
-            if(count($suggestion) !== 7){
+        
+        if(!empty(array_filter($response))){
+            $suggestion = explode("$==$",$response['values']);
+            if(count($suggestion) !== 6){
                 goto tryAgain;
                 return redirect()->back()->with("error", __('messages.something_went_wrong'));
             }
 
             $name = $suggestion[0];
-            $description = $suggestion[1];
-            $budget = (int)$suggestion[2];
-            $days = (int)$suggestion[3];
-            $gender = $suggestion[4];
-            $age = $suggestion[5];
-            $socialMedia = $suggestion[6];
+            $budget = (int)$suggestion[1];
+            $days = (int)$suggestion[2];
+            $gender = $suggestion[3];
+            $age = $suggestion[4];
+            $socialMedia = $suggestion[5];
 
             $startDate = new \DateTime('tomorrow');
             $endDate = new \DateTime('tomorrow');
@@ -316,7 +315,7 @@ class AdsController extends Controller
 
             $data['title'] = $this->title;
             $data['name'] = $name;
-            $data['description'] = $description;
+            $data['description'] = $response['description'];
             $data['budget'] = $budget;
             $data['days'] = $days;
             $data['gender'] = $gender;
@@ -324,6 +323,23 @@ class AdsController extends Controller
             $data['social_media'] = $socialMedia;
             $data['ai_sugguested'] = 1;
             $data['medias'] = Media::where('user_id', Auth::user()->id)->get();
+            $data['strategy'] = $response['strategy'];
+            $data['used_request'] = [
+                'first_campaign' => $request->first_campaign,
+                'used_budget' => $request->used_budget,
+                'duration' => $request->duration,
+                'campaignGoal' => $request->campaignGoal,
+                'social_media' => $request->social_media,
+                'budgetRange' => $request->budgetRange,
+                'age_range' => $request->age_range,
+                'gender' => $request->gender,
+                'target' => $request->target,
+                'keywords' => $request->keywords,
+                'used_social_media' => $request->used_social_media,
+                'best_social_media' => $request->best_social_media,
+                'worst_social_media' => $request->worst_social_media,
+            ];
+
             session([self::AI_SESSION_KEY=>$data]);
             return redirect()->route('add.ads',['ai'=>1]);
         }
@@ -375,5 +391,63 @@ class AdsController extends Controller
 
     function keepOnlyNumbersAndDashes($string) {
         return preg_replace('/[^0-9\-]/', '', $string);
+    }
+
+    function reGenerateAd(Request $request) {
+        $aiController = new AIController();
+        tryAgain:
+        $response = $aiController->fetchContent($request);
+        
+        if(!empty(array_filter($response))){
+            $suggestion = explode("$==$",$response['values']);
+            if(count($suggestion) !== 6){
+                goto tryAgain;
+            }
+
+            $name = $suggestion[0];
+            $budget = (int)$suggestion[1];
+            $days = (int)$suggestion[2];
+            $gender = $suggestion[3];
+            $age = $suggestion[4];
+            $socialMedia = $suggestion[5];
+
+            $startDate = new \DateTime('tomorrow');
+            $endDate = new \DateTime('tomorrow');
+            if(is_int($days)){
+                $endDate = $endDate->modify("+$days Days");
+            }
+
+            $data['title'] = $this->title;
+            $data['name'] = $name;
+            $data['description'] = $response['description'];
+            $data['budget'] = $budget;
+            $data['days'] = $days;
+            $data['gender'] = $gender;
+            $data['age'] = $age;
+            $data['social_media'] = $socialMedia;
+            $data['ai_sugguested'] = 1;
+            $data['medias'] = Media::where('user_id', Auth::user()->id)->get();
+            $data['strategy'] = $response['strategy'];
+            $data['used_request'] = [
+                'first_campaign' => $request->first_campaign,
+                'used_budget' => $request->used_budget,
+                'duration' => $request->duration,
+                'campaignGoal' => $request->campaignGoal,
+                'social_media' => $request->social_media,
+                'budgetRange' => $request->budgetRange,
+                'age_range' => $request->age_range,
+                'gender' => $request->gender,
+                'target' => $request->target,
+                'keywords' => $request->keywords,
+                'used_social_media' => $request->used_social_media,
+                'best_social_media' => $request->best_social_media,
+                'worst_social_media' => $request->worst_social_media,
+            ];
+
+            session([self::AI_SESSION_KEY=>$data]);
+            return json_encode([200, $data]);
+        }
+
+        return json_encode([400,[]]);
     }
 }
