@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\Mime\Part\File;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Schema\Blueprint;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +29,29 @@ Route::get('/hash', function () {
     ]);
 });
 
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    Artisan::call('optimize:clear');
+
+    Session::flush(); // Clears the current session
+
+    // File::cleanDirectory(storage_path('framework/sessions'));
+
+    // If using database sessions, truncate the sessions table
+    DB::table('sessions')->truncate();
+
+    return "All caches and sessions cleared successfully!";
+});
+
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-Route::get('/content/{category}', [App\Http\Controllers\HomeController::class, 'content'])->name('content');
+Route::get('/about', [App\Http\Controllers\HomeController::class, 'about_us'])->name('about');
+Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact_us'])->name('contact');
+Route::get('/join-us', [App\Http\Controllers\HomeController::class, 'join_us'])->name('join_us');
+Route::get('/pricing', [App\Http\Controllers\HomeController::class, 'pricing'])->name('pricing');
 
 
 // Route::group(['middleware' => 'customer', 'prefix' => 'customer'], function () {

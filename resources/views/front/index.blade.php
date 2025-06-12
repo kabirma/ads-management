@@ -1,313 +1,190 @@
-@extends('front.layout.app')
-
+@extends('front.layout.master')
+@section('title', 'Home')
+@section('meta')
+    <meta name="description" content="SparkNext - Your all-in-one platform for managing social media ads and campaigns.">
+    <meta name="keywords" content="SparkNext, social media management, ad management, TikTok, Snapchat, Google Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@endsection
 
 @section('content')
-   
-	<!-- Section -- intro -->
-	<section class="section section--intro" id="intro">
-		<div class="section__content section__content--fluid-width section__content--intro">
-			<div class="intro">
-				<div class="intro__content">
-					<div class="intro__title">{{$setting->name}}</div>
-					<div class="intro__subtitle">{{$setting->short_description}}</div>
-					<!-- <div class="intro__description">For as low as <span>$0.95</span> per user account</div> -->
-					<div class="intro__buttons intro__buttons--left">
-					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="login"><i class="fa fa-user"></i>
-						{{__("messages.LOGIN")}}</a>
-					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="signup"> <i class="fa fa-rocket"></i>{{__("messages.GETSTARTED")}}</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="intro-animation">
-			<img src="{{asset($setting->cover)}}" alt="" title="" />
-		</div>
-		<svg class="svg-intro-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-			preserveAspectRatio="none">
-			<path d="M0,70 C30,130 70,50 100,70 L100,100 0,100 Z" fill="#ffffff" />
-		</svg>
-		<svg class="svg-intro-bottom-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-			preserveAspectRatio="none">
-			<path d="M0,70 C30,130 70,50 100,70 L100,100 0,100 Z" fill="#ffffff" fill-opacity="0.4" />
-		</svg>
-		<svg class="svg-intro-bottom-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-			preserveAspectRatio="none">
-			<path d="M95,0 Q90,90 10,100 L100,100 100,0 Z" fill="#ffffff" fill-opacity="0.1" />
-		</svg>
-	</section>
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="hero-topleft-btn">
+                        <button type="button" class="tool-button">
+                            <img src="{{ asset('assets/front_new/images/hero-snapchat-btn-logo.png') }} " alt="">
+                            Snap
+                            Chat</button>
+                    </div>
+                </div>
+                <div class="col-md-3"> </div>
+
+                <div class="col-md-3">
+                    <div class="hero-topright-btn">
+                        <button type="button" class="tool-button">
+                            <img src="{{ asset('assets/front_new/images/google-toolicon.png') }}" alt="">
+                            &nbsp;Google
+                            Tools</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- heading row -->
+            <div class="row">
+                <div class="header-row position-relative">
+                    <h6>SparkNext</h6>
+                    <div class="hero-top-title text-center d-inline-flex">
+
+                        <p>
+                            Manage <span style="color: #38afc3;">all</span>
+                            <span style="color: #38afc3;">your</span>
+                            <span style="color: #38afc3;">ads</span>
+                            <span class="platform-gradient">platform</span> form
+                            <br>
+                            <span style="color: #1487B3;">a</span>
+                            <span style="color: #38afc3;">single</span>
+                            <span class="signle-portal"> portal.</span>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center ">
+                <div class="col-md-6 ">
+                    <div class="tittok-tool-main-btn d-flex justify-content-end">
+                        <button class="tiktok-tool-button">
+                            <img src="{{ asset('assets/front_new/images/tiktok-btn-logo.png') }}" alt=""> TikTok
+                            Tool
+                        </button>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ asset('assets/front_new/images/hero-dashboardimg.png') }}" alt="Dashboard Image"
+                        class="dashboard-image">
+                </div>
+            </div>
+            <!-- Footer Logo -->
+            <div class="logo-icon">
+                <img src="{{ asset('assets/front_new/images/Hero-footer-logo.png') }}" alt="Footer Logo"
+                    style="width: 72px; height: 75px; margin-top: 30px;">
+            </div>
+
+            <!-- Line Art Background -->
+            <div class="line-art position-relative">
+                <img src="{{ asset('assets/front_new/images/hero-footer-line.png') }}" alt="">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- service card section -->
+    <section class="service-card-section py-5">
+        <div class="service-right-circleimg position-relative">
+            <img src="{{ asset('assets/front_new/images/service-right-circle.png') }}" alt="img not found">
+        </div>
+        <div class="services-section container">
+            <h2 class="services-title"></h2>
 
 
-	<section class="section section--about" id="about">
 
-		<div class="section__content section__content--fluid-width section__content--about">
-			<div class="grid grid--5col grid--about">
-
-				<div class="grid__item grid__item--x2">
-					<h3 class="grid__title"><?= $setting->about_heading ?></h3>
-					<p class="grid__text"> <?= $setting->about_content ?></p>
-				</div>
-				<div class="grid__item grid__item--x3">
-					<div class="grid__image grid__image--right" data-paroller-factor="0.2"
-						data-paroller-type="foreground" data-paroller-direction="vertical"><img
-							src="{{asset($setting->about_image)}}" alt="" title="" /></div>
-				</div>
-			</div>
-		</div>
-
-	</section>
+            <div class="row justify-content-center mt-5 p-4">
+                <div class="card-heading-row">
+                    <p>What We Offer?</p>
+                </div>
+                <!-- second card glow image -->
+                <div class="card-top-lighting-bottom-glow position-relative">
+                    <img src="{{ asset('assets/front_new/images/service-cart-top-glow.png') }} " alt="img not found">
+                </div>
+                <div class="col-md-6 col-lg-4 ">
+                    <div class="service-card service-gradient-border" onclick="setActive(this)">
+                        <div class="card-icon-glow position-relative">
+                            <img src="{{ asset('assets/front_new/images/service-card-left-glow.png') }}"
+                                class="card-icon-white-glow" alt="">
+                        </div>
 
 
-	<!-- Section -- about -->
-	<section class="section section--features" id="vision">
+                        <img src="{{ asset('assets/front_new/images/insights-card-icon.png') }} " class="mt-4"
+                            alt="AI Icon" width="65" height="65" />
 
-		<div class="section__content section__content--fluid-width section__content--about">
-			<div class="grid grid--2col grid--about">
+                        <h5>AI-Powered Insights</h5>
+                        <hr class="w-100 m-0 p-0 border-top mt-4"
+                            style="position: relative; left: 0; right: 0; width: 100vw; border: 2px solid #38AFC3 !important;">
+                        <p class="service-card-para">Our platform analyzes market trends and audience behavior,
+                            helping you tailor your campaigns for maximum impact.</p>
+                        <div class="card-seq-no d-flex justify-content-end">
+                            <span>01</span>
+                        </div>
 
-				<div class="grid__item grid__item--x1 grid__item--floated-right">
-					
-					<h3 class="grid__title"><span> <?= $setting->vision_heading ?></span></h3>
-					<p class="grid__text"><?= $setting->vision_content ?>
+                    </div>
 
-				</div>
-				<div class="grid__item grid__item--x1">
-				<h3 class="grid__title"><span> <?= $setting->mission_heading ?></span></h3>
-				<p class="grid__text"><?= $setting->mission_content ?>
-		<br><br>
+                </div>
 
-		<br><br>
-
-				</div>
-
-			</div>
-		</div>
-	</section>
-	
-<!-- Section -->
-	<section class="section" id="joinus">
-		<div class="section__content section__content--fluid-width section__content--padding">
-			<div class="grid grid--2col grid--support">
-			
-				<div class="grid__item grid__item--padding">
-					<h3 class="grid__title">{{$setting->join_us_heading}}</h3>
-					<p class="grid__text"><?= $setting->join_us_content ?></p>
-
-				</div>
-					<div class="grid__item grid__item--padding  grid__item--centering">
-
-					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="login">{{__("messages.LOGIN")}}</a>
-					<a href="#"  class="btn btn--orange-bg modal-toggle" data-openpopup="signuplogin" data-popup="signup">{{__("messages.GETSTARTED")}}</a>
-				</div>
-				<svg class="svg-support-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-					preserveAspectRatio="none">
-					<path d="M0,90 Q0,100 3,100 L95,96 Q100,96 99,80 L95,25 Q94,15 90,15 L6,0 Q2,0 2,10 Z"
-						fill="#476A30" />
-				</svg>
-			</div>
-			<div class="clear"></div>
-		</div>
-
-	</section>
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card service-gradient-border" onclick="setActive(this)">
+                        <div class="card-icon-glow position-relative">
+                            <img src=" {{ asset('assets/front_new/images/card-img-glow.png') }} "
+                                class="card-icon-white-glow" alt="">
+                        </div>
+                        <img src="{{ asset('assets/front_new/images/user-card-icon.png') }} " class="mt-4"
+                            alt="Tools Icon" width="65" height="65" />
+                        <h5>User-Friendly Tools</h5>
+                        <hr class="w-100 m-0 p-0 border-top mt-4"
+                            style="position: relative; left: 0; right: 0; width: 100vw; border: 2px solid #38AFC3 !important;">
+                        <p class="service-card-para">We provide intuitive tools that make it easy to create,
+                            schedule, and manage your social media posts.</p>
+                        <div class="card-seq-no d-flex justify-content-end">
+                            <span>02</span>
+                        </div>
+                    </div>
+                </div>
 
 
-	<!-- Section -- features -->
-	<!-- <section class="section section--features" id="features">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card service-gradient-border " onclick="setActive(this)">
+                        <div class="card-icon-glow position-relative">
+                            <img src="{{ asset('assets/front_new/images/service-card-left-glow.png') }}"
+                                class="card-icon-white-glow" alt="">
+                        </div>
+                        <img src="{{ asset('assets/front_new/images/supoort-card-icon.png') }}" class="mt-4"
+                            alt="Support Icon" width="65" height="65" />
+                        <h5>Comprehensive Support</h5>
+                        <hr class="w-100 m-0 p-0 border-top mt-4"
+                            style="position: relative; left: 0; right: 0; width: 100vw; border: 2px solid #38AFC3 !important;">
+                        <p class="service-card-para">
+                            Our team of experts is here to guide you every step of the way, ensuring your campaigns
+                            are optimized for success.
+                        </p>
+                        <div class="card-seq-no d-flex justify-content-end">
+                            <span>03</span>
+                        </div>
+                        <div class="third-card-glowimg">
+                            <img src="{{ asset('assets/front_new/images/service-card-left-glow.png') }}" alt="">
+                        </div>
+                    </div>
 
-		<div class="section__content section__content--fluid-width section__content--features">
-			<h2 class="section__title section__title--centered">Features designed for you</h2>
-			<div class="section__description section__description--centered">
-				We believe we have created the most efficient SaaS landing page for your users. Landing page with
-				features that will convince you to use it for your SaaS business.
-			</div>
-			<div class="grid grid--3col grid--features">
-
-				<div class="grid__item">
-					<div class="grid__icon"><img src="{{ asset('front/images/icons/icons-64-violet/responsive-64.png')}}" alt="" title="" />
-					</div>
-					<h3 class="grid__title"><span>Responsive</span> Layout Template</h3>
-					<p class="grid__text">Responsive code that makes your landing page look good on all devices
-						(desktops, tablets, and phones). Created with mobile specialists.</p>
-				</div>
-
-				<div class="grid__item">
-					<div class="grid__icon"><img src="{{ asset('front/images/icons/icons-64-violet/desktop-chart-64.png')}}" alt=""
-							title="" /></div>
-					<h3 class="grid__title">SaaS Landing Page <span>Analysis</span></h3>
-					<p class="grid__text">A perfect structure created after we analized trends in SaaS landing page
-						designs. Analysis made to the most popular SaaS businesses.</p>
-				</div>
-
-				<div class="grid__item">
-					<div class="grid__icon"><img src="{{ asset('front/images/icons/icons-64-violet/browser-64.png')}}" alt="" title="" />
-					</div>
-					<h3 class="grid__title">Smart <span>BEM</span> Grid</h3>
-					<p class="grid__text">Blocks, Elements and Modifiers. A smart HTML/CSS structure that can easely be
-						reused. Layout driven by the purpose of modularity.</p>
-				</div>
-
-			</div>
-
-			<div class="grid grid--3col grid--features">
+                </div>
 
 
-				<div class="grid__item">
-					<div class="grid__icon"><img src="{{ asset('front/images/icons/icons-64-violet/users-64.png')}}" alt="" title="" />
-					</div>
-					<h3 class="grid__title">User <span>Friendly</span></h3>
-					<p class="grid__text">Easy to navigate. Made with user experience in mind, in order to provide the
-						perfect landing page experience for your client.</p>
-				</div>
 
-				<div class="grid__item">
-					<div class="grid__icon"><img src="{{ asset('front/images/icons/icons-64-violet/security-64.png')}}" alt="" title="" />
-					</div>
-					<h3 class="grid__title">Best online <span>Security</span></h3>
-					<p class="grid__text">A perfect structure created after we analized trends in SaaS landing page
-						designs. Analysis made to the most popular SaaS businesses.</p>
-				</div>
+            </div>
+            <!-- left corner glow image -->
+            <div class="service-left-circleimg position-relative">
+                <img src="{{ asset('assets/front_new/images/service-left-circle.png') }} " alt="img not found">
+            </div>
+            <!--service first card glow image  -->
+            <div class="card-lighting-bottom-glow position-relative">
+                <img src="{{ asset('assets/front_new/images/card-bottom-lighting-glow.png') }} " alt="img not found">
+            </div>
 
-				<div class="grid__item">
-					<div class="grid__icon"><img src="{{ asset('front/images/icons/icons-64-violet/target-64.png')}}" alt="" title="" />
-					</div>
-					<h3 class="grid__title">Target <span>audience</span></h3>
-					<p class="grid__text">Blocks, Elements and Modifiers. A smart HTML/CSS structure that can easely be
-						reused. Layout driven by the purpose of modularity.</p>
-				</div>
-
-			</div>
-		</div>
-
-
-	</section> -->
-
-
-	<section class="section section--features" id="our_team">
-
-		<div class="section__content section__content--fluid-width section__content--features">
-			<h2 class="section__title section__title--centered">{{$setting->our_team_heading}}</h2>
-			<div class="section__description section__description--centered">
-				<?= $setting->our_team_content ?>
-			</div>
-			
-		</div>
-
-
-	</section>
-
-
-{{--	//yaha se--}}
-	<!-- Section -- pricing -->
-	<section class="section" id="pricing">
-
-		<div class="section__content section__content--fluid-width section__content--padding">
-			<h2 class="section__title section__title--centered">{{__("messages.OurPlans")}}</h2>
-			<div class="section__description section__description--centered">
-				{{__("messages.message_content")}}
-			</div>
-
-
-			<div class="pricing">
-				<div class="pricing__switcher switcher">
-					<div class="switcher__buttons">
-						<div class="switcher__button switcher__button--enabled">{{__("messages.Monthly")}}</div>
-						<div class="switcher__button">{{__("messages.Yearly")}} </div>
-						<div class="switcher__border"></div>
-					</div>
-
-				</div>
-
-
-				<div class="pricing__plan">
-					<h3 class="pricing__title">{{__("messages.FREE")}}</h3>
-					<div class="pricing__values">
-						<div class="pricing__value pricing__value--show"><span>$</span>0 <b>/ {{__("messages.month")}}</b></div>
-						<div class="pricing__value pricing__value--hide pricing__value--hidden"><span>$</span>0 <b>/
-								{{__("messages.yearly")}}</b></div>
-					</div>
-					<ul class="pricing__list">
-						<li><b>1</b> {{__("messages.UserAccount")}}</li>
-						<li><b>10</b> {{__("messages.TeamMembers")}}</li>
-						<li><b>{{__("messages.Unlimited")}}</b> {{__("messages.EmailsAccounts")}}</li>
-						<li>{{__("messages.SetAndManagePermissions")}}</li>
-						<li class="disabled">{{__("messages.API&extensionsupport")}}</li>
-						<li class="disabled">{{__("messages.Developersupport")}}</li>
-						<li class="disabled">{{__("messages.A/BTesting")}}</li>
-					</ul>
-					<a class="pricing__signup" href="#">{{__("messages.Signup")}}</a>
-				</div>
-				<div class="pricing__plan pricing__plan--popular">
-					<div class="pricing__badge-bg"></div>
-					<div class="pricing__badge-text">{{__("messages.POPULAR")}}</div>
-					<h3 class="pricing__title">{{__("messages.PRO")}}</h3>
-					<div class="pricing__values">
-						<div class="pricing__value pricing__value--show"><span>$</span>49 <b>/ {{__("messages.month")}}</b></div>
-						<div class="pricing__value pricing__value--hide pricing__value--hidden"><span>$</span>529 <b>/
-								{{__("messages.yearly")}}</b></div>
-					</div>
-					<ul class="pricing__list">
-						<li><b>50</b> {{__("messages.UserAccount")}}</li>
-						<li><b>500</b> {{__("messages.TeamMembers")}}</li>
-						<li><b>{{__("messages.Unlimited")}}</b> {{__("messages.EmailsAccounts")}}</li>
-						<li>{{__("messages.SetAndManagePermissions")}}</li>
-						<li>{{__("messages.API&extensionsupport")}}</li>
-						<li>{{__("messages.Developersupport")}}</li>
-						<li class="disabled">{{__("messages.A/BTesting")}}</li>
-					</ul>
-					<a class="pricing__signup" href="#">{{__("messages.Signup")}}</a>
-				</div>
-				<div class="pricing__plan">
-					<h3 class="pricing__title">{{__("messages.ULTRA")}}</h3>
-					<div class="pricing__values">
-						<div class="pricing__value pricing__value--show"><span>$</span>99 <b>/ {{__("messages.month")}}</b></div>
-						<div class="pricing__value pricing__value--hide pricing__value--hidden"><span>$</span>900 <b>/
-								{{__("messages.yearly")}}</b></div>
-					</div>
-					<ul class="pricing__list">
-						<li><b>{{__("messages.Unlimited")}}</b> {{__("messages.UserAccount")}}</li>
-						<li><b>{{__("messages.Unlimited")}}</b> {{__("messages.TeamMembers")}}</li>
-						<li><b>{{__("messages.Unlimited")}}</b> {{__("messages.EmailsAccounts")}}</li>
-						<li>{{__("messages.SetAndManagePermissions")}}</li>
-						<li>{{__("messages.API&extensionsupport")}}</li>
-						<li>{{__("messages.Developersupport")}}</li>
-						<li>{{__("messages.A/BTesting")}}</li>
-
-					</ul>
-					<a class="pricing__signup" href="#">{{__("messages.Signup")}}</a>
-				</div>
-			</div>
-
-			<div class="clear"></div>
-		</div>
-
-	</section>
-
-	<!-- Section -->
-	<section class="section section--cta" id="contact">
-		<div class="section__content section__content--fluid-width section__content--padding section__content--cta">
-			<h2 class="section__title section__title--centered section__title--cta">{{__("messages.cta_title")}}			</h2>
-			<div class="section__description section__description--centered section__description--cta">
-{{__("messages.cta_description")}}
-			</div>
-			<div style="display:flex;padding:0 20%">
-			<div class="intro__buttons intro__buttons--centered">
-				<a href="index-2.html" class="btn btn--orange-bg">
-				<i class="fa fa-phone"></i>
-				{{$setting->phone}}</a>
-			</div>
-			<div class="intro__buttons intro__buttons--centered">
-				<a href="index-2.html" class="btn btn--orange-bg">
-				<i class="fa fa-at"></i>
-				{{$setting->email}}</a>
-			</div>
-			<div class="intro__buttons intro__buttons--centered">
-				<a href="index-2.html" class="btn btn--orange-bg">
-				<i class="fa fa-map-marker"></i>
-				{{$setting->address}}</a>
-			</div>
-			</div>
-		</div>
-		<svg class="svg-cta-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-			<path d="M0,70 C30,130 70,50 100,70 L100,100 0,100 Z" fill="#ffffff" />
-		</svg>
-	</section>
-
+            <button type="button" class="learn-btn primary-btn">Learn more about us</button>
+        </div>
+    </section>
 @endsection

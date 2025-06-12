@@ -13,6 +13,9 @@
 
                   <a class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }} "
                       href="{{ route('dashboard') }}">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
+
                       <img src="{{ asset('assets/admin/img/icons/dashboard.png') }}" alt=""> &nbsp;
                       Dashboard</a>
               </li>
@@ -21,6 +24,10 @@
 
                   <a class="nav-link {{ Route::currentRouteName() == 'view.customer' ? 'active' : '' }} "
                       href="{{ route('view.customer') }}">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
+
+
                       <i class="fa fa-users"></i><span class="menu-title text-truncate" data-i18n="Invoice">&nbsp;
                           {{ __('messages.USERS') }}
                       </span>
@@ -31,6 +38,9 @@
 
                   <a class="nav-link {{ Route::currentRouteName() == 'view.ads' ? 'active' : '' }} "
                       href="{{ route('view.ads') }}">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
+
                       <img src=" {{ asset('assets/admin/img/icons/sidebar-wallet.png') }}" alt="">&nbsp;
                       <span class="menu-title text-truncate me-3" data-i18n="Invoice">
                           {{ __('messages.ADS') }}
@@ -41,6 +51,9 @@
 
                   <a class="nav-link {{ Route::currentRouteName() == 'view.media' ? 'active' : '' }} "
                       href="{{ route('view.media') }}">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
+
                       {{-- <img src=" {{ asset('assets/admin/img/icons/sidebar-wallet.png') }}" alt="">&nbsp; --}}
 
                       <img src=" {{ asset('assets/admin/img/icons/media-icon.png') }}" alt=""><span
@@ -51,14 +64,20 @@
                   </a>
               </li>
               <li class="nav-item"><a class="nav-link" href="#">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
                       <img src=" {{ asset('assets/admin/img/icons/sidebar-wallet.png') }}" alt="">&nbsp;
                       Wallet</a></li>
               <li class="nav-item"><a class="nav-link" href="#">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
                       <img src=" {{ asset('assets/admin/img/icons/add-tools.png') }}" alt="">&nbsp; Add
                       Tools</a></li>
               <li class=" nav-item ">
                   <a class="nav-link {{ Route::currentRouteName() == 'view.page' ? 'active' : '' }}"
                       href="{{ route('view.page') }}">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
                       <i class="fa fa-pencil me-3"></i><span class="menu-title text-truncate"
                           data-i18n="Invoice">{{ __('messages.PAGE') }}
                       </span>
@@ -119,6 +138,8 @@
               <li class=" nav-item  mt-5">
                   <a class="nav-link {{ Route::currentRouteName() == 'company' ? 'active' : '' }}"
                       href="{{ route('company') }}">
+                      <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
+                          width="30px" height="30px" style="display:none;">
                       <img src=" {{ asset('assets/admin/img/icons/setting.png') }}" alt="">&nbsp;
                       {{ __('messages.SETTINGS') }}</a>
 
@@ -126,8 +147,11 @@
               </li>
 
 
-              <li class="nav-item"><a class="nav-link" href="#">
-                      <img src="{{ asset('assets/admin/img/icons/logout.png') }}" alt="">&nbsp; Logout</a>
+              <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}"
+                      onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <img src="{{ asset('assets/admin/img/icons/logout.png') }}" alt="">&nbsp;
+                      Logout
+                  </a>
               </li>
           </ul>
       </nav>
@@ -135,3 +159,7 @@
       <div class="sidebar-toggle-btn" id="sidebarToggler">
           <img src=" {{ asset('assets/admin/img/icons/sidebar-arrow.png') }}" alt="">
       </div>
+
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+      </form>

@@ -1,0 +1,48 @@
+<svg width="1440" height="158" viewBox="0 0 1440 158" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_di_20_57)">
+<path d="M1.75524 12.8758C37.1526 10.5355 115.144 10.7696 143.93 30.4283C165.578 46.8105 218.001 79.575 254.51 79.575C291.019 79.575 348.708 79.575 372.989 79.575" stroke="white" stroke-linecap="round"/>
+<path d="M3.07167 48.4517C38.5527 47.3596 116.728 47.4688 145.582 56.642C167.281 64.2864 219.829 79.5751 256.424 79.5751C293.019 79.5751 350.845 79.5751 375.183 79.5751" stroke="white" stroke-linecap="round"/>
+<path d="M0 146.274C35.3974 148.615 113.389 148.381 142.175 128.722C163.823 112.34 216.246 79.5751 252.755 79.5751C289.264 79.5751 346.953 79.5751 371.234 79.5751" stroke="white" stroke-linecap="round"/>
+<path d="M1.31643 112.428C36.7975 113.58 114.973 113.465 143.827 103.782C165.526 95.7131 218.073 79.575 254.669 79.575C291.264 79.575 349.089 79.575 373.428 79.575" stroke="white" stroke-linecap="round"/>
+</g>
+<g filter="url(#filter1_di_20_57)">
+<path d="M1438.43 12.0093C1403.03 9.66894 1325.04 9.90297 1296.25 29.5617C1274.61 45.9439 1222.18 78.7085 1185.67 78.7085C1149.16 78.7085 1091.47 78.7085 1067.19 78.7085" stroke="white" stroke-linecap="round"/>
+<path d="M1437.11 47.5851C1401.63 46.493 1323.45 46.6022 1294.6 55.7754C1272.9 63.4198 1220.35 78.7085 1183.76 78.7085C1147.16 78.7085 1089.34 78.7085 1065 78.7085" stroke="white" stroke-linecap="round"/>
+<path d="M1440.18 145.408C1404.79 147.748 1326.79 147.514 1298.01 127.855C1276.36 111.473 1223.94 78.7085 1187.43 78.7085C1150.92 78.7085 1093.23 78.7085 1068.95 78.7085" stroke="white" stroke-linecap="round"/>
+<path d="M1438.87 111.561C1403.39 112.714 1325.21 112.598 1296.36 102.916C1274.66 94.8465 1222.11 78.7085 1185.51 78.7085C1148.92 78.7085 1091.09 78.7085 1066.76 78.7085" stroke="white" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter0_di_20_57" x="-10.5" y="1.36658" width="396.183" height="156.417" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.219608 0 0 0 0 0.686275 0 0 0 0 0.764706 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_20_57"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_20_57" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="1.5"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.0784314 0 0 0 0 0.529412 0 0 0 0 0.701961 0 0 0 1 0"/>
+<feBlend mode="normal" in2="shape" result="effect2_innerShadow_20_57"/>
+</filter>
+<filter id="filter1_di_20_57" x="1054.5" y="0.5" width="396.183" height="156.417" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.219608 0 0 0 0 0.686275 0 0 0 0 0.764706 0 0 0 1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_20_57"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_20_57" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="1.5"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.0784314 0 0 0 0 0.529412 0 0 0 0 0.701961 0 0 0 1 0"/>
+<feBlend mode="normal" in2="shape" result="effect2_innerShadow_20_57"/>
+</filter>
+</defs>
+</svg>

@@ -62,7 +62,7 @@ class HomeController extends Controller
 
     public function content($category)
     {
-        $page = Page::where('category',$category)->first();
+        $page = Page::where('category', $category)->first();
         return view('front.page', compact("page"));
     }
 
@@ -86,6 +86,24 @@ class HomeController extends Controller
     public function about_us()
     {
         return view('front.about');
+    }
+
+    public function contact_us()
+    {
+        return view('front.contact');
+    }
+    public function join_us()
+    {
+        return view('front.join_us');
+    }
+    public function pricing(Request $request)
+    {
+        // $packages = Package::where('status', 1)->get();
+        // if ($request->has('package')) {
+        //     $package = Package::find($request->package);
+        //     return view('front.pricing', compact("packages", "package"));
+        // }
+        return view('front.pricing');
     }
 
     public function make_donation()
@@ -119,10 +137,11 @@ class HomeController extends Controller
         return view('front.gallery', compact("galleries"));
     }
 
-    public function photo_gallery_detail($id){
+    public function photo_gallery_detail($id)
+    {
         $gallery = Gallery::find($id);
         $blogs = Blog::where('status', 1)->orderBy('id', 'desc')->limit(6)->get();
-        return view('front.gallery_detail', compact("gallery","blogs"));
+        return view('front.gallery_detail', compact("gallery", "blogs"));
     }
 
     public function search(Request $request)
@@ -196,7 +215,7 @@ class HomeController extends Controller
 
     public function event_detail($id)
     {
-        $event = Event::with('galleries','bts_events')->find($id);
+        $event = Event::with('galleries', 'bts_events')->find($id);
         $interested = 0;
         if (Auth::guard('customer')->check()) {
             $interested = !is_null(InterestedEvents::where(['event_id' => $id, 'user_id' => Auth::guard('customer')->user()->id])->first()) ? 1 : 0;
