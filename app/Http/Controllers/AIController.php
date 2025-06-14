@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
-use App\Models\Company;
 use Auth;
+use Carbon\Carbon;
+use App\Models\Company;
 use App\Models\AiCampaign;
+use Illuminate\Http\Request;
 use App\Models\AiCampaignHistory;
+use Illuminate\Support\Facades\Http;
+
 class AIController extends Controller
 {
     private $openAiToken;
@@ -172,51 +174,83 @@ class AIController extends Controller
         $platform = $data['platform'] ?? 'ALL';
 
         // STRATEGY PROMPT
+        // if ($isFirst) {
+        //     $strategyPrompt = "You are a professional digital marketing consultant.\n\n" .
+        //         "This is the user's **first-ever** campaign. Based on best practices, recommend:\n" .
+        //         "1. Starting Budget in SAR: Suggest a safe and effective budget range considering the goal is \"{$campaignGoal}\".\n" .
+        //         "2. Platform: Choose the most effective platform for reaching {$targetChoices} aged {$age}.\n" .
+        //         "3. Confidence Message: Reassure the user that this is a great starting point, and explain why your plan will help build brand awareness and early traction.\n\n" .
+        //         "Inputs:\n" .
+        //         "- Campaign Goal: {$campaignGoal}\n" .
+        //         "- Proposed Budget: {$budgetRange}\n" .
+        //         "- Target Audience: {$targetChoices}\n" .
+        //         "- Age Group: {$age}\n" .
+        //         "- Gender: {$gender}\n" .
+        //         "- Platform Suggestion: {$platform}";
+        // } else {
+        //     $strategyPrompt = "You are a professional digital marketing consultant.\n\n" .
+        //         "Using the campaign insights below, provide:\n" .
+        //         "1. Recommended Budget in SAR: Improve on previous budget (" . ($data['previous_budget'] ?? 'ALL') . ") with reasoning.\n" .
+        //         "2. Recommended Platform: Use best performing (" . ($data['best_platform'] ?? 'N/A') . ") and avoid worst (" . ($data['worst_platform'] ?? 'N/A') . ").\n" .
+        //         "3. Confidence Message: Reassure the user that this plan is better than their past campaign due to smarter budgeting/platform alignment.\n\n" .
+        //         "Campaign Data:\n" .
+        //         "- Not First Campaign: Yes\n" .
+        //         "- Previous Platform: " . ($data['previous_platform'] ?? 'N/A') . "\n" .
+        //         "- Campaign Goal: {$campaignGoal}\n" .
+        //         "- Proposed Budget: {$budgetRange}\n" .
+        //         "- Duration: " . ($data['campaign_duration'] ?? 'ALL');
+
+
+        // }
+
         if ($isFirst) {
-            $strategyPrompt = "You are a professional digital marketing consultant.\n\n" .
-                "This is the user's **first-ever** campaign. Based on best practices, recommend:\n" .
-                "1. Starting Budget in SAR: Suggest a safe and effective budget range considering the goal is \"{$campaignGoal}\".\n" .
-                "2. Platform: Choose the most effective platform for reaching {$targetChoices} aged {$age}.\n" .
-                "3. Confidence Message: Reassure the user that this is a great starting point, and explain why your plan will help build brand awareness and early traction.\n\n" .
-                "Inputs:\n" .
+            $strategyPrompt = "You are a professional digital marketing expert. Help a new user set up their **first-ever** ad campaign.\n\n" .
+                "Use best practices for new advertisers to recommend:\n" .
+                "1. Budget (SAR): What's a safe but effective starting budget for the goal: \"{$campaignGoal}\"?\n" .
+                "2. Platform: Choose TIKTOK or SNAPCHAT based on the target audience: {$targetChoices}, age: {$age}, gender: {$gender}.\n" .
+                "3. Duration: Recommend 1 or 2 days of runtime.\n" .
+                "4. Confidence Message: Give a positive, reassuring message about why this plan will work well.\n\n" .
+                "User Inputs:\n" .
                 "- Campaign Goal: {$campaignGoal}\n" .
                 "- Proposed Budget: {$budgetRange}\n" .
-                "- Target Audience: {$targetChoices}\n" .
-                "- Age Group: {$age}\n" .
+                "- Target: {$targetChoices}\n" .
+                "- Age: {$age}\n" .
                 "- Gender: {$gender}\n" .
-                "- Platform Suggestion: {$platform}";
+                "- Platform: {$platform}";
         } else {
-            $strategyPrompt = "You are a professional digital marketing consultant.\n\n" .
-                "Using the campaign insights below, provide:\n" .
-                "1. Recommended Budget in SAR: Improve on previous budget (" . ($data['previous_budget'] ?? 'ALL') . ") with reasoning.\n" .
-                "2. Recommended Platform: Use best performing (" . ($data['best_platform'] ?? 'N/A') . ") and avoid worst (" . ($data['worst_platform'] ?? 'N/A') . ").\n" .
-                "3. Confidence Message: Reassure the user that this plan is better than their past campaign due to smarter budgeting/platform alignment.\n\n" .
-                "Campaign Data:\n" .
-                "- Not First Campaign: Yes\n" .
+            $strategyPrompt = "You are a professional digital marketing expert. Help improve an existing advertiser’s campaign.\n\n" .
+                "Using the past data and best practices, provide:\n" .
+                "1. Improved Budget in SAR (past budget: " . ($data['previous_budget'] ?? 'ALL') . ").\n" .
+                "2. Platform Recommendation: Build on best platform (" . ($data['best_platform'] ?? 'N/A') . ") and avoid worst (" . ($data['worst_platform'] ?? 'N/A') . ").\n" .
+                "3. Duration: Recommend 1 or 2 days of runtime.\n" .
+                "4. Confidence Message: Explain why this setup improves past performance.\n\n" .
+                "Campaign Details:\n" .
                 "- Previous Platform: " . ($data['previous_platform'] ?? 'N/A') . "\n" .
-                "- Campaign Goal: {$campaignGoal}\n" .
+                "- Goal: {$campaignGoal}\n" .
                 "- Proposed Budget: {$budgetRange}\n" .
+                "- Target: {$targetChoices}\n" .
+                "- Age: {$age}\n" .
+                "- Gender: {$gender}\n" .
                 "- Duration: " . ($data['campaign_duration'] ?? 'ALL');
-
-
         }
+
 
         // Escape for embedding
         $strategyPromptEscaped = addslashes($strategyPrompt);
 
         // VALUES PROMPT
-        $valuesPrompt = "Based on the following campaign strategy prompt:\n\n" .
+        $valuesPrompt = "Based on the campaign strategy below, generate a compact campaign summary.\n\n" .
             "\"{$strategyPromptEscaped}\"\n\n" .
-            "Please provide a summary in the exact format:\n\n" .
+            "Return the result using this exact format (one single line):\n\n" .
             "TITLE\$==\$BUDGET\$==\$DAYS\$==\$GENDER\$==\$AGE\$==\$SOCIAL_MEDIA\n\n" .
-            "Where:\n" .
-            "- TITLE: 3–5 word campaign summary.\n" .
-            "- BUDGET: Recommended ad budget in SAR or 'ALL'.\n" .
-            "- DAYS: Run time (1 or 2 days).\n" .
+            "Rules:\n" .
+            "- TITLE: A 3–5 word headline (max 32 characters) that fits the goal (e.g., 'Boost Brand Buzz').\n" .
+            "- BUDGET: Suggested ad spend in SAR (numeric or 'ALL').\n" .
+            "- DAYS: 1 or 2.\n" .
             "- GENDER: MALE, FEMALE, BOTH, or ALL.\n" .
-            "- AGE: 12 (under 12), 18 (12–17), 30 (18–30), 0 (31+), or ALL.\n" .
+            "- AGE: 12, 18, 30, 0, or ALL (as defined).\n" .
             "- SOCIAL_MEDIA: TIKTOK or SNAPCHAT only.\n\n" .
-            "Respond in one single line. Use \$==\$ as separator. No extra explanation.";
+            "Output ONLY one line, using \$==\$ as separator. No extra text.";
 
         // (Optional) Description prompt (currently commented out)
         // $descriptionPrompt = "...";
@@ -288,6 +322,137 @@ class AIController extends Controller
             ], 500);
         }
     }
+
+    public function save(Request $request)
+    {
+        // dd($request->all());
+        $data = $request->validate([
+            'campaign_goal' => 'nullable|string',
+            'business_keywords' => 'nullable|string',
+            'age' => 'nullable|string',
+            'gender' => 'nullable|string',
+            'target' => 'nullable|string',
+            'budget_range' => 'nullable|string',
+            'platform' => 'nullable|string',
+            'is_first_campaign' => 'nullable|string', // '1' or '0'
+            'previous_platform' => 'nullable|string',
+            'best_platform' => 'nullable|string',
+            'worst_platform' => 'nullable|string',
+            'previous_budget' => 'nullable|string',
+            'ai_description' => 'nullable|string',
+            'ai_title' => 'nullable|string',
+            'ai_platform' => 'nullable|string',
+            'ai_strategy' => 'nullable|string',
+            'ai_values' => 'nullable|string',
+        ]);
+
+        $startDate = Carbon::parse($request->campaign_start);
+        $endDate = Carbon::parse($request->campaign_end);
+
+        $duration = $startDate->diffInDays($endDate);
+        // Helper function to clean AI-generated strings
+        $clean = fn($value, $removeTrailingComma = false) => $removeTrailingComma
+            ? rtrim(trim(str_replace(['**', '"'], '', $value)), ',')
+            : trim(str_replace(['**', '"'], '', $value));
+
+        $campaign = new AiCampaign();
+        $campaign->user_id = auth()->id() ?? $data['user_id'];
+        $campaign->campaign_goal = $data['campaign_goal'];
+        $campaign->business_keywords = $data['business_keywords'] ?? '';
+        $campaign->age = $data['age'] ?? "all ages";
+        $campaign->gender = $data['gender'];
+        $campaign->target_choices = $data['target'] ?? 'all';
+        $campaign->budget_range = $data['budget_range'];
+        $campaign->platform = $data['platform'];
+        $campaign->is_first_campaign = $data['is_first_campaign'] ?? false;
+        $campaign->previous_platform = $data['previous_platform'] ?? "all";
+        $campaign->best_platform = $data['best_platform'];
+        $campaign->worst_platform = $data['worst_platform'];
+        $campaign->previous_budget = $data['previous_budget'] ?? '0.00';
+        $campaign->campaign_duration = $duration;
+
+        // Clean AI-generated strings
+        $campaign->ai_strategy = $clean($data['ai_strategy'] ?? '');
+        $campaign->ai_title = $clean($data['ai_title'] ?? '');
+        $campaign->ai_description = $clean($data['ai_description'] ?? '');
+        $campaign->ai_platform = $clean($data['ai_platform'] ?? 'Not set');
+        $campaign->ai_values = $clean($data['ai_values'] ?? '', true);
+
+        $campaign->save();
+
+        return response()->json(['status' => 'success', 'campaign_id' => $campaign->id]);
+    }
+
+    public function generate(Request $request)
+    {
+        $isFirst = $request->input('first_campaign') == 1;
+
+        if ($isFirst) {
+            $prompt = "Create an ad for the following campaign:\n\n" .
+                "Business: {$request->business}\n" .
+                "Goal: {$request->campaignGoal}\n" .
+                "Platform: {$request->social_media}\n" .
+                "Budget Range: {$request->budgetRange}\n" .
+                "Target Audience: {$request->worst_platform}\n" .
+                "Keywords: {$request->keywords}\n\n" .
+                "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n";
+        } else {
+            $prompt = "Improve a campaign based on past data:\n\n" .
+                "Used Platforms: {$request->used_platforms}\n" .
+                "Best Platform: {$request->best_platform}\n" .
+                "Worst Platform: {$request->worst_platform}\n" .
+                "Budget: {$request->previous_budget}\n" .
+                "Dates: {$request->campaign_start} to {$request->campaign_end}\n" .
+                "Issue: {$request->comments}\n\n" .
+                "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n";
+        }
+
+        // Call OpenAI (you need to configure your API key)
+
+
+        $headers = [
+            'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+            'Content-Type' => 'application/json',
+        ];
+
+        $url = 'https://api.openai.com/v1/chat/completions';
+        $model = 'gpt-4o';
+
+        $response = Http::withOptions(['verify' => false])
+            ->withHeaders($headers)
+            ->post($url, [
+                'model' => $model,
+                'messages' => [
+                    ['role' => 'system', 'content' => 'You are an expert digital marketer.'],
+                    ['role' => 'user', 'content' => $prompt],
+                ],
+                'temperature' => 0.7,
+            ]);
+        // $response = Http::withToken(env('OPENAI_API_KEY'))->post('https://api.openai.com/v1/chat/completions', [
+        //     'model' => 'gpt-4o',
+        //     'messages' => [
+        //         ['role' => 'system', 'content' => 'You are an expert digital marketer.'],
+        //         ['role' => 'user', 'content' => $prompt],
+        //     ],
+        //     'temperature' => 0.7,
+        // ]);
+
+        $text = $response['choices'][0]['message']['content'];
+
+        // Very basic parsing (you can improve this)
+        preg_match('/Title:(.*?)\n/i', $text, $title);
+        preg_match('/Description:(.*?)\n/i', $text, $desc);
+        preg_match('/Strategy:(.*?)$/is', $text, $strategy);
+
+        return response()->json([
+            'title' => trim($title[1] ?? 'Untitled'),
+            'description' => trim($desc[1] ?? 'No description'),
+            'strategy' => trim($strategy[1] ?? 'No strategy'),
+            'platform' => $request->social_media ?? $request->best_platform ?? 'Not set',
+            'values' => $request->keywords ?? '',
+        ]);
+    }
+
 
 
     public function fetch1(Request $request)
@@ -432,157 +597,5 @@ class AIController extends Controller
             return response()->json(['error' => 'An error occurred while processing the request: ' . $e->getMessage()], 500);
         }
     }
-
-    //     public function fetch(Request $request)
-//     {
-//         $data = $request->all();
-
-    //         dd($data);
-//         $userId = auth()->id(); // or use $request->user_id if public
-
-    //         $openaiKey = env('OPENAI_API_KEY');
-//         if (!$openaiKey) {
-//             return response()->json(['error' => 'OpenAI API key not configured.'], 500);
-//         }
-
-    //         $headers = [
-//             'Authorization' => "Bearer {$openaiKey}",
-//             'Content-Type'  => 'application/json'
-//         ];
-
-    //         //  Use previous campaign data if needed
-//         $lastCampaign = AiCampaign::where('user_id', $userId)->latest()->first();
-//         $isFirst = strtolower($data['is_first_campaign'] ?? 'yes') === 'yes';
-
-    //         // Prompt 1: Description
-// $descriptionPrompt = <<<EOT
-//            You are a creative ad copywriter. Your job is to write a human-touching, emotionally engaging, and specific ad description.
-
-    //            Generate a 5–8 line ad focused on the *end-user*, using the tone of a warm and persuasive marketer.
-
-    //            Use the input:
-//            - Campaign Goal: {$data['campaign_goal']}
-//            - Business Keywords: {$data['business_keywords']}
-//            - Age Group: {$data['age']}
-//            - Gender: {$data['gender']}
-//            - Target Audience: {$data['target_choices']}
-//            - This is {$isFirst ? "their first campaign (be welcoming and inspiring)" : "not their first campaign (so show maturity in brand voice)"}
-//            Only return the ad description. No titles, no bullets.
-//            EOT;
-
-    //         // Prompt 2: Strategy
-//         if ($isFirst) {
-//             $strategyPrompt = <<<EOT
-//              You are a professional digital marketing consultant.
-
-    //              This is the user's **first-ever** campaign. Based on best practices, recommend:
-//              1. Starting Budget in SAR: Suggest a safe and effective budget range considering the goal is "{$data['campaign_goal']}".
-//              2. Platform: Choose the most effective platform for reaching {$data['target_choices']} aged {$data['age']}.
-//              3. Confidence Message: Reassure the user that this is a great starting point, and explain why your plan will help build brand awareness and early traction.
-
-    //             Inputs:
-//             - Campaign Goal: {$data['campaign_goal']}
-//             - Proposed Budget: {$data['budget_range']}
-//             - Target Audience: {$data['target_choices']}
-//             - Age Group: {$data['age']}
-//             - Gender: {$data['gender']}
-//             - Platform Suggestion: {$data['platform']}
-//             EOT;
-//         } else {
-//             $strategyPrompt = <<<EOT
-//             You are a professional digital marketing consultant.
-
-    //              Using the campaign insights below, provide:
-//             1. Recommended Budget in SAR: Improve on previous budget ({$data['previous_budget']}) with reasoning.
-//             2. Recommended Platform: Use best performing ({$data['best_platform']}) and avoid worst ({$data['worst_platform']}).
-//             3. Confidence Message: Reassure the user that this plan is better than their past campaign due to smarter budgeting/platform alignment.
-//             Campaign Data:
-//             - Not First Campaign: Yes
-//             - Previous Platform: {$data['previous_platform']}
-//             - Campaign Goal: {$data['campaign_goal']}
-//             - Proposed Budget: {$data['budget_range']}
-//             - Duration: {$data['campaign_duration']}
-//             EOT;
-//         }
-
-    //         // Prompt 3: Values (recommendation summary)
-//         $valuesPrompt = <<<EOT
-//                        based on strategy prompt `{$strategyPrompt}` of campaign give me a title, recommended budget in Saudi Riyal (SAR), how many days should
-//                        I run it (1 or 2), which gender should we target (MALE, FEMALE, BOTH), and which age should we target (12 (being less than 12),
-//                        18 (being less than 18 and greater than 12), 30 (being less than 30 and greater than 18, 0 (being every other age from 31)),
-//                        and also tell me which social media (among TIKTOK, SNAPCHAT ) should I publish my ad.
-//                        Give me the response in exactly like the following pattern TITLE$==$BUDGET$==$DAYS$==$GENDER$==$AGE$==$SOCIAL_MEDIA
-//                        please strictly follow the pattern and add $==$ this between all as I will split response on this also keep in mind these rules
-//                        EOT;
-
-    //         // Prepare payloads
-//         $url = 'https://api.openai.com/v1/chat/completions';
-//         $model = 'gpt-3.5-turbo';
-
-    //         $descResp = Http::withHeaders($headers)->post($url, [
-//             'model' => $model,
-//             'messages' => [['role' => 'user', 'content' => $descriptionPrompt]],
-//         ]);
-
-    //         $stratResp = Http::withHeaders($headers)->post($url, [
-//             'model' => $model,
-//             'messages' => [['role' => 'user', 'content' => $strategyPrompt]],
-//         ]);
-
-    //         $valResp = Http::withHeaders($headers)->post($url, [
-//             'model' => $model,
-//             'messages' => [['role' => 'user', 'content' => $valuesPrompt]],
-//         ]);
-
-    //         $description = $descResp->ok() ? $descResp['choices'][0]['message']['content'] : null;
-//         $strategy = $stratResp->ok() ? $stratResp['choices'][0]['message']['content'] : null;
-//         $values = $valResp->ok() ? $valResp['choices'][0]['message']['content'] : null;
-
-    //         // Save to database
-//         $campaign = new AiCampaign();
-//         $campaign->user_id = $userId;
-//         $campaign->campaign_goal = $data['campaign_goal'];
-//         $campaign->business_keywords = $data['business_keywords'];
-//         $campaign->age = $data['age'];
-//         $campaign->gender = $data['gender'];
-//         $campaign->target_choices = $data['target_choices'];
-//         $campaign->budget_range = $data['budget_range'];
-//         $campaign->platform = $data['platform'];
-//         $campaign->is_first_campaign = $isFirst;
-//         $campaign->previous_platform = $data['previous_platform'] ?? null;
-//         $campaign->best_platform = $data['best_platform'] ?? null;
-//         $campaign->worst_platform = $data['worst_platform'] ?? null;
-//         $campaign->previous_budget = $data['previous_budget'] ?? null;
-//         $campaign->campaign_duration = $data['campaign_duration'] ?? null;
-//         $campaign->ai_description = $description;
-//         $campaign->ai_strategy = $strategy;
-//         $campaign->ai_values = $values;
-//         $campaign->save();
-
-    //         return response()->json([
-//             'description' => $description,
-//             'strategy' => $strategy,
-//             'values' => $values,
-//             'campaign_id' => $campaign->id,
-//         ]);
-//     }
-
-    // public function index()
-    // {
-    //     $company = Company::first();
-    //     $campaigns = AiCampaign::where('status', 1)->get();
-    //     $campaignHistory = AiCampaignHistory::where('status', 1)->get();
-    //     $pageType = 'list';
-    //     return view('front.ai.index', compact("company", "campaigns", "campaignHistory", "pageType"));
-    // }
-
-    // public function createCampaign()
-    // {
-    //     $company = Company::first();
-    //     $campaigns = AiCampaign::where('status', 1)->get();
-    //     $campaignHistory = AiCampaignHistory::where('status', 1)->get();
-    //     $pageType = 'create';
-    //     return view('front.ai.create', compact("company", "campaigns", "campaignHistory", "pageType"));
-    // }
 
 }

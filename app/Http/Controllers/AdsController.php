@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Company;
 use App\Models\Campaign;
+use App\Models\AiCampaign;
 use App\Models\UserPackage;
 use Illuminate\Http\Request;
 use App\Http\Requests\AdRequest;
@@ -108,8 +109,38 @@ class AdsController extends Controller
         return view($this->view_page, $data);
     }
 
-    public function add($ai = 0)
+    public function addOld($ai = 0)
     {
+
+        // dd($ai);
+        if ($ai != 0) {
+
+            $aiData = AiCampaign::findOrFail($ai);
+            if ($aiData) {
+                $data['title'] = $aiData->ai_title;
+                $data['name'] = $aiData->name;
+                $data['description'] = $aiData->ai_description;
+                $data['budget'] = $aiData->budget_range;
+                $data['social_media'] = $aiData->ai_platform;
+                $data['days'] = $aiData->campaign_duration;
+
+            }
+
+            // $data['title'] = "Create Ads Using AI";
+            // $data['name'] = '';
+            // $data['description'] = '';
+            // $data['budget'] = 0;
+            // $data['days'] = 0;
+            // $data['campaignName'] = '';
+            // $data['ai_sugguested'] = 1;
+        } else {
+            $data['title'] = "Create Ads";
+            $data['name'] = '';
+            $data['description'] = '';
+            $data['budget'] = 0;
+            $data['days'] = 0;
+            $data['campaignName'] = '';
+        }
         $userPackage = UserPackage::where('user_id', Auth::guard('web')->user()->id)->where('expire_at', '>=', date("Y-m-d"))->first();
         if (!isset($userPackage)) {
             return view('auth.package', ['title' => 'Subscribe to Packages']);
@@ -129,6 +160,63 @@ class AdsController extends Controller
         $setting = Company::first();
         $data['campaignName'] = $setting->name . '-TK-' . $campaignId . date('His');
         return view($this->store_page, $data);
+    }
+
+
+    public function add($ai = 0)
+    {
+        $defaultData = [
+            'title' => 'Create Ads',
+            'name' => '',
+            'description' => '',
+            'budget' => 0,
+            'days' => 0,
+            'campaignName' => '',
+            'social_media' => '',
+        ];
+
+        // AI campaign fallback
+        if ($ai != 0) {
+            $aiData = AiCampaign::findOrFail($ai);
+            $defaultData['title'] = $aiData->ai_title ?? 'Create Ads Using AI';
+            $defaultData['name'] = $aiData->ai_title ?? '';
+            $defaultData['description'] = $aiData->ai_description ?? '';
+            $defaultData['budget'] = $aiData->budget_range ?? 0;
+            $defaultData['social_media'] = $aiData->ai_platform ?? '';
+            $defaultData['days'] = $aiData->campaign_duration ?? 0;
+        }
+
+        // Check active package
+        $userId = Auth::guard('web')->id();
+        $userPackage = UserPackage::where('user_id', $userId)
+            ->where('expire_at', '>=', now()->toDateString())
+            ->first();
+
+        if (!$userPackage) {
+            return view('auth.package', ['title' => 'Subscribe to Packages']);
+        }
+
+        // AI session suggestion override
+        if ($ai == 1) {
+            $aiSuggestion = session(self::AI_SESSION_KEY);
+            if (!empty($aiSuggestion)) {
+                $defaultData = array_merge($defaultData, $aiSuggestion);
+            }
+        } else {
+            session([self::AI_SESSION_KEY => '']);
+        }
+
+        // Generate campaign name
+        $lastCampaignId = optional(Campaign::latest()->first())->id ?? 0;
+        $nextCampaignId = $lastCampaignId + 1;
+
+        $companyName = optional(Company::first())->name ?? 'Company';
+        $defaultData['campaignName'] = "{$companyName}-TK-{$nextCampaignId}" . date('His');
+
+        // Final title from controller property
+        $defaultData['title'] = $this->title;
+
+        return view($this->store_page, $defaultData);
     }
 
     public function addAI()

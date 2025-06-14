@@ -159,7 +159,18 @@
         #imageRadio :checked+label i {
             transform: scale(0.9);
             z-index: -1;
+            /* color: #1487b3; */
+            color: white
+        }
+
+        #imageRadio label i {
             color: #1487b3;
+            /* Color for icons */
+        }
+
+        #imageRadio label:hover {
+            border: 1px solid #1487b3;
+            /* Change border color on hover */
         }
 
         .important-note {
@@ -336,8 +347,8 @@
                 /* background-color: #FFF; */
                 /* color: #968DF3; */
                 /* background: linear-gradient(to right, #1487b3, #38afc3);
-                                                -webkit-background-clip: text;
-                                                -webkit-text-fill-color: transparent; */
+                                                                                                    -webkit-background-clip: text;
+                                                                                                    -webkit-text-fill-color: transparent; */
 
         }
 
@@ -537,6 +548,8 @@
     </style>
     <!-- Dashboard Analytics Start -->
     <section id="dashboard-analytics">
+
+        {{-- @dd($data) --}}
         <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
@@ -544,7 +557,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active">
                                 <span class="badge badge-light-primary">{{ __('messages.ADD') }}
-                                    {{ $title }}
+                                    {{ $title ?? '' }}
                                 </span>
                             </li>
                         </ol>
@@ -601,6 +614,7 @@
                                                     id="facebook" />
                                                 <label for="facebook"> <i class="fab fa-facebook"></i> </label>
                                             </li>
+                                            {{-- @dump($social_media) --}}
                                             <li><input type="radio" name="social_media"
                                                     @if (isset($social_media)) @if (strtolower($social_media) == 'tiktok') checked @endif
                                                 @else checked @endif value="tiktok" id="tiktok"
@@ -653,57 +667,57 @@
                                         </div>
 
                                         <ul id="imageRadio">
-                                            <li class='tiktok_goal'><input
+                                            <li class='tiktok_goal'><input class="text-white"
                                                     @if (isset($goal)) @if ($goal == 'TRAFFIC') checked @endif
                                                 @else @endif type="radio" name="goal"
                                                 value="TRAFFIC" id="tk1" />
                                                 <label for="tk1"> <img
                                                         src="{{ asset('front/images/cost-per-click.png') }}"
                                                         alt="">
-                                                    <h4>{{ __('messages.WebsiteTraffic') }}</h4>
+                                                    <h4 class="text-white">{{ __('messages.WebsiteTraffic') }}</h4>
                                                     <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
                                                 </label>
                                             </li>
-                                            <li class='tiktok_goal'><input
+                                            <li class='tiktok_goal'><input class="text-white"
                                                     @if (isset($goal)) @if ($goal == 'LEAD_GENERATION') checked @endif
                                                 @else @endif type="radio" name="goal"
                                                 value="LEAD_GENERATION" id="tk2" />
                                                 <label for="tk2"> <img
                                                         src="{{ asset('front/images/video-chat.png') }}" alt="">
-                                                    <h4>{{ __('messages.Reach') }}</h4>
+                                                    <h4 class="text-white">{{ __('messages.Reach') }}</h4>
                                                     <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
                                                 </label>
                                             </li>
 
-                                            <li class='snapchat_goal'><input
+                                            <li class='snapchat_goal'><input class="text-white"
                                                     @if (isset($goal)) @if ($goal == 'WEB_CONVERSION') checked @endif
                                                 @else @endif type="radio" name="goal"
                                                 value="WEB_CONVERSION" id="sc1" />
                                                 <label for="sc1"> <img
                                                         src="{{ asset('front/images/cost-per-click.png') }}"
                                                         alt="">
-                                                    <h4>{{ __('messages.WebsiteTraffic') }}</h4>
+                                                    <h4 class="text-white">{{ __('messages.WebsiteTraffic') }}</h4>
                                                     <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
                                                 </label>
                                             </li>
-                                            <li class='snapchat_goal'><input
+                                            <li class='snapchat_goal'><input class="text-white"
                                                     @if (isset($goal)) @if ($goal == 'ENGAGEMENT') checked @endif
                                                 @else @endif type="radio" name="goal"
                                                 value="ENGAGEMENT" id="sc2" />
                                                 <label for="sc2"> <img
                                                         src="{{ asset('front/images/video-chat.png') }}" alt="">
-                                                    <h4>{{ __('messages.Reach') }}</h4>
+                                                    <h4 class="text-white">{{ __('messages.Reach') }}</h4>
                                                     <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
                                                 </label>
                                             </li>
 
-                                            <li class='snapchat_goal'><input
+                                            <li class='snapchat_goal'><input class="text-white"
                                                     @if (isset($goal)) @if ($goal == 'BRAND_AWARENESS') checked @endif
                                                 @else @endif type="radio" name="goal"
                                                 value="BRAND_AWARENESS " id="sc3" />
                                                 <label for="sc3"> <img src="{{ asset('front/images/web.png') }}"
                                                         alt="">
-                                                    <h4>{{ __('messages.BrandPromotion') }}</h4>
+                                                    <h4 class="text-white">{{ __('messages.BrandPromotion') }}</h4>
                                                     <p>{{ __('messages.IncreaseBrandAwareness') }}</p>
                                                 </label>
                                             </li>
@@ -717,21 +731,25 @@
                                         </div>
                                         <div class="titleRow row">
                                             <div class="form-group col-md-12">
-                                                <label for="campaigName">{{ __('messages.CampaignTitle') }}</label>
+                                                <label for="campaigName"
+                                                    class="text-white">{{ __('messages.CampaignTitle') }}</label>
                                                 <input id="campaigName" name="campaigName" value="{{ $campaignName }}"
                                                     type="text" readonly class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="title">{{ __('messages.Title') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
-                                                            class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
-                                                            {{ __('messages.AISuggested') }} )</small> @endif
+                                                <label for="title" class="text-white">{{ __('messages.Title') }}
+                                                    @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                        <small class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
+                                                            {{ __('messages.AISuggested') }} )</small>
+                                                    @endif
                                                 </label>
                                                 <input id="title" name="title"
-                                                    @if (isset($name)) value="{{ $name }}" @endif
-                                                    type="text" class="form-control">
+                                                    value="{{ !empty($name) ? $name : $title ?? '' }}" type="text"
+                                                    class="form-control">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="description">{{ __('messages.Description') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
+                                                <label for="description"
+                                                    class="text-white">{{ __('messages.Description') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
                                                             class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                             {{ __('messages.AISuggested') }} )</small> @endif
                                                 </label>
@@ -740,7 +758,8 @@
                                             </div>
                                             <div class="form-group col-md-6" id="callTOActionArea">
                                                 <label for="call_to_action">{{ __('messages.CallToAction') }}</label>
-                                                <select name="call_to_action" id="call_to_action" class="form-control">
+                                                <select name="call_to_action" id="call_to_action"
+                                                    class="form-control text-white">
                                                     <option class="tiktok"
                                                         @if (isset($call_to_action)) @if ($call_to_action == 'BOOK_NOW') selected @endif
                                                     @else selected @endif
@@ -768,7 +787,8 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6" id="websiteUrlArea">
-                                                <label for="website_url">{{ __('messages.WebsiteUrl') }}</label>
+                                                <label for="website_url"
+                                                    class="text-white">{{ __('messages.WebsiteUrl') }}</label>
                                                 <input id="website_url" name="website_url"
                                                     @if (isset($website_url)) value="{{ $website_url }}" @endif
                                                     type="text" required class="form-control">
