@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 use Symfony\Component\Mime\Part\File;
+use App\Http\Controllers\AIController;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
@@ -184,6 +185,10 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/delete/{id}', 'delete')->name('delete.ads');
             Route::get('/delete/image/{id}', 'delete_image')->name('delete.ads.image');
             Route::get('/status/{id}', 'status')->name('status.ads');
+
+            // Route::get('/ads/details/{id}/{platform}', 'show')->name('detail.ads');
+
+
         });
     });
 
@@ -239,4 +244,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/status/{id}', 'status')->name('status.draft');
         });
     });
+
+    Route::post('/ai/fetch', [App\Http\Controllers\AIController::class, 'fetch'])->name('ai.fetch');
+
 });

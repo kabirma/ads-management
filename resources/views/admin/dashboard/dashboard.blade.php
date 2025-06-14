@@ -11,10 +11,11 @@
             </h4>
 
             <div class="addition-btn-main">
-                <button class="btn btn-primary primary-btn addition-button d-block w-100 w-md-auto">
-                    <img src="{{ asset('assets/admin/img/icons/addition.png')}}" alt="" width="13" />
+                <a class="btn btn-primary primary-btn addition-button d-block w-100 w-md-auto"
+                    href="{{ route('addAI.ads') }}">
+                    <img src="{{ asset('assets/admin/img/icons/addition.png') }}" alt="" width="13" />
                     Create New Campaign
-                </button>
+                </a>
             </div>
         </div>
 
@@ -39,7 +40,7 @@
                         </button>
                     </div>
                     <div class="col-md-4 dashboard-card-img">
-                        <img src="{{ asset('assets/admin/img/icons/wallet.png')}}" alt="image not found" />
+                        <img src="{{ asset('assets/admin/img/icons/wallet.png') }}" alt="image not found" />
                     </div>
                 </div>
             </div>
@@ -55,7 +56,8 @@
                         </button>
                     </div>
                     <div class="col-md-4 dashboard-card-img">
-                        <img src="{{ asset('assets/admin/img/icons/support.png')}}" alt="image not found" width="89" height="89" />
+                        <img src="{{ asset('assets/admin/img/icons/support.png') }}" alt="image not found" width="89"
+                            height="89" />
                     </div>
                 </div>
             </div>
@@ -71,7 +73,8 @@
                         </button>
                     </div>
                     <div class="col-md-4 dashboard-card-img">
-                        <img src=" {{ asset('assets/admin/img/icons/campaign.png')}}" alt="image not found" width="89" height="89" />
+                        <img src=" {{ asset('assets/admin/img/icons/campaign.png') }}" alt="image not found" width="89"
+                            height="89" />
                     </div>
                 </div>
             </div>
@@ -134,7 +137,8 @@
             <div class="card overview-card  p-3">
                 <div class="overview-head d-flex justify-content-between">
                     <h5>Overview</h5>
-                    <img src="{{ asset('assets/admin/img/icons/overview-icon.png')}}" alt="" width="21" height="21">
+                    <img src="{{ asset('assets/admin/img/icons/overview-icon.png') }}" alt="" width="21"
+                        height="21">
                 </div>
 
                 <div class="overview-record d-flex justify-content-between">
@@ -483,8 +487,8 @@
             <div class="col-md-3">
                 <div class="card-custom mb-3">
                     <div class="d-flex align-items-center mb-2">
-                        <img src=" {{ asset('assets/admin/img/icons/adsens-icon.png') }}" alt="Google Ads" width="24"
-                            class="me-2">
+                        <img src=" {{ asset('assets/admin/img/icons/adsens-icon.png') }}" alt="Google Ads"
+                            width="24" class="me-2">
                         <strong>Ad Name <span class="d-block">GOCA #30</span></strong>
                         <span class="ms-auto"><span class="status-dot"></span> Active</span>
                     </div>
