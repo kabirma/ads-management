@@ -53,7 +53,7 @@
                                     </div>
                                 @endif
                                 <input type="hidden" name="id" value="{{ isset($record) ? $record->id : 0 }}">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-12 mt-1">
                                     <label class="text-white" for="reason">{{ __('messages.FirstCampaign') }}</label>
                                     <br>
                                     <label class="text-white" for="first_campaign_yes">
@@ -104,20 +104,10 @@
                                         </div>
 
 
-                                        <div class="form-group col-md-6">
-                                            <label class="text-white" for="campaign_start">Campaign Start Date</label>
-                                            <input type="date" class="form-control" name="campaign_start"
-                                                id="campaign_start" required>
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label class="text-white" for="campaign_end">Campaign End Date</label>
-                                            <input type="date" class="form-control" name="campaign_end" id="campaign_end"
-                                                required>
-                                        </div>
 
 
-                                        <div class="form-group col-md-6">
+
+                                        <div class="form-group col-md-12 mt-1">
                                             <label class="text-white" for="comments">Where was the issue?</label>
                                             <textarea name="comments" class="form-control" id="comments" rows="3"
                                                 placeholder="The more details you give, the more results you will get." required></textarea>
@@ -159,6 +149,17 @@
                                         </div>
 
                                         <div class="form-group col-md-6">
+                                            <label class="text-white" for="campaign_start">Campaign Start Date</label>
+                                            <input type="date" class="form-control" name="campaign_start"
+                                                id="campaign_start" required>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label class="text-white" for="campaign_end">Campaign End Date</label>
+                                            <input type="date" class="form-control" name="campaign_end"
+                                                id="campaign_end" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label class="text-white"
                                                 for="location">{{ __('messages.CampaignTarget') }}</label>
                                             {{-- <input type="text" class="form-control" name="target"
@@ -182,7 +183,7 @@
 
                                 </div>
 
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-12 mt-1">
                                     <hr>
                                     <button class="btn btn-primary primary-btn" type="submit" id="submitAI"><i
                                             class="fa fa-pencil"></i>

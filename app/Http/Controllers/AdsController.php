@@ -8,6 +8,7 @@ use App\Models\Ads;
 use App\Models\Role;
 // use App\Models\AdsImage;
 use App\Models\User;
+use App\Models\Media;
 use App\Models\Company;
 use App\Models\Campaign;
 use App\Models\AiCampaign;
@@ -173,6 +174,11 @@ class AdsController extends Controller
             'days' => 0,
             'campaignName' => '',
             'social_media' => '',
+            'start_date' => Carbon::now()->format('Y-m-d'),
+            'end_date' => Carbon::now()->addDays(7)->format('Y-m-d'),
+            'ai_sugguested' => 0,
+            'gender' => '',
+            'age' => '',
         ];
 
         // AI campaign fallback
@@ -184,6 +190,10 @@ class AdsController extends Controller
             $defaultData['budget'] = $aiData->budget_range ?? 0;
             $defaultData['social_media'] = $aiData->ai_platform ?? '';
             $defaultData['days'] = $aiData->campaign_duration ?? 0;
+            $defaultData['start_date'] = $aiData->start_date ?? Carbon::now()->format('Y-m-d');
+            $defaultData['end_date'] = $aiData->end_date ?? Carbon::now()->addDays(7)->format('Y-m-d');
+            $defaultData['gender'] = $aiData->gender ?? '';
+
         }
 
         // Check active package
@@ -215,6 +225,9 @@ class AdsController extends Controller
 
         // Final title from controller property
         $defaultData['title'] = $this->title;
+        $defaultData['media'] = Media::whereIn('media_type', ['image', 'video'])->get();
+        $defaultData['media_type'] = 'image'; // or 'video' or get from DB/request
+
 
         return view($this->store_page, $defaultData);
     }

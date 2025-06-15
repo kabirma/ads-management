@@ -2,6 +2,7 @@
 
 @section('content')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     <style>
         #map {
             height: 500px;
@@ -347,8 +348,8 @@
                 /* background-color: #FFF; */
                 /* color: #968DF3; */
                 /* background: linear-gradient(to right, #1487b3, #38afc3);
-                                                                                                    -webkit-background-clip: text;
-                                                                                                    -webkit-text-fill-color: transparent; */
+                                                                                                                                                                                                                                                                                                -webkit-background-clip: text;
+                                                                                                                                                                                                                                                                                                -webkit-text-fill-color: transparent; */
 
         }
 
@@ -437,7 +438,7 @@
         }
 
         .left-side {
-            background: whitesmoke;
+            /* background: whitesmoke; */
             padding: 0px;
             border-radius: 0px 0px 10px 10px;
         }
@@ -539,11 +540,26 @@
             color: white;
         }
 
+        .card1 {
+            /* background: linear-gradient(to right, #1487b3, #38afc3) !important; */
+            background: linear-gradient(to right, #102840, #0d1a2f) !important;
+            color: white !important;
+        }
+
         .step.done:before {
             /* background-color: #968DF3; */
             background: linear-gradient(to right, #1487b3, #38afc3);
 
 
+        }
+
+
+        option {
+            /* background-color: transparent; */
+            /* or your page background */
+
+            color: #000;
+            /* change if needed */
         }
     </style>
     <!-- Dashboard Analytics Start -->
@@ -816,10 +832,14 @@
                                                         @endif
                                                     @endif
                                                 </div>
-                                                <button type="button" class="btn btn-primary primary-btn"
+                                                {{-- <button type="button" class="btn btn-primary primary-btn"
                                                     data-bs-toggle="modal" data-bs-target="#imageModal">
                                                     <i class="fa fa-image"></i> Choose Media
+                                                </button> --}}
+                                                <button id="openMediaModal" class="btn btn-primary primary-btn">
+                                                    <i class="fa fa-image"></i> Open Media Modal
                                                 </button>
+
                                                 <input type="hidden" id="selectedMedia" name="media"
                                                     value="{{ isset($media) ? $media : '' }}">
                                                 <input type="hidden" id="selectedType" name="media_type"
@@ -856,11 +876,20 @@
                                                                     {{ __('messages.AISuggested') }})</small>
                                                             @endif
                                                         </label>
+
+                                                        @php
+                                                            $combinedDates = $start_date . ' to ' . $end_date;
+                                                        @endphp
+                                                        {{-- @dd($combinedDates) --}}
+
                                                         <input id="dates" name="dates" type="text"
-                                                            class="form-control">
+                                                            class="form-control" value="{{ $combinedDates }}">
+
+                                                        {{-- <input id="dates" name="dates" type="text"
+                                                            class="form-control"> --}}
                                                     </div>
                                                     <div class="form-group col-md-12">
-                                                        <label for="budget">
+                                                        <label for="budget" class="text-white">
                                                             {{ __('messages.Budget') }}
                                                             @if (isset($ai_sugguested) && $ai_sugguested == 1)
                                                                 <small class="ai-suggestion">(<i
@@ -868,9 +897,32 @@
                                                                     {{ __('messages.AISuggested') }})</small>
                                                             @endif
                                                         </label>
+
+                                                        <p class="text-white my-2"> you can set your budget
+                                                            <span class="text-success">{{ $budget }} SAR</span>
+                                                        </p>
+
+                                                        @php
+                                                            $min = null;
+                                                            $max = null;
+
+                                                            if (!empty($budget)) {
+                                                                if (strpos($budget, '-') !== false) {
+                                                                    [$min, $max] = explode('-', $budget);
+                                                                } else {
+                                                                    $min = $budget;
+                                                                    $max = ''; // Leave max open (optional)
+                                                                }
+                                                            }
+                                                        @endphp
+
+
                                                         <input id="budget" name="budget"
-                                                            @if (isset($budget)) value="{{ $budget }}" @endif
-                                                            type="number" class="form-control">
+                                                            @if (isset($budget)) value="{{ $min }}" @endif
+                                                            type="number" class="form-control"
+                                                            min="{{ $min }}" {{ $max !== '' ? "max=$max" : '' }}
+                                                            value="{{ old('min_budget', $min) }}">
+
                                                     </div>
                                                 </div>
                                                 <div id="recommendedBudget" class="budgetType">
@@ -944,26 +996,31 @@
                                         <div class="titleRow row">
                                             <div class="col-md-12">
                                                 <div class="mb-2 col-md-12">
-                                                    <label for="language">{{ __('messages.Language') }} </label><br>
+                                                    <label for="language"
+                                                        class="text-white">{{ __('messages.Language') }} </label><br>
                                                     <br>
-                                                    <label for="english">
-                                                        <input type="checkbox" name="language[]"
+                                                    <label for="english" class="text-white">
+                                                        <input type="checkbox" class="text-white" name="language[]"
                                                             @if (isset($language) && in_array('english', $language)) checked @endif
                                                             value="english"> English
                                                     </label>
                                                     <br>
-                                                    <label for="english">
-                                                        <input type="checkbox" name="language[]"
+                                                    <label for="english" class="text-white">
+                                                        <input type="checkbox" class="text-white" name="language[]"
                                                             @if (isset($language) && in_array('arabic', $language)) checked @endif
                                                             value="arabic"> عربي
                                                     </label>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label for="gender">{{ __('messages.Gender') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
-                                                                class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
-                                                                {{ __('messages.AISuggested') }})</small> @endif
+                                                    <label for="gender" class="text-white">{{ __('messages.Gender') }}
+                                                        @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                            <small class="ai-suggestion">(<i
+                                                                    class="fa-solid fa-robot"></i>
+                                                                {{ __('messages.AISuggested') }})</small>
+                                                        @endif
                                                     </label>
-                                                    <select name="gender" id="gender" class="form-control">
+                                                    <select name="gender" id="gender"
+                                                        class="form-control form-select">
                                                         <option @if (isset($gender) && strtolower($gender) == 'male') selected @else @endif
                                                             value="Male">{{ __('messages.Male') }}</option>
                                                         <option @if (isset($gender) && strtolower($gender) == 'female') selected @else @endif
@@ -973,7 +1030,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label for="age_group">{{ __('messages.AgeGroup') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
+                                                    <label for="age_group"
+                                                        class="text-white">{{ __('messages.AgeGroup') }} @if (isset($ai_sugguested) && $ai_sugguested == 1) <small
                                                                 class="ai-suggestion">(<i class="fa-solid fa-robot"></i>
                                                                 {{ __('messages.AISuggested') }})</small> @endif
                                                     </label>
@@ -1021,12 +1079,12 @@
                                         </div>
                                         <div class="titleRow row">
                                             <div class="col-md-8 right-side">
-                                                <div class="card">
+                                                <div class="card card1">
                                                     <h3>{{ __('messages.AdCreativity') }}</h3>
                                                     <div id="mediaValue"></div>
                                                 </div>
 
-                                                <div class="card">
+                                                <div class="card card1">
                                                     <h3>{{ __('messages.CampaignDetails') }}</h3>
                                                     <p><strong>{{ __('messages.CampaignType') }}:</strong> <span
                                                             id="goalValue"></span></p>
@@ -1034,7 +1092,7 @@
                                                         {{ $campaignName }}</p>
                                                 </div>
 
-                                                <div class="card">
+                                                <div class="card card1">
                                                     <h3>{{ __('messages.Audience') }}</h3>
                                                     <p><strong>{{ __('messages.Locations') }}:</strong> <span
                                                             id="locationValue"></span></p>
@@ -1053,8 +1111,8 @@
                                                     <h2>00 SAR</h2>
                                                 </div>
 
-                                                <div class="card">
-                                                    <h3>{{ __('messages.CampaignSummary') }}</h3>
+                                                <div class="card card1">
+                                                    <h3 class="text-white">{{ __('messages.CampaignSummary') }}</h3>
                                                     <p><strong>{{ __('messages.Duration') }}:</strong> <span
                                                             id="datesValue"></span></p>
                                                     <p><strong>{{ __('messages.DailyBudget') }}:</strong> <span
@@ -1063,8 +1121,9 @@
                                                             id="budgetValue"></span> SAR</p>
                                                 </div>
 
-                                                <div class="card">
-                                                    <h3>{{ __('messages.EstimatedCampaignPerformance') }}</h3>
+                                                <div class="card card1">
+                                                    <h3 class="text-white">
+                                                        {{ __('messages.EstimatedCampaignPerformance') }}</h3>
                                                     <p><strong>{{ __('messages.Reach') }}:</strong> <span
                                                             id="reach"></span></p>
                                                     <p><strong>{{ __('messages.IMPRESSION') }}:</strong> <span
@@ -1101,12 +1160,110 @@
         </div>
         <input type="hidden" value="0" id="draftId">
     </section>
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content card1">
+                <form id="imageForm">
+                    <div class="modal-header">
+                        <div class="row w-100">
+                            <div class="col-md-6">
+                                <h5 class="modal-title" id="imageModalLabel">Choose Your Media</h5>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <a href="{{ route('add.media') }}" class="btn btn-secondary primary-btn btn-sm">
+                                    <i class="fa fa-plus"></i> Upload Media
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row g-3">
+                            @foreach ($media as $item)
+                                <div class="col-4">
+                                    <label class="image-radio w-100">
+                                        <input type="radio" name="image" value="{{ $item->media }}"
+                                            data-path="{{ asset($item->media) }}" data-type="{{ $item->media_type }}">
+
+                                        @if ($item->type === 'video')
+                                            <video class="img-fluid" controls>
+                                                <source src="{{ asset($item->media) }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        @else
+                                            <img src="{{ asset($item->path) }}" class="img-fluid"
+                                                alt="{{ $item->name }}">
+                                        @endif
+
+                                        <div>
+                                            {{ $item->name }}<br>
+                                            Resolution: {{ $item->resolution ?? 'N/A' }}
+                                        </div>
+                                    </label>
+                                </div>
+                            @endforeach
+
+                            {{-- <div class="col-4">
+                                <label class="image-radio w-100">
+                                    <input type="radio" name="image" value="storage/images/gallery/sample1.png"
+                                        data-path="https://www.sahllah.net/storage/images/gallery/sample1.png"
+                                        data-type="image">
+                                    <img src="https://www.sahllah.net/storage/images/gallery/sample1.png"
+                                        class="img-fluid" alt="Sample 1">
+                                    <div>Resolution: 1024 x 1024</div>
+                                </label>
+                            </div> --}}
+
+                            <!-- Add more as needed -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success primary-btn ">Select</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Dashboard Analytics end -->
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <!-- Bootstrap Bundle JS (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('openMediaModal').addEventListener('click', function() {
+            const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+            modal.show();
+        });
+    </script>
+
+    <script>
+        document.getElementById('imageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const selected = document.querySelector('input[name="image"]:checked');
+
+            if (selected) {
+                const mediaPath = selected.getAttribute('data-path');
+                const mediaType = selected.getAttribute('data-type');
+
+                document.getElementById('selectedMedia').value = mediaPath;
+                document.getElementById('selectedType').value = mediaType;
+
+                // Close modal (Bootstrap 5)
+                const modal = bootstrap.Modal.getInstance(document.getElementById('imageModal'));
+                modal.hide();
+            } else {
+                alert("Please select a media item.");
+            }
+        });
+    </script>
 
     <script>
         function fillSpansFromSerialized(serializedStr) {

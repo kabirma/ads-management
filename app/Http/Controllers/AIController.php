@@ -369,6 +369,7 @@ class AIController extends Controller
         $campaign->best_platform = $data['best_platform'];
         $campaign->worst_platform = $data['worst_platform'];
         $campaign->previous_budget = $data['previous_budget'] ?? '0.00';
+
         $campaign->campaign_duration = $duration;
 
         // Clean AI-generated strings
@@ -377,6 +378,8 @@ class AIController extends Controller
         $campaign->ai_description = $clean($data['ai_description'] ?? '');
         $campaign->ai_platform = $clean($data['ai_platform'] ?? 'Not set');
         $campaign->ai_values = $clean($data['ai_values'] ?? '', true);
+        $campaign->start_date = $startDate->toDateString();
+        $campaign->end_date = $endDate->toDateString();
 
         $campaign->save();
 
