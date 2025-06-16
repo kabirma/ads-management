@@ -24,10 +24,6 @@
                             {{__('messages.List')}}</span></li>
                         </ol>
 
-                        <a href="{{ route('add.draft') }}" class="btn btn-sm btn-primary waves-effect">
-                            <i class="fa fa-plus"></i> <span>{{__('messages.New')}} {{ $title }}</span>
-                        </a>
-
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard" style="padding-top: 0px;">

@@ -915,13 +915,13 @@
                                                         <br>
                                                         <label for="english">
                                                             <input type="checkbox" name="language[]"
-                                                                @if (isset($language) && in_array('english', $language)) checked @endif
+                                                                @if (isset($language) && count($language) > 0 && in_array('english', $language)) checked @endif
                                                                 value="english"> English
                                                         </label>
                                                         <br>
                                                         <label for="english">
                                                             <input type="checkbox" name="language[]"
-                                                                @if (isset($language) && in_array('arabic', $language)) checked @endif
+                                                                @if (isset($language) && count($language) > 0 && in_array('arabic', $language)) checked @endif
                                                                 value="arabic"> عربي
                                                         </label>
                                                     </div>
