@@ -59,7 +59,10 @@
                                     <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <button type="button" class="get-started-btn primary-btn">Get Started <img
+                                    <button type="button" class="get-started-btn primary-btn"
+                                        onclick="window.location.href='{{ route('login') }}'">
+
+                                        Get Started <img
                                             src="{{ asset('assets/front_new/images/getstarted-btn-arrow.png') }}"
                                             alt="">
                                     </button>

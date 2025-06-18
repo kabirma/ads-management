@@ -348,8 +348,8 @@
                 /* background-color: #FFF; */
                 /* color: #968DF3; */
                 /* background: linear-gradient(to right, #1487b3, #38afc3);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-background-clip: text;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-text-fill-color: transparent; */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -webkit-background-clip: text;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -webkit-text-fill-color: transparent; */
 
         }
 
@@ -869,9 +869,9 @@
 
                                             <li class='snapchat_goal'>
                                                 <input class="text-white" type="radio" name="goal"
-                                                    value="App Promotion" id="sc5"
+                                                    value="App Promotion" id="sc2"
                                                     @if (isset($goal) && $goal == 'App Promotion') checked @endif />
-                                                <label for="sc5">
+                                                <label for="sc2">
                                                     <h4 class="text-white">📱 <span>App Promotion</span></h4>
                                                     <p class="text-white">Conversion</p>
                                                 </label>
@@ -879,9 +879,9 @@
 
                                             <li class='snapchat_goal'>
                                                 <input class="text-white" type="radio" name="goal"
-                                                    value="Lead Generation" id="sc6"
+                                                    value="Lead Generation" id="sc3"
                                                     @if (isset($goal) && $goal == 'Lead Generation') checked @endif />
-                                                <label for="sc6">
+                                                <label for="sc3">
                                                     <h4 class="text-white">📝 <span>Lead Generation</span></h4>
                                                     <p class="text-white">Conversion</p>
                                                 </label>
@@ -889,8 +889,8 @@
 
                                             <li class='snapchat_goal'>
                                                 <input class="text-white" type="radio" name="goal" value="Sales"
-                                                    id="sc7" @if (isset($goal) && $goal == 'Sales') checked @endif />
-                                                <label for="sc7">
+                                                    id="sc3" @if (isset($goal) && $goal == 'Sales') checked @endif />
+                                                <label for="sc3">
                                                     <h4 class="text-white">💳 <span>Sales</span></h4>
                                                     <p class="text-white">Conversion</p>
                                                 </label>
@@ -899,6 +899,69 @@
                                         </ul>
                                     </div>
 
+                                    {{-- <div class="col-md-12 steps" id="step3">
+                                        <div class="step-heading">
+                                            <h2>{{ __('messages.Goal') }}</h2>
+                                        </div>
+
+                                        <ul id="imageRadio">
+                                            <li class='tiktok_goal'><input class="text-white"
+                                                    @if (isset($goal)) @if ($goal == 'TRAFFIC') checked @endif
+                                                @else @endif type="radio" name="goal"
+                                                value="TRAFFIC" id="tk1" />
+                                                <label for="tk1"> <img
+                                                        src="{{ asset('front/images/cost-per-click.png') }}"
+                                                        alt="">
+                                                    <h4 class="text-white">{{ __('messages.WebsiteTraffic') }}</h4>
+                                                    <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
+                                                </label>
+                                            </li>
+                                            <li class='tiktok_goal'><input class="text-white"
+                                                    @if (isset($goal)) @if ($goal == 'LEAD_GENERATION') checked @endif
+                                                @else @endif type="radio" name="goal"
+                                                value="LEAD_GENERATION" id="tk2" />
+                                                <label for="tk2"> <img
+                                                        src="{{ asset('front/images/video-chat.png') }}" alt="">
+                                                    <h4 class="text-white">{{ __('messages.Reach') }}</h4>
+                                                    <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
+                                                </label>
+                                            </li>
+
+                                            <li class='snapchat_goal'><input class="text-white"
+                                                    @if (isset($goal)) @if ($goal == 'WEB_CONVERSION') checked @endif
+                                                @else @endif type="radio" name="goal"
+                                                value="WEB_CONVERSION" id="sc1" />
+                                                <label for="sc1"> <img
+                                                        src="{{ asset('front/images/cost-per-click.png') }}"
+                                                        alt="">
+                                                    <h4 class="text-white">{{ __('messages.WebsiteTraffic') }}</h4>
+                                                    <p>{{ __('messages.GetMoreWebsiteVisits') }}</p>
+                                                </label>
+                                            </li>
+                                            <li class='snapchat_goal'><input class="text-white"
+                                                    @if (isset($goal)) @if ($goal == 'ENGAGEMENT') checked @endif
+                                                @else @endif type="radio" name="goal"
+                                                value="ENGAGEMENT" id="sc2" />
+                                                <label for="sc2"> <img
+                                                        src="{{ asset('front/images/video-chat.png') }}" alt="">
+                                                    <h4 class="text-white">{{ __('messages.Reach') }}</h4>
+                                                    <p>{{ __('messages.IncreaseTheOverallReach') }}</p>
+                                                </label>
+                                            </li>
+
+                                            <li class='snapchat_goal'><input class="text-white"
+                                                    @if (isset($goal)) @if ($goal == 'BRAND_AWARENESS') checked @endif
+                                                @else @endif type="radio" name="goal"
+                                                value="BRAND_AWARENESS " id="sc3" />
+                                                <label for="sc3"> <img src="{{ asset('front/images/web.png') }}"
+                                                        alt="">
+                                                    <h4 class="text-white">{{ __('messages.BrandPromotion') }}</h4>
+                                                    <p>{{ __('messages.IncreaseBrandAwareness') }}</p>
+                                                </label>
+                                            </li>
+
+                                        </ul>
+                                    </div> --}}
 
                                     <div class="col-md-12 steps" id="step4">
                                         <div class="step-heading">
@@ -939,10 +1002,9 @@
                                                     <ul class="nav nav-pills justify-content-center mb-4 pricing-tab"
                                                         id="pricingTab" role="tablist">
                                                         <li class="nav-item" role="presentation">
-                                                            <button class="nav-link active btn primary-btn "
-                                                                id="monthly-tab" data-bs-toggle="pill"
-                                                                data-bs-target="#monthly" type="button"
-                                                                role="tab">Impression</button>
+                                                            <button class="nav-link active primary-btn " id="monthly-tab"
+                                                                data-bs-toggle="pill" data-bs-target="#monthly"
+                                                                type="button" role="tab">Impression</button>
                                                         </li>
                                                         <li class="nav-item" role="presentation">
                                                             <button class="nav-link btn-primary primary-btn"
@@ -1016,7 +1078,7 @@
 
 
                                                         <!-- file upload -->
-                                                        {{-- <div
+                                                        <div
                                                             class="attachment-preview mb-3 d-flex justify-content-between align-items-center">
                                                             <div>
                                                                 <p class="text-white mb-0">whbc0clgv-anfbfyu9n6na.png
@@ -1027,12 +1089,22 @@
                                                                 class="btn btn-sm btn-link text-white p-0 ms-3">
                                                                 <i class="fas fa-times"></i> <!-- Font Awesome icon -->
                                                             </button>
-                                                        </div> --}}
+                                                        </div>
 
 
                                                         <hr class="w-100">
                                                         <!-- attachment title -->
                                                         <div class="mb-3">
+                                                            {{-- <label for="attachment-title"
+                                                                class="form-label fw-bold">Attachment</label>
+                                                            <span class="text-white" style="margin-top: -10px;">Add an
+                                                                Attachment for a more enginering add</span>
+                                                            <div class="attachment-details mb-3 d-flex justify-content-center align-items-center border border-white"
+                                                                style="height: 40px;">
+                                                                <span id="websiteTrigger" class="text-white"
+                                                                    style="cursor: pointer;">Website</span>
+                                                            </div> --}}
+
                                                             <h2 class="text-white">Select a Social Media Platform</h2>
 
                                                             <label for="social-platform">Choose a platform:</label>
@@ -1123,73 +1195,150 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-
-                                                <div class="text-center mb-4">
-                                                    <h5 class="text-white">Media Preview</h5>
-                                                    <div id="mediaPreview">
-                                                        {{-- <img src="https://via.placeholder.com/200x400?text=Media+Preview"
-                                                            alt="Media Preview" class="img-fluid rounded" /> --}}
-                                                    </div>
+                                                <div class="preview-section">
+                                                    <h3>Ad Preview</h3>
+                                                    <img src="https://via.placeholder.com/200x400?text=Ad+Preview"
+                                                        alt="Ad Preview" class="img-fluid rounded mb-3" />
+                                                    <div class="button-more btn btn-outline-primary w-100">More</div>
                                                 </div>
-
 
                                                 <div class="mb-3">
-                                                    <label class="form-label fw-bold">Attachment</label>
-                                                    <span class="text-white d-block mb-2">Add an attachment for a more
-                                                        engaging ad</span>
-
-                                                    <!-- Upload Button -->
-                                                    <div class="attachment-buttons d-flex gap-2">
-                                                        <button type="button" class="btn btn-success primary-btn  w-100"
-                                                            onclick="document.getElementById('mediaInput').click()">
-                                                            Upload Image or Video
-                                                        </button>
+                                                    <label for="attachment-title"
+                                                        class="form-label fw-bold">Attachment</label>
+                                                    <span class="text-white" style="margin-top: -10px;">Add an
+                                                        Attachment for a more enginering add</span>
+                                                    <div class="attachment-details mb-3 d-flex justify-content-center align-items-center border border-white"
+                                                        style="height: 40px;">
+                                                        <span id="websiteTrigger" class="text-white"
+                                                            style="cursor: pointer;">Website</span>
                                                     </div>
 
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="mediaInput" accept="image/*,video/*"
-                                                        style="display: none;" onchange="previewMediaFile(event)" />
                                                 </div>
-
-
-                                                <script>
-                                                    function previewMediaFile(event) {
-                                                        const file = event.target.files[0];
-                                                        if (!file) return;
-
-                                                        const previewContainer = document.getElementById('mediaPreview');
-                                                        const placeholder = 'https://via.placeholder.com/200x400?text=Media+Preview';
-
-                                                        // Clear preview area
-                                                        previewContainer.innerHTML = '';
-
-                                                        if (file.type.startsWith("image/")) {
-                                                            const reader = new FileReader();
-                                                            reader.onload = e => {
-                                                                previewContainer.innerHTML =
-                                                                    `<img src="${e.target.result}" class="img-fluid rounded" alt="Image Preview" />`;
-                                                            };
-                                                            reader.readAsDataURL(file);
-                                                        } else if (file.type.startsWith("video/")) {
-                                                            const videoURL = URL.createObjectURL(file);
-                                                            previewContainer.innerHTML =
-                                                                `<video controls class="img-fluid rounded" width="100%">
-                                                                    <source src="${videoURL}" type="${file.type}">
-                                                                    Your browser does not support the video tag.
-                                                                 </video>`;
-                                                        } else {
-                                                            previewContainer.innerHTML =
-                                                                `<img src="${placeholder}" class="img-fluid rounded" alt="Unsupported file" />`;
-                                                            alert("Unsupported file type. Please upload an image or video.");
-                                                        }
-                                                    }
-                                                </script>
-
-
                                             </div>
                                         </div>
 
                                     </div>
+
+                                    {{-- <div class="col-md-12 steps" id="step5">
+                                        <div class="step-heading">
+                                            <h2>{{ __('messages.UploadMedia') }}</h2>
+                                        </div>
+                                        <div class="titleRow">
+
+                                            <div class="form-group col-md-12 text-center">
+                                                <div id="mediaArea" class="mb-2">
+                                                    @if (isset($media) && isset($media_type))
+                                                        @if ($media_type == '1')
+                                                            <img src="{{ asset($media) }}" height="200">
+                                                        @else
+                                                            <video width="320" height="240" controls>
+                                                                <source src="{{ asset($media) }}" type="video/mp4">
+                                                                Your browser does not support the video tag.
+                                                            </video>
+                                                        @endif
+                                                    @endif
+                                                </div>
+
+                                                <button id="openMediaModal" class="btn btn-primary primary-btn">
+                                                    <i class="fa fa-image"></i> Open Media Modal
+                                                </button>
+
+                                                <input type="hidden" id="selectedMedia" name="media"
+                                                    value="{{ isset($media) ? $media : '' }}">
+                                                <input type="hidden" id="selectedType" name="media_type"
+                                                    value="{{ isset($media_type) ? $media_type : '' }}">
+                                            </div>
+                                        </div>
+                                    </div> --}}
+
+                                    {{-- <div class="col-md-12 steps" id="step5">
+                                        <div class="step-heading">
+                                            <h2>{{ __('messages.ChooseDemographic&Location') }}</h2>
+                                        </div>
+                                        <div class="titleRow row">
+                                            <div class="col-md-12">
+                                                <div class="mb-2 col-md-12">
+                                                    <label for="language"
+                                                        class="text-white">{{ __('messages.Language') }}
+                                                    </label><br>
+                                                    <br>
+                                                    <label for="english" class="text-white">
+                                                        <input type="checkbox" class="text-white" name="language[]"
+                                                            @if (isset($language) && in_array('english', $language)) checked @endif
+                                                            value="english">
+                                                        English
+                                                    </label>
+                                                    <br>
+                                                    <label for="english" class="text-white">
+                                                        <input type="checkbox" class="text-white" name="language[]"
+                                                            @if (isset($language) && in_array('arabic', $language)) checked @endif
+                                                            value="arabic">
+                                                        عربي
+                                                    </label>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="gender" class="text-white">{{ __('messages.Gender') }}
+                                                        @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                            <small class="ai-suggestion">(<i
+                                                                    class="fa-solid fa-robot"></i>
+                                                                {{ __('messages.AISuggested') }})</small>
+                                                        @endif
+                                                    </label>
+                                                    <select name="gender" id="gender"
+                                                        class="form-control form-select">
+                                                        <option @if (isset($gender) && strtolower($gender) == 'male') selected @else @endif
+                                                            value="Male">{{ __('messages.Male') }}</option>
+                                                        <option @if (isset($gender) && strtolower($gender) == 'female') selected @else @endif
+                                                            value="Female">{{ __('messages.Female') }}</option>
+                                                        <option @if (isset($gender) && strtolower($gender) == 'both') selected @else @endif
+                                                            value="Both">{{ __('messages.Both') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="age_group"
+                                                        class="text-white">{{ __('messages.AgeGroup') }}
+                                                        @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                            <small class="ai-suggestion">(<i
+                                                                    class="fa-solid fa-robot"></i>
+                                                                {{ __('messages.AISuggested') }})</small>
+                                                        @endif
+                                                    </label>
+                                                    <select name="age_group" id="age_group" class="form-control">
+                                                        <option @if (isset($age) && strtolower($age) == '18') selected @else @endif
+                                                            value="18">{{ __('messages.MaxAge18') }}</option>
+                                                        <option @if (isset($age) && strtolower($age) == '30') selected @else @endif
+                                                            value="30">{{ __('messages.MaxAge30') }}</option>
+                                                        <option @if (isset($age) && strtolower($age) == '0') selected @else @endif
+                                                            value="0">{{ __('messages.AnyAge') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="location">{{ __('messages.Locations') }}</label>
+                                                    <select name="location" id="locationSelect"
+                                                        class="form-control select2">
+                                                        <option value="">{{ __('messages.SelectCountry') }}
+                                                        </option>
+                                                        <option value="SA" selected>{{ __('messages.SaudiArabia') }}
+                                                        </option>
+                                                        <option value="AE">{{ __('messages.UnitedArabEmirates') }}
+                                                        </option>
+                                                        <option value="QA">{{ __('messages.Qatar') }}</option>
+                                                        <option value="BH">{{ __('messages.Bahrain') }}</option>
+                                                        <option value="KW">{{ __('messages.Kuwait') }}</option>
+                                                        <option value="OM">{{ __('messages.Oman') }}</option>
+                                                        <option value="YE">{{ __('messages.Yemen') }}</option>
+                                                        <option value="IQ">{{ __('messages.Iraq') }}</option>
+                                                        <option value="SY">{{ __('messages.Syria') }}</option>
+                                                        <option value="LB">{{ __('messages.Lebanon') }}</option>
+                                                        <option value="JO">{{ __('messages.Jordan') }}</option>
+                                                        <option value="PS">{{ __('messages.Palestine') }}</option>
+                                                        <option value="EG">{{ __('messages.Egypt') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div> --}}
                                     <div class="col-md-12 steps" id="step5">
                                         <div class="step-heading">
                                             <h2>{{ __('messages.ChooseDemographic&Location') }}</h2>
@@ -1240,8 +1389,6 @@
                                                 <div class="mb-3 row">
                                                     <label>State</label>
                                                     <div>
-                                                        {{-- <select class="form-select form-control" id="state-select"
-                                                            disabled multiple="multiple"> --}}
                                                         <select class="form-select form-control" id="state-select"
                                                             disabled>
                                                             <option value="">-- Select State/City --</option>
@@ -1250,7 +1397,7 @@
 
                                                 </div>
 
-
+                                                <!-- Age -->
                                                 <div class="mb-3 row">
                                                     <label>Age</label>
                                                     @php
@@ -1262,11 +1409,10 @@
                                                             '35-44',
                                                             '45-54',
                                                             '55+',
-                                                            'Custom', // Add Custom option
                                                         ];
                                                     @endphp
+                                                    <div class="col-sm-9 d-flex flex-wrap" id="age-buttons">
 
-                                                    <div class="col-sm-9 d-flex flex-wrap " id="age-buttons">
                                                         @foreach ($ageRanges as $range)
                                                             <div class="select-button1 {{ isset($age) && $age === $range ? 'active' : '' }}"
                                                                 data-value="{{ $range }}">
@@ -1274,24 +1420,19 @@
                                                             </div>
                                                         @endforeach
 
-                                                        <!-- Hidden Custom Range Inputs -->
-                                                        <div id="custom-range-inputs"
-                                                            class="d-flex align-items-center gap-2 mt-2 d-none"
-                                                            style="display: none;">
-                                                            <input type="number" id="custom-min-age"
-                                                                class="form-control form-control-sm" placeholder="Min Age"
-                                                                min="0" />
-                                                            <span class="text-white">to</span>
-                                                            <input type="number" id="custom-max-age"
-                                                                class="form-control form-control-sm" placeholder="Max Age"
-                                                                min="0" />
-                                                        </div>
-
                                                         <input type="hidden" name="age" id="selected-age"
                                                             value="{{ $age ?? 'All' }}">
                                                     </div>
+                                                    {{-- <div class="col-sm-9 d-flex flex-wrap" id="age-buttons">
+                                                        <div class="select-button1 active" data-value="All">All</div>
+                                                        <div class="select-button1" data-value="13-17">13-17</div>
+                                                        <div class="select-button1" data-value="18-24">18-24</div>
+                                                        <div class="select-button1" data-value="25-34">25-34</div>
+                                                        <div class="select-button1" data-value="35-44">35-44</div>
+                                                        <div class="select-button1" data-value="45-54">45-54</div>
+                                                        <div class="select-button1" data-value="55+">55+</div>
+                                                    </div> --}}
                                                 </div>
-
 
                                                 <!-- Gender -->
                                                 <div class="mb-3 row">
@@ -1308,18 +1449,14 @@
                                                 <div class="mb-3 row">
                                                     <label>Languages</label>
                                                     <div>
-                                                        <select class="form-select" name="ad_language"
-                                                            id="language-select">
+                                                        <select class="form-select" id="language-select">
                                                             <option value="">Select Language</option>
-                                                            {{-- @foreach ($Languages as $lang)
+                                                            @foreach ($Languages as $lang)
                                                                 <option value="{{ $lang }}"
                                                                     {{ isset($language) && $language == $lang ? 'selected' : '' }}>
                                                                     {{ ucfirst($lang) }}
                                                                 </option>
-                                                            @endforeach --}}
-                                                            <option value="English">English</option>
-                                                            <option value="Arabic">Arabic</option>
-
+                                                            @endforeach
                                                         </select>
 
                                                     </div>
@@ -1341,7 +1478,7 @@
 
 
                                                 <div id="audience-panel" class="panel">
-                                                    <h4 class="text-white">Available Audience</h4>
+                                                    <h4>Available Audience</h4>
                                                     <p><strong id="audience-range" class="text-white">32,563,000 –
                                                             39,800,000</strong></p>
                                                     <p style="font-size: 14px; color: white;">
@@ -1352,11 +1489,93 @@
                                                     </p>
                                                 </div>
 
-                                                <button class="btn btn-primary primary-btn w-100"
+                                                <button class="btn btn-primary w-100"
                                                     onclick="submitAudience()">Continue</button>
                                             </div>
                                         </div>
+                                        {{-- <div class="titleRow row">
+                                            <div class="col-md-12">
+                                                <div class="mb-2 col-md-12">
+                                                    <label for="language"
+                                                        class="text-white">{{ __('messages.Language') }}
+                                                    </label><br>
+                                                    <br>
+                                                    <label for="english" class="text-white">
+                                                        <input type="checkbox" class="text-white" name="language[]"
+                                                            @if (isset($language) && in_array('english', $language)) checked @endif
+                                                            value="english">
+                                                        English
+                                                    </label>
+                                                    <br>
+                                                    <label for="english" class="text-white">
+                                                        <input type="checkbox" class="text-white" name="language[]"
+                                                            @if (isset($language) && in_array('arabic', $language)) checked @endif
+                                                            value="arabic">
+                                                        عربي
+                                                    </label>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="gender" class="text-white">{{ __('messages.Gender') }}
+                                                        @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                            <small class="ai-suggestion">(<i
+                                                                    class="fa-solid fa-robot"></i>
+                                                                {{ __('messages.AISuggested') }})</small>
+                                                        @endif
+                                                    </label>
+                                                    <select name="gender" id="gender"
+                                                        class="form-control form-select">
+                                                        <option @if (isset($gender) && strtolower($gender) == 'male') selected @else @endif
+                                                            value="Male">{{ __('messages.Male') }}</option>
+                                                        <option @if (isset($gender) && strtolower($gender) == 'female') selected @else @endif
+                                                            value="Female">{{ __('messages.Female') }}</option>
+                                                        <option @if (isset($gender) && strtolower($gender) == 'both') selected @else @endif
+                                                            value="Both">{{ __('messages.Both') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="age_group"
+                                                        class="text-white">{{ __('messages.AgeGroup') }}
+                                                        @if (isset($ai_sugguested) && $ai_sugguested == 1)
+                                                            <small class="ai-suggestion">(<i
+                                                                    class="fa-solid fa-robot"></i>
+                                                                {{ __('messages.AISuggested') }})</small>
+                                                        @endif
+                                                    </label>
+                                                    <select name="age_group" id="age_group" class="form-control">
+                                                        <option @if (isset($age) && strtolower($age) == '18') selected @else @endif
+                                                            value="18">{{ __('messages.MaxAge18') }}</option>
+                                                        <option @if (isset($age) && strtolower($age) == '30') selected @else @endif
+                                                            value="30">{{ __('messages.MaxAge30') }}</option>
+                                                        <option @if (isset($age) && strtolower($age) == '0') selected @else @endif
+                                                            value="0">{{ __('messages.AnyAge') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="location">{{ __('messages.Locations') }}</label>
+                                                    <select name="location" id="locationSelect"
+                                                        class="form-control select2">
+                                                        <option value="">{{ __('messages.SelectCountry') }}
+                                                        </option>
+                                                        <option value="SA" selected>{{ __('messages.SaudiArabia') }}
+                                                        </option>
+                                                        <option value="AE">{{ __('messages.UnitedArabEmirates') }}
+                                                        </option>
+                                                        <option value="QA">{{ __('messages.Qatar') }}</option>
+                                                        <option value="BH">{{ __('messages.Bahrain') }}</option>
+                                                        <option value="KW">{{ __('messages.Kuwait') }}</option>
+                                                        <option value="OM">{{ __('messages.Oman') }}</option>
+                                                        <option value="YE">{{ __('messages.Yemen') }}</option>
+                                                        <option value="IQ">{{ __('messages.Iraq') }}</option>
+                                                        <option value="SY">{{ __('messages.Syria') }}</option>
+                                                        <option value="LB">{{ __('messages.Lebanon') }}</option>
+                                                        <option value="JO">{{ __('messages.Jordan') }}</option>
+                                                        <option value="PS">{{ __('messages.Palestine') }}</option>
+                                                        <option value="EG">{{ __('messages.Egypt') }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
+                                        </div> --}}
                                     </div>
 
                                     <div class="col-md-12 steps" id="step6">
@@ -1429,6 +1648,15 @@
                                                                             {{ __('messages.AISuggested') }})</small>
                                                                     @endif
                                                                 </label>
+
+                                                                {{-- @php
+                                                                    $combinedDates = $start_date . ' to ' . $end_date;
+                                                                @endphp
+                                                                {{-- @dd($combinedDates) --}}
+
+                                                                {{-- <input id="dates" name="dates" type="text"
+                                                                    class="form-control" value="{{ $combinedDates }}"> --}}
+
                                                                 <div class="form-group col-md-12">
                                                                     <label class="text-white" for="campaign_start"> Start
                                                                         Date</label>
@@ -1704,35 +1932,6 @@
 
 
     <style>
-        @media screen and (max-width: 768px) {
-            .step-tabs {
-                width: 100% !important;
-                max-width: 100% !important;
-                display: none;
-            }
-
-            .step-tab {
-                width: 100% !important;
-            }
-
-            .step-icon {
-                width: 18px;
-                background-color: red !important;
-            }
-
-            .step-tab:not(:last-child)::after {
-                width: 90px !important;
-            }
-
-            .btn-group .btn {
-                width: 100% !important;
-                margin: 0px;
-                padding: 0px;
-                white-space: nowrap !important;
-                font-size: 14px;
-            }
-        }
-
         .form-select:disabled {
             background-color: #1c2a45;
         }
@@ -1748,25 +1947,16 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 13px;
-            color: #fff;
-            margin: 4px 8px 4px 0;
-            /* Added horizontal spacing between buttons */
-            background-color: transparent;
-            transition: all 0.3s ease;
-        }
-
-        .select-button1:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            /* Light hover effect */
+            color: white;
+            margin: 4px 0px 4px 0;
         }
 
         .select-button1.active {
-            background: linear-gradient(to right, #1487b3, #38afc3);
-            color: #fff;
+            background-color: #e8f0fe;
+            border-color: #1a73e8;
+            color: #1a73e8;
             font-weight: bold;
-            border-color: transparent;
         }
-
 
         .panel {
             /* background-color: #fff; */
@@ -1803,6 +1993,9 @@
     <!-- Bootstrap Bundle JS (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+
+    {{-- age section script --}}
+
     <script>
         let selectedAge = "All";
         let selectedGender = "All";
@@ -1810,30 +2003,12 @@
 
         function handleSelection(containerId, variableName) {
             const container = document.getElementById(containerId);
-            const customInputs = document.getElementById("custom-range-inputs");
-            const selectedAgeInput = document.getElementById("selected-age");
-
             container.querySelectorAll('.select-button1').forEach(button => {
                 button.addEventListener('click', () => {
-                    // Remove all actives
                     container.querySelectorAll('.select-button1').forEach(btn => btn.classList.remove(
                         'active'));
                     button.classList.add('active');
-
-                    const value = button.getAttribute('data-value');
-                    window[variableName] = value;
-
-                    if (containerId === "age-buttons") {
-                        if (value === "Custom") {
-                            customInputs.classList.remove('d-none');
-                            selectedAge = "";
-                            selectedAgeInput.value = "";
-                        } else {
-                            customInputs.classList.add('d-none');
-                            selectedAge = value;
-                            selectedAgeInput.value = value;
-                        }
-                    }
+                    window[variableName] = button.getAttribute('data-value');
                 });
             });
         }
@@ -1842,26 +2017,13 @@
         handleSelection("gender-buttons", "selectedGender");
         handleSelection("spending-buttons", "selectedSpending");
 
-        // Live update for custom age values
-        const minAgeInput = document.getElementById("custom-min-age");
-        const maxAgeInput = document.getElementById("custom-max-age");
+        function submitAudience() {
+            console.log("Selected Age:", selectedAge);
+            console.log("Selected Gender:", selectedGender);
+            console.log("Selected Spending Power:", selectedSpending);
 
-        function updateCustomAgeValue() {
-            const min = minAgeInput.value;
-            const max = maxAgeInput.value;
-            const selectedAgeInput = document.getElementById("selected-age");
-
-            if (min && max && Number(min) <= Number(max)) {
-                selectedAge = `${min}-${max}`;
-                selectedAgeInput.value = selectedAge;
-            } else {
-                selectedAge = "";
-                selectedAgeInput.value = "";
-            }
+            alert(`Age: ${selectedAge}\nGender: ${selectedGender}\nSpending Power: ${selectedSpending}`);
         }
-
-        minAgeInput.addEventListener('input', updateCustomAgeValue);
-        maxAgeInput.addEventListener('input', updateCustomAgeValue);
     </script>
 
     <script>
@@ -2870,10 +3032,7 @@
                 const country = countrySelect.value;
                 const state = stateSelect.value;
                 // const platform = "tiktok"; // Hardcoded as per original code
-                var currentSocialMedia = $("input[name='social_media']:checked").val()
-
-
-                const platform = @json($social_media ?? null) || currentSocialMedia;
+                const platform = @json($social_media); // Dynamically set from PHP
 
 
                 if (country && state && audienceRanges[country] && audienceRanges[country][state] && audienceRanges[
@@ -2889,17 +3048,6 @@
     </script>
 
     {{-- end  --}}
-
-    {{-- <script>
-        $(document).ready(function() {
-            $('#state-select').select2({
-                placeholder: "-- Select State/City --",
-                allowClear: true,
-                width: '100%' // This ensures Select2 respects Bootstrap's w-100
-            });
-        });
-    </script> --}}
-
 
     <script>
         document.getElementById('openMediaModal').addEventListener('click', function() {

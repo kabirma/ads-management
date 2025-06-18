@@ -1,4 +1,13 @@
       <!-- Sidebar -->
+
+
+      @php
+          $customerRoutes = ['view.customer', 'add.customer', 'edit.customer'];
+          $adsRoutes = ['add.ads', 'view.ads', 'edit.ads'];
+          $mediaRoutes = ['view.media', 'add.media', 'edit.media'];
+          $pageRoutes = ['view.page', 'add.page', 'edit.page'];
+      @endphp
+
       <nav class="col-md-2  sidebar" id="sidebarToggle">
           <div class="text-center mb-4 d-flex align-items-center">
               <img src=" {{ asset('assets/admin/img/icons/logo.png') }}" class="mb-2" alt="logo" />
@@ -20,9 +29,11 @@
                       Dashboard</a>
               </li>
 
+
+
               <li class=" nav-item ">
 
-                  <a class="nav-link {{ Route::currentRouteName() == 'view.customer' ? 'active' : '' }} "
+                  <a class="nav-link {{ in_array(Route::currentRouteName(), $customerRoutes) ? 'active' : '' }} "
                       href="{{ route('view.customer') }}">
                       <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
                           width="30px" height="30px" style="display:none;">
@@ -36,7 +47,7 @@
 
               <li class=" nav-item ">
 
-                  <a class="nav-link {{ Route::currentRouteName() == 'view.ads' ? 'active' : '' }} "
+                  <a class="nav-link {{ in_array(Route::currentRouteName(), $adsRoutes) ? 'active' : '' }} "
                       href="{{ route('view.ads') }}">
                       <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
                           width="30px" height="30px" style="display:none;">
@@ -49,7 +60,7 @@
               </li>
               <li class=" nav-item ">
 
-                  <a class="nav-link {{ Route::currentRouteName() == 'view.media' ? 'active' : '' }} "
+                  <a class="nav-link {{ in_array(Route::currentRouteName(), $mediaRoutes) ? 'active' : '' }} "
                       href="{{ route('view.media') }}">
                       <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
                           width="30px" height="30px" style="display:none;">
@@ -74,8 +85,8 @@
                       <img src=" {{ asset('assets/admin/img/icons/add-tools.png') }}" alt="">&nbsp; Add
                       Tools</a></li>
               <li class=" nav-item ">
-                  <a class="nav-link {{ Route::currentRouteName() == 'view.page' ? 'active' : '' }}"
-                      href="{{ route('view.page') }}">
+                <a class="nav-link {{ in_array(Route::currentRouteName(), $pageRoutes) ? 'active' : '' }} "
+                href="{{ route('view.page') }}">
                       <img src=" {{ asset('assets/admin/img/icons/sidebar-glow-icon.png') }}" class="sidebar-icon"
                           width="30px" height="30px" style="display:none;">
                       <i class="fa fa-pencil me-3"></i><span class="menu-title text-truncate"

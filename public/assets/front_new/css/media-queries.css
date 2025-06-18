@@ -1,106 +1,217 @@
 @media (max-width: 768px) {
-  .services-title {
-    font-size: 36px;
-  }
-  .service-right-circleimg img,
-  .service-lef-circleimg img {
-    display: none !important;
-  }
+    .services-title {
+        font-size: 36px;
+    }
+    .service-right-circleimg img,
+    .service-lef-circleimg img {
+        display: none !important;
+    }
+    .hero-section .hero-top-title p {
+        font-size: 20px;
+    }
+    .line-art {
+        margin-top: 90px;
+    }
 
+    .hero-topleft-btn button,
+    .hero-topright-btn button {
+        display: flex;
+        justify-content: center;
+        width: 100% !important;
+        white-space: nowrap;
+    }
+    .hero-topleft-btn,
+    .hero-topright-btn {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
 
-
-  .hero-topleft-btn button,
-  .hero-topright-btn button {
-    display: flex;
-    justify-content: center;
-    width: 100% !important;
-    white-space: nowrap;
-  }
-  .hero-topleft-btn,
-  .hero-topright-btn {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  .row > [class*="col-"] {
-    margin-bottom: 20px; 
-  }
-  .tittok-tool-main-btn {
-    display: flex;
-    justify-content: start !important;
-  }
-  .tittok-tool-main-btn button {
-    width: 100% !important;
-  }
-  .vision-hero-title{
-    margin: 0px;
-    display: flex;
-    text-align: center;
-  }
-  .about-service-contents .vision-hero-para{
-    margin: 0px !important;
-    width: 100% ;
-  }
-  .about-mission-contents .mission-hero-para{
-    margin-right: 10px !important;
-    width: 100% !important;
- 
-  }
-  .home-section .sn-venn-container{
-    width: 100% !important;
-    padding: 0px !important;
-    margin: 0px !important;
-  } 
-  .about-right-glow-img img,
-  .about-top-glow-img img,
-  .our-mission-glow-img img  {
-    display: none;
-  }
-  .sn-venn1{
-   top: 207px;
-  }
-.sn-venn2 {
-    bottom: 142px;
-    left: 178px;
-}
-  .sn-venn3 {
-    bottom: 139px;
-    right: 187px;
-}
-.sn-label1 {
-    top: 257px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.sn-label2 {
-    bottom: 189px;
-    left: 65px;
-}
-.sn-label3 {
-    bottom: 189px;
-    right: 73px;
-}
- .annual-card .card {
+    .row > [class*="col-"] {
         margin-bottom: 20px;
-      }
-      .main-heading h1 {
-        font-size: 2.25rem;
-      }
-
-      .info-box {
-        padding: 20px;
-      }
-
-      .btn {
+    }
+    .tittok-tool-main-btn {
+        display: flex;
+        justify-content: start !important;
+    }
+    .tittok-tool-main-btn button {
+        width: 100% !important;
+    }
+    .vision-hero-title {
+        margin: 0px;
+        display: flex;
+        text-align: center;
+    }
+    .about-service-contents .vision-hero-para {
+        margin: 0px !important;
         width: 100%;
-      }
-        .annual-card .col-md-4{
-          width: 100% !important;
-        }
+    }
+    .about-mission-contents .mission-hero-para {
+        margin-right: 10px !important;
+        width: 100% !important;
+    }
+    .home-section .sn-venn-container {
+        width: 100% !important;
+        padding: 0px !important;
+        margin: 0px !important;
+    }
+    .about-right-glow-img img,
+    .about-top-glow-img img,
+    .our-mission-glow-img img {
+        display: none;
+    }
+    .sn-title {
+        margin-top: 30px !important;
+        font-size: 26px;
+    }
+    .sn-subtitle {
+        text-align: justify;
+    }
+    .sn-venn1 {
+        top: 207px;
+    }
+    .sn-venn2 {
+        bottom: 142px;
+        left: 178px;
+    }
+    .sn-venn3 {
+        bottom: 139px;
+        right: 187px;
+    }
+    .sn-label1 {
+        top: 257px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .sn-label2 {
+        bottom: 189px;
+        left: 65px;
+    }
+    .sn-label3 {
+        bottom: 189px;
+        right: 73px;
+    }
+    .annual-card .card {
+        margin-bottom: 20px;
+    }
+    .main-heading h1 {
+        font-size: 2.25rem;
+    }
+
+    .info-box {
+        padding: 20px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+    .annual-card .col-md-4 {
+        width: 100% !important;
+    }
+    .about-service-img img {
+        margin-top: 4px !important;
+    }
+    .pricing-section {
+        margin-top: 20px !important;
+    }
+    .pricing-section .price-title {
+        font-size: 30px;
+    }
+    .annual-card .pricing-tab {
+        margin-top: 40px;
+        width: 100%;
+        height: auto;
+        padding: 5px !important;
+    }
+    #annual-custom-card {
+        margin: 0px !important;
+        width: 100% !important;
+    }
+    .info-box p {
+        text-align: justify;
+        letter-spacing: 100% !important;
+    }
+    .info-box-second-para {
+        text-align: normal;
+    }
+    .main-heading .join-us-heading {
+        font-size: 50px !important;
+    }
+    .info-leftcircle-glowimage img,
+    .join-rightcircle-glowimage img {
+        display: none;
+    }
+    .join-us-main-image img {
+        height: 601px;
+    }
+    .info-box {
+        margin-top: 200px !important;
+    }
+    .lighting-glowimage img {
+        left: -16px;
+    }
+    .info-box-btn .get-started {
+        margin-top: 20px;
+    }
+    .info-box button {
+        width: 100% !important;
+    }
+
+    .faq {
+        margin-top: 10px;
+    }
+    .faq button {
+        width: 100% !important;
+    }
+    .faq-section-wrapper .ask-question-btntwo {
+        margin-top: 20px !important;
+    }
+    .contact-hero-bg {
+        margin: 0px !important;
+    }
+    .contact-box {
+        width: 100% !important;
+    }
 }
 
-@media (max-width: 992px){
- .annual-card .col-md-4{
-          width: 100% !important;
-        }
+/* for 360px mobile screen */
+@media (max-width: 360px) {
+    .sn-venn1 {
+        width: 100%;
+        max-width: 125px;
+        top: 155px;
+    }
+    .sn-venn2 {
+        width: 100%;
+        max-width: 125px;
+        bottom: 110px;
+        left: 160px;
+    }
+    .sn-venn3 {
+        width: 100%;
+        max-width: 125px;
+        bottom: 110px;
+        right: 135px;
+    }
+    .sn-label1 {
+        top: 210px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .sn-label2 {
+        bottom: 169px;
+        left: 65px;
+    }
+    .sn-label3 {
+        bottom: 169px;
+        right: 49px;
+    }
+    .about-service-img img {
+        margin-top: 4px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .annual-card .col-md-4 {
+        width: 100% !important;
+    }
 }

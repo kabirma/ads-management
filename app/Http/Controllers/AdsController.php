@@ -229,6 +229,54 @@ class AdsController extends Controller
         $defaultData['media_type'] = 'image'; // or 'video' or get from DB/request
 
 
+        $Languages = [
+            'All',
+            'arabic',
+            'english',
+            'french',
+            'german',
+            'spanish',
+            'portuguese',
+            'russian',
+            'chinese',
+            'japanese',
+            'korean',
+            'hindi',
+            'urdu',
+            'turkish',
+            'italian',
+            'dutch',
+            'swedish',
+            'norwegian',
+            'finnish',
+            'danish',
+            'polish',
+            'thai',
+            'vietnamese',
+            'indonesian',
+            'malay',
+            'bengali',
+            'tamil',
+            'telugu',
+            'punjabi',
+            'greek',
+            'hebrew',
+            'persian',
+            'swahili',
+            'romanian',
+            'czech',
+            'slovak',
+            'ukrainian',
+            'hungarian',
+            'filipino',
+            'burmese',
+            'amharic',
+            'hausa',
+            'zulu',
+        ];
+        $defaultData['Languages'] = $Languages; // or 'video' or get from DB/request
+
+
         return view($this->store_page, $defaultData);
     }
 

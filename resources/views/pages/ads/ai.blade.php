@@ -70,7 +70,7 @@
                                         <div class="form-group col-md-6">
                                             <label class="text-white" for="used_platforms">Which platform were you
                                                 using?</label>
-                                            <select name="used_platforms" class="form-control " id="used_platforms">
+                                            <select name="used_platforms" class="form-control" id="used_platforms">
                                                 <option value="snapchat">Snapchat</option>
                                                 <option value="tiktok">TikTok</option>
                                             </select>
@@ -164,9 +164,11 @@
                                                 for="location">{{ __('messages.CampaignTarget') }}</label>
                                             {{-- <input type="text" class="form-control" name="target"
                                                 placeholder="{{ __('messages.CampaignTarget') }}" required> --}}
-                                            <select name="target" class="form-control" id="gender" required>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
+                                            <select name="gender" class="form-control" id="gender" required>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="All">All</option>
+
                                             </select>
 
                                         </div>
@@ -176,6 +178,17 @@
                                                 for="keywords">{{ __('messages.AdsKeywords') }}</label>
                                             <input type="text" class="form-control" id="tags-input" id="keywords"
                                                 name="keywords" placeholder="{{ __('messages.AdsKeywords') }}">
+                                        </div>
+                                        <div class="form-group col-md-6 my-2">
+                                            <label class="text-white"
+                                                for="location">{{ __('messages.CampaignTarget') }}</label>
+
+                                            <select name="language" class="form-control" id="language" required>
+                                                <option value="English">English</option>
+                                                <option value="Arabic">Arabic</option>
+                                            </select>
+
+
                                         </div>
 
                                     </div>

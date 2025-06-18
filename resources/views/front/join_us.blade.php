@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 @endsection
 
+<style>
+    .joinus-section {
+        overflow: hidden;
+    }
+</style>
+
 @section('content')
     <!-- Hero Section -->
 

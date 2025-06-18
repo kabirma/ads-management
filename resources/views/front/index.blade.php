@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 @endsection
 
+<style>
+    .home-section {
+        overflow: hidden;
+    }
+</style>
 @section('content')
     <section class="hero-section">
         <div class="hero-overlay"></div>

@@ -116,6 +116,9 @@
 </main>
 @include('admin.layouts.footer')
 
+<!-- jQuery -->
+
+<!-- Select2 JS -->
 
 
 <script>

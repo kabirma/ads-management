@@ -388,30 +388,61 @@ class AIController extends Controller
 
     public function generate(Request $request)
     {
+        // Check input for debugging
+        \Log::info('Request input: ' . json_encode($request->all(), JSON_UNESCAPED_UNICODE));
+
         $isFirst = $request->input('first_campaign') == 1;
+        $language = ucfirst(strtolower(trim($request->language))); // Normalize to "Arabic" or "English"
+        $gender = ucfirst(strtolower(trim($request->gender))); // e.g. "Male", "Female", "All"
+
+        // Validate language
+        if (!in_array($language, ['Arabic', 'English'])) {
+            \Log::error('Invalid language: ' . $language);
+            return response()->json(['error' => 'Invalid language'], 400);
+        }
+
+        if ($language === 'Arabic') {
+            $gender_ar = match ($gender) {
+                'Male' => 'ذكر',
+                'Female' => 'أنثى',
+                default => 'الكل',
+            };
+            $promptIntro = "الرجاء كتابة كل شيء باللغة العربية. الجمهور المستهدف هو: {$gender_ar}.\n\n";
+        } else {
+            $promptIntro = "Please write everything in English. Target gender: {$gender}.\n\n";
+        }
 
         if ($isFirst) {
-            $prompt = "Create an ad for the following campaign:\n\n" .
+            $prompt = $promptIntro .
+                ($language === 'Arabic' ? "قم بإنشاء إعلان للحملة التالية:\n\n" : "Create an ad for the following campaign:\n\n") .
                 "Business: {$request->business}\n" .
                 "Goal: {$request->campaignGoal}\n" .
                 "Platform: {$request->social_media}\n" .
                 "Budget Range: {$request->budgetRange}\n" .
-                "Target Audience: {$request->worst_platform}\n" .
+                "Target Audience Platform: {$request->worst_platform}\n" .
+                "Target Gender: {$gender}\n" .
                 "Keywords: {$request->keywords}\n\n" .
-                "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n";
+                "Return the response in this exact format, using English labels even for Arabic content:\n" .
+                "Title: [title, max 10 words]\n" .
+                "Description: [description, max 200 characters]\n" .
+                "Strategy: [strategy]\n";
         } else {
-            $prompt = "Improve a campaign based on past data:\n\n" .
+            $prompt = $promptIntro .
+                ($language === 'Arabic' ? "حسّن الحملة بناءً على البيانات السابقة:\n\n" : "Improve a campaign based on past data:\n\n") .
                 "Used Platforms: {$request->used_platforms}\n" .
                 "Best Platform: {$request->best_platform}\n" .
                 "Worst Platform: {$request->worst_platform}\n" .
                 "Budget: {$request->previous_budget}\n" .
                 "Dates: {$request->campaign_start} to {$request->campaign_end}\n" .
-                "Issue: {$request->comments}\n\n" .
-                "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n";
+                "Issue: {$request->comments}\n" .
+                "Target Gender: {$gender}\n\n" .
+                "Return the response in this exact format, using English labels even for Arabic content:\n" .
+                "Title: [title, max 10 words]\n" .
+                "Description: [description, max 200 characters]\n" .
+                "Strategy: [strategy]\n";
         }
 
-        // Call OpenAI (you need to configure your API key)
-
+        \Log::info('Prompt sent to API: ' . $prompt);
 
         $headers = [
             'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
@@ -426,26 +457,41 @@ class AIController extends Controller
             ->post($url, [
                 'model' => $model,
                 'messages' => [
-                    ['role' => 'system', 'content' => 'You are an expert digital marketer.'],
+                    ['role' => 'system', 'content' => 'You are an expert digital marketer specializing in Arabic and English campaigns. Follow the user prompt exactly, ensuring clear, professional output in the requested language. Always use English labels (Title, Description, Strategy) in the response format as instructed, even for Arabic content.'],
                     ['role' => 'user', 'content' => $prompt],
                 ],
                 'temperature' => 0.7,
             ]);
-        // $response = Http::withToken(env('OPENAI_API_KEY'))->post('https://api.openai.com/v1/chat/completions', [
-        //     'model' => 'gpt-4o',
-        //     'messages' => [
-        //         ['role' => 'system', 'content' => 'You are an expert digital marketer.'],
-        //         ['role' => 'user', 'content' => $prompt],
-        //     ],
-        //     'temperature' => 0.7,
-        // ]);
 
-        $text = $response['choices'][0]['message']['content'];
+        if ($response->successful()) {
+            $data = $response->json();
+            if (isset($data['choices'][0]['message']['content'])) {
+                $text = $data['choices'][0]['message']['content'];
+                \Log::info('Raw API response: ' . json_encode($text, JSON_UNESCAPED_UNICODE));
+            } else {
+                \Log::error('No content in API response: ' . json_encode($data));
+                return response()->json(['error' => 'No content returned from API'], 500);
+            }
+        } else {
+            \Log::error('API request failed: ' . $response->body());
+            return response()->json(['error' => 'API request failed'], 500);
+        }
 
-        // Very basic parsing (you can improve this)
-        preg_match('/Title:(.*?)\n/i', $text, $title);
-        preg_match('/Description:(.*?)\n/i', $text, $desc);
-        preg_match('/Strategy:(.*?)$/is', $text, $strategy);
+        // Parse response with English labels (case-insensitive, flexible spacing)
+        preg_match('/title\s*:\s*(.*?)\n/i', $text, $title);
+        preg_match('/description\s*:\s*(.*?)\n/i', $text, $desc);
+        preg_match('/strategy\s*:\s*(.*?)$/is', $text, $strategy);
+
+        // Fallback for Arabic labels
+        if ($language === 'Arabic') {
+            preg_match('/العنوان\s*:\s*(.*?)\n/ui', $text, $title_arabic);
+            preg_match('/الوصف\s*:\s*(.*?)\n/ui', $text, $desc_arabic);
+            preg_match('/الاستراتيجية\s*:\s*(.*?)$/uis', $text, $strategy_arabic);
+
+            $title = $title_arabic ?: $title;
+            $desc = $desc_arabic ?: $desc;
+            $strategy = $strategy_arabic ?: $strategy;
+        }
 
         return response()->json([
             'title' => trim($title[1] ?? 'Untitled'),
@@ -453,8 +499,241 @@ class AIController extends Controller
             'strategy' => trim($strategy[1] ?? 'No strategy'),
             'platform' => $request->social_media ?? $request->best_platform ?? 'Not set',
             'values' => $request->keywords ?? '',
-        ]);
+        ], 200, ['Content-Type' => 'application/json; charset=UTF-8']);
     }
+
+    // public function generate(Request $request)
+    // {
+
+    //     // dd(request()->all());
+    //     $isFirst = $request->input('first_campaign') == 1;
+
+    //     $language = ucfirst(strtolower(trim($request->language))); // normalize to "Arabic" or "English"
+    //     $gender = ucfirst(strtolower(trim($request->gender))); // e.g. "Male", "Female", "All"
+
+    //     if ($language === 'Arabic') {
+    //         $gender_ar = match ($gender) {
+    //             'Male' => 'ذكر',
+    //             'Female' => 'أنثى',
+    //             default => 'الكل',
+    //         };
+
+    //         $promptIntro = "الرجاء كتابة كل شيء باللغة العربية. الجمهور المستهدف هو: {$gender_ar}.\n\n";
+    //     } else {
+    //         $promptIntro = "Please write everything in English. Target gender: {$gender}.\n\n";
+    //     }
+
+    //     if ($isFirst) {
+    //         $prompt = $promptIntro .
+    //             ($language === 'Arabic' ? "قم بإنشاء إعلان للحملة التالية:\n\n" : "Create an ad for the following campaign:\n\n") .
+    //             "Business: {$request->business}\n" .
+    //             "Goal: {$request->campaignGoal}\n" .
+    //             "Platform: {$request->social_media}\n" .
+    //             "Budget Range: {$request->budgetRange}\n" .
+    //             "Target Audience Platform: {$request->worst_platform}\n" .
+    //             "Target Gender: {$gender}\n" .
+    //             "Keywords: {$request->keywords}\n\n" .
+    //             ($language === 'Arabic'
+    //                 ? "يرجى إنشاء ما يلي:\n- عنوان (بحد أقصى 10 كلمات)\n- وصف (بحد أقصى 200 حرف)\n- استراتيجية\n"
+    //                 : "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n"
+    //             );
+    //     } else {
+    //         $prompt = $promptIntro .
+    //             ($language === 'Arabic' ? "حسّن الحملة بناءً على البيانات السابقة:\n\n" : "Improve a campaign based on past data:\n\n") .
+    //             "Used Platforms: {$request->used_platforms}\n" .
+    //             "Best Platform: {$request->best_platform}\n" .
+    //             "Worst Platform: {$request->worst_platform}\n" .
+    //             "Budget: {$request->previous_budget}\n" .
+    //             "Dates: {$request->campaign_start} to {$request->campaign_end}\n" .
+    //             "Issue: {$request->comments}\n" .
+    //             "Target Gender: {$gender}\n\n" .
+    //             ($language === 'Arabic'
+    //                 ? "يرجى إنشاء ما يلي:\n- عنوان (بحد أقصى 10 كلمات)\n- وصف (بحد أقصى 200 حرف)\n- استراتيجية\n"
+    //                 : "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n"
+    //             );
+    //     }
+
+    //     $headers = [
+    //         'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+    //         'Content-Type' => 'application/json',
+    //     ];
+
+    //     $url = 'https://api.openai.com/v1/chat/completions';
+    //     $model = 'gpt-4o';
+
+    //     $response = Http::withOptions(['verify' => false])
+    //         ->withHeaders($headers)
+    //         ->post($url, [
+    //             'model' => $model,
+    //             'messages' => [
+    //                 ['role' => 'system', 'content' => 'You are an expert digital marketer specializing in Arabic and English campaigns. Follow the user prompt exactly, ensuring clear, professional output in the requested language.'],
+    //                 ['role' => 'user', 'content' => $prompt],
+    //             ],
+    //             'temperature' => 0.7,
+    //         ]);
+
+
+    //     $text = $response['choices'][0]['message']['content'];
+
+    //     // Very basic parsing (you can improve this)
+    //     preg_match('/Title:(.*?)\n/i', $text, $title);
+    //     preg_match('/Description:(.*?)\n/i', $text, $desc);
+    //     preg_match('/Strategy:(.*?)$/is', $text, $strategy);
+
+
+    //     if ($language === 'Arabic') {
+    //         preg_match('/العنوان\s*:\s*(.*?)\n/ui', $text, $title_arabic);
+    //         preg_match('/الوصف\s*:\s*(.*?)\n/ui', $text, $desc_arabic);
+    //         preg_match('/الاستراتيجية\s*:\s*(.*?)$/uis', $text, $strategy_arabic);
+
+    //         $title = $title_arabic ?: $title;
+    //         $desc = $desc_arabic ?: $desc;
+    //         $strategy = $strategy_arabic ?: $strategy;
+    //     }
+    //     return response()->json([
+    //         'title' => trim($title[1] ?? 'Untitled'),
+    //         'description' => trim($desc[1] ?? 'No description'),
+    //         'strategy' => trim($strategy[1] ?? 'No strategy'),
+    //         'platform' => $request->social_media ?? $request->best_platform ?? 'Not set',
+    //         'values' => $request->keywords ?? '',
+    //     ]);
+    // }
+    // public function generate(Request $request)
+    // {
+
+    //     // dd(request()->all());
+    //     $isFirst = $request->input('first_campaign') == 1;
+
+    //     $language = ucfirst(strtolower(trim($request->language))); // normalize to "Arabic" or "English"
+    //     $gender = ucfirst(strtolower(trim($request->gender))); // e.g. "Male", "Female", "All"
+
+    //     if ($language === 'Arabic') {
+    //         $gender_ar = match ($gender) {
+    //             'Male' => 'ذكر',
+    //             'Female' => 'أنثى',
+    //             default => 'الكل',
+    //         };
+
+    //         $promptIntro = "الرجاء كتابة كل شيء باللغة العربية. الجمهور المستهدف هو: {$gender_ar}.\n\n";
+    //     } else {
+    //         $promptIntro = "Please write everything in English. Target gender: {$gender}.\n\n";
+    //     }
+
+    //     if ($isFirst) {
+    //         $prompt = $promptIntro .
+    //             ($language === 'Arabic' ? "قم بإنشاء إعلان للحملة التالية:\n\n" : "Create an ad for the following campaign:\n\n") .
+    //             "Business: {$request->business}\n" .
+    //             "Goal: {$request->campaignGoal}\n" .
+    //             "Platform: {$request->social_media}\n" .
+    //             "Budget Range: {$request->budgetRange}\n" .
+    //             "Target Audience Platform: {$request->worst_platform}\n" .
+    //             "Target Gender: {$gender}\n" .
+    //             "Keywords: {$request->keywords}\n\n" .
+    //             ($language === 'Arabic'
+    //                 ? "يرجى إنشاء ما يلي:\n- عنوان (بحد أقصى 10 كلمات)\n- وصف (بحد أقصى 200 حرف)\n- استراتيجية\n"
+    //                 : "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n"
+    //             );
+    //     } else {
+    //         $prompt = $promptIntro .
+    //             ($language === 'Arabic' ? "حسّن الحملة بناءً على البيانات السابقة:\n\n" : "Improve a campaign based on past data:\n\n") .
+    //             "Used Platforms: {$request->used_platforms}\n" .
+    //             "Best Platform: {$request->best_platform}\n" .
+    //             "Worst Platform: {$request->worst_platform}\n" .
+    //             "Budget: {$request->previous_budget}\n" .
+    //             "Dates: {$request->campaign_start} to {$request->campaign_end}\n" .
+    //             "Issue: {$request->comments}\n" .
+    //             "Target Gender: {$gender}\n\n" .
+    //             ($language === 'Arabic'
+    //                 ? "يرجى إنشاء ما يلي:\n- عنوان (بحد أقصى 10 كلمات)\n- وصف (بحد أقصى 200 حرف)\n- استراتيجية\n"
+    //                 : "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n"
+    //             );
+    //     }
+
+    //     // if ($isFirst) {
+    //     //     $prompt = "Create an ad for the following campaign:\n\n" .
+    //     //         "Business: {$request->business}\n" .
+    //     //         "Goal: {$request->campaignGoal}\n" .
+    //     //         "Platform: {$request->social_media}\n" .
+    //     //         "Budget Range: {$request->budgetRange}\n" .
+    //     //         "Target Audience: {$request->worst_platform}\n" .
+    //     //         "Target Gender: {$gender}\n\n" .
+    //     //         "Keywords: {$request->keywords}\n\n" .
+    //     //         "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n";
+    //     // } else {
+    //     //     $prompt = "Improve a campaign based on past data:\n\n" .
+    //     //         "Used Platforms: {$request->used_platforms}\n" .
+    //     //         "Best Platform: {$request->best_platform}\n" .
+    //     //         "Worst Platform: {$request->worst_platform}\n" .
+    //     //         "Budget: {$request->previous_budget}\n" .
+    //     //         "Dates: {$request->campaign_start} to {$request->campaign_end}\n" .
+    //     //         "Issue: {$request->comments}\n\n" .
+    //     //         "Generate:\n- Title (max 10 words)\n- Description (max 200 characters)\n- Strategy\n";
+    //     // }
+
+    //     // if (!empty($request->language)) {
+    //     //     $prompt .= "\n\nPlease write the output in {$language}.";
+    //     // }
+
+
+    //     // Call OpenAI (you need to configure your API key)
+
+    //     // dd($prompt);
+    //     $headers = [
+    //         'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
+    //         'Content-Type' => 'application/json',
+    //     ];
+
+    //     $url = 'https://api.openai.com/v1/chat/completions';
+    //     $model = 'gpt-4o';
+
+    //     $response = Http::withOptions(['verify' => false])
+    //         ->withHeaders($headers)
+    //         ->post($url, [
+    //             'model' => $model,
+    //             'messages' => [
+    //                 // ['role' => 'system', 'content' => 'You are an expert digital marketer.'],
+    //                 // ['role' => 'system', 'content' => "You are a professional Arabic marketing expert."],
+
+    //                 // ['role' => 'user', 'content' => $prompt],
+    //                 ['role' => 'system', 'content' => 'You are an expert digital marketer specializing in Arabic and English campaigns. Follow the user prompt exactly, ensuring clear, professional output in the requested language.'],
+    //                 ['role' => 'user', 'content' => $prompt],
+    //             ],
+    //             'temperature' => 0.7,
+    //         ]);
+    //     // $response = Http::withToken(env('OPENAI_API_KEY'))->post('https://api.openai.com/v1/chat/completions', [
+    //     //     'model' => 'gpt-4o',
+    //     //     'messages' => [
+    //     //         ['role' => 'system', 'content' => 'You are an expert digital marketer.'],
+    //     //         ['role' => 'user', 'content' => $prompt],
+    //     //     ],
+    //     //     'temperature' => 0.7,
+    //     // ]);
+
+    //     $text = $response['choices'][0]['message']['content'];
+
+    //     // Very basic parsing (you can improve this)
+    //     preg_match('/Title:(.*?)\n/i', $text, $title);
+    //     preg_match('/Description:(.*?)\n/i', $text, $desc);
+    //     preg_match('/Strategy:(.*?)$/is', $text, $strategy);
+
+
+    //     if ($language === 'Arabic') {
+    //         preg_match('/العنوان\s*:\s*(.*?)\n/ui', $text, $title_arabic);
+    //         preg_match('/الوصف\s*:\s*(.*?)\n/ui', $text, $desc_arabic);
+    //         preg_match('/الاستراتيجية\s*:\s*(.*?)$/uis', $text, $strategy_arabic);
+
+    //         $title = $title_arabic ?: $title;
+    //         $desc = $desc_arabic ?: $desc;
+    //         $strategy = $strategy_arabic ?: $strategy;
+    //     }
+    //     return response()->json([
+    //         'title' => trim($title[1] ?? 'Untitled'),
+    //         'description' => trim($desc[1] ?? 'No description'),
+    //         'strategy' => trim($strategy[1] ?? 'No strategy'),
+    //         'platform' => $request->social_media ?? $request->best_platform ?? 'Not set',
+    //         'values' => $request->keywords ?? '',
+    //     ]);
+    // }
 
 
 

@@ -248,7 +248,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/ai/fetch', [App\Http\Controllers\AIController::class, 'generate'])->name('ai.fetch');
     // Route::post('/ai/fetch', [App\Http\Controllers\AIController::class, 'fetch'])->name('ai.fetch');
-    Route::post('/ai/save', [App\Http\Controllers\AiController::class, 'save'])->name('ai.save.response');
+    Route::post('/ai/save', [App\Http\Controllers\AIController::class, 'save'])->name('ai.save.response');
 
 
 });
