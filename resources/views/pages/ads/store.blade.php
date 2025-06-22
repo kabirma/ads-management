@@ -348,8 +348,8 @@
                 /* background-color: #FFF; */
                 /* color: #968DF3; */
                 /* background: linear-gradient(to right, #1487b3, #38afc3);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-background-clip: text;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-text-fill-color: transparent; */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-background-clip: text;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-text-fill-color: transparent; */
 
         }
 
@@ -1152,7 +1152,7 @@
                                                 </div>
 
 
-                                                <script>
+                                                {{-- <script>
                                                     function previewMediaFile(event) {
                                                         const file = event.target.files[0];
                                                         if (!file) return;
@@ -1183,7 +1183,47 @@
                                                             alert("Unsupported file type. Please upload an image or video.");
                                                         }
                                                     }
+                                                </script> --}}
+
+                                                <script>
+                                                    function previewMediaFile(event) {
+                                                        const file = event.target.files[0];
+                                                        if (!file) return;
+
+                                                        const previewContainers = [
+                                                            document.getElementById('mediaPreview'),
+                                                            document.getElementById('mediaPreviewSecondary') // New preview area
+                                                        ];
+
+                                                        const placeholder = 'https://via.placeholder.com/200x400?text=Media+Preview';
+
+                                                        // Clear both preview areas
+                                                        previewContainers.forEach(container => container.innerHTML = '');
+
+                                                        if (file.type.startsWith("image/")) {
+                                                            const reader = new FileReader();
+                                                            reader.onload = e => {
+                                                                const imgHTML = `<img src="${e.target.result}" class="img-fluid rounded" alt="Image Preview" />`;
+                                                                previewContainers.forEach(container => container.innerHTML = imgHTML);
+                                                            };
+                                                            reader.readAsDataURL(file);
+                                                        } else if (file.type.startsWith("video/")) {
+                                                            const videoURL = URL.createObjectURL(file);
+                                                            const videoHTML = `
+                                                                <video controls class="img-fluid rounded" width="100%">
+                                                                    <source src="${videoURL}" type="${file.type}">
+                                                                    Your browser does not support the video tag.
+                                                                </video>`;
+                                                            previewContainers.forEach(container => container.innerHTML = videoHTML);
+                                                        } else {
+                                                            const unsupportedHTML = `<img src="${placeholder}" class="img-fluid rounded" alt="Unsupported file" />`;
+                                                            previewContainers.forEach(container => container.innerHTML = unsupportedHTML);
+                                                            alert("Unsupported file type. Please upload an image or video.");
+                                                        }
+                                                    }
                                                 </script>
+
+
 
 
                                             </div>
@@ -1204,34 +1244,46 @@
                                                 <div class="mb-3 row">
                                                     <label>Country</label>
                                                     <div>
-                                                        <select class="form-select" id="country-select">
+                                                        <select class="form-select form-control" id="country-select"
+                                                            name="countries[]">
+
                                                             <option value="">Select Country</option>
-                                                            <option value="saudi">Saudi Arabia</option>
-                                                            <option value="usa">United States</option>
-                                                            <option value="india">India</option>
-                                                            <option value="uk">United Kingdom</option>
-                                                            <option value="uae">United Arab Emirates</option>
-                                                            <option value="pakistan">Pakistan</option>
-                                                            <option value="canada">Canada</option>
-                                                            <option value="germany">Germany</option>
-                                                            <option value="france">France</option>
-                                                            <option value="australia">Australia</option>
-                                                            <option value="japan">Japan</option>
-                                                            <option value="south_korea">South Korea</option>
-                                                            <option value="china">China</option>
-                                                            <option value="turkey">Turkey</option>
-                                                            <option value="egypt">Egypt</option>
-                                                            <option value="south_africa">South Africa</option>
-                                                            <option value="brazil">Brazil</option>
-                                                            <option value="mexico">Mexico</option>
-                                                            <option value="spain">Spain</option>
-                                                            <option value="italy">Italy</option>
-                                                            <option value="russia">Russia</option>
-                                                            <option value="indonesia">Indonesia</option>
-                                                            <option value="thailand">Thailand</option>
-                                                            <option value="vietnam">Vietnam</option>
-                                                            <option value="nigeria">Nigeria</option>
-                                                            <option value="kenya">Kenya</option>
+                                                            <optgroup label="GCC Countries">
+                                                                <option value="saudi">Saudi Arabia</option>
+                                                                <option value="uae">United Arab Emirates</option>
+                                                                <option value="qatar">Qatar</option>
+                                                                <option value="kuwait">Kuwait</option>
+                                                                <option value="oman">Oman</option>
+                                                                <option value="bahrain">Bahrain</option>
+                                                            </optgroup>
+
+                                                            <optgroup label="Other Countries">
+                                                                <option value="usa">United States</option>
+                                                                <option value="india">India</option>
+                                                                <option value="uk">United Kingdom</option>
+                                                                <option value="pakistan">Pakistan</option>
+                                                                <option value="canada">Canada</option>
+                                                                <option value="germany">Germany</option>
+                                                                <option value="france">France</option>
+                                                                <option value="australia">Australia</option>
+                                                                <option value="japan">Japan</option>
+                                                                <option value="south_korea">South Korea</option>
+                                                                <option value="china">China</option>
+                                                                <option value="turkey">Turkey</option>
+                                                                <option value="egypt">Egypt</option>
+                                                                <option value="south_africa">South Africa</option>
+                                                                <option value="brazil">Brazil</option>
+                                                                <option value="mexico">Mexico</option>
+                                                                <option value="spain">Spain</option>
+                                                                <option value="italy">Italy</option>
+                                                                <option value="russia">Russia</option>
+                                                                <option value="indonesia">Indonesia</option>
+                                                                <option value="thailand">Thailand</option>
+                                                                <option value="vietnam">Vietnam</option>
+                                                                <option value="nigeria">Nigeria</option>
+                                                                <option value="kenya">Kenya</option>
+                                                            </optgroup>
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -1240,10 +1292,9 @@
                                                 <div class="mb-3 row">
                                                     <label>State</label>
                                                     <div>
-                                                        {{-- <select class="form-select form-control" id="state-select"
-                                                            disabled multiple="multiple"> --}}
                                                         <select class="form-select form-control" id="state-select"
-                                                            disabled>
+                                                            disabled multiple="multiple">
+                                                            {{-- <select class="form-select form-control" id="state-select" > --}}
                                                             <option value="">-- Select State/City --</option>
                                                         </select>
                                                     </div>
@@ -1311,12 +1362,6 @@
                                                         <select class="form-select" name="ad_language"
                                                             id="language-select">
                                                             <option value="">Select Language</option>
-                                                            {{-- @foreach ($Languages as $lang)
-                                                                <option value="{{ $lang }}"
-                                                                    {{ isset($language) && $language == $lang ? 'selected' : '' }}>
-                                                                    {{ ucfirst($lang) }}
-                                                                </option>
-                                                            @endforeach --}}
                                                             <option value="English">English</option>
                                                             <option value="Arabic">Arabic</option>
 
@@ -1350,6 +1395,11 @@
                                                         under 18 years of
                                                         age.
                                                     </p>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="audience-data" id="audience-data"></div>
                                                 </div>
 
                                                 <button class="btn btn-primary primary-btn w-100"
@@ -1445,8 +1495,6 @@
                                                                         id="campaign_end" required>
                                                                 </div>
 
-                                                                {{-- <input id="dates" name="dates" type="text"
-                                                                    class="form-control"> --}}
                                                             </div>
 
                                                         </div>
@@ -1538,13 +1586,44 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <div class="card">
-                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe,
-                                                        debitis minus repudiandae quam voluptatibus provident est velit
-                                                        porro praesentium, hic ut beatae aliquam voluptate odit, sed
-                                                        inventore cupiditate esse nulla.</p>
+                                                <div class="card card1" id="audience-summary-card">
+                                                    <div class="card-body ">
+                                                        <h5 class="card-title">Available Audience Size</h5>
+                                                        <p class="card-text">Increase budget to reach more of audience.</p>
+                                                        <ul class="list-unstyled" style="background: transparent;">
+                                                            <li class="py-2 border-bottom">
+                                                                <div class="row fw-semibold">
+                                                                    <div class="col-6">Daily Reach</div>
+                                                                    <div class="col-6">Impressions</div>
+                                                                </div>
+                                                                <div class="row mt-1">
+                                                                    <div class="col-6" id="reach-value1">4,000 –
+                                                                        2,700,000</div>
+                                                                    <div class="col-6" id="impressions-value1">5,100
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="py-2 border-bottom fw-semibold">
+                                                                Daily Budget
+                                                                <span class="float-end fw-normal"
+                                                                    id="daily-budget">-</span>
+                                                            </li>
+                                                            <li class="py-2 border-bottom fw-semibold">
+                                                                Total Budget
+                                                                <span class="float-end fw-normal"
+                                                                    id="total-budget">-</span>
+                                                            </li>
+                                                            <li class="py-2 fw-semibold">
+                                                                Duration
+                                                                <span class="float-end fw-normal"
+                                                                    id="campaign-duration">-</span>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
@@ -1557,8 +1636,8 @@
                                         <div class="titleRow row">
                                             <div class="col-md-8 right-side">
                                                 <div class="card card1">
-                                                    <h3>{{ __('messages.AdCreativity') }}</h3>
-                                                    <div id="mediaValue"></div>
+                                                    <h4>{{ __('messages.AdCreativity') }}</h4>
+                                                    <div id="mediaPreviewSecondary" class="my-3"></div>
                                                 </div>
 
                                                 <div class="card card1">
@@ -1566,19 +1645,21 @@
                                                     <p><strong>{{ __('messages.CampaignType') }}:</strong> <span
                                                             id="goalValue"></span></p>
                                                     <p><strong>{{ __('messages.CurrentBalance') }}:</strong>
-                                                        {{ $campaignName }}</p>
+                                                        {{ $campaignName }} </p>
                                                 </div>
 
                                                 <div class="card card1">
                                                     <h3>{{ __('messages.Audience') }}</h3>
+
                                                     <p><strong>{{ __('messages.Locations') }}:</strong> <span
-                                                            id="locationValue"></span></p>
+                                                            id="preview-location">Not selected</span></p>
                                                     <p><strong>{{ __('messages.Language') }}:</strong> <span
-                                                            id="languageValue"></span></p>
+                                                            id="preview-language">Not selected</span></p>
                                                     <p><strong>{{ __('messages.Gender') }}:</strong> <span
-                                                            id="genderValue"></span></p>
+                                                            id="preview-gender">All</span></p>
                                                     <p><strong>{{ __('messages.AgeGroup') }}:</strong> <span
-                                                            id="age_groupValue"></span></p>
+                                                            id="preview-age">All</span></p>
+
                                                 </div>
                                             </div>
 
@@ -1599,12 +1680,59 @@
                                                 </div>
 
                                                 <div class="card card1">
-                                                    <h3 class="text-white">
-                                                        {{ __('messages.EstimatedCampaignPerformance') }}</h3>
-                                                    <p><strong>{{ __('messages.Reach') }}:</strong> <span
-                                                            id="reach"></span></p>
-                                                    <p><strong>{{ __('messages.IMPRESSION') }}:</strong> <span
-                                                            id="impression"></span></p>
+                                                    <div id="audience-data-sum">
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="card card1" id="audience-summary-card">
+                                                    <div class="card-body ">
+                                                        <h5 class="card-title">Available Audience Size</h5>
+                                                        <p class="card-text">Increase budget to reach more of audience.</p>
+                                                        <ul class="list-unstyled" id="summary-block-2"
+                                                            style="background: transparent;">
+                                                            <li class="py-2 border-bottom">
+                                                                <div class="row fw-semibold">
+                                                                    <div class="col-6">Daily Reach</div>
+                                                                    <div class="col-6">Impressions</div>
+                                                                </div>
+                                                                <div class="row mt-1">
+                                                                    <div class="col-6" id="reach-value2">4,000 –
+                                                                        2,700,000</div>
+                                                                    <div class="col-6" id="impressions-value2">5,100
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="py-2 border-bottom fw-semibold">
+                                                                Daily Budget
+                                                                <span class="float-end fw-normal"
+                                                                    id="daily-budget2">-</span>
+                                                            </li>
+                                                            <li class="py-2 border-bottom fw-semibold">
+                                                                Total Budget
+                                                                <span class="float-end fw-normal"
+                                                                    id="total-budget2">-</span>
+                                                            </li>
+                                                            <li class="py-2 fw-semibold">
+                                                                Duration
+                                                                <span class="float-end fw-normal"
+                                                                    id="campaign-duration2">-</span>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                                <div class="card card1">
+                                                    <div id="summary-block-2">
+                                                        <div id="reach-value2"></div>
+                                                        <div id="impressions-value2"></div>
+                                                        <span id="daily-budget2"></span>
+                                                        <span id="total-budget2"></span>
+                                                        <span id="campaign-duration2"></span>
+
+                                                    </div>
+
                                                 </div>
 
 
@@ -1864,1033 +1992,180 @@
         maxAgeInput.addEventListener('input', updateCustomAgeValue);
     </script>
 
+
     <script>
-        // Define countries and their cities
-        const countriesWithCities = {
-            saudi: ["Riyadh", "Jeddah", "Dammam", "Mecca", "Medina", "Tabuk", "Abha", "Khobar", "Yanbu"],
-            usa: ["California", "Texas", "New York", "Florida", "Illinois", "Pennsylvania", "Ohio", "Georgia",
-                "Washington"
-            ],
-            india: ["Delhi", "Mumbai", "Bangalore", "Kolkata", "Chennai", "Hyderabad", "Pune", "Ahmedabad", "Jaipur"],
-            uk: ["London", "Manchester", "Birmingham", "Liverpool", "Glasgow", "Edinburgh", "Bristol", "Leeds",
-                "Newcastle"
-            ],
-            uae: ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "Fujairah", "Ras Al Khaimah", "Umm Al Quwain", "Al Ain"],
-            pakistan: ["Lahore", "Karachi", "Islamabad", "Peshawar", "Quetta", "Faisalabad", "Multan", "Rawalpindi",
-                "Gujranwala"
-            ],
-            canada: ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa", "Edmonton", "Winnipeg", "Quebec City",
-                "Halifax"
-            ],
-            germany: ["Berlin", "Munich", "Frankfurt", "Hamburg", "Cologne", "Stuttgart", "Düsseldorf", "Leipzig",
-                "Dresden"
-            ],
-            france: ["Paris", "Lyon", "Marseille", "Toulouse", "Nice", "Lille", "Bordeaux", "Nantes", "Strasbourg"],
-            australia: ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast", "Canberra", "Newcastle",
-                "Hobart"
-            ],
-            japan: ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Nagoya", "Sapporo", "Kobe", "Fukuoka", "Hiroshima"],
-            south_korea: ["Seoul", "Busan", "Incheon", "Daegu", "Daejeon", "Gwangju", "Suwon", "Ulsan"],
-            china: ["Beijing", "Shanghai", "Guangzhou", "Shenzhen", "Chengdu", "Chongqing", "Tianjin", "Wuhan"],
-            turkey: ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "Konya", "Adana", "Gaziantep"],
-            egypt: ["Cairo", "Alexandria", "Giza", "Shubra El Kheima", "Port Said", "Suez", "Luxor", "Mansoura"],
-            south_africa: ["Johannesburg", "Cape Town", "Durban", "Pretoria", "Port Elizabeth", "Bloemfontein",
-                "East London"
-            ],
-            brazil: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador", "Fortaleza", "Belo Horizonte", "Manaus"],
-            mexico: ["Mexico City", "Guadalajara", "Monterrey", "Puebla", "Tijuana", "León", "Querétaro", "Mérida"],
-            spain: ["Madrid", "Barcelona", "Valencia", "Seville", "Zaragoza", "Malaga", "Murcia", "Palma"],
-            italy: ["Rome", "Milan", "Naples", "Turin", "Palermo", "Genoa", "Bologna", "Florence"],
-            russia: ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Kazan", "Nizhny Novgorod",
-                "Chelyabinsk"
-            ],
-            indonesia: ["Jakarta", "Surabaya", "Bandung", "Medan", "Semarang", "Makassar", "Palembang", "Denpasar"],
-            thailand: ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Khon Kaen", "Udon Thani", "Hat Yai",
-                "Nakhon Ratchasima"
-            ],
-            vietnam: ["Hanoi", "Ho Chi Minh City", "Da Nang", "Haiphong", "Can Tho", "Bien Hoa", "Hue", "Nha Trang"],
-            nigeria: ["Lagos", "Kano", "Ibadan", "Abuja", "Port Harcourt", "Benin City", "Maiduguri", "Zaria"],
-            kenya: ["Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret", "Thika", "Malindi", "Kitale"]
-        };
+        $('#country-select').on('change', function() {
+            const country = $(this).val(); // Single value like "saudi"
+            const stateSelect = $('#state-select');
 
-        // Define audience ranges for social media platforms
-        const audienceRanges = {
-            saudi: {
-                Riyadh: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,500,010 – 7,200,000"
-                },
-                Jeddah: {
-                    snapchat: "3,200,000 – 4,000,000",
-                    tiktok: "3,800,000 – 4,600,000"
-                },
-                Dammam: {
-                    snapchat: "1,300,000 – 1,800,000",
-                    tiktok: "1,500,000 – 2,100,000"
-                },
-                Mecca: {
-                    snapchat: "2,100,000 – 2,900,000",
-                    tiktok: "2,400,000 – 3,200,000"
-                },
-                Medina: {
-                    snapchat: "1,000,000 – 1,400,000",
-                    tiktok: "1,200,000 – 1,700,000"
-                },
-                Tabuk: {
-                    snapchat: "600,000 – 900,000",
-                    tiktok: "750,000 – 1,100,000"
-                },
-                Abha: {
-                    snapchat: "500,000 – 800,000",
-                    tiktok: "650,000 – 950,000"
-                },
-                Khobar: {
-                    snapchat: "900,000 – 1,300,000",
-                    tiktok: "1,100,000 – 1,600,000"
-                },
-                Yanbu: {
-                    snapchat: "400,000 – 700,000",
-                    tiktok: "550,000 – 850,000"
-                }
-            },
-            usa: {
-                California: {
-                    snapchat: "15,000,000 – 18,000,000",
-                    tiktok: "17,000,000 – 21,000,000"
-                },
-                Texas: {
-                    snapchat: "12,500,000 – 15,000,000",
-                    tiktok: "14,000,000 – 17,000,000"
-                },
-                "New York": {
-                    snapchat: "12,000,000 – 14,500,000",
-                    tiktok: "13,500,000 – 16,500,000"
-                },
-                Florida: {
-                    snapchat: "10,800,000 – 13,000,000",
-                    tiktok: "12,000,000 – 14,500,000"
-                },
-                Illinois: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,000,000 – 8,500,000"
-                },
-                Pennsylvania: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,500,000 – 8,000,000"
-                },
-                Ohio: {
-                    snapchat: "5,200,000 – 6,600,000",
-                    tiktok: "5,900,000 – 7,400,000"
-                },
-                Georgia: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,400,000 – 6,800,000"
-                },
-                Washington: {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "4,800,000 – 6,200,000"
-                }
-            },
-            india: {
-                Delhi: {
-                    snapchat: "16,500,000 – 20,000,000",
-                    tiktok: "23,000,000 – 28,000,000"
-                },
-                Mumbai: {
-                    snapchat: "18,000,000 – 22,000,000",
-                    tiktok: "25,000,000 – 30,000,000"
-                },
-                Bangalore: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "16,000,000 – 20,000,000"
-                },
-                Kolkata: {
-                    snapchat: "10,500,000 – 13,000,000",
-                    tiktok: "14,000,000 – 17,500,000"
-                },
-                Chennai: {
-                    snapchat: "8,000,000 – 10,000,000",
-                    tiktok: "11,000,000 – 14,000,000"
-                },
-                Hyderabad: {
-                    snapchat: "9,500,000 – 12,000,000",
-                    tiktok: "13,000,000 – 16,000,000"
-                },
-                Pune: {
-                    snapchat: "7,500,000 – 9,500,000",
-                    tiktok: "10,000,000 – 13,000,000"
-                },
-                Ahmedabad: {
-                    snapchat: "6,800,000 – 8,700,000",
-                    tiktok: "9,000,000 – 11,500,000"
-                },
-                Jaipur: {
-                    snapchat: "5,200,000 – 6,800,000",
-                    tiktok: "7,000,000 – 9,000,000"
-                }
-            },
-            uk: {
-                London: {
-                    snapchat: "9,200,000 – 11,500,000",
-                    tiktok: "10,500,000 – 13,000,000"
-                },
-                Manchester: {
-                    snapchat: "2,800,000 – 3,600,000",
-                    tiktok: "3,200,000 – 4,100,000"
-                },
-                Birmingham: {
-                    snapchat: "2,500,000 – 3,200,000",
-                    tiktok: "2,900,000 – 3,700,000"
-                },
-                Liverpool: {
-                    snapchat: "1,600,000 – 2,100,000",
-                    tiktok: "1,900,000 – 2,500,000"
-                },
-                Glasgow: {
-                    snapchat: "1,800,000 – 2,400,000",
-                    tiktok: "2,100,000 – 2,800,000"
-                },
-                Edinburgh: {
-                    snapchat: "1,500,000 – 2,000,000",
-                    tiktok: "1,800,000 – 2,400,000"
-                },
-                Bristol: {
-                    snapchat: "1,300,000 – 1,800,000",
-                    tiktok: "1,600,000 – 2,100,000"
-                },
-                Leeds: {
-                    snapchat: "1,400,000 – 1,900,000",
-                    tiktok: "1,700,000 – 2,300,000"
-                },
-                Newcastle: {
-                    snapchat: "1,100,000 – 1,500,000",
-                    tiktok: "1,300,000 – 1,800,000"
-                }
-            },
-            uae: {
-                Dubai: {
-                    snapchat: "2,800,000 – 3,600,000",
-                    tiktok: "3,200,000 – 4,000,000"
-                },
-                "Abu Dhabi": {
-                    snapchat: "1,500,000 – 2,000,000",
-                    tiktok: "1,700,000 – 2,200,000"
-                },
-                Sharjah: {
-                    snapchat: "800,000 – 1,200,000",
-                    tiktok: "950,000 – 1,400,000"
-                },
-                Ajman: {
-                    snapchat: "400,000 – 700,000",
-                    tiktok: "500,000 – 850,000"
-                },
-                Fujairah: {
-                    snapchat: "300,000 – 500,000",
-                    tiktok: "400,000 – 650,000"
-                },
-                "Ras Al Khaimah": {
-                    snapchat: "350,000 – 600,000",
-                    tiktok: "450,000 – 750,000"
-                },
-                "Umm Al Quwain": {
-                    snapchat: "200,000 – 400,000",
-                    tiktok: "300,000 – 500,000"
-                },
-                "Al Ain": {
-                    snapchat: "600,000 – 900,000",
-                    tiktok: "750,000 – 1,100,000"
-                }
-            },
-            pakistan: {
-                Lahore: {
-                    snapchat: "1,800,000 – 2,500,000",
-                    tiktok: "2,400,000 – 3,200,000"
-                },
-                Karachi: {
-                    snapchat: "2,000,000 – 2,700,000",
-                    tiktok: "2,800,000 – 3,600,000"
-                },
-                Islamabad: {
-                    snapchat: "900,000 – 1,300,000",
-                    tiktok: "1,100,000 – 1,500,000"
-                },
-                Peshawar: {
-                    snapchat: "700,000 – 1,100,000",
-                    tiktok: "900,000 – 1,400,000"
-                },
-                Quetta: {
-                    snapchat: "500,000 – 800,000",
-                    tiktok: "650,000 – 950,000"
-                },
-                Faisalabad: {
-                    snapchat: "800,000 – 1,200,000",
-                    tiktok: "1,000,000 – 1,500,000"
-                },
-                Multan: {
-                    snapchat: "600,000 – 950,000",
-                    tiktok: "800,000 – 1,200,000"
-                },
-                Rawalpindi: {
-                    snapchat: "750,000 – 1,100,000",
-                    tiktok: "950,000 – 1,400,000"
-                },
-                Gujranwala: {
-                    snapchat: "550,000 – 850,000",
-                    tiktok: "700,000 – 1,100,000"
-                }
-            },
-            canada: {
-                Toronto: {
-                    snapchat: "6,500,000 – 8,200,000",
-                    tiktok: "7,300,000 – 9,100,000"
-                },
-                Vancouver: {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "3,600,000 – 4,600,000"
-                },
-                Montreal: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,300,000 – 5,500,000"
-                },
-                Calgary: {
-                    snapchat: "2,100,000 – 2,800,000",
-                    tiktok: "2,400,000 – 3,100,000"
-                },
-                Ottawa: {
-                    snapchat: "1,800,000 – 2,400,000",
-                    tiktok: "2,000,000 – 2,700,000"
-                },
-                Edmonton: {
-                    snapchat: "1,600,000 – 2,200,000",
-                    tiktok: "1,900,000 – 2,000,000"
-                },
-                Winnipeg: {
-                    snapchat: "1,200,000 – 1,700,000",
-                    tiktok: "1,400,000 – 2,000,000"
-                },
-                "Quebec City": {
-                    snapchat: "1,300,000 – 1,800,000",
-                    tiktok: "1,500,000 – 2,100,000"
-                },
-                Halifax: {
-                    snapchat: "900,000 – 1,300,000",
-                    tiktok: "1,100,000 – 1,500,000"
-                }
-            },
-            germany: {
-                Berlin: {
-                    snapchat: "5,200,000 – 6,600,000",
-                    tiktok: "5,900,000 – 7,400,000"
-                },
-                Munich: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,300,000 – 5,500,000"
-                },
-                Frankfurt: {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,300,000 – 4,300,000"
-                },
-                Hamburg: {
-                    snapchat: "3,500,000 – 4,500,000",
-                    tiktok: "4,000,000 – 5,100,000"
-                },
-                Cologne: {
-                    snapchat: "2,600,000 – 3,400,000",
-                    tiktok: "3,000,000 – 3,900,000"
-                },
-                Stuttgart: {
-                    snapchat: "2,300,000 – 3,000,000",
-                    tiktok: "2,600,000 – 3,400,000"
-                },
-                Düsseldorf: {
-                    snapchat: "2,100,000 – 2,800,000",
-                    tiktok: "2,400,000 – 3,200,000"
-                },
-                Leipzig: {
-                    snapchat: "1,800,000 – 2,400,000",
-                    tiktok: "2,100,000 – 2,800,000"
-                },
-                Dresden: {
-                    snapchat: "1,500,000 – 2,000,000",
-                    tiktok: "1,800,000 – 2,400,000"
-                }
-            },
-            france: {
-                Paris: {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "9,700,000 – 12,000,000"
-                },
-                Lyon: {
-                    snapchat: "2,500,000 – 3,200,000",
-                    tiktok: "2,900,000 – 3,700,000"
-                },
-                Marseille: {
-                    snapchat: "2,800,000 – 3,600,000",
-                    tiktok: "3,200,000 – 4,100,000"
-                },
-                Toulouse: {
-                    snapchat: "1,800,000 – 2,400,000",
-                    tiktok: "2,100,000 – 2,800,000"
-                },
-                Nice: {
-                    snapchat: "1,600,000 – 2,100,000",
-                    tiktok: "1,900,000 – 2,500,000"
-                },
-                Lille: {
-                    snapchat: "1,400,000 – 1,900,000",
-                    tiktok: "1,700,000 – 2,300,000"
-                },
-                Bordeaux: {
-                    snapchat: "1,700,000 – 2,300,000",
-                    tiktok: "2,000,000 – 2,700,000"
-                },
-                Nantes: {
-                    snapchat: "1,500,000 – 2,000,000",
-                    tiktok: "1,800,000 – 2,400,000"
-                },
-                Strasbourg: {
-                    snapchat: "1,300,000 – 1,800,000",
-                    tiktok: "1,600,000 – 2,100,000"
-                }
-            },
-            australia: {
-                Sydney: {
-                    snapchat: "6,800,000 – 8,500,000",
-                    tiktok: "7,700,000 – 9,600,000"
-                },
-                Melbourne: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,000,000 – 8,800,000"
-                },
-                Brisbane: {
-                    snapchat: "3,500,000 – 4,500,000",
-                    tiktok: "4,000,000 – 5,100,000"
-                },
-                Perth: {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,300,000 – 4,300,000"
-                },
-                Adelaide: {
-                    snapchat: "2,100,000 – 2,800,000",
-                    tiktok: "2,400,000 – 3,200,000"
-                },
-                "Gold Coast": {
-                    snapchat: "1,800,000 – 2,400,000",
-                    tiktok: "2,100,000 – 2,800,000"
-                },
-                Canberra: {
-                    snapchat: "1,200,000 – 1,700,000",
-                    tiktok: "1,400,000 – 2,000,000"
-                },
-                Newcastle: {
-                    snapchat: "1,100,000 – 1,500,000",
-                    tiktok: "1,300,000 – 1,800,000"
-                },
-                Hobart: {
-                    snapchat: "800,000 – 1,200,000",
-                    tiktok: "950,000 – 1,400,000"
-                }
-            },
-            japan: {
-                Tokyo: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "14,000,000 – 17,500,000"
-                },
-                Osaka: {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "9,700,000 – 12,000,000"
-                },
-                Kyoto: {
-                    snapchat: "2,800,000 – 3,600,000",
-                    tiktok: "3,200,000 – 4,100,000"
-                },
-                Yokohama: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,000,000 – 8,800,000"
-                },
-                Nagoya: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,500,000 – 8,000,000"
-                },
-                Sapporo: {
-                    snapchat: "3,500,000 – 4,500,000",
-                    tiktok: "4,000,000 – 5,100,000"
-                },
-                Kobe: {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,300,000 – 4,300,000"
-                },
-                Fukuoka: {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "4,800,000 – 6,200,000"
-                },
-                Hiroshima: {
-                    snapchat: "2,300,000 – 3,000,000",
-                    tiktok: "2,600,000 – 3,400,000"
-                }
-            },
-            south_korea: {
-                Seoul: {
-                    snapchat: "10,800,000 – 13,000,000",
-                    tiktok: "12,000,000 – 14,500,000"
-                },
-                Busan: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,000,000 – 8,500,000"
-                },
-                Incheon: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,400,000 – 6,800,000"
-                },
-                Daegu: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,300,000 – 5,500,000"
-                },
-                Daejeon: {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,300,000 – 4,300,000"
-                },
-                Gwangju: {
-                    snapchat: "2,500,000 – 3,200,000",
-                    tiktok: "2,900,000 – 3,700,000"
-                },
-                Suwon: {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "3,600,000 – 4,600,000"
-                },
-                Ulsan: {
-                    snapchat: "2,100,000 – 2,800,000",
-                    tiktok: "2,400,000 – 3,200,000"
-                }
-            },
-            china: {
-                Beijing: {
-                    snapchat: "22,000,000 – 27,000,000",
-                    tiktok: "35,000,000 – 42,000,000"
-                },
-                Shanghai: {
-                    snapchat: "25,000,000 – 30,000,000",
-                    tiktok: "38,000,000 – 45,000,000"
-                },
-                Guangzhou: {
-                    snapchat: "18,000,000 – 22,000,000",
-                    tiktok: "28,000,000 – 34,000,000"
-                },
-                Shenzhen: {
-                    snapchat: "20,000,000 – 24,000,000",
-                    tiktok: "32,000,000 – 38,000,000"
-                },
-                Chengdu: {
-                    snapchat: "15,000,000 – 18,000,000",
-                    tiktok: "23,000,000 – 28,000,000"
-                },
-                Chongqing: {
-                    snapchat: "14,000,000 – 17,000,000",
-                    tiktok: "21,000,000 – 26,000,000"
-                },
-                Tianjin: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "18,000,000 – 22,000,000"
-                },
-                Wuhan: {
-                    snapchat: "13,000,000 – 16,000,000",
-                    tiktok: "20,000,000 – 25,000,000"
-                }
-            },
-            turkey: {
-                Istanbul: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "15,000,000 – 18,000,000"
-                },
-                Ankara: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,800,000 – 9,500,000"
-                },
-                Izmir: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "7,200,000 – 8,800,000"
-                },
-                Bursa: {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "5,300,000 – 6,700,000"
-                },
-                Antalya: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,800,000 – 6,100,000"
-                },
-                Konya: {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "4,100,000 – 5,300,000"
-                },
-                Adana: {
-                    snapchat: "3,500,000 – 4,500,000",
-                    tiktok: "4,400,000 – 5,600,000"
-                },
-                Gaziantep: {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,700,000 – 4,800,000"
-                }
-            },
-            egypt: {
-                Cairo: {
-                    snapchat: "15,000,000 – 18,000,000",
-                    tiktok: "18,000,000 – 22,000,000"
-                },
-                Alexandria: {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "10,000,000 – 12,500,000"
-                },
-                Giza: {
-                    snapchat: "7,200,000 – 9,000,000",
-                    tiktok: "8,700,000 – 10,800,000"
-                },
-                "Shubra El Kheima": {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,200,000"
-                },
-                "Port Said": {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "3,900,000 – 5,000,000"
-                },
-                Suez: {
-                    snapchat: "2,800,000 – 3,600,000",
-                    tiktok: "3,400,000 – 4,400,000"
-                },
-                Luxor: {
-                    snapchat: "2,100,000 – 2,800,000",
-                    tiktok: "2,600,000 – 3,400,000"
-                },
-                Mansoura: {
-                    snapchat: "3,500,000 – 4,500,000",
-                    tiktok: "4,300,000 – 5,500,000"
-                }
-            },
-            south_africa: {
-                Johannesburg: {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "10,000,000 – 12,500,000"
-                },
-                "Cape Town": {
-                    snapchat: "7,200,000 – 9,000,000",
-                    tiktok: "8,500,000 – 10,500,000"
-                },
-                Durban: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,400,000 – 9,200,000"
-                },
-                Pretoria: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,900,000 – 8,600,000"
-                },
-                "Port Elizabeth": {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,600,000 – 5,900,000"
-                },
-                Bloemfontein: {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,500,000 – 4,600,000"
-                },
-                "East London": {
-                    snapchat: "2,500,000 – 3,200,000",
-                    tiktok: "3,100,000 – 4,000,000"
-                }
-            },
-            brazil: {
-                "São Paulo": {
-                    snapchat: "25,000,000 – 30,000,000",
-                    tiktok: "30,000,000 – 36,000,000"
-                },
-                "Rio de Janeiro": {
-                    snapchat: "18,000,000 – 22,000,000",
-                    tiktok: "22,000,000 – 27,000,000"
-                },
-                Brasília: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "14,500,000 – 18,000,000"
-                },
-                Salvador: {
-                    snapchat: "10,500,000 – 13,000,000",
-                    tiktok: "12,800,000 – 16,000,000"
-                },
-                Fortaleza: {
-                    snapchat: "9,500,000 – 12,000,000",
-                    tiktok: "11,500,000 – 14,500,000"
-                },
-                "Belo Horizonte": {
-                    snapchat: "11,000,000 – 13,500,000",
-                    tiktok: "13,500,000 – 16,500,000"
-                },
-                Manaus: {
-                    snapchat: "8,000,000 – 10,000,000",
-                    tiktok: "9,800,000 – 12,300,000"
-                }
-            },
-            mexico: {
-                "Mexico City": {
-                    snapchat: "20,000,000 – 24,000,000",
-                    tiktok: "24,000,000 – 29,000,000"
-                },
-                Guadalajara: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "14,500,000 – 18,000,000"
-                },
-                Monterrey: {
-                    snapchat: "11,000,000 – 13,500,000",
-                    tiktok: "13,500,000 – 16,500,000"
-                },
-                Puebla: {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "10,300,000 – 12,800,000"
-                },
-                Tijuana: {
-                    snapchat: "7,200,000 – 9,000,000",
-                    tiktok: "8,800,000 – 11,000,000"
-                },
-                León: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,600,000 – 9,500,000"
-                },
-                Querétaro: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "7,100,000 – 8,900,000"
-                },
-                Mérida: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,900,000 – 7,400,000"
-                }
-            },
-            spain: {
-                Madrid: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "14,000,000 – 17,500,000"
-                },
-                Barcelona: {
-                    snapchat: "10,500,000 – 13,000,000",
-                    tiktok: "12,500,000 – 15,500,000"
-                },
-                Valencia: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,400,000 – 9,300,000"
-                },
-                Seville: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,900,000 – 8,600,000"
-                },
-                Zaragoza: {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "5,100,000 – 6,500,000"
-                },
-                Malaga: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,300,000"
-                },
-                Murcia: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,600,000 – 5,900,000"
-                },
-                Palma: {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "3,900,000 – 5,000,000"
-                }
-            },
-            italy: {
-                Rome: {
-                    snapchat: "10,500,000 – 13,000,000",
-                    tiktok: "12,500,000 – 15,500,000"
-                },
-                Milan: {
-                    snapchat: "9,500,000 – 12,000,000",
-                    tiktok: "11,500,000 – 14,500,000"
-                },
-                Naples: {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "10,300,000 – 12,800,000"
-                },
-                Turin: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,400,000 – 9,300,000"
-                },
-                Palermo: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,900,000 – 8,600,000"
-                },
-                Genoa: {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "5,100,000 – 6,500,000"
-                },
-                Bologna: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,300,000"
-                },
-                Florence: {
-                    snapchat: "4,500,000 – 5,700,000",
-                    tiktok: "5,500,000 – 7,000,000"
-                }
-            },
-            russia: {
-                Moscow: {
-                    snapchat: "18,000,000 – 22,000,000",
-                    tiktok: "20,000,000 – 25,000,000"
-                },
-                "Saint Petersburg": {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "14,000,000 – 17,500,000"
-                },
-                Novosibirsk: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,400,000 – 9,300,000"
-                },
-                Yekaterinburg: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,900,000 – 8,600,000"
-                },
-                Kazan: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,300,000"
-                },
-                "Nizhny Novgorod": {
-                    snapchat: "4,500,000 – 5,700,000",
-                    tiktok: "5,500,000 – 7,000,000"
-                },
-                Chelyabinsk: {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "5,100,000 – 6,500,000"
-                }
-            },
-            indonesia: {
-                Jakarta: {
-                    snapchat: "22,000,000 – 27,000,000",
-                    tiktok: "28,000,000 – 34,000,000"
-                },
-                Surabaya: {
-                    snapchat: "15,000,000 – 18,000,000",
-                    tiktok: "19,000,000 – 23,000,000"
-                },
-                Bandung: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "15,000,000 – 18,500,000"
-                },
-                Medan: {
-                    snapchat: "10,500,000 – 13,000,000",
-                    tiktok: "13,500,000 – 16,500,000"
-                },
-                Semarang: {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "10,800,000 – 13,300,000"
-                },
-                Makassar: {
-                    snapchat: "7,200,000 – 9,000,000",
-                    tiktok: "9,200,000 – 11,500,000"
-                },
-                Palembang: {
-                    snapchat: "6,800,000 – 8,500,000",
-                    tiktok: "8,700,000 – 10,900,000"
-                },
-                Denpasar: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "7,400,000 – 9,300,000"
-                }
-            },
-            thailand: {
-                Bangkok: {
-                    snapchat: "15,000,000 – 18,000,000",
-                    tiktok: "18,000,000 – 22,000,000"
-                },
-                "Chiang Mai": {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,300,000"
-                },
-                Phuket: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,600,000 – 5,900,000"
-                },
-                Pattaya: {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "3,900,000 – 5,000,000"
-                },
-                "Khon Kaen": {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,500,000 – 4,600,000"
-                },
-                "Udon Thani": {
-                    snapchat: "2,500,000 – 3,200,000",
-                    tiktok: "3,100,000 – 4,000,000"
-                },
-                "Hat Yai": {
-                    snapchat: "2,800,000 – 3,600,000",
-                    tiktok: "3,400,000 – 4,400,000"
-                },
-                "Nakhon Ratchasima": {
-                    snapchat: "2,300,000 – 3,000,000",
-                    tiktok: "2,800,000 – 3,600,000"
-                }
-            },
-            vietnam: {
-                Hanoi: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "15,000,000 – 18,500,000"
-                },
-                "Ho Chi Minh City": {
-                    snapchat: "15,000,000 – 18,000,000",
-                    tiktok: "18,000,000 – 22,000,000"
-                },
-                "Da Nang": {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,400,000 – 9,300,000"
-                },
-                Haiphong: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,900,000 – 8,600,000"
-                },
-                "Can Tho": {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,300,000"
-                },
-                "Bien Hoa": {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "5,100,000 – 6,500,000"
-                },
-                Hue: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,600,000 – 5,900,000"
-                },
-                "Nha Trang": {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "3,900,000 – 5,000,000"
-                }
-            },
-            nigeria: {
-                Lagos: {
-                    snapchat: "18,000,000 – 22,000,000",
-                    tiktok: "20,000,000 – 25,000,000"
-                },
-                Kano: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "14,000,000 – 17,500,000"
-                },
-                Ibadan: {
-                    snapchat: "10,500,000 – 13,000,000",
-                    tiktok: "12,500,000 – 15,500,000"
-                },
-                Abuja: {
-                    snapchat: "9,500,000 – 12,000,000",
-                    tiktok: "11,500,000 – 14,500,000"
-                },
-                "Port Harcourt": {
-                    snapchat: "8,500,000 – 10,500,000",
-                    tiktok: "10,300,000 – 12,800,000"
-                },
-                "Benin City": {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,400,000 – 9,300,000"
-                },
-                Maiduguri: {
-                    snapchat: "5,800,000 – 7,200,000",
-                    tiktok: "6,900,000 – 8,600,000"
-                },
-                Zaria: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,300,000"
-                }
-            },
-            kenya: {
-                Nairobi: {
-                    snapchat: "12,000,000 – 15,000,000",
-                    tiktok: "14,000,000 – 17,500,000"
-                },
-                Mombasa: {
-                    snapchat: "6,200,000 – 7,800,000",
-                    tiktok: "7,400,000 – 9,300,000"
-                },
-                Kisumu: {
-                    snapchat: "4,800,000 – 6,000,000",
-                    tiktok: "5,800,000 – 7,300,000"
-                },
-                Nakuru: {
-                    snapchat: "4,200,000 – 5,400,000",
-                    tiktok: "5,100,000 – 6,500,000"
-                },
-                Eldoret: {
-                    snapchat: "3,800,000 – 4,900,000",
-                    tiktok: "4,600,000 – 5,900,000"
-                },
-                Thika: {
-                    snapchat: "3,200,000 – 4,100,000",
-                    tiktok: "3,900,000 – 5,000,000"
-                },
-                Malindi: {
-                    snapchat: "2,900,000 – 3,800,000",
-                    tiktok: "3,500,000 – 4,600,000"
-                },
-                Kitale: {
-                    snapchat: "2,500,000 – 3,200,000",
-                    tiktok: "3,100,000 – 4,000,000"
-                }
-            }
-        };
+            // Clear state and audience
+            stateSelect.empty();
+            $('#audience-data').empty();
 
-        // Get DOM elements
-        const countrySelect = document.getElementById("country-select");
-        const stateSelect = document.getElementById("state-select");
-        const audiencePanel = document.getElementById("audience-panel");
-        const audienceRange = document.getElementById("audience-range");
+            if (!country) return;
 
-        // Check if DOM elements exist
-        if (!countrySelect || !stateSelect || !audiencePanel || !audienceRange) {
-            console.error(
-                "One or more DOM elements are missing. Please ensure 'country-select', 'state-select', 'audience-panel', and 'audience-range' exist in the HTML."
-            );
-        }
+            const formData = new FormData();
+            formData.append('country', country); // changed from countries[] to single country
 
-        // Add event listener for country selection
-        if (countrySelect) {
-            countrySelect.addEventListener("change", function() {
-                const selectedCountry = this.value;
-                stateSelect.innerHTML = '<option value="">-- Select State/City --</option>';
-                audiencePanel.style.display = "none";
+            // Add CSRF token
+            const csrfToken = $('meta[name="csrf-token"]').attr('content');
+            formData.append('_token', csrfToken);
 
-                if (selectedCountry && countriesWithCities[selectedCountry]) {
-                    stateSelect.removeAttribute("disabled");
+            $.ajax({
+                url: '/get-states',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    stateSelect.prop('disabled', false);
+                    stateSelect.empty();
+                    stateSelect.append(`<option value="">-- Select State/City --</option>`);
 
-                    countriesWithCities[selectedCountry].forEach(state => {
-                        const option = document.createElement("option");
-                        option.value = state;
-                        option.text = state;
-                        stateSelect.appendChild(option);
+                    const states = data.states[country] || [];
+
+                    states.forEach(state => {
+                        stateSelect.append(
+                            `<option value="${country}|${state}">${country.toUpperCase()} - ${state}</option>`
+                        );
                     });
-                } else {
-                    stateSelect.setAttribute("disabled", true);
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
                 }
             });
-        }
-
-        // Add event listener for state/city selection
-        if (stateSelect) {
-            stateSelect.addEventListener("change", function() {
-                const country = countrySelect.value;
-                const state = stateSelect.value;
-                // const platform = "tiktok"; // Hardcoded as per original code
-                var currentSocialMedia = $("input[name='social_media']:checked").val()
-
-
-                const platform = @json($social_media ?? null) || currentSocialMedia;
-
-
-                if (country && state && audienceRanges[country] && audienceRanges[country][state] && audienceRanges[
-                        country][state][platform]) {
-                    audienceRange.textContent = audienceRanges[country][state][platform];
-                    audiencePanel.style.display = "block";
-                } else {
-                    audienceRange.textContent = "Audience data not available for this selection.";
-                    audiencePanel.style.display = "block";
-                }
-            });
-        }
+        });
     </script>
 
-    {{-- end  --}}
+    <script>
+        // $('#country-select').on('change', function() {
+        //     const countries = $(this).val(); // e.g. ["saudi", "uae", "oman"]
+        //     $('#state-select').empty();
+        //     $('#audience-data').empty();
 
-    {{-- <script>
+        //     if (!countries || countries.length === 0) return;
+
+        //     const formData = new FormData();
+        //     countries.forEach(country => formData.append('countries[]', country));
+
+        //     // Add CSRF token directly to the FormData
+        //     const csrfToken = $('meta[name="csrf-token"]').attr('content');
+        //     formData.append('_token', csrfToken);
+
+        //     $.ajax({
+        //         url: '/get-states',
+        //         method: 'POST',
+        //         data: formData,
+        //         processData: false,
+        //         contentType: false,
+        //         // OPTIONAL: You can still pass it in headers too if needed
+        //         // headers: { 'X-CSRF-TOKEN': csrfToken },
+        //         success: function(data) {
+        //             const stateSelect = $('#state-select');
+        //             stateSelect.prop('disabled', false); // Enable select
+        //             stateSelect.empty(); // Clear previous options
+        //             stateSelect.append(`<option value="">-- Select State/City --</option>`);
+
+        //             Object.entries(data.states).forEach(([country, states]) => {
+        //                 states.forEach(state => {
+        //                     stateSelect.append(
+        //                         `<option value="${country}|${state}">${country.toUpperCase()} - ${state}</option>`
+        //                     );
+        //                 });
+        //             });
+        //         },
+        //         error: function(xhr) {
+        //             console.error(xhr.responseText);
+        //         }
+        //     });
+        // });
+
+
+        // Load audience when states change
+        $('#state-select').on('change', function() {
+            const selected = $(this).val(); // e.g. ["saudi|Riyadh", "uae|Dubai"]
+            $('#audience-data').empty();
+            $('#audience-data-sum').empty();
+
+            let currentSocialMedia = $("input[name='social_media']:checked").val();
+
+            const platform = @json($social_media ?? null) || currentSocialMedia;
+
+
+            if (!selected || selected.length === 0) return;
+
+            const formData = new FormData();
+            const csrfToken = $('meta[name="csrf-token"]').attr('content');
+            formData.append('_token', csrfToken);
+
+            selected.forEach(item => {
+                formData.append('states[]', item); // e.g., "saudi|Riyadh"
+            });
+            if (platform) {
+                formData.append('platform', platform); // Append platform too
+            }
+
+            $.ajax({
+                url: '/get-audience',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    let totalMin = 0;
+                    let totalMax = 0;
+
+                    let table = `<table class="table table-bordered text-white"><thead><tr>
+                      <th>Country</th>
+                      <th>State</th>
+                      <th>${platform.charAt(0).toUpperCase() + platform.slice(1)}</th>
+                    </tr></thead><tbody>`;
+
+                    data.forEach(item => {
+                        const value = item[platform];
+
+                        if (value && value !== '-') {
+                            table += `<tr>
+                <td>${item.country.toUpperCase()}</td>
+                <td>${item.state}</td>
+                <td>${value}</td>
+            </tr>`;
+
+                            const [min, max] = value.replace(/,/g, '').split('–').map(n =>
+                                parseInt(n.trim()));
+                            if (!isNaN(min)) totalMin += min;
+                            if (!isNaN(max)) totalMax += max;
+                        }
+                    });
+
+                    table += `</tbody></table>`;
+                    $('#audience-data').html(table);
+
+                    $('#audience-data-sum').html(table);
+
+
+                    if (totalMin && totalMax) {
+                        $('#audience-range').text(
+                            `${totalMin.toLocaleString()} – ${totalMax.toLocaleString()}`
+                        );
+                        $('#audience-panel').show();
+                    } else {
+                        $('#audience-range').text("N/A");
+                        $('#audience-panel').hide();
+                    }
+                },
+                error: function() {
+                    $('#audience-range').text("Error fetching data.");
+                    $('#audience-panel').hide();
+                }
+            });
+
+        });
+    </script>
+
+    </script>
+
+    <script>
         $(document).ready(function() {
             $('#state-select').select2({
                 placeholder: "-- Select State/City --",
@@ -2898,7 +2173,7 @@
                 width: '100%' // This ensures Select2 respects Bootstrap's w-100
             });
         });
-    </script> --}}
+    </script>
 
 
     <script>
@@ -3325,5 +2600,159 @@
 
         updateStepProgress();
     </script>
+
+
+    {{-- step  budage  --}}
+    {{-- <script>
+        $(document).ready(function() {
+            // Handle recommended budget selection
+            $('input[name="recommended_budget"]').change(function() {
+                updateSummary();
+            });
+
+            // Handle recommended dates selection
+            $('input[name="recommended_dates"]').change(function() {
+                updateSummary();
+            });
+
+            function updateSummary() {
+                // Get selected daily budget
+                let dailyBudget = parseFloat($('input[name="recommended_budget"]:checked').val()) || 150;
+
+                // Get selected duration (in days)
+                let durationValue = $('input[name="recommended_dates"]:checked').val();
+                let days = 7; // Default to 1 week
+                if (durationValue.includes('+14 days') || durationValue.includes('+15 days')) {
+                    days = 14; // 2 weeks
+                } else if (durationValue.includes('+21 days')) {
+                    days = 21; // 3 weeks
+                }
+
+                // Calculate total budget
+                let totalBudget = dailyBudget * days;
+
+                // Update card values
+                $('#daily-budget').text(dailyBudget.toFixed(2) + ' SAR');
+                $('#total-budget').text(totalBudget.toFixed(2) + ' SAR');
+                $('#campaign-duration').text(days + ' days');
+
+                // Reach and impressions (placeholders)
+                $('#reach-value').text('-');
+                $('#impressions-value').text('-');
+            }
+
+            // Initial update
+            updateSummary();
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            // Handle recommended budget selection
+            $('input[name="recommended_budget"]').on('change', function() {
+                updateSummary();
+            });
+
+            // Handle recommended dates selection
+            $('input[name="recommended_dates"]').on('change', function() {
+                updateSummary();
+            });
+
+            function updateSummary() {
+                // Get selected daily budget
+                let dailyBudget = parseFloat($('input[name="recommended_budget"]:checked').val()) || 150;
+
+                // Get selected duration (in days) from the label text
+                let selectedLabel = $('input[name="recommended_dates"]:checked').closest('label').find('div').text()
+                    .trim();
+                let days = 7; // Default to 1 week
+                if (selectedLabel === '2 Weeks') {
+                    days = 14;
+                } else if (selectedLabel === '3 Weeks') {
+                    days = 21;
+                }
+
+                // Calculate total budget
+                let totalBudget = dailyBudget * days;
+
+                // Update card values
+                $('#daily-budget').text(dailyBudget.toFixed(2) + ' SAR');
+                $('#total-budget').text(totalBudget.toFixed(2) + ' SAR');
+                $('#campaign-duration').text(days + ' days');
+
+                // Reach and impressions (placeholders)
+                $('#reach-value').text('-');
+                $('#impressions-value').text('-');
+
+                // ids.forEach(suffix => {
+                $(`#daily-budget2`).text(dailyBudget.toFixed(2) + ' SAR');
+                $(`#total-budget2`).text(totalBudget.toFixed(2) + ' SAR');
+                $(`#campaign-duration2`).text(days + ' days');
+                $(`#reach-value2`).text('-');
+                $(`#impressions-value2`).text('-');
+
+            }
+
+            // Initial update
+            updateSummary();
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Update Language
+            document.getElementById("language-select").addEventListener("change", function() {
+                document.getElementById("preview-language").textContent = this.value || 'Not selected';
+            });
+
+            // Update Gender
+            document.querySelectorAll("#gender-buttons .select-button1").forEach(button => {
+                button.addEventListener("click", function() {
+                    document.getElementById("preview-gender").textContent = this.getAttribute(
+                        "data-value");
+                });
+            });
+
+            // Update Age Group
+            document.querySelectorAll("#age-buttons .select-button1").forEach(button => {
+                button.addEventListener("click", function() {
+                    const age = this.getAttribute("data-value");
+                    document.getElementById("preview-age").textContent = age === "Custom" ?
+                        'Custom' :
+                        age;
+                });
+            });
+
+            // Handle Custom Age input
+            const customMinAge = document.getElementById("custom-min-age");
+            const customMaxAge = document.getElementById("custom-max-age");
+
+            [customMinAge, customMaxAge].forEach(input => {
+                input.addEventListener("input", () => {
+                    const min = customMinAge.value;
+                    const max = customMaxAge.value;
+                    if (min && max) {
+                        document.getElementById("preview-age").textContent = `${min} - ${max}`;
+                    }
+                });
+            });
+
+            // Optional: Update location and balance fields if they exist
+            const locationInput = document.getElementById("location"); // Add this in your form
+            if (locationInput) {
+                locationInput.addEventListener("input", () => {
+                    document.getElementById("preview-location").textContent = locationInput.value ||
+                        'Not selected';
+                });
+            }
+
+            const balanceInput = document.getElementById("balance"); // Add this in your form
+            if (balanceInput) {
+                balanceInput.addEventListener("input", () => {
+                    document.getElementById("preview-balance").textContent =
+                        `$${parseFloat(balanceInput.value || 0).toFixed(2)}`;
+                });
+            }
+        });
+    </script>
+
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 @endsection

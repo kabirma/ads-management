@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Schema\Blueprint;
+use App\Http\Controllers\CommonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -250,5 +251,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::post('/ai/fetch', [App\Http\Controllers\AIController::class, 'fetch'])->name('ai.fetch');
     Route::post('/ai/save', [App\Http\Controllers\AIController::class, 'save'])->name('ai.save.response');
 
+    // Route::get('/get-countries', [CommonController::class, 'getCountries'])->name('getCountries');
+    Route::post('/get-states', [CommonController::class, 'getStates'])->name('getStates');
+    Route::post('/get-audience', [CommonController::class, 'getAudience'])->name('getAudience');
 
 });
